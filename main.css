@@ -142,7 +142,7 @@ body {
     height: 100%;
     width: auto;
     pointer-events: none;
-    z-index: 2;
+    z-index: 1;
   }
 
 .newsform input[type="email"] {
@@ -157,7 +157,7 @@ body {
     background: transparent;
     box-sizing: border-box;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .newsform input[type="email"]::placeholder {
