@@ -95,6 +95,18 @@
     font-style: italic;
 }
 
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Gotham', sans-serif;
+
+}
+
+.newsbold {
+    font-weight: 600;
+}
+
 .foot2 {
     background-image: url('assets/pattern.jpg');
     background-size: cover;
@@ -102,11 +114,4 @@
     background-position: center;
     margin: 0px;
     padding: 32px 96px 32px 96px;
-}
-
-body {
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Gotham', sans-serif;
-
 }
