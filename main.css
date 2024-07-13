@@ -113,6 +113,64 @@ body {
     margin: 0px;
     padding: 24px 96px 24px 96px;
     display: flex;
-    align-items: flex-start;
+    justify-content: space-between;
 
+}
+
+.newsform {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsform form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.newsform input[type="email"] {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #db261d;
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+    border-left: none;
+    border-right: none;
+    box-sizing: border-box;
+    height: 48px;
+    width: 320px;
+    padding: 0px;
+    position: relative;
+    z-index: 2;
+}
+
+.newsform input[type="email"]::placeholder {
+    color: #ffffff80;
+}
+
+.newsform button {
+    font-family: 'Gotham', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    height: 48px;
+    margin-left: -26px;
+    padding: 0px 0px 0px 42px;
+    z-index: 1;
+    position: relative;
+}
+
+.newsform button:hover {
+    background-color: #FFF903;
+}
+
+.newsform button:hover {
+    background-color: #FFF903;
 }
