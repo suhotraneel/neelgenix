@@ -19,11 +19,22 @@
             </div>
             <div class="newsform">
                 <form action="#" method="post">
-                    <input type="email" id="email" name="email" placeholder="Email Address" required>
-                    <button type="submit">SUBSCRIBE</button>
+                    <div class="input-wrapper">
+                        <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388" height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;">
+                            <path d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
+                        </svg>
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                    </div>
+                    <button type="submit">
+                        <svg id="detecthover" fill="#ffffff" width="167" height="48" viewBox="0 0 167 49" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;" onmouseover="this.querySelector('path').setAttribute('fill', '#FFF903');" onmouseout="this.querySelector('path').setAttribute('fill', '#ffffff');">
+                            <path d="M0 48.1656H140.8L166.035 29.8312L156.396 0.165625H0V24V48.1656Z"/>
+                            <text x="55%" y="50%" dominant-baseline="middle" text-anchor="middle" class="substext" fill="#000000">SUBSCRIBE</text>
+                        </svg>
+                    </button> 
                 </form>
             </div>
         </div>
     </footer>
+    <script src="mainscript.js"></script>
 </body>
 </html>
