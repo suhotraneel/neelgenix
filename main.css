@@ -103,15 +103,16 @@ body {
 
 }
 
-.newsbold {
-    font-weight: 600;
-}
-
 .foot2 {
+    color: #ffffff;
     background-image: url('assets/pattern.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    height: 48px;
     margin: 0px;
-    padding: 32px 96px 32px 96px;
+    padding: 24px 96px 24px 96px;
+    display: flex;
+    align-items: flex-start;
+
 }
