@@ -12,9 +12,7 @@ const connection = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    // The following is optional and depends on your MySQL version and setup:
-    // socketPath: '/cloudsql/' + process.env.DB_HOST
+    database: process.env.DB_NAME
 });
 
 connection.connect(err => {
@@ -29,21 +27,21 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/submit-email', (req, res) => {
-    const email = req.body.email;
-    
-    if (email) {
-        const query = 'INSERT INTO emails (email) VALUES (?)';
-        connection.query(query, [email], (err, results) => {
-            if (err) {
-                console.error('Error inserting into database', err);
-                res.status(500).send('Internal Server Error');
-            } else {
-                res.status(200).send('Email submitted successfully');
-            }
-        });
-    } else {
-        res.status(400).send('Email is required');
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ error: 'Email is required' });
     }
+
+    const query = 'INSERT INTO emails (email) VALUES (?)';
+    connection.query(query, [email], (err, results) => {
+        if (err) {
+            console.error('Error inserting into database:', err);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+        console.log('Email submitted successfully:', email);
+        res.status(200).json({ message: 'Email submitted successfully' });
+    });
 });
 
 app.listen(PORT, () => {
