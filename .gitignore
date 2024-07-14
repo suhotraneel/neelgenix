@@ -1,2 +1,12 @@
+# Node.js dependencies
 node_modules/
+
+# Environment variables file
 .env
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+
+# Build output
+dist/
