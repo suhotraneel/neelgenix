@@ -1,4 +1,6 @@
 const { Pool } = require('pg');
+const fs = require('fs');
+const path = require('path');
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -18,6 +20,12 @@ export default async function handler(req, res) {
       } else {
         console.log(`Email saved: ${email}`);
         res.status(201).json({ message: 'Email saved successfully' });
+        // Serve the index.html file
+        const indexPath = path.join(process.cwd(), 'index.html');
+        const indexHtml = fs.readFileSync(indexPath, 'utf8');
+        res.setHeader('Content-Type', 'text/html');
+        res.write(indexHtml);
+        res.end();
       }
     });
   } else {
