@@ -9,6 +9,11 @@ const pool = new Pool({
   port: 5432,
 });
 
+pool.on('error', (err, client) => {
+  console.error('Unexpected error on idle client', err);
+  process.exit(-1);
+});
+
 export default async function handler(req, res) {
   if (req.method!== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -29,3 +34,8 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Error saving email', details: error.message });
   }
 }
+
+// Close the pool on process termination
+process.on('exit', () => {
+  pool.end();
+});
