@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 # Database connection config
 db_config = {
-    'user': 'SuhotraNeel,
+    'user': 'SuhotraNeel',
     'password': 'Project@2003TRAPS',
-    'host': 'groovy-sentry-429411-b8:us-central1:pgnewsletter',
+    'host': '34.28.34.166',
     'database': 'pgnewsletter'
 }
 
