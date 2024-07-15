@@ -10,7 +10,13 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-app.use(express.json()); // Add this middleware to parse JSON bodies
+app.use(express.json()); // Parse JSON bodies
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
