@@ -7,6 +7,7 @@ const pool = new Pool({
   database: 'pgsubscribe',
   password: 'Project@2003TRAPS',
   port: 5432,
+  maxConnections: 10,
 });
 
 pool.on('error', (err, client) => {
@@ -31,8 +32,14 @@ export default async function handler(req, res) {
     res.status(201).json({ message: 'Email saved successfully!', data: result.rows[0] });
     console.log("Email", [email]);
   } catch (error) {
-    console.error('Error saving email:', error.message);
-    res.status(500).json({ error: 'Error saving email', details: error.message });
+    if (error instanceof pg.Error) {
+      // Handle pg-specific errors more efficiently
+      console.error('Error saving email:', error.message);
+      res.status(500).json({ error: 'Error saving email', details: error.message });
+    } else {
+      console.error('Unexpected error:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 }
 
