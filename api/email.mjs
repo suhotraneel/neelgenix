@@ -2,10 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  user: 'SuhotraNeel',
+  host: '34.172.70.137',
+  database: 'pgsubscribe',
+  password: 'Project@2003TRAPS',
   port: 5432,
 });
 
