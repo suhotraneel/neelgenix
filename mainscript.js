@@ -1,4 +1,4 @@
-const { Pool } = window.pg;
+const { Pool } = require('pg');
 
 const pool = new Pool({
   user: 'SuhotraNeel',
