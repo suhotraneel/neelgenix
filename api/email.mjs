@@ -7,7 +7,7 @@ const pool = new Pool({
   database: 'pgsubscribe',
   password: 'Project@2003TRAPS',
   port: 5432,
-  maxConnections: 10,
+  maxConnections: 100,
 });
 
 pool.on('error', (err, client) => {
