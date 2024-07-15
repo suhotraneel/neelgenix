@@ -9,7 +9,7 @@ const pool = new Pool({
   database: 'pgsubscribe',
   password: 'Project@2003TRAPS',
   port: 5432,
-  maxConnections: 100,
+  timeout: 90000,
 });
 
 pool.connect((err, client, done) => {
