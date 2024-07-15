@@ -1,10 +1,9 @@
 {
     "version": 2,
-    "builds": [
-      { "src": "app.py", "use": "@now/python" }
-    ],
     "routes": [
-      { "src": "/submit-form", "dest": "/app.py" },
-      { "src": "/(.*)", "dest": "/app.py" }
+      {
+        "src": "/submit-form",
+        "dest": "/submit-form"
+      }
     ]
-  }  
+  }
