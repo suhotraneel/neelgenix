@@ -52,7 +52,21 @@
             </div>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/pg-browserify@1.2.1/dist/pg-browserify.min.js"></script>
+    <script>
+        const emailForm = document.getElementById('emailForm');
+        emailForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const email = document.getElementById('email').value;
+          fetch('/save-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email }),
+          })
+         .then((response) => response.json())
+         .then((data) => console.log(data.message))
+         .catch((error) => console.error(error));
+        });
+      </script>
     <script src="mainscript.js"></script>
 </body>
 </html>
