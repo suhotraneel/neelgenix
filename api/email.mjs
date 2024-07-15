@@ -10,7 +10,6 @@ const pool = new Pool({
   password: 'process.env.PGPASSWORD',
   port: 5432,
   maxConnections: 100,
-  timeout: 90000,
 });
 
 pool.connect((err, client, done) => {
