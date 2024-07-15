@@ -23,10 +23,9 @@ export default async function handler(req, res) {
 
   try {
     const result = await pool.query(`INSERT INTO emails (email) VALUES ($1) RETURNING *`, [email]);
-    res.status(201).json({ message: 'Email saved successfully!' });
+    res.status(201).json({ message: 'Email saved successfully!', data: result.rows[0] });
   } catch (error) {
-    console.error('Error saving email:', error);
-    console.error('SQL Query:', `INSERT INTO emails (email) VALUES ($1) RETURNING *`, [email]);
-    res.status(500).json({ error: 'Error saving email' });
+    console.error('Error saving email:', error.message);
+    res.status(500).json({ error: 'Error saving email', details: error.message });
   }
 }
