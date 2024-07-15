@@ -12,6 +12,15 @@ const pool = new Pool({
   maxConnections: 100,
 });
 
+pool.connect((err, client, done) => {
+  if (err) {
+    console.error('Error connecting to database:', err);
+  } else {
+    console.log('Connected to database!');
+    done();
+  }
+});
+
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err);
   // Log the error using a logging library like Winston or Morgan
