@@ -1,9 +1,0 @@
-{
-    "version": 2,
-    "routes": [
-      {
-        "src": "/submit-form",
-        "dest": "/submit-form"
-      }
-    ]
-  }
