@@ -1,0 +1,9 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "api/save-email.js",
+        "use": "@vercel/node"
+      }
+    ]
+  }
