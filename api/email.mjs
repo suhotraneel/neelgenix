@@ -21,6 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(201).json({ message: 'Email saved successfully!' });
   } catch (error) {
     console.error('Error saving email:', error);
+    console.error('SQL Query:', `INSERT INTO emails (email) VALUES ($1) RETURNING *`, [email]);
     res.status(500).json({ error: 'Error saving email' });
   }
 }
