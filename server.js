@@ -1,3 +1,5 @@
+const express = require('express');
+const app = express();
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -8,7 +10,13 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-export default async function handler(req, res) {
+app.use(express.json()); // Add this middleware to parse JSON bodies
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+async function handler(req, res) {
   if (req.method === 'POST') {
     if (req.url === '/save-email') {
       const email = req.body.email;
@@ -29,16 +37,7 @@ export default async function handler(req, res) {
   }
 }
 
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-app.post('/save-email', (req, res) => {
-  // handle email saving logic here
-});
+app.post('/save-email', handler);
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
