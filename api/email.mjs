@@ -12,7 +12,8 @@ const pool = new Pool({
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err);
-  process.exit(-1);
+  // Log the error using a logging library like Winston or Morgan
+  logger.error(err);
 });
 
 export default async function handler(req, res) {
@@ -23,7 +24,8 @@ export default async function handler(req, res) {
   const { email } = req.body;
 
   // Validate email input
-  if (!email ||!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+  const isValidEmail = validateEmail(email);
+  if (!isValidEmail) {
     return res.status(400).json({ error: 'Invalid email address' });
   }
 
