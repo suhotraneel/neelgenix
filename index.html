@@ -36,20 +36,26 @@
         </div>
     </footer>
     <script>
-        const emailForm = document.getElementById('emailForm');
-        emailForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const email = document.getElementById('email').value;
-          fetch('/save-email', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-          })
-         .then((response) => response.json())
-         .then((data) => console.log(data.message))
-         .catch((error) => console.error(error));
+        const form = document.getElementById('email-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            try {
+                const response = await fetch('/api/email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+                if (response.ok) {
+                    console.log('Email saved successfully!');
+                } else {
+                    console.error('Error saving email:', response.status);
+                }
+            } catch (error) {
+                console.error('Error saving email:', error);
+            }
         });
-      </script>
+    </script>
     <script src="mainscript.js"></script>
 </body>
 </html>
