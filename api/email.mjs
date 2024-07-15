@@ -2,11 +2,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { Pool } from 'pg';
 
 const pool = new Pool({
-  user: 'SuhotraNeel',
-  host: '34.172.70.137',
-  database: 'pgsubscribe',
-  password: 'Project@2003TRAPS',
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: parseInt(process.env.DB_PORT, 10),
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -15,6 +15,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const { email } = req.body;
+
+  if (!email ||!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    return res.status(400).json({ error: 'Invalid email address' });
+  }
 
   try {
     const result = await pool.query(`INSERT INTO emails (email) VALUES ($1) RETURNING *`, [email]);
