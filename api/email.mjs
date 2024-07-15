@@ -4,11 +4,12 @@ import { validate } from 'email-validator';
 const { Pool } = pg;
 
 const pool = new Pool({
-  user: 'SuhotraNeel',
-  host: '34.172.70.137',
-  database: 'pgsubscribe',
-  password: 'Project@2003TRAPS',
+  user: 'process.env.PGUSER',
+  host: 'process.env.PGHOST',
+  database: 'process.env.PGDATABASE',
+  password: 'process.env.PGPASSWORD',
   port: 5432,
+  maxConnections: 100,
   timeout: 90000,
 });
 
