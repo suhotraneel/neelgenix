@@ -1,12 +1,4 @@
-module.exports = {
-    entry: './mainscript.js',
-    output: {
-      path: './dist',
-      filename: 'bundle.js',
-    },
-  };
-
-const { Pool } = require('pg');
+const { Pool } = window.pg;
 
 const pool = new Pool({
   user: 'SuhotraNeel',
