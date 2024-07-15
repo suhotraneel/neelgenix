@@ -47,10 +47,6 @@ export default async function handler(req, res) {
     } else {
       console.error('Unexpected error:', error);
       res.status(500).json({ error: 'Internal Server Error' });
-    } finally {
-      if (client) {
-        client.release();
-      }
     }
   }
 }
