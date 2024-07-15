@@ -5,5 +5,8 @@
         "src": "index.js",
         "use": "@now/node"
       }
-    ]
-}
+    ],
+    "static": {
+      "public": "public"
+    }
+  }
