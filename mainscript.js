@@ -2,8 +2,8 @@ const { Pool } = window.pg;
 
 const pool = new Pool({
   user: 'SuhotraNeel',
-  host: '34.28.34.166',
-  database: 'pgnewsletter',
+  host: '34.172.70.137',
+  database: 'pgsubscribe',
   password: 'Project@2003TRAPS',
   port: 5432,
 });
