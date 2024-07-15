@@ -10,17 +10,36 @@ const pool = new Pool({
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const email = req.body.email;
-    pool.query(`INSERT INTO emails (email) VALUES ($1)`, [email], (err, result) => {
-      if (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Failed to save email' });
-      } else {
-        console.log(`Email saved: ${email}`);
-        res.status(201).json({ message: 'Email saved successfully' });
-      }
-    });
+    if (req.url === '/save-email') {
+      const email = req.body.email;
+      pool.query(`INSERT INTO emails (email) VALUES ($1)`, [email], (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ error: 'Failed to save email' });
+        } else {
+          console.log(`Email saved: ${email}`);
+          res.status(201).json({ message: 'Email saved successfully' });
+        }
+      });
+    } else {
+      res.status(404).json({ error: 'Route not found' });
+    }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
 }
+
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/save-email', (req, res) => {
+  // handle email saving logic here
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
