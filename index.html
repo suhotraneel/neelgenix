@@ -24,7 +24,7 @@
                             <path d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
                         </svg>
                         <input type="email" id="email" name="email" placeholder="Email Address" required>
-                        <div id="response-message"></div>
+                        <div id="response-message">Already Exists !</div>
                     </div>
                     <button type="submit">
                         <svg id="detecthover" fill="#ffffff" width="167" height="48" viewBox="0 0 167 49" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;" onmouseover="this.querySelector('path').setAttribute('fill', '#FFF903');" onmouseout="this.querySelector('path').setAttribute('fill', '#ffffff');">
@@ -51,17 +51,17 @@
                 });
                 const responseData = await response.json();
                 if (response.ok) {
-                    responseMessageElement.innerHTML = `Email saved successfully!`;
-                    responseMessageElement.style.color = 'green';
+                    responseMessageElement.innerHTML = `Saved.`;
+                    responseMessageElement.style.color = 'rgb(94, 255, 0)';
                     console.log('Email saved successfully!');
                 } else {
-                    responseMessageElement.innerHTML = responseData.error;
-                    responseMessageElement.style.color = 'red';
+                    responseMessageElement.innerHTML = 'Already Exists !';
+                    responseMessageElement.style.color = 'rgb(251, 255, 0);';
                     console.error('Error saving email:', response.status);
                 }
             } catch (error) {
-                responseMessageElement.innerHTML = 'Error saving email:';
-                responseMessageElement.style.color = 'red';
+                responseMessageElement.innerHTML = 'Error !';
+                responseMessageElement.style.color = 'rgb(251, 255, 0);';
                 console.error('Error saving email:', error);
             }
         });

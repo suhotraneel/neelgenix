@@ -119,8 +119,9 @@ body {
 
 .newsform {
     position: relative;
+    flex-direction: column;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -191,5 +192,13 @@ body {
 }
 
 #response-message {
-    margin-top: 64px;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+    z-index: 3;
+    color: rgb(251, 255, 0);
+    padding: 6px;
+    background-color: #DB261D;
 }
