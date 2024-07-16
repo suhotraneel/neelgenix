@@ -37,6 +37,8 @@
     </footer>
     <script>
         const form = document.getElementById('email-form');
+        const responseMessageElement = document.getElementById('response-message');
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const email = document.getElementById('email').value;
@@ -46,12 +48,19 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email }),
                 });
+                const responseData = await response.json();
                 if (response.ok) {
+                    responseMessageElement.innerHTML = `Email saved successfully!`;
+                    responseMessageElement.style.color = 'green';
                     console.log('Email saved successfully!');
                 } else {
+                    responseMessageElement.innerHTML = responseData.error;
+                    responseMessageElement.style.color = 'red';
                     console.error('Error saving email:', response.status);
                 }
             } catch (error) {
+                responseMessageElement.innerHTML = 'Error saving email:';
+                responseMessageElement.style.color = 'red';
                 console.error('Error saving email:', error);
             }
         });
