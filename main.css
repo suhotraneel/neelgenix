@@ -103,6 +103,10 @@ body {
     cursor: url('assets/cursor.png') 16 16, auto;
 }
 
+a {
+    cursor: url('assets/cursorp.png') 16 16, auto;
+}
+
 .foot1 {
     color: #ffffff;
     background-color: #000000;
@@ -112,6 +116,12 @@ body {
     display: flex;
     justify-content: space-between;
 }
+
+#interactive-svg .hover-area {
+    fill: white; /* Default fill color */
+    transition: fill 0.3s ease; /* Smooth transition on hover */
+}
+
 
 .column {
     flex: 1 1 0;
@@ -123,10 +133,6 @@ body {
     text-decoration: none;
     margin: 16px 0px;
     padding: 0px;
-}
-
-a {
-    cursor: url('assets/cursorp.png') 16 16, auto;
 }
 
 .fsocials {
