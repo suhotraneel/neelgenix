@@ -100,7 +100,54 @@ body {
     margin: 0px;
     padding: 0px;
     font-family: 'Gotham', sans-serif;
+    cursor: url('assets/cursor.png') 16 16, auto;
+}
 
+.foot1 {
+    color: #ffffff;
+    background-color: #000000;
+    height: 240px;
+    margin: 0px;
+    padding: 64px 96px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    flex: 1 1 0;
+    min-width: 150px;
+}
+
+.footlink {
+    font-size: 16px;
+    text-decoration: none;
+    margin: 16px 0px;
+    padding: 0px;
+}
+
+a {
+    cursor: url('assets/cursorp.png') 16 16, auto;
+}
+
+.fsocials {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.socialicon-container {
+    flex: 1;
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+}
+
+.socialicon {
+    max-height: 100%; /* Ensure all icons have the same height */
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
 }
 
 .foot2 {
@@ -114,7 +161,6 @@ body {
     padding: 24px 96px;
     display: flex;
     justify-content: space-between;
-
 }
 
 .newsform {
