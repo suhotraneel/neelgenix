@@ -8,91 +8,112 @@
     <link rel="stylesheet" href="main.css" type="text/css">
 </head>
 <body>
-    <footer>
-        <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 96px;">
-            <div style="flex: 1;">
-                <div id="svg-container">
-                    <svg id="interactive-svg" width="525" height="61" viewBox="0 0 525 61" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M509.172 1.20001H523.872L504.216 29.928L524.712 60H509.592L496.404 39.84L483.132 60H468.432L488.928 30.096L469.272 1.20001H484.392L496.656 20.268L509.172 1.20001Z" fill="white"/>
-                        <path d="M445.253 60V1.20001H458.189V60H445.253Z" fill="white"/>
-                        <path d="M378.302 60V1.20001H390.23L417.782 37.404V1.20001H430.55V60H419.546L391.07 22.62V60H378.302Z" fill="white"/>
-                        <path d="M322.029 60V1.20001H366.381V12.708H334.881V24.636H362.601V36.144H334.881V48.492H366.801V60H322.029Z" fill="white"/>
-                        <path d="M284.466 61.008C266.154 61.008 253.554 48.24 253.554 30.768V30.6C253.554 13.884 266.574 0.192017 284.382 0.192017C294.882 0.192017 301.434 3.04801 307.482 8.25601L299.334 18.084C294.882 14.304 290.682 12.12 283.962 12.12C274.554 12.12 267.078 20.436 267.078 30.432V30.6C267.078 41.352 274.47 49.248 284.886 49.248C289.674 49.248 293.79 48.072 297.066 45.72V37.32H284.046V26.148H309.582V51.684C303.534 56.808 295.218 61.008 284.466 61.008Z" fill="white"/>
-                        <path d="M178.966 60V1.20001H191.902V48.24H221.218V60H178.966Z" fill="white"/>
-                        <path d="M122.693 60V1.20001H167.045V12.708H135.545V24.636H163.265V36.144H135.545V48.492H167.465V60H122.693Z" fill="white"/>
-                        <path d="M66.4193 60V1.20001H110.771V12.708H79.2713V24.636H106.991V36.144H79.2713V48.492H111.191V60H66.4193Z" fill="white"/>
-                        <path d="M0.0559998 60V1.20001H11.984L39.536 37.404V1.20001H52.304V60H41.3L12.824 22.62V60H0.0559998Z" fill="white"/>
-                        </svg>
-                        
-                </div>
-                <!-- <img id="ngfoot" style="width: 100%; height: auto; margin: 4px 0px 32px 0px;" src="assets/ngfoot.svg" alt="Neel Genix"> -->
-                <div style="display: flex; gap: 64px;">
-                    <div class="column">
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Branding & Campaigns</a></p>
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital Products</a></p>
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Poetry</a></p>
-                    </div>
-                    <div class="column">
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual Design</a></p>
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Research Papers</a></p>
-                        <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual Journal</a></p>
-                    </div>
-                </div>
+    <div class="scroller">
+        <div style="scroll-snap-align: start; height: 100vh;"></div>
+        <div style=" overflow: hidden; scroll-snap-align: start; height: 100vh;">
+            <div class="findme">
+                <p>SUHOTRA<br>CHAKRABORTY</p>
+                <div class="light"></div>
             </div>
-            <div style="flex: 1;">
-                <div style="display: flex; gap: 64px;">
-                    <div class="column">
-                        <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">SERVICES</div>
-                        <div>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Logo & Branding</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Website Design</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital Product</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Brand Campaign</a></p>
+        </div>
+        <footer style="scroll-snap-align: start; height: 100vh;">
+            <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 96px;">
+                <div style="flex: 1;">
+                    <div id="svg-container" class="blue-div">
+                        <img style="width: 100%; height: auto;" src="assets/ngfoot.svg" alt="Neel Genix">
+                        <div class="red-spot" id="red-spot"></div>
+                    </div>
+                    <!-- <img id="ngfoot" style="width: 100%; height: auto; margin: 4px 0px 32px 0px;" src="assets/ngfoot.svg" alt="Neel Genix"> -->
+                    <div style="display: flex; gap: 64px;">
+                        <div class="column">
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Branding & Campaigns</a></p>
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital Products</a></p>
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Poetry</a></p>
+                        </div>
+                        <div class="column">
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual Design</a></p>
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Research Papers</a></p>
+                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual Journal</a></p>
                         </div>
                     </div>
-                    <div class="column">
-                        <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">CONTACT</div>
-                        <div>
-                            <p class="footlink"><a style="color: #ffffff;" href="mailto:suhotraneel@gmail.com">suhotraneel@gmail.com</a></p>
-                            <div class="fsocials">
-                                <div class="socialicon-container"><img class="socialicon" src="assets/instagram.svg" alt="Instagram"></div>
-                                <div class="socialicon-container"><img class="socialicon" src="assets/linkedin.svg" alt="LinkedIn"></div>
-                                <div class="socialicon-container"><img class="socialicon" src="assets/youtube.svg" alt="YouTube"></div>
-                                <div class="socialicon-container"><img class="socialicon" src="assets/twitter.svg" alt="Twitter"></div>
-                                <div class="socialicon-container"><img class="socialicon" src="assets/spotify.svg" alt="Spotify"></div>
+                </div>
+                <div style="flex: 1;">
+                    <div style="display: flex; gap: 64px;">
+                        <div class="column">
+                            <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">SERVICES</div>
+                            <div>
+                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Logo & Branding</a></p>
+                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Website Design</a></p>
+                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital Product</a></p>
+                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Brand Campaign</a></p>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">CONTACT</div>
+                            <div>
+                                <p class="footlink"><a style="color: #ffffff;" href="mailto:suhotraneel@gmail.com">suhotraneel@gmail.com</a></p>
+                                <div class="fsocials">
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/instagram.svg" alt="Instagram"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/linkedin.svg" alt="LinkedIn"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/youtube.svg" alt="YouTube"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/twitter.svg" alt="Twitter"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/spotify.svg" alt="Spotify"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="foot2">
-            <div style="display: flex; align-items: flex-start;">
-                <img src="assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
-                <div style="margin-left: 32px;">
-                    <div style="font-size: 24px;">Subscribe to our <span style="font-weight: 500;">Newsletter</span>.</div>
-                    <div style="font-size: 12px;">Project Genix, Copyright 2024. All Rights Reserved.</div>
+            <div class="foot2">
+                <div style="display: flex; align-items: flex-start;">
+                    <img src="assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
+                    <div style="margin-left: 32px;">
+                        <div style="font-size: 24px;">Subscribe to our <span style="font-weight: 500;">Newsletter</span>.</div>
+                        <div style="font-size: 12px;">Project Genix, Copyright 2024. All Rights Reserved.</div>
+                    </div>
+                </div>
+                <div class="newsform">
+                    <form id="email-form">
+                        <div class="input-wrapper">
+                            <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388" height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;">
+                                <path d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
+                            </svg>
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                            <div id="response-message"></div>
+                        </div>
+                        <button type="submit">
+                            <svg id="detecthover" fill="#ffffff" width="167" height="48" viewBox="0 0 167 49" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;" onmouseover="this.querySelector('path').setAttribute('fill', '#FFF903');" onmouseout="this.querySelector('path').setAttribute('fill', '#ffffff');">
+                                <path d="M0 48.1656H140.8L166.035 29.8312L156.396 0.165625H0V24V48.1656Z"/>
+                                <text x="55%" y="50%" dominant-baseline="middle" text-anchor="middle" class="substext" fill="#000000">SUBSCRIBE</text>
+                            </svg>
+                        </button> 
+                    </form>
                 </div>
             </div>
-            <div class="newsform">
-                <form id="email-form">
-                    <div class="input-wrapper">
-                        <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388" height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;">
-                            <path d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
-                        </svg>
-                        <input type="email" id="email" name="email" placeholder="Email Address" required>
-                        <div id="response-message"></div>
-                    </div>
-                    <button type="submit">
-                        <svg id="detecthover" fill="#ffffff" width="167" height="48" viewBox="0 0 167 49" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;" onmouseover="this.querySelector('path').setAttribute('fill', '#FFF903');" onmouseout="this.querySelector('path').setAttribute('fill', '#ffffff');">
-                            <path d="M0 48.1656H140.8L166.035 29.8312L156.396 0.165625H0V24V48.1656Z"/>
-                            <text x="55%" y="50%" dominant-baseline="middle" text-anchor="middle" class="substext" fill="#000000">SUBSCRIBE</text>
-                        </svg>
-                    </button> 
-                </form>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+    <!-- <script>
+        const blueDiv = document.querySelector('.blue-div');
+        const redSpot = document.getElementById('red-spot');
+        
+        blueDiv.addEventListener('mousemove', (e) => {
+          const rect = blueDiv.getBoundingClientRect();
+          let x = e.clientX - rect.left - 10; // subtract half of the red spot's width
+          let y = e.clientY - rect.top - 10; // subtract half of the red spot's height
+          
+          // keep the red spot inside the blue div
+          x = Math.max(0, Math.min(x, rect.width - 20)); // 20 is the width of the red spot
+          y = Math.max(0, Math.min(y, rect.height - 20)); // 20 is the height of the red spot
+          
+          redSpot.style.top = `${y}px`;
+          redSpot.style.left = `${x}px`;
+          redSpot.style.opacity = 1; // show the red spot
+        });
+        
+        blueDiv.addEventListener('mouseleave', () => {
+          redSpot.style.opacity = 0; // hide the red spot
+        });
+    </script> -->
     <script>
         const form = document.getElementById('email-form');
         const responseMessageElement = document.getElementById('response-message');

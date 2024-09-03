@@ -1,3 +1,54 @@
+var pos = document.documentElement;
+var divElement = document.querySelector('.light');
+
+// Get div dimensions
+const divRect = divElement.getBoundingClientRect();
+
+const findMeDiv = document.querySelector('.findme');
+const originalBackground = divElement.style.background;
+
+findMeDiv.addEventListener('mouseover', (e) => {
+  divElement.style.background = `radial-gradient(circle at var(--x) var(--y), hsla(var(--h), 100%, 5%, 0) 0%, hsla(var(--h), 100%, 5%, 0.95) 5%, hsla(var(--h), 100%, 5%, 1) 15%)`;
+});
+
+findMeDiv.addEventListener('mouseout', (e) => {
+  divElement.style.background = originalBackground;
+});
+
+pos.style.setProperty('--x', divRect.width/2 + 'px');
+pos.style.setProperty('--y', divRect.height/2 + 'px');
+
+divElement.style.setProperty('--h', 360);
+
+pos.addEventListener('mousemove', e =>{
+    pos.style.setProperty('--x', e.clientX + 'px')
+    pos.style.setProperty('--y', e.clientY + 'px')
+
+    // Get div dimensions
+    const divRect = divElement.getBoundingClientRect();
+      
+      // Calculate color based on mouse position
+    const hue = ((e.clientX / divRect.width) + (e.clientY / divRect.height)) * 180;
+
+    divElement.style.setProperty('--h', hue);
+})
+
+const container = document.getElementById('container');
+let isScrolling;
+
+container.addEventListener('scroll', () => {
+    window.clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+        let sectionHeight = window.innerHeight;
+        let scrollPosition = container.scrollTop;
+        let sectionIndex = Math.round(scrollPosition / sectionHeight);
+        container.scrollTo({
+            top: sectionIndex * sectionHeight,
+            behavior: 'smooth'
+        });
+    }, 50);
+});
+
 const detectHover = document.getElementById('detecthover');
 const effectHover = document.getElementById('effecthover');
 
@@ -8,17 +59,3 @@ detectHover.addEventListener('mouseover', () => {
 detectHover.addEventListener('mouseout', () => {
     effectHover.querySelector('path').setAttribute('stroke', '#FFFFFF');
 });
-
-
-const divElement = document.querySelector('.foot1');
-
-    divElement.addEventListener('mousemove', function(event) {
-      // Get div dimensions
-      const divRect = divElement.getBoundingClientRect();
-      
-      // Calculate color based on mouse position
-      const hue = (event.clientX / divRect.width) * 360;
-
-      // Update background color
-      divElement.style.backgroundColor = `hsl(${hue}, 100%, 5%)`;
-    });

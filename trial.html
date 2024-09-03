@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Div Background Mouse Interactions</title>
-  <style>
-    /* CSS styles for the container */
-    #myDiv {
-      width: 100%;
-      height: 300px;
-      background-color: blue; /* Initial background color */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap Scroll Example</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        .section {
+            scroll-snap-align: start;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: #fff;
+        }
+        .section:nth-child(odd) {
+            background-color: #3498db;
+        }
+        .section:nth-child(even) {
+            background-color: #2ecc71;
+        }
+    </style>
 </head>
 <body>
-  <div id="myDiv"></div>
-
-  <script>
-    // JavaScript for handling mouse events
-    const divElement = document.getElementById('myDiv');
-
-    divElement.addEventListener('mousemove', function(event) {
-      // Get div dimensions
-      const divRect = divElement.getBoundingClientRect();
-      
-      // Calculate color based on mouse position
-      const hue = (event.clientX / divRect.width) * 360;
-      const saturation = (event.clientY / divRect.height) * 100;
-
-      // Update background color
-      divElement.style.backgroundColor = `hsl(${hue}, ${saturation}%, 50%)`;
-    });
-  </script>
+    <div class="container">
+        <div class="section">Section 1</div>
+        <div class="section">Section 2</div>
+        <div class="section">Section 3</div>
+        <div class="section">Section 4</div>
+        <div class="section">Section 5</div>
+    </div>
 </body>
 </html>
