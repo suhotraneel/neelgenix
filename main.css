@@ -116,6 +116,14 @@ a {
     cursor: url('assets/cursorp.png') 16 16, auto;
 }
 
+button {
+    cursor: url('assets/cursorp.png') 16 16, auto;
+}
+
+input {
+    cursor: url('assets/cursort.png') 16 16, auto;
+}
+
 .findme {
     position: relative;
     min-height: 100vh;
