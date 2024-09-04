@@ -95,7 +95,6 @@
     font-style: italic;
 }
 
-
 body {
     margin: 0px;
     padding: 0px;
@@ -106,14 +105,223 @@ body {
     overflow: hidden;
 }
 
+a {
+    cursor: url('assets/cursorp.png') 16 16, auto;
+    text-decoration: none;
+}
+
+header {
+    background-image: url('assets/header.jpg');
+}
+
+#navbar {
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 96px;
+    padding: 0px 96px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#navcont {
+    display: flex;
+    align-items: center;
+}
+
+#navicon {
+    height: 42px;
+    width: auto;
+    transition: transform 0.3s ease; /* Use transform instead of height */
+}
+
+#navcont:hover #navicon {
+    transform: scale(1.14); /* Scale the icon when the container is hovered */
+}
+
+#navhead {
+    padding-left: 12px;
+    font-family: 'Gotham', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: left;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.navelements {
+    font-family: 'Gotham', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    color: #ffffff;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    position: relative; /* Required for positioning */
+    transition: box-shadow 0.3s ease;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.navelements:hover {
+    box-shadow: 0 0 20px 1px rgba(255, 255, 255, 0.5); /* Enhanced white glow on hover */
+}
+
+#nav1{
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+
+#nav2{
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+#nav3{
+    font-weight: 300;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+
+#nav4{
+    font-weight: 300;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+
+#nav5{
+    font-weight: 300;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: all 5s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+
+#nav6{
+    font-weight: 300;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 24px;
+    transition: background-color 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+}
+
+/* #nav1:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav2:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav3:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav4:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav5:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav6:hover {
+    background-image: url('assets/haedele.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#nav1:hover::before, 
+#nav2:hover::before, 
+#nav3:hover::before, 
+#nav4:hover::before, 
+#nav5:hover::before, 
+#nav6:hover::before {
+    content: ''; 
+    position: absolute; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1; 
+}
+
+#nav1 span, 
+#nav2 span, 
+#nav3 span, 
+#nav4 span, 
+#nav5 span, 
+#nav6 span {
+    position: relative;
+    z-index: 2;
+} */
+
 .scroller {
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100vh;
-}
-
-a {
-    cursor: url('assets/cursorp.png') 16 16, auto;
 }
 
 button {
