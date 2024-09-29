@@ -1,3 +1,12 @@
+var loader = document.getElementById("preloader");
+
+window.addEventListener("load", function() {
+    setTimeout(function() {
+        loader.classList.add("hide");
+    }, 1000);
+});
+
+
 let lastScrollTop = 0; // Keeps track of the last scroll position
 const header = document.querySelector('#navbar'); // Select the header element
 
@@ -77,4 +86,5 @@ detectHover.addEventListener('mouseover', () => {
 detectHover.addEventListener('mouseout', () => {
     effectHover.querySelector('path').setAttribute('stroke', '#FFFFFF');
 });
+
 
