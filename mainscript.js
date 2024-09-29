@@ -1,3 +1,21 @@
+let lastScrollTop = 0; // Keeps track of the last scroll position
+const header = document.querySelector('#navbar'); // Select the header element
+
+window.addEventListener('scroll', () => {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (currentScroll > lastScrollTop) {
+        // Scrolling down
+        header.classList.add('header-hidden');
+    } else {
+        // Scrolling up
+        header.classList.remove('header-hidden');
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+});
+
+
 var pos = document.documentElement;
 var divElement = document.querySelector('.light');
 
@@ -59,3 +77,4 @@ detectHover.addEventListener('mouseover', () => {
 detectHover.addEventListener('mouseout', () => {
     effectHover.querySelector('path').setAttribute('stroke', '#FFFFFF');
 });
+
