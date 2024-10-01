@@ -113,14 +113,29 @@
     visibility: hidden; /* Hidden after fade out */
 }
 
-svg.loadline {
-    width: 100%;
-    height: 100%;
-    position: absolute; /* Position SVG absolutely within parent */
-    top: 0; /* Align to the top */
+.loadwrapper {
+    position: absolute; /* Position wrapper absolutely */
+    top: 5vh; /* Align to the top */
     left: 0; /* Align to the left */
-    pointer-events: none; /* Allow clicks to pass through SVG */
-    z-index: 0; /* Ensure SVG is below the preloader content */
+    width: 100%; /* Full width to cover the parent */
+    pointer-events: none;
+}
+
+svg.loadline {
+    width: 100%; /* Ensure SVG takes full width */
+    height: auto; /* Adjust height automatically */
+    display: block; /* Ensure SVG is treated as a block element */
+}
+
+@media (max-width: 768px) {
+    .loadwrapper {
+        width: 200%; /* Increase width to make the SVG larger */
+        left: -50%; /* Adjust left to center the SVG */
+    }
+
+    svg.loadline {
+        width: 100%; /* Ensure SVG is also 120% width */
+    }
 }
 
 /* Animate both .cls-1 and .cls-2 lines */
@@ -148,7 +163,7 @@ svg.loadline {
     text-align: center;
     font-family: 'Gotham', sans-serif;
     font-size: 48px;
-    margin-top: 10vh;
+    margin-top: 25vh;
     font-weight: 800;
     animation: weight-and-color-change 1s linear infinite;
 }
@@ -169,7 +184,7 @@ svg.loadline {
 
 .loader {
     animation: rotate 2s linear infinite;
-    margin-top: 20vh;
+    margin-top: 15vh;
 }
 
 @keyframes rotate {
