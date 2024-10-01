@@ -163,7 +163,7 @@ svg.loadline {
     text-align: center;
     font-family: 'Gotham', sans-serif;
     font-size: 48px;
-    margin-top: 25vh;
+    margin-top: 20vh;
     font-weight: 800;
     animation: weight-and-color-change 1s linear infinite;
 }
@@ -184,7 +184,7 @@ svg.loadline {
 
 .loader {
     animation: rotate 2s linear infinite;
-    margin-top: 15vh;
+    margin-top: 20vh;
 }
 
 @keyframes rotate {
