@@ -113,6 +113,36 @@
     visibility: hidden; /* Hidden after fade out */
 }
 
+svg.loadline {
+    width: 100%;
+    height: 100%;
+    position: absolute; /* Position SVG absolutely within parent */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    pointer-events: none; /* Allow clicks to pass through SVG */
+    z-index: 0; /* Ensure SVG is below the preloader content */
+}
+
+/* Animate both .cls-1 and .cls-2 lines */
+.cls-1, .cls-2 {
+    stroke-dasharray: 1000; /* Adjust to be larger than the line length */
+    stroke-dashoffset: 1000;
+    animation: draw 0.5s ease-in-out infinite alternate;
+}
+
+/* Keyframes for left-to-right and right-to-left animation */
+@keyframes draw {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    100% {
+        stroke-dashoffset: -1000;
+    }
+}
+
 .loadertext{
     color: #ffffff;
     text-align: center;
@@ -171,7 +201,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-image: url('assets/header.jpg');
+    background-color: #000000;
     transition: transform 0.3s ease;
     z-index: 1000;
 }
@@ -182,7 +212,7 @@ header {
 
 #navbar {
     background-color: rgba(0, 0, 0, 0.6);
-    height: 96px;
+    height: 64px;
     padding: 0px 96px;
     display: flex;
     align-items: center;
@@ -195,7 +225,7 @@ header {
 }
 
 #navicon {
-    height: 42px;
+    height: 32px;
     width: auto;
     transition: transform 0.3s ease; /* Use transform instead of height */
 }
@@ -207,7 +237,7 @@ header {
 #navhead {
     padding-left: 12px;
     font-family: 'Gotham', sans-serif;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
     text-align: left;
     color: #ffffff;

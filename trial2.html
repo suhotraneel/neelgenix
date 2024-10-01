@@ -3,43 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SVG Line Animation (Left & Right)</title>
+  <title>SVG Line Left-Right Animation</title>
   <style>
     svg {
       width: 100%;
       height: auto;
     }
 
-    /* Animate both .cls-1 and .cls-2 lines */
+    /* Apply left-right animation to lines */
     .cls-1, .cls-2 {
-      stroke-dasharray: 1000; /* Adjust to be larger than the line length */
-      stroke-dashoffset: 1000;
-      animation: draw 1.5s ease-in-out infinite alternate;
+      stroke: #ffe000;
+      stroke-width: 2;
+      animation: moveLeftRight 4s ease-in-out infinite;
     }
 
-    /* Keyframes for left-to-right and right-to-left animation */
-    @keyframes draw {
+    /* Stagger the animations for each line */
+    .cls-1:nth-child(1), .cls-2:nth-child(1) {
+      animation-delay: 0s;
+    }
+    .cls-1:nth-child(2), .cls-2:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .cls-1:nth-child(3), .cls-2:nth-child(3) {
+      animation-delay: 1s;
+    }
+    .cls-1:nth-child(4), .cls-2:nth-child(4) {
+      animation-delay: 1.5s;
+    }
+    .cls-1:nth-child(5), .cls-2:nth-child(5) {
+      animation-delay: 2s;
+    }
+
+    /* Keyframes for left-right animation */
+    @keyframes moveLeftRight {
       0% {
-        stroke-dashoffset: 1000;
+        transform: translateX(-100%);
+        opacity: 0;
       }
-      50% {
-        stroke-dashoffset: 0;
+      25% {
+        transform: translateX(0%);
+        opacity: 1;
+      }
+      75% {
+        transform: translateX(0%);
+        opacity: 1;
       }
       100% {
-        stroke-dashoffset: -1000;
+        transform: translateX(100%);
+        opacity: 0;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Embed the provided SVG content -->
+  <!-- SVG lines from the file -->
   <svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160.27 913.93">
     <defs>
       <style>
         .cls-1, .cls-2 {
           fill: none;
-          stroke: #ffe000;
           stroke-miterlimit: 10;
         }
         .cls-2 {
