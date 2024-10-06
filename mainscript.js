@@ -10,23 +10,10 @@ window.addEventListener("load", function() {
 fetch('navbar.html')
 .then(response => response.text())
 .then(data => {
-    document.getElementById('header').innerHTML = data;
-
-    // Ensuring that the script inside the fetched content is executed
-    const scripts = document.getElementById('header').getElementsByTagName('script');
-    for (let i = 0; i < scripts.length; i++) {
-        const scriptTag = document.createElement('script');
-        if (scripts[i].src) {
-            // If the script has a src attribute, set the src
-            scriptTag.src = scripts[i].src;
-        } else {
-            // Otherwise, add the inline script content
-            scriptTag.textContent = scripts[i].textContent;  // Use textContent for inline scripts
-        }
-        document.body.appendChild(scriptTag);
-    }
-});
-
+// Insert the fetched HTML into the header div
+document.getElementById('header').innerHTML = data;
+})
+.catch(error => console.error('Error fetching navbar:', error));
 
 
 let lastScrollTop = 0; // Keeps track of the last scroll position
