@@ -7,6 +7,39 @@ window.addEventListener("load", function() {
 });
 
 
+// Select the container and individual navdesa and navdesb images
+const navContainer = document.getElementById('navcont');
+const navDesA = document.getElementById('navdesa');
+const navDesB = document.getElementById('navdesb');
+
+// Flicker effect logic
+function flickerEffect(element, originalSrc, hoverSrc, times, duration) {
+    let flickerCount = 0;
+    const interval = setInterval(() => {
+        element.src = (flickerCount % 2 === 0) ? hoverSrc : originalSrc;
+        flickerCount++;
+        if (flickerCount >= times * 2) { // times * 2 because we are toggling between 2 states
+            clearInterval(interval);
+            element.src = hoverSrc; // Final hover image
+        }
+    }, duration);
+}
+
+// Add hover event listener for the whole navcont container
+navContainer.addEventListener('mouseenter', () => {
+    // Flicker effect for navdesa (3 times flicker, 100ms per toggle)
+    flickerEffect(navDesA, 'assets/navleft.svg', 'assets/navlefth.svg', 3, 100);
+    // Flicker effect for navdesb (3 times flicker, 100ms per toggle)
+    flickerEffect(navDesB, 'assets/navright.svg', 'assets/navrighth.svg', 3, 100);
+});
+
+navContainer.addEventListener('mouseleave', () => {
+    // Flicker effect for reverting back to original images
+    flickerEffect(navDesA, 'assets/navlefth.svg', 'assets/navleft.svg', 1, 100);
+    flickerEffect(navDesB, 'assets/navrighth.svg', 'assets/navright.svg', 1, 100);
+});
+
+
 let lastScrollTop = 0; // Keeps track of the last scroll position
 const header = document.querySelector('#navbar'); // Select the header element
 

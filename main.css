@@ -217,12 +217,7 @@ header {
     left: 0;
     width: 100%;
     background-color: #000000;
-    transition: transform 0.3s ease;
     z-index: 1000;
-}
-
-.header-hidden {
-    transform: translateY(-100%);
 }
 
 #navbar {
@@ -232,21 +227,51 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+}
+
+#left-nav, #right-nav {
+    display: flex;
+    width: 35%; /* Set a fixed width to ensure both have the same size */
+    justify-content: space-evenly; /* Equal spacing between children */
+    align-items: center;
+}
+
+.navelements {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0px 12px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 #navcont {
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #navicon {
     height: 32px;
     width: auto;
-    transition: transform 0.3s ease; /* Use transform instead of height */
+    margin: 0px 32px;
+    transition: transform 0.3s ease;
 }
 
 #navcont:hover #navicon {
     transform: scale(1.14); /* Scale the icon when the container is hovered */
+}
+
+#navdesa, #navdesb {
+    height: 100%;
+    width: auto;
+    transition: opacity 0.3s ease;
 }
 
 #navhead {
