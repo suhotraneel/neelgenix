@@ -7,11 +7,19 @@ window.addEventListener("load", function() {
 });
 
 // JavaScript to load header
-fetch('navbar.html')
-.then(response => response.text())
-.then(data => {
-    document.getElementById('header').innerHTML = data;
-});
+fetch('header.html')
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('header').innerHTML = data;
+
+        // Execute the script inside header.html
+        const scripts = document.getElementById('header').getElementsByTagName('script');
+        for (let i = 0; i < scripts.length; i++) {
+            const script = document.createElement('script');
+            script.innerHTML = scripts[i].innerHTML; // Assign the script content
+            document.body.appendChild(script); // Append to body to execute it
+        }
+    })
 
 
 let lastScrollTop = 0; // Keeps track of the last scroll position
