@@ -11,6 +11,14 @@ fetch('navbar.html')
 .then(response => response.text())
 .then(data => {
     document.getElementById('header').innerHTML = data;
+
+    // This ensures that the script inside the fetched content is executed
+    const scripts = document.getElementById('header').getElementsByTagName('script');
+    for (let i = 0; i < scripts.length; i++) {
+        const scriptTag = document.createElement('script');
+        scriptTag.text = scripts[i].text;
+        document.body.appendChild(scriptTag);
+    }
 });
 
 
