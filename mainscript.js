@@ -16,10 +16,17 @@ fetch('navbar.html')
     const scripts = document.getElementById('header').getElementsByTagName('script');
     for (let i = 0; i < scripts.length; i++) {
         const scriptTag = document.createElement('script');
-        scriptTag.text = scripts[i].text;
+        if (scripts[i].src) {
+            // If the script has a src attribute, set the src
+            scriptTag.src = scripts[i].src;
+        } else {
+            // Otherwise, add the inline script content
+            scriptTag.text = scripts[i].text;
+        }
         document.body.appendChild(scriptTag);
     }
 });
+
 
 
 let lastScrollTop = 0; // Keeps track of the last scroll position
