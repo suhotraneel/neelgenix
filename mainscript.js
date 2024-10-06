@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+
 let lastScrollTop = 0; // Keeps track of the last scroll position
 const header = document.querySelector('#navbar'); // Select the header element
 
