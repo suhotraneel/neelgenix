@@ -48,7 +48,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the current page URL
+    const currentPage = window.location.pathname.split("/").pop(); // Get the current page name
 
+    // Create a mapping of page names to their corresponding nav IDs
+    const navMap = {
+        "professionalworks.html": "nav1",
+        "creativeworks.html": "nav2",
+        "blogs.html": "nav3",
+        "services.html": "nav4",
+        "about.html": "nav5",
+        "contact.html": "nav6"
+    };
+
+    // Check if the current page exists in the navMap
+    if (navMap[currentPage]) {
+        // Get the corresponding nav element and add the red class
+        document.getElementById(navMap[currentPage]).classList.add("red");
+    }
+});
 
 let lastScrollTop = 0; // Keeps track of the last scroll position
 const header = document.querySelector('#navbar'); // Select the header element

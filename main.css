@@ -198,7 +198,7 @@ svg.loadline {
 
 body {
     margin: 0px;
-    padding: 64px 0px 0px 0px;
+    padding: 0px;
     background-color: #000000;
     font-family: 'Gotham', sans-serif;
     cursor: url('assets/cursor.png') 16 16, auto;
@@ -289,7 +289,6 @@ header {
     font-family: 'Gotham', sans-serif;
     font-size: 16px;
     text-align: center;
-    color: #ffffff;
     height: 100%;
     display: flex;
     align-items: center;
@@ -300,9 +299,7 @@ header {
     white-space: nowrap; /* Prevent text from wrapping */
 }
 
-.navelements:hover {
-    color: #FFF903;
-}
+
 
 #nav1{
     font-weight: 500;
@@ -316,6 +313,7 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
 
 #nav2{
@@ -330,7 +328,9 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
+
 #nav3{
     font-weight: 400;
     height: 100%;
@@ -343,6 +343,7 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
 
 #nav4{
@@ -357,6 +358,7 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
 
 #nav5{
@@ -371,6 +373,7 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
 
 #nav6{
@@ -385,7 +388,21 @@ header {
     overflow: hidden;
     white-space: nowrap; /* Prevent text from wrapping */
     text-overflow: ellipsis;
+    color: #ffffff;
 }
+
+.red {
+    color: #DB261D !important;
+}
+
+.red:hover {
+    color: #FFF903 !important;
+}
+
+#nav1:hover, #nav2:hover, #nav3:hover, #nav4:hover, #nav5:hover, #nav6:hover {
+    color: #FFF903;
+}
+
 
 /* #nav1:hover {
     background-image: url('assets/haedele.jpg');
@@ -450,9 +467,34 @@ header {
 } */
 
 .scroller {
+    padding-top: 64px;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100vh;
+    position: relative;
+}
+
+/* For Webkit browsers */
+.scroller::-webkit-scrollbar {
+    width: 4px; /* Width of the scrollbar */
+}
+
+.scroller::-webkit-scrollbar-track {
+    background-color: #ffffff00; /* Background of the scrollbar track */
+}
+
+.scroller::-webkit-scrollbar-track:hover {
+    background-color: #ffffff75; /* Background of the scrollbar track */
+}
+
+/* Scrollbar thumb */
+.scroller::-webkit-scrollbar-thumb {
+    background-color: #db261d;
+}
+
+/* Scrollbar thumb on hover */
+.scroller::-webkit-scrollbar-thumb:hover {
+    background-color: #FFF903; /* Darker red on hover */
 }
 
 button {
