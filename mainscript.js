@@ -12,7 +12,7 @@ fetch('navbar.html')
 .then(data => {
     document.getElementById('header').innerHTML = data;
 
-    // This ensures that the script inside the fetched content is executed
+    // Ensuring that the script inside the fetched content is executed
     const scripts = document.getElementById('header').getElementsByTagName('script');
     for (let i = 0; i < scripts.length; i++) {
         const scriptTag = document.createElement('script');
@@ -21,7 +21,7 @@ fetch('navbar.html')
             scriptTag.src = scripts[i].src;
         } else {
             // Otherwise, add the inline script content
-            scriptTag.text = scripts[i].text;
+            scriptTag.textContent = scripts[i].textContent;  // Use textContent for inline scripts
         }
         document.body.appendChild(scriptTag);
     }
