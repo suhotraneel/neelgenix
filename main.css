@@ -219,7 +219,7 @@ header {
     width: 100%;
     background-color: #000000;
     z-index: 1000;
-    box-shadow: 0 0px 2px rgba(255, 255, 255, 0.499); /* Horizontal offset, Vertical offset, Blur radius, Color */
+    box-shadow: 0 0px 2px rgb(255, 255, 255); /* Horizontal offset, Vertical offset, Blur radius, Color */
 }
 
 #navbar {
@@ -468,7 +468,7 @@ header {
 } */
 
 .scroller {
-    padding-top: 64px;
+    margin-top: 64px;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
     height: 100vh;
@@ -504,6 +504,39 @@ button {
 
 input {
     cursor: url('assets/cursort.png') 16 16, auto;
+}
+
+.video-background {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+}
+
+.overlay {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 1) 100%);
+    z-index: 0; /* Ensures the overlay is above the video but below the content */
+}
+
+.content {
+    position: absolute;
+    bottom: 0; /* Align content to the bottom */
+    left: 0;
+    width: 100%;
+    padding: 20px; /* Optional padding for content */
+    color: white;
+    text-align: center;
+    z-index: 1; /* Ensures content is above the overlay */
 }
 
 .findme {
