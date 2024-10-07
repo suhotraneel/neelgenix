@@ -54,12 +54,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Create a mapping of page names to their corresponding nav IDs
     const navMap = {
-        "professionalworks.html": "nav1",
-        "creativeworks.html": "nav2",
-        "blogs.html": "nav3",
-        "services.html": "nav4",
-        "about.html": "nav5",
-        "contact.html": "nav6"
+        "professionalworks": "nav1",
+        "creativeworks": "nav2",
+        "blogs": "nav3",
+        "services": "nav4",
+        "about": "nav5",
+        "contact": "nav6"
     };
 
     // Check if the current page exists in the navMap
