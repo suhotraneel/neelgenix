@@ -1,10 +1,27 @@
 var loader = document.getElementById("preloader");
+var video = document.getElementById("preloader-video");
+var videoEnded = false; // Track whether the video has ended
+var pageLoaded = false; // Track whether the page has loaded
 
-window.addEventListener("load", function() {
-    setTimeout(function() {
+// Check both conditions before hiding the loader
+function checkToHideLoader() {
+    if (videoEnded && pageLoaded) {
         loader.classList.add("hide");
-    }, 1000);
+    }
+}
+
+// Listen for the "ended" event on the video
+video.addEventListener("ended", function() {
+    videoEnded = true; // Mark video as ended
+    checkToHideLoader();
 });
+
+// Listen for the page "load" event
+window.addEventListener("load", function() {
+    pageLoaded = true; // Mark page as loaded
+    checkToHideLoader();
+});
+
 
 // JavaScript to load header
 fetch('navbar.html')
