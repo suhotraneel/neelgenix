@@ -1,31 +1,22 @@
 var loader = document.getElementById("preloader");
-var video = document.getElementById("preloader-video");
-var videoEnded = false; // Track whether the video has ended
-var pageLoaded = false; // Track whether the page has loaded
+var pageLoaded = false;
+var minimumTimePassed = false;
 
-// Check both conditions before hiding the loader
-function checkToHideLoader() {
-    console.log("Video ended:", videoEnded, "Page loaded:", pageLoaded); // Debugging
-    if (videoEnded && pageLoaded) {
-        console.log("Hiding loader..."); // Debugging
+// Start a 1-second timer
+setTimeout(function () {
+    minimumTimePassed = true;
+    if (pageLoaded) {
         loader.classList.add("hide");
     }
-}
+}, 1000);
 
-// Listen for the "ended" event on the video
-video.addEventListener("ended", function() {
-    console.log("Video has ended"); // Debugging
-    videoEnded = true; // Mark video as ended
-    checkToHideLoader();
-});
-
-// Listen for the page "load" event
-window.addEventListener("load", function() {
-    console.log("Page has loaded"); // Debugging
-    pageLoaded = true; // Mark page as loaded
-    checkToHideLoader();
-});
-
+// When page is fully loaded
+window.onload = function () {
+    pageLoaded = true;
+    if (minimumTimePassed) {
+        loader.classList.add("hide");
+    }
+};
 
 
 // JavaScript to load header
