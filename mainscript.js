@@ -5,22 +5,27 @@ var pageLoaded = false; // Track whether the page has loaded
 
 // Check both conditions before hiding the loader
 function checkToHideLoader() {
+    console.log("Video ended:", videoEnded, "Page loaded:", pageLoaded); // Debugging
     if (videoEnded && pageLoaded) {
+        console.log("Hiding loader..."); // Debugging
         loader.classList.add("hide");
     }
 }
 
 // Listen for the "ended" event on the video
 video.addEventListener("ended", function() {
+    console.log("Video has ended"); // Debugging
     videoEnded = true; // Mark video as ended
     checkToHideLoader();
 });
 
 // Listen for the page "load" event
 window.addEventListener("load", function() {
+    console.log("Page has loaded"); // Debugging
     pageLoaded = true; // Mark page as loaded
     checkToHideLoader();
 });
+
 
 
 // JavaScript to load header
