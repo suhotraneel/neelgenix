@@ -96,7 +96,7 @@
 }
 
 #preloader{
-    background: #000000;
+    background: #FFFFF5;
     height: 100vh;
     width: 100%;
     position: fixed;
@@ -393,11 +393,11 @@ header {
 }
 
 .red {
-    color: #DB261D !important;
+    color: #B48578 !important;
 }
 
 .red:hover {
-    color: #FFF903 !important;
+    color: #823425 !important;
 }
 
 #nav1:hover, #nav2:hover, #nav3:hover, #nav4:hover, #nav5:hover, #nav6:hover {

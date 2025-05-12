@@ -8,7 +8,7 @@ setTimeout(function () {
     if (pageLoaded) {
         loader.classList.add("hide");
     }
-}, 1000);
+}, 2000);
 
 // When page is fully loaded
 window.onload = function () {
