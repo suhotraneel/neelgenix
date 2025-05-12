@@ -219,7 +219,7 @@ header {
     width: 100%;
     background-color: #fffff5;
     z-index: 1000;
-    box-shadow: 0 0px 2px rgb(255, 255, 255); /* Horizontal offset, Vertical offset, Blur radius, Color */
+    box-shadow: 0 0px 2px #11111180; /* Horizontal offset, Vertical offset, Blur radius, Color */
 }
 
 #navbar {
