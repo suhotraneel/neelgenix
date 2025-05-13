@@ -95,6 +95,8 @@
     font-style: italic;
 }
 
+
+
 #preloader{
     background: #FFFFF5;
     top: 0px;
@@ -152,6 +154,8 @@
     }
 }
 
+
+
 body {
     margin: 0px;
     padding: 0px;
@@ -167,6 +171,16 @@ a {
     cursor: url('assets/cursorp.png') 16 16, auto;
     text-decoration: none;
 }
+
+button {
+    cursor: url('assets/cursorp.png') 16 16, auto;
+}
+
+input {
+    cursor: url('assets/cursort.png') 16 16, auto;
+}
+
+
 
 header {
     position: fixed; /* Keep the header at the top of the page */
@@ -255,8 +269,6 @@ header {
     transition: color 0.3s ease;
     white-space: nowrap; /* Prevent text from wrapping */
 }
-
-
 
 #nav1{
     font-weight: 500;
@@ -361,67 +373,6 @@ header {
 }
 
 
-/* #nav1:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav2:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav3:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav4:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav5:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav6:hover {
-    background-image: url('assets/haedele.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-#nav1:hover::before, 
-#nav2:hover::before, 
-#nav3:hover::before, 
-#nav4:hover::before, 
-#nav5:hover::before, 
-#nav6:hover::before {
-    content: ''; 
-    position: absolute; 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1; 
-}
-
-#nav1 span, 
-#nav2 span, 
-#nav3 span, 
-#nav4 span, 
-#nav5 span, 
-#nav6 span {
-    position: relative;
-    z-index: 2;
-} */
 
 .scroller {
     margin-top: 64px;
@@ -454,13 +405,7 @@ header {
     background-color: #B48578; /* Darker red on hover */
 }
 
-button {
-    cursor: url('assets/cursorp.png') 16 16, auto;
-}
 
-input {
-    cursor: url('assets/cursort.png') 16 16, auto;
-}
 
 .video-background {
     position: absolute;
@@ -489,7 +434,6 @@ input {
     bottom: 0; /* Align content to the bottom */
     left: 0;
     width: 100%;
-    padding: 20px; /* Optional padding for content */
     color: white;
     text-align: center;
     z-index: 1; /* Ensures content is above the overlay */
@@ -524,6 +468,8 @@ input {
     pointer-events: none;
     background: radial-gradient(circle at var(--x) var(--y), hsla(var(--h), 100%, 5%, 1) 0%, hsla(var(--h), 100%, 5%, 1) 20%);
 }
+
+
 
 .foot1 {
     color: #ffffff;
