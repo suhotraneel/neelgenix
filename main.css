@@ -195,7 +195,7 @@ header {
 #navbar {
     background-color: #FFFEE6;
     height: 64px;
-    padding: 0px 96px;
+    padding: 0 6%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -374,11 +374,60 @@ header {
 
 
 
+.floating-button {
+    position: fixed;
+    bottom: 32px;      /* Distance from bottom */
+    right: 48px;
+    display: inline-flex;      /* Distance from right */
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent;
+    border: none;
+    filter: drop-shadow(0 0 4px #11111180);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.floating-button svg {
+    padding: 0px;
+}
+
+.floatinner{
+    display: flex;
+    padding: 0px 8px 0px 16px;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    font-family: 'Gotham', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    background-color: transparent;
+    border: none;
+    background-color: #823425;
+    color: #FFFFF5;
+}
+.floatinner:hover{
+    background-color: #8F483A;
+}
+
+.floating-button:hover svg path {
+    fill: #8F483A;
+}
+
+
+
 .scroller {
-    margin-top: 64px;
+    top: 64px;
     scroll-snap-type: y mandatory;
     overflow-y: scroll;
-    height: 100vh;
+    height: calc(100vh - 64px);
     position: relative;
 }
 

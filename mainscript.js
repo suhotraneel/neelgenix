@@ -18,15 +18,13 @@ window.onload = function () {
     }
 };
 
-
 // JavaScript to load header
-fetch('navbar.html')
-.then(response => response.text())
-.then(data => {
-// Insert the fetched HTML into the header div
-document.getElementById('header').innerHTML = data;
-})
-.catch(error => console.error('Error fetching navbar:', error));
+fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('callnav').innerHTML = data;
+            });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const navContainer = document.getElementById('navcont');
