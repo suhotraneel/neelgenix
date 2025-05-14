@@ -1,0 +1,287 @@
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Thin.otf') format('opentype');
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-ThinItalic.otf') format('opentype');
+    font-weight: 100;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-XLight.otf') format('opentype');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-XLightItalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Light.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-LightItalic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Book.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-BookItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-MediumItalic.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Bold.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-BoldItalic.otf') format('opentype');
+    font-weight: 600;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Black.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-BlackItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-Ultra.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('assets/gotham/Gotham-UltraItalic.otf') format('opentype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+
+
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fffff5;
+    z-index: 1000;
+    box-shadow: 0 0px 2px #11111180; /* Horizontal offset, Vertical offset, Blur radius, Color */
+}
+
+#navbar {
+    background-color: #FFFEE6;
+    height: 64px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+#left-nav, #right-nav {
+    display: flex;
+    width: 35%; /* Set a fixed width to ensure both have the same size */
+    justify-content: space-evenly; /* Equal spacing between children */
+    align-items: center;
+}
+
+.navelements {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 0px 12px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+#navcont {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#navicon {
+    height: 32px;
+    width: auto;
+    margin: 0px 32px;
+    transition: transform 0.3s ease;
+}
+
+#navcont:hover #navicon {
+    transform: scale(1.14); /* Scale the icon when the container is hovered */
+}
+
+#navdesa, #navdesb {
+    height: 100%;
+    width: auto;
+    transition: opacity 0.3s ease;
+}
+
+#navhead {
+    padding-left: 12px;
+    font-family: 'Gotham', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+    color: #fffff5;
+    line-height: 1.2;
+}
+
+.navelements {
+    font-family: 'Gotham', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    position: relative; /* Required for positioning */
+    transition: color 0.3s ease;
+    white-space: nowrap; /* Prevent text from wrapping */
+}
+
+#nav1{
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+#nav2{
+    font-weight: 500;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+#nav3{
+    font-weight: 400;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+#nav4{
+    font-weight: 400;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+#nav5{
+    font-weight: 400;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+#nav6{
+    font-weight: 400;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent text from wrapping */
+    text-overflow: ellipsis;
+    color: #111111;
+}
+
+.red {
+    color: #9B5D4F !important;
+}
+
+.red:hover {
+    color: #823425 !important;
+}
+
+#nav1:hover, #nav2:hover, #nav3:hover, #nav4:hover, #nav5:hover, #nav6:hover {
+    color: #823425;
+}

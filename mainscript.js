@@ -19,11 +19,22 @@ window.onload = function () {
 };
 
 // JavaScript to load header
-fetch('header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('callnav').innerHTML = data;
-            });
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('navbar.html')
+        .then(res => {
+            if (!res.ok) throw new Error('Header not found');
+            return res.text();
+        })
+        .then(data => {
+            document.getElementById('callnav').innerHTML = data;
+        })
+        .catch(err => {
+            console.error('Error loading header:', err);
+            const target = document.getElementById('callnav');
+            if (target) target.textContent = 'Failed to load header.';
+        });
+});
+
 
 
 document.addEventListener('DOMContentLoaded', function() {
