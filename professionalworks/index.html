@@ -4,93 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neel Genix - Suhotra Chakraborty</title>
-    <link rel="icon" href="../../assets/ngicon.svg" type="image/x-icon">
-    <link rel="stylesheet" href="../../main.css" type="text/css">
+    <link rel="icon" href="assets/ngicondark.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">    
+    <link rel="stylesheet" href="../main.css" type="text/css">
+    <link rel="stylesheet" href="../navbar.css" type="text/css">
+    <base href="/" />
 </head>
 <body>
     <div id="preloader">
         <span class="loadertext">NEEL GENIX</span>
-        <img src="../../assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
-        <div class="loadwrapper">
-            <svg class="loadline" id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2160.27 913.93">
-                <defs>
-                    <style>
-                        .cls-1, .cls-2 {
-                            fill: none;
-                            stroke: #ffe000;
-                            stroke-miterlimit: 10;
-                        }
-                        .cls-2 {
-                            fill-rule: evenodd;
-                        }
-                    </style>
-                </defs>
-                <g id="Layer_1-2" data-name="Layer_1">
-                    <polyline class="cls-2" points="275.81 223.08 1068.05 .52 1884.46 229.87"/>
-                    <polyline class="cls-2" points=".14 320.09 1137.72 .52 1608.79 132.85"/>
-                    <polyline class="cls-2" points="551.48 187.52 1217.13 .52 2160.14 265.43"/>
-                    <polyline class="cls-2" points="413.65 143.59 922.93 .52 2022.3 309.36"/>
-                    <polyline class="cls-2" points="137.97 242.37 998.88 .52 1746.62 210.58"/>
-                </g>
-            </svg>
-        </div>
+        <img src="assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
     </div>
-    
-    
-    <header>
-        <link rel="preload" href="../../assets/navlefth.svg" as="image">
-        <link rel="preload" href="../../assets/navrighth.svg" as="image">
-    
-        <div id="navbar">
-            <div id="left-nav" style="display: flex; align-items: center; height: 100%;">
-                <a href="../professionalworks" class="navelements"><div id="nav1"><span>Professional Works</span></div></a>
-                <a href="../creativeworks" class="navelements"><div id="nav2"><span>Creative Works</span></div></a>
-            </div>
-            <a href="../../" style="height: 64px; width: auto;" >
-                <div id="navcont">   
-                    <img src="../../assets/navleft.svg" id="navdesa" alt="Neel Genix">
-                    
-                    <img src="../../assets/navicon.svg" id="navicon" alt="Neel Genix">
-                    
-                    <img src="../../assets/navright.svg" id="navdesb" alt="Neel Genix">
-                </div>
-            </a>
-            <div id="right-nav" style="display: flex; align-items: center; height: 100%;">
-                <a href="../blogs" class="navelements"><div id="nav3"><span>Blogs</span></div></a>
-                <a href="../services" class="navelements"><div id="nav4"><span>Services</span></div></a>
-                <a href="../about" class="navelements"><div id="nav5"><span>About</span></div></a>
-                <a href="../contact" class="navelements"><div id="nav6"><span>Contact</span></div></a>
-            </div>
-        </div>
-    </header>  
+
+    <div id="callnav" style="width: 100%; position: fixed;"></div>
+
+
+    <button class="floating-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="48" viewBox="0 0 20 48" fill="none">
+            <path d="M20 0H0L20 14.3642L8.94425 48H20V0Z" fill="#823425"/>
+        </svg>
+        <div class="floatinner">Book a Meeting</div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="48" viewBox="0 0 20 48" fill="none">
+            <path d="M8.94427 -1.14818e-06L20 33.6358L0 48V-1.14818e-06H8.94427Z" fill="#823425"/>
+        </svg>
+    </button>
+     
 
     <!-- The body content starts from here -->
     <div class="scroller">
         <div style="scroll-snap-align: start; height: 100%;">
-            <video class="video-background" autoplay loop muted>
-                <source src="../../assets/videos/genixlandintro.mp4" type="video/mp4">
-                Enter Genix Land.
-            </video>
             <div class="overlay"></div>
             <div class="content">
-                <h1>Your Content Here</h1>
+                <h1>Your Content Will be Here</h1>
                 <p>This is an example of a video background that loops.</p>
             </div>
         </div>
-        <div style=" overflow: hidden; scroll-snap-align: start; height: 100vh;">
+        <div style=" overflow: hidden; scroll-snap-align: start; height: 100%;">
             <div class="findme">
                 <p>SUHOTRA<br>CHAKRABORTY</p>
                 <div class="light"></div>
             </div>
         </div>
-        <footer style="scroll-snap-align: start; height: 100vh;">
+        <footer style="scroll-snap-align: start; height: 100%;">
             <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 96px;">
                 <div style="flex: 1;">
                     <div id="svg-container" class="blue-div">
-                        <img style="width: 100%; height: auto;" src="../../assets/ngfoot.svg" alt="Neel Genix">
+                        <img style="width: 100%; height: auto;" src="assets/ngfoot.svg" alt="Neel Genix">
                         <div class="red-spot" id="red-spot"></div>
                     </div>
-                    <!-- <img id="ngfoot" style="width: 100%; height: auto; margin: 4px 0px 32px 0px;" src="../../assets/ngfoot.svg" alt="Neel Genix"> -->
+                    <!-- <img id="ngfoot" style="width: 100%; height: auto; margin: 4px 0px 32px 0px;" src="assets/ngfoot.svg" alt="Neel Genix"> -->
                     <div style="display: flex; gap: 64px;">
                         <div class="column">
                             <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Branding & Campaigns</a></p>
@@ -120,11 +82,11 @@
                             <div>
                                 <p class="footlink"><a style="color: #ffffff;" href="mailto:suhotraneel@gmail.com">suhotraneel@gmail.com</a></p>
                                 <div class="fsocials">
-                                    <div class="socialicon-container"><img class="socialicon" src="../../assets/instagram.svg" alt="Instagram"></div>
-                                    <div class="socialicon-container"><img class="socialicon" src="../../assets/linkedin.svg" alt="LinkedIn"></div>
-                                    <div class="socialicon-container"><img class="socialicon" src="../../assets/youtube.svg" alt="YouTube"></div>
-                                    <div class="socialicon-container"><img class="socialicon" src="../../assets/twitter.svg" alt="Twitter"></div>
-                                    <div class="socialicon-container"><img class="socialicon" src="../../assets/spotify.svg" alt="Spotify"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/instagram.svg" alt="Instagram"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/linkedin.svg" alt="LinkedIn"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/youtube.svg" alt="YouTube"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/twitter.svg" alt="Twitter"></div>
+                                    <div class="socialicon-container"><img class="socialicon" src="assets/spotify.svg" alt="Spotify"></div>
                                 </div>
                             </div>
                         </div>
@@ -133,14 +95,14 @@
             </div>
             <div class="foot2">
                 <div style="display: flex; align-items: flex-start;">
-                    <img src="../../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
+                    <img src="assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
                     <div style="margin-left: 32px;">
                         <div style="font-size: 24px;">Subscribe to our <span style="font-weight: 500;">Newsletter</span>.</div>
                         <div style="font-size: 12px;">Project Genix, Copyright 2024. All Rights Reserved.</div>
                     </div>
                 </div>
                 <div class="newsform">
-                    <form id="email-form" style="cursor: url('../../assets/cursor.png') 16 16, auto;">
+                    <form id="email-form" style="cursor: url('assets/cursor.png') 16 16, auto;">
                         <div class="input-wrapper">
                             <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388" height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;">
                                 <path d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
@@ -216,6 +178,6 @@
             }, 3000);
         });
     </script>
-    <script src="../../mainscript.js"></script>
+    <script src="mainscript.js"></script>
 </body>
 </html>

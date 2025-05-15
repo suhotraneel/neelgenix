@@ -18,6 +18,8 @@ window.onload = function () {
     }
 };
 
+
+
 // JavaScript to load header
 document.addEventListener('DOMContentLoaded', function () {
     fetch('navbar.html')
@@ -34,6 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (target) target.textContent = 'Failed to load header.';
         });
 });
+
+
+
+
 
 
 

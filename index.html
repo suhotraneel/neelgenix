@@ -18,7 +18,7 @@
     <div id="callnav" style="width: 100%; position: fixed;"></div>
 
 
-    <button class="floating-button">
+    <button onclick="openCalendly()" class="floating-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="48" viewBox="0 0 20 48" fill="none">
             <path d="M20 0H0L20 14.3642L8.94425 48H20V0Z" fill="#823425"/>
         </svg>
@@ -27,6 +27,32 @@
             <path d="M8.94427 -1.14818e-06L20 33.6358L0 48V-1.14818e-06H8.94427Z" fill="#823425"/>
         </svg>
     </button>
+
+    <div id="calendlyModal" class="modal">
+        <div class="modal-content">
+            <div>
+                <span>Schedule a Meeting</span>
+                <span class="close" onclick="closeCalendly()">&times;</span>
+            </div>
+            <iframe src="https://calendly.com/neelgenix/appointment?primary_color=823425" frameborder="0"></iframe>
+        </div>
+    </div>
+    <script>
+        function openCalendly() {
+        document.getElementById("calendlyModal").style.display = "block";
+        }
+
+        function closeCalendly() {
+        document.getElementById("calendlyModal").style.display = "none";
+        }
+
+        window.addEventListener("click", function(event) {
+        const modal = document.getElementById("calendlyModal");
+        if (event.target === modal) {
+            closeCalendly();
+        }
+        });
+    </script>
      
 
     <!-- The body content starts from here -->
@@ -34,7 +60,7 @@
         <div style="scroll-snap-align: start; height: 100%;">
             <div class="overlay"></div>
             <div class="content">
-                <h1>Your Content Here</h1>
+                <h1>Your Content Will be Here</h1>
                 <p>This is an example of a video background that loops.</p>
             </div>
         </div>
