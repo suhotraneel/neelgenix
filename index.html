@@ -22,7 +22,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="48" viewBox="0 0 20 48" fill="none">
             <path d="M20 0H0L20 14.3642L8.94425 48H20V0Z" fill="#823425"/>
         </svg>
-        <div class="floatinner">Book a Meeting</div>
+        <div class="floatinner">Schedule a Meeting</div>
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="48" viewBox="0 0 20 48" fill="none">
             <path d="M8.94427 -1.14818e-06L20 33.6358L0 48V-1.14818e-06H8.94427Z" fill="#823425"/>
         </svg>
@@ -30,11 +30,21 @@
 
     <div id="calendlyModal" class="modal">
         <div class="modal-content">
-            <div>
-                <span>Schedule a Meeting</span>
-                <span class="close" onclick="closeCalendly()">&times;</span>
+            <div style="display: flex; width: 100%; height: 48px; justify-content: center; align-items: center; background: #FFFFF5;">
+                <div style="display: flex; padding-left: 48px; justify-content: center; align-items: center; flex: 1 0 0;">
+                    <span style="color: #823425; font-family: Gotham; font-size: 16px; font-style: normal; font-weight: 500; line-height: 24px;">Schedule a Meeting</span>
+                </div>
+                <div onclick="closeCalendly()" style="display: flex; width: 48px; justify-content: center; align-items: center; gap: 10px; flex-shrink: 0; align-self: stretch; aspect-ratio: 1/1; cursor: url('assets/cursorp.png') 16 16, auto;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M1.73125e-07 2L2 1.22712e-06L14 12L12 14L1.73125e-07 2Z" fill="#823425"/>
+                        <path d="M12 0L14 2L2 14L0 12L12 0Z" fill="#823425"/>
+                    </svg>
+                </div>
             </div>
-            <iframe src="https://calendly.com/neelgenix/appointment?primary_color=823425" frameborder="0"></iframe>
+            <div style="height: 1px; background: #823425; z-index: 1;"></div>
+            <div style="position: relative; height: calc(100% - 48px);">
+                <iframe src="https://calendly.com/neelgenix/appointment?primary_color=823425" frameborder="0"></iframe>
+            </div>
         </div>
     </div>
     <script>
