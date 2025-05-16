@@ -250,6 +250,7 @@ input {
     margin: auto;
     padding: 0;
     top: 10%;
+    bottom: 10%;
     width: 90%;
     max-width: 640px;
     height: 80%;
