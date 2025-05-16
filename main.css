@@ -184,9 +184,9 @@ input {
 
 .floating-button {
     position: fixed;
-    bottom: 32px;      /* Distance from bottom */
+    bottom: 32px;
     right: 48px;
-    display: inline-flex;      /* Distance from right */
+    display: inline-flex;
     height: 48px;
     justify-content: center;
     align-items: center;
@@ -201,15 +201,16 @@ input {
 
 .floating-button svg {
     padding: 0px;
+    width: 20px;
+    height: 48px;
 }
 
 .floatinner{
     display: flex;
-    padding: 0px 8px 0px 16px;
+    padding: 0px 12px;
     margin: 0px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     align-self: stretch;
     font-family: 'Gotham', sans-serif;
     font-weight: 400;
@@ -226,6 +227,23 @@ input {
 
 .floating-button:hover svg path {
     fill: #8F483A;
+}
+
+@media (max-width: 420px) {
+    .floating-button {
+        bottom: 16px;
+        right: 16px;
+        height: 40px;
+    }
+    .floating-button svg {
+        width: 17px;
+        height: 40px;
+    }
+    .floatinner{
+        padding: 0px 8px;
+        font-size: 14px;
+        line-height: 20px;
+    }
 }
 
 
