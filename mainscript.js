@@ -24,22 +24,18 @@ window.onload = function () {
 document.addEventListener('DOMContentLoaded', function () {
     fetch('navbar.html')
         .then(res => {
-            if (!res.ok) throw new Error('Header not found');
+            if (!res.ok) throw new Error('Navbar not found');
             return res.text();
         })
         .then(data => {
-            document.getElementById('callnav').innerHTML = data;
+            document.getElementById('callnavbar').innerHTML = data;
         })
         .catch(err => {
-            console.error('Error loading header:', err);
-            const target = document.getElementById('callnav');
-            if (target) target.textContent = 'Failed to load header.';
+            console.error('Error loading navbar:', err);
+            const target = document.getElementById('callnavbar');
+            if (target) target.textContent = 'Failed to load navbar.';
         });
 });
-
-
-
-
 
 
 

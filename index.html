@@ -8,6 +8,7 @@
     <link rel="icon" href="assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">    
     <link rel="stylesheet" href="main.css" type="text/css">
     <link rel="stylesheet" href="navbar.css" type="text/css">
+    <link rel="stylesheet" href="calendly/calendly.css" type="text/css">
 </head>
 <body>
     <div id="preloader">
@@ -15,8 +16,7 @@
         <img src="assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
     </div>
 
-    <div id="callnav" style="width: 100%; position: fixed;"></div>
-
+    <div id="callnavbar" style="width: 100%; position: fixed;"></div>
 
     <button onclick="openCalendly()" class="floating-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="60" class="floatedge" viewBox="0 0 25 60" fill="none">
@@ -52,24 +52,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function openCalendly() {
-        document.getElementById("calendlyModal").style.display = "block";
-        }
-
-        function closeCalendly() {
-        document.getElementById("calendlyModal").style.display = "none";
-        }
-
-        window.addEventListener("click", function(event) {
-        const modal = document.getElementById("calendlyModal");
-        if (event.target === modal) {
-            closeCalendly();
-        }
-        });
-    </script>
-     
 
     <!-- The body content starts from here -->
     <div class="scroller">
@@ -185,7 +167,7 @@
         });
     </script> -->
 
-    
+    <script src="calendly/calendly.js"></script>
     <script>
         const form = document.getElementById('email-form');
         const responseMessageElement = document.getElementById('response-message');
