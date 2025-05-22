@@ -1,0 +1,171 @@
+.carousel-wrapper {
+    top: 64px;
+    height: 100vh;
+    width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #11111180;
+    scroll-padding: 0 50%;
+}
+
+.carouselbuttonleft {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    display: inline-flex;
+    padding: 12px 18px 12px 14px;
+    z-index: 10;
+    background-color: #FFFFF566;
+    filter: drop-shadow(0px 0px 1px #FFFFF566);
+    clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px, 
+        100% calc(100% - 8px), 
+        calc(100% - 8px) 100%, 
+        8px 100%, 
+        0% calc(100% - 8px), 
+        0% 8px
+    );
+    transition: opacity 0.2s ease;
+}
+.carouselbuttonleft:hover {
+    background-color: #FFFFF599;
+}
+
+.carouselbuttonright {
+    position: absolute;
+    top: 50%;
+    right: 24px;
+    display: inline-flex;
+    padding: 12px 14px 12px 18px;
+    z-index: 10;
+    background-color: #FFFFF566;
+    filter: drop-shadow(0px 0px 1px #FFFFF566);
+    clip-path: polygon(
+        8px 0%,
+        calc(100% - 8px) 0%,
+        100% 8px, 
+        100% calc(100% - 8px), 
+        calc(100% - 8px) 100%, 
+        8px 100%, 
+        0% calc(100% - 8px), 
+        0% 8px
+    );
+    transition: opacity 0.2s ease;
+}
+.carouselbuttonright:hover {
+    background-color: #FFFFF599;
+}
+
+.carouselicon{
+    width: 16px;
+    height: 32px;
+    flex-shrink: 0;
+    fill: #823425;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 24px;
+    padding: 40px 0;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overflow-x: auto;
+    width: max-content;
+    padding: 0 calc(50vw - 171px);
+    perspective: 1000px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carouselcard{
+    display: flex;
+    width: 342px;
+    height: 397px;
+    flex-direction: column;
+    align-items: center;
+    scroll-snap-align: start;
+    clip-path: polygon(
+        16px 0%,
+        calc(100% - 16px) 0%,
+        100% 16px, 
+        100% calc(100% - 16px), 
+        calc(100% - 16px) 100%, 
+        16px 100%, 
+        0% calc(100% - 16px), 
+        0% 16px
+    );
+    flex: 0 0 342px;
+    scroll-snap-align: center;
+    transition: transform 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 180ms ease-out;
+    will-change: transform, opacity;
+    transform-origin: center center;
+}
+
+.carouselcard.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.carouselimagecont{
+    display: flex;
+    padding: 48px 96px;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFF5;
+}
+
+.carouselsignframe{
+    display: flex;
+    width: 150px;
+    height: 195px;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 10/13;
+}
+
+.carouselsign{
+    height: 195px;
+    flex: 1 0 0;
+    aspect-ratio: 10/13;
+}
+
+.carouseltextcont{
+    display: flex;
+    padding: 24px 32px;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    align-self: stretch;
+    background: #FFFEE6;
+    box-shadow: 0px -1px 0px 0px rgba(143, 72, 58, 0.40);
+}
+
+.carouselname{
+    color: #111111;
+    text-align: center;
+    font-family: Gotham;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.carouseldescription{
+    align-self: stretch;
+    color: #111111;
+    text-align: center;
+    font-family: Gotham;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
