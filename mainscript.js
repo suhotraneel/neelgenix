@@ -39,17 +39,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-const titles = [
-        "Hello!",
-        "I'm Suhotra Chakraborty",
-        "aka Neel Genix",
-    ];
-    let i = 0;
+const originalTitle = document.title;
+const altTitles = [
+    "Hello!",
+    "I'm Suhotra Chakraborty",
+    "aka Neel Genix",
+];
+let titleInterval;
+let i = 0;
 
-    setInterval(() => {
-      document.title = titles[i];
-      i = (i + 1) % titles.length;
-    }, 1000); // changes every 2 seconds
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        titleInterval = setInterval(() => {
+            document.title = altTitles[i];
+            i = (i + 1) % altTitles.length;
+        }, 1000);
+    } else {
+        clearInterval(titleInterval);
+        document.title = originalTitle;
+    }
+});
 
 
 
