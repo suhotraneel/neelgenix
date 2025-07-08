@@ -49,7 +49,7 @@ const titles = [
     setInterval(() => {
       document.title = titles[i];
       i = (i + 1) % titles.length;
-    }, 2000); // changes every 2 seconds
+    }, 1000); // changes every 2 seconds
 
 
 
