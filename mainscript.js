@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const originalTitle = document.title;
 const altTitles = [
-    "Hello! ✍🏻",
-    "I'm Suhotra Chakraborty",
+    "Hello! 🤔",
+    "I'm Suhotra Chakraborty ✍🏻",
     "aka Neel Genix 🎸",
 ];
 let titleInterval;
