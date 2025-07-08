@@ -39,6 +39,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+const titles = [
+        "Hello!",
+        "I'm Suhotra Chakraborty",
+        "aka Neel Genix",
+    ];
+    let i = 0;
+
+    setInterval(() => {
+      document.title = titles[i];
+      i = (i + 1) % titles.length;
+    }, 2000); // changes every 2 seconds
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const navContainer = document.getElementById('navcont');
     const navDesA = document.getElementById('navdesa');
