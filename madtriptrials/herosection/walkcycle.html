@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll Frame Animation</title>
+  <style>
+    body {
+      margin: 0;
+      height: 800vh; /* Allows scrolling */
+      background-color: black;
+    }
+    #frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body style="background-color: #000000;">
+
+<img id="frame" src="frames/frame1.png" alt="Frame Animation">
+
+<script>
+const totalFrames = 8;
+const frameElement = document.getElementById('frame');
+let currentFrame = -1;
+
+function updateFrame() {
+  const scrollY = window.scrollY;
+  const scrollFraction = scrollY / 100; // 🔧 Adjust speed — lower = faster
+  let frameIndex = Math.floor(scrollFraction) % totalFrames;
+
+  if (frameIndex < 0) frameIndex += totalFrames; // Ensure positive frame
+
+  if (frameIndex !== currentFrame) {
+    frameElement.src = `frames/frame${frameIndex + 1}.png`; // +1 to match filenames
+    currentFrame = frameIndex;
+  }
+}
+
+window.addEventListener('scroll', updateFrame);
+window.addEventListener('load', updateFrame);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Horizontal Scroll with Image</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* no default scrollbars */
+    }
+
+    .scroll-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .scroll-container video {
+      position: absolute;
+      top: 0;
+      height: 100vh;
+      width: auto;
+      display: block;
+    }
+
+    #video1 {
+      z-index: 1; /* Sky layer */
+      opacity: 1;
+    }
+    #video2 {
+      z-index: 2; /* Background layer */
+    }
+  </style>
+</head>
+<body style="background-color: #000000;">
+
+<div class="scroll-container" id="scrollContainer">
+  <video autoplay muted loop playsinline id="video1">
+    <source src="sky.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <video autoplay muted loop playsinline id="video2">
+    <source src="background.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<script>
+  const scrollContainer = document.getElementById('scrollContainer');
+  const video1 = document.getElementById('video1');
+  const video2 = document.getElementById('video2');
+
+  let scrollSpeed1, scrollSpeed2;
+  let maxScrollableDistance = 0;
+  let scrollX = 0;
+
+  function getDynamicWidth(video) {
+    const viewportHeight = window.innerHeight;
+    const aspectRatio = video.videoWidth / video.videoHeight;
+    return viewportHeight * aspectRatio;
+  }
+
+  function setupRatios() {
+    const viewportWidth = window.innerWidth;
+    const width1 = getDynamicWidth(video1);
+    const width2 = getDynamicWidth(video2);
+
+    const scroll1 = width1 - viewportWidth;
+    const scroll2 = width2 - viewportWidth;
+
+    maxScrollableDistance = Math.max(scroll1, scroll2);
+    scrollSpeed1 = (scroll1 / maxScrollableDistance);
+    scrollSpeed2 = (scroll2 / maxScrollableDistance);
+
+    // Debug: Log image widths and scroll distances
+    console.log("Viewport Width:", viewportWidth);
+    console.log("Video 1 (width):", width1, "Scroll distance:", scroll1);
+    console.log("Video 2 (width):", width2, "Scroll distance:", scroll2);
+    console.log("Max Scrollable Distance:", maxScrollableDistance);
+    console.log("Scroll Speed 1:", scrollSpeed1);
+    console.log("Scroll Speed 2:", scrollSpeed2);
+  }
+
+  function applyScroll() {
+    scrollX = Math.max(0, Math.min(scrollX, maxScrollableDistance));
+    video1.style.left = `${-scrollX * scrollSpeed1}px`;
+    video2.style.left = `${-scrollX * scrollSpeed2}px`;
+  }
+
+  function waitForVideos(callback) {
+    let loaded = 0;
+    const total = 2;
+
+    function check() {
+      loaded++;
+      if (loaded === total) callback();
+    }
+
+    if (video1.readyState >= 1) check(); else video1.addEventListener('loadedmetadata', check);
+    if (video2.readyState >= 1) check(); else video2.addEventListener('loadedmetadata', check);
+  }
+
+  waitForVideos(() => {
+    setupRatios();
+    applyScroll();
+  });
+
+  scrollContainer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    scrollX += e.deltaY;
+    applyScroll();
+  });
+
+  // Re-run ratio & scroll setup on window resize
+  window.addEventListener('resize', () => {
+    setupRatios();
+    applyScroll();
+  });
+</script>
+</body>
+</html>
