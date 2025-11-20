@@ -101,15 +101,14 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #fffff5;
+    background-color: #FFFEE6;
     z-index: 1000;
     box-shadow: 0 0px 2px #11111180; /* Horizontal offset, Vertical offset, Blur radius, Color */
 }
 
 #navbar {
-    background-color: #FFFEE6;
     height: 64px;
-    padding: 0 6%;
+    padding: 0 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
