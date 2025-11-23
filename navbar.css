@@ -106,27 +106,45 @@ header {
     box-shadow: 0 0px 2px #11111180; /* Horizontal offset, Vertical offset, Blur radius, Color */
 }
 
+#responsivenav {
+    max-width: 1440px;
+    margin: 0 auto; 
+}
+
 #navbar {
     height: 64px;
-    padding: 0 80px;
+    margin: 0 auto; 
+    padding: 0 128px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
 }
 
+@media screen and (max-width: 1280px) {
+  #navbar {
+    padding: 0 64px;
+  }
+}
+
 #left-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 32px;
     justify-content: flex-start;
 }
 
 #right-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     justify-content: flex-end;
+}
+
+@media screen and (max-width: 1280px) {
+  #left-nav, #right-nav  {
+    gap: 32px;
+  }
 }
 
 .navelements {
@@ -183,26 +201,12 @@ header {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 0 12px;
+    padding: 0px;
     text-decoration: none;
     transition: color 0.3s ease;
     white-space: nowrap;
     width: auto; /* Fix: allow it to hug content */
 }
-
-/* #nav1, #nav2, #nav3, #nav4, #nav5, #nav6 {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #111111;
-}*/
 
 #nav1, #nav2, #nav3, #nav4, #nav5, #nav6 {
     display: flex;
