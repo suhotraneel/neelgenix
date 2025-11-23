@@ -115,15 +115,17 @@ header {
     position: relative;
 }
 
-#left-nav, #right-nav {
+#left-nav {
     display: flex;
     align-items: center;
     gap: 20px;
-    flex: 1 0 0;
-    align-self: stretch;
+    justify-content: flex-start;
 }
 
 #right-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     justify-content: flex-end;
 }
 
