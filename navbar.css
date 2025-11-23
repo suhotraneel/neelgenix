@@ -117,9 +117,14 @@ header {
 
 #left-nav, #right-nav {
     display: flex;
-    width: 35%; /* Set a fixed width to ensure both have the same size */
-    justify-content: space-evenly; /* Equal spacing between children */
     align-items: center;
+    gap: 20px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+#right-nav {
+    justify-content: flex-end;
 }
 
 .navelements {
@@ -183,94 +188,36 @@ header {
     white-space: nowrap; /* Prevent text from wrapping */
 }
 
-#nav1{
+/* #nav1, #nav2, #nav3, #nav4, #nav5, #nav6 {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #111111;
+}*/
+
+#nav1, #nav2, #nav3, #nav4, #nav5, #nav6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    color: #111111;
+}
+
+/* Individual font weights */
+#nav1, #nav2 {
     font-weight: 500;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
 }
 
-#nav2{
-    font-weight: 500;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
-}
-
-#nav3{
+#nav3, #nav4, #nav5, #nav6 {
     font-weight: 400;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
-}
-
-#nav4{
-    font-weight: 400;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
-}
-
-#nav5{
-    font-weight: 400;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
-}
-
-#nav6{
-    font-weight: 400;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    position: relative;
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis;
-    color: #111111;
 }
 
 .red {
