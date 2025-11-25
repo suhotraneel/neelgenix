@@ -121,9 +121,27 @@ header {
     position: relative;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   #navbar {
     padding: 0 64px;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  #navbar {
+    padding: 0 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #navbar {
+    padding: 0 24px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  #navbar {
+    padding: 0 16px;
   }
 }
 
@@ -141,17 +159,36 @@ header {
     justify-content: flex-end;
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1439px) {
   #left-nav, #right-nav  {
     gap: 40px;
   }
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
   #left-nav, #right-nav  {
     gap: 32px;
   }
 }
+
+/* --------------- MOBILE / TABLET NAV HIDE ---------------- */
+@media screen and (max-width: 1023px) {
+    #left-nav,
+    #right-nav {
+        display: none !important;
+    }
+    #navcont {
+        position: static !important;
+        left: auto !important;
+        transform: none !important;
+        justify-content: flex-start !important;
+    }
+    #navdesa,
+    #navdesb {
+        display: none;
+    }
+}
+
 
 .navelements {
     display: flex;
@@ -180,8 +217,16 @@ header {
     transition: transform 0.3s ease;
 }
 
-#navcont:hover #navicon {
-    transform: scale(1.14); /* Scale the icon when the container is hovered */
+@media screen and (max-width: 1023px) {
+    #navicon {
+    margin: 0px 8px;
+}
+}
+
+@media (min-width: 1024px) {
+    #navcont:hover #navicon {
+        transform: scale(1.14);
+    }
 }
 
 #navdesa, #navdesb {
@@ -231,6 +276,78 @@ header {
 #nav3, #nav4, #nav5, #nav6 {
     font-weight: 400;
 }
+
+#burger {
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    #burger {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+            cursor: url('assets/cursorp.png') 16 16, auto;
+    }
+
+    #burger img {
+        height: 20px;
+        width: auto;
+        transition: transform 0.2s ease;
+    }
+}
+
+#drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #FFFEE6;
+    z-index: 99999999999;
+    transform: translateY(-100%);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+#drawer.open {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+#drawer-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+}
+
+/* Drawer items general style */
+.drawer-item {
+    font-family: 'Gotham', sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    color: #111;
+    transition: color 0.25s ease;
+}
+
+/* Emphasis */
+.drawer-item:nth-child(1) { font-weight: 500; } /* Professional Works */
+.drawer-item:nth-child(2) { font-weight: 400; } /* Creative Works */
+
+/* Remaining links */
+.drawer-item:nth-child(n+3) {
+    font-weight: 300;
+}
+
+.drawer-item:hover {
+    color: #823425;
+}
+
 
 .red {
     color: #9B5D4F !important;

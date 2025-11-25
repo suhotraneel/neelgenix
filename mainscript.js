@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             document.getElementById('callnavbar').innerHTML = data;
             initNavbarFlicker();
+            initDrawer();
         })
         .catch(err => {
             console.error('Error loading navbar:', err);

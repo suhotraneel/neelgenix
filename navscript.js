@@ -26,3 +26,31 @@ function initNavbarFlicker() {
         flickerEffect(navDesB, 'assets/navrighth.svg', 'assets/navright.svg', 2, 100);
     });
 }
+
+
+
+function initDrawer() {
+
+    const burger = document.getElementById("burger");
+    const drawer = document.getElementById("drawer");
+
+    if (!burger) {
+        console.error("BURGER NOT FOUND");
+        return;
+    }
+    if (!drawer) {
+        console.error("DRAWER NOT FOUND");
+        return;
+    }
+
+    burger.addEventListener("click", () => {
+        drawer.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".drawer-item").forEach(item => {
+        item.addEventListener("click", () => {
+            drawer.classList.remove("open");
+        });
+    });
+
+}
