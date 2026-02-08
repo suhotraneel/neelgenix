@@ -5,106 +5,291 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right to Look - Neel Genix</title>
-    <link rel="icon" href="../../../assets/ngicondark.svg" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../../../assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">
+    <link rel="icon" href="../../assets/ngicondark.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../../assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">
     <link rel="stylesheet" href="../../css/main.css" type="text/css">
     <link rel="stylesheet" href="../../css/navbar.css" type="text/css">
     <base href="/" />
     <style>
-        .project-hero {
-            padding: 120px 24px 60px;
-            max-width: 1200px;
+        /* Project Specific Styles */
+        :root {
+            --primary-color: #823425;
+            --text-color: #333;
+            --bg-color: #fffff5;
+            --card-bg: #fff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .project-container {
+            max-width: 1400px;
             margin: 0 auto;
-        }
-
-        .project-title {
-            font-family: 'Gotham Black', sans-serif;
-            font-size: 4rem;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-        }
-
-        .project-subtitle {
-            font-family: 'Gotham Book', sans-serif;
-            font-size: 1.5rem;
-            color: #666;
-            margin-bottom: 48px;
+            padding: 120px 24px 60px;
         }
 
         .project-section {
-            padding: 60px 24px;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin-bottom: 120px;
         }
 
-        .section-title {
-            font-family: 'Gotham Bold', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 32px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 16px;
+        /* Banner */
+        .project-banner {
+            text-align: center;
+            margin-bottom: 80px;
         }
 
-        .project-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            margin-bottom: 48px;
-        }
-
-        @media (max-width: 768px) {
-            .project-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-title {
-                font-size: 2.5rem;
-            }
-        }
-
-        .text-block {
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-
-        .highlight-box {
-            background: #f5f5f5;
-            padding: 32px;
-            border-radius: 12px;
+        .vector-icon {
+            width: 54px;
+            height: auto;
             margin-bottom: 24px;
         }
 
-        .process-step {
-            margin-bottom: 48px;
+        .project-title {
+            font-family: 'Gotham', sans-serif;
+            font-weight: 800;
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 16px;
         }
 
-        .process-title {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #823425;
-            margin-bottom: 12px;
+        .project-subtitle {
+            font-family: 'Gotham', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        img.placeholder {
+        /* Video/Hero Image */
+        .hero-media {
             width: 100%;
             height: auto;
-            background: #e0e0e0;
+            aspect-ratio: 16/9;
+            background-color: #e0e0e0;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            min-height: 300px;
+            margin-bottom: 80px;
+            overflow: hidden;
         }
 
-        /* Override main.css scroll snap for this page */
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Details Grid */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 48px;
+        }
+
+        .details-column h3 {
+            font-family: 'Gotham', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            color: var(--primary-color);
+        }
+
+        .details-column p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-family: 'Gotham', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            margin-bottom: 48px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 16px;
+        }
+
+        /* Process Grid */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .process-item h4 {
+            font-family: 'Gotham', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+        }
+
+        /* Findings Grid */
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+        }
+
+        .findings-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .finding-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            aspect-ratio: 3/4;
+            background-color: #ddd;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        /* Personas */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .persona-card {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .persona-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background-color: #ddd;
+            border-radius: 12px;
+        }
+
+        /* Empathy Map */
+        .empathy-map-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .empathy-quadrant {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 16px;
+            background: #fff;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #eee;
+        }
+
+        .quadrant-item strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        /* Competitors */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .competitor-item {
+            text-align: center;
+        }
+
+        .competitor-logo {
+            width: 100%;
+            aspect-ratio: 2/1;
+            background-color: #f0f0f0;
+            margin-bottom: 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Solution Concept */
+        .highlight-text {
+            font-size: 1.5rem;
+            line-height: 1.5;
+            font-weight: 500;
+            background: #fff;
+            padding: 48px;
+            border-radius: 16px;
+            border-left: 8px solid var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+
+            .process-grid,
+            .findings-grid-4,
+            .competitor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .details-grid,
+            .findings-grid,
+            .persona-grid,
+            .empathy-map-container,
+            .process-grid,
+            .findings-grid-4,
+            .competitor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-container {
+                padding: 100px 20px 40px;
+            }
+
+            .section-header {
+                font-size: 1.8rem;
+            }
+
+            .highlight-text {
+                font-size: 1.2rem;
+                padding: 24px;
+            }
+
+            .hero-media {
+                border-radius: 8px;
+            }
+        }
+
+        /* Disable snap scroll */
         .scroller {
             scroll-snap-type: none !important;
             scroll-behavior: auto !important;
         }
 
-        /* Remove snap align from children if any global styles apply */
         .scroller>* {
             scroll-snap-align: none !important;
         }
@@ -120,161 +305,282 @@
     <div id="callnav" style="width: 100%; position: fixed; z-index: 100;"></div>
 
     <div class="scroller">
-        <div style="padding-top: 100px;">
-            <div class="project-hero">
-                <h1 class="project-title">The Right to Look</h1>
+        <div class="project-container">
+
+            <!-- Banner -->
+            <section class="project-section project-banner">
+                <svg class="vector-icon" viewBox="0 0 54 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M27 0L54 33.5L27 67L0 33.5L27 0Z" fill="#823425" />
+                </svg>
+                <h1 class="project-title">THE RIGHT TO LOOK</h1>
                 <p class="project-subtitle">Audio-Visual Experience</p>
+            </section>
 
-                <div class="highlight-box">
-                    <p class="text-block" style="font-size: 1.2rem;">Right to Look is an immersive audio-visual art
-                        gallery experience. By scanning a QR code, visitors access a web app that guides them through
-                        the exhibition. Curated audio tours accompany each artwork, allowing users to explore the
-                        museum, discover the stories behind each piece, and hear directly the curators' voices.</p>
-                </div>
-
-                <div class="project-grid">
-                    <div>
-                        <h3>Team</h3>
-                        <p>Suhotra Chakraborty (Designer + Developer)<br>Ajinkya Satam (Designer)<br>Mansha Jejani
-                            (Designer)</p>
-                    </div>
-                    <div>
-                        <h3>Role & Year</h3>
-                        <p>UX/UI + Development<br>2023-24</p>
-                    </div>
-                </div>
+            <!-- Video Thumbnail -->
+            <div class="hero-media">
+                <p>Project Video Placeholder</p>
             </div>
 
-            <div class="project-section">
-                <h2 class="section-title">Design Process</h2>
-                <p class="text-block">Based on Double Diamond & 3 Phases of IB MYP Design Cycle.</p>
+            <!-- Details -->
+            <section class="project-section details-grid">
+                <div class="details-column">
+                    <h3>Project Overview</h3>
+                    <p>Right to Look is an immersive audio-visual art gallery experience. By scanning a QR code,
+                        visitors access a web app that guides them through the exhibition. Curated audio tours accompany
+                        each artwork, allowing users to explore the museum, discover the stories behind each piece, and
+                        hear directly the curators' voices.</p>
+                </div>
+                <div class="details-column">
+                    <h3>Team</h3>
+                    <p>Suhotra Chakraborty (Designer + Developer)<br>Ajinkya Satam (Designer)<br>Mansha Jejani
+                        (Designer)</p>
 
-                <div class="project-grid">
-                    <div class="process-step">
-                        <div class="process-title">1. Enquire</div>
+                    <h3>Role & Year</h3>
+                    <p>UX/UI + Development<br>2023-24</p>
+                </div>
+            </section>
+
+            <!-- Design Process -->
+            <section class="project-section">
+                <h2 class="section-header">Design Process</h2>
+                <p style="margin-bottom: 32px;">Based on Double Diamond & 3 Phases of IB MYP Design Cycle.</p>
+                <div class="process-grid">
+                    <div class="process-item">
+                        <h4>1. Enquire</h4>
                         <p>Explore, gather data, question. Understand the problem's scope, laying groundwork for design.
                         </p>
                     </div>
-                    <div class="process-step">
-                        <div class="process-title">2. Analyze</div>
+                    <div class="process-item">
+                        <h4>2. Analyze</h4>
                         <p>Scrutinize data, find patterns, define the problem. Synthesize to create a clear problem
                             statement.</p>
                     </div>
-                    <div class="process-step">
-                        <div class="process-title">3. Develop</div>
+                    <div class="process-item">
+                        <h4>3. Develop</h4>
                         <p>Generate solutions, evaluate ideas, and refine them, planning from concept to final design.
                         </p>
                     </div>
-                    <div class="process-step">
-                        <div class="process-title">4. Establish</div>
+                    <div class="process-item">
+                        <h4>4. Establish</h4>
                         <p>Build prototypes for practical application, validating user experience and finalize design
                             details.</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="project-section">
-                <h2 class="section-title">Research & Findings</h2>
+            <!-- Phase 1: Enquire -->
+            <section class="project-section">
+                <h2 class="section-header">Phase 1: Enquire</h2>
+                <p class="text-block">Explore, gather data, question. Understand the problem's scope, laying groundwork
+                    for design.</p>
 
-                <h3>Domain Study</h3>
-                <p class="text-block">Exploration of the contemporary art gallery landscape revealed key insights:</p>
-                <ul style="list-style-position: inside; margin-bottom: 24px;">
-                    <li>Visitor Engagement: Need for more than just visual observation.</li>
-                    <li>Description vs. Guidance: Analysis of minimal descriptions vs guided experiences.</li>
-                    <li>Immersive Experiences: Growing trend in artistic & cultural settings.</li>
-                    <li>Audio-Visual Installations: Success of multi-sensory exhibits.</li>
-                </ul>
-
-                <h3>User Insights (Secondary Findings)</h3>
-                <div class="project-grid">
+                <h3 style="margin-top: 48px; margin-bottom: 24px;">Domain Study</h3>
+                <div class="findings-grid-4">
                     <div>
-                        <ul>
-                            <li>Common visitor disengagement due to lack of artwork context.</li>
-                            <li>Existing audio guides are underutilized or lack personalization.</li>
-                        </ul>
+                        <div class="image-placeholder">Gallery Landscape</div>
+                        <p>Exploration of the contemporary art gallery landscape, focusing on visitor engagement
+                            strategies.</p>
                     </div>
                     <div>
-                        <ul>
-                            <li>Desire for a cohesive narrative throughout an exhibition.</li>
-                            <li>Lack of interaction with digital space.</li>
-                        </ul>
+                        <div class="image-placeholder">Approaches</div>
+                        <p>Analysis of diverse gallery approaches: minimal description vs. guided experiences.</p>
+                    </div>
+                    <div>
+                        <div class="image-placeholder">Immersive Experience</div>
+                        <p>Research on immersive and semi-immersive experiences in artistic & cultural settings.</p>
+                    </div>
+                    <div>
+                        <div class="image-placeholder">Audio-Visual</div>
+                        <p>Study of successful audio-visual installations in museums, galleries and exhibition centres.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 64px; margin-bottom: 24px;">Target Group</h3>
+                <p class="highlight-text" style="font-size: 1.2rem; padding: 32px; border-left-width: 4px;">
+                    Individuals, aged 18-45, visiting or present in Mumbai, including students, employed professionals,
+                    workers in unorganized sectors and entrepreneurs with a strong presence in the city's cultural and
+                    social scene, with a casual interest in art exhibitions.
+                </p>
+            </section>
+
+            <!-- Phase 2: Analyze -->
+            <section class="project-section">
+                <h2 class="section-header">Phase 2: Analyze</h2>
+
+                <h3 style="margin-bottom: 24px;">User Personas</h3>
+                <div class="persona-grid">
+                    <div class="persona-card">
+                        <div class="persona-image"></div>
+                        <div>
+                            <h4>Priya Desai</h4>
+                            <p><strong>Bandra, Mumbai | 32 | Marketing Manager</strong></p>
+                            <p>Busy professional, enjoys exploring Mumbai's cultural scene, values experiences over
+                                material possessions, appreciates art but doesn't consider herself an expert.
+                                Comfortable with smartphones and social media.</p>
+                        </div>
+                    </div>
+                    <div class="persona-card">
+                        <div class="persona-image"></div>
+                        <div>
+                            <h4>Rohan Kapoor</h4>
+                            <p><strong>Malabar Hill, Mumbai | 40 | Tech Entrepreneur</strong></p>
+                            <p>High-net-worth individual, appreciates fine art, values exclusive experiences, tech-savvy
+                                and open to new technologies, collects contemporary art, attends art auctions, invests
+                                in art.</p>
+                        </div>
                     </div>
                 </div>
 
-                <h3>Target Group</h3>
-                <p class="text-block">Individuals, aged 18-45, visiting or present in Mumbai, including students,
-                    employed professionals, and entrepreneurs with a casual interest in art exhibitions.</p>
-            </div>
-
-            <div class="project-section">
-                <h2 class="section-title">Problem Statement</h2>
-                <div class="highlight-box">
-                    <p style="font-size: 1.1rem; font-weight: 500;">"Art gallery visitors often lack sufficient
-                        contextual information and engaging experiences to fully appreciate artworks and understand the
-                        artists' intentions. This results in a diminished connection with the art, and therefore,
-                        reduced lasting engagement and visitor retention for the gallery."</p>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h2 class="section-title">Solution Concept</h2>
-                <p class="text-block">An immersive and accessible web application, with a seamless QR code onboarding
-                    process, that delivers curated audio-visual experiences for art exhibitions, providing deeper
-                    contextual information about artworks and artists to enhance visitor engagement.</p>
-
-                <h3>Key Features</h3>
-                <div class="project-grid">
+                <h3 style="margin-top: 64px; margin-bottom: 24px;">Empathy Maps</h3>
+                <div class="empathy-map-container">
                     <div>
-                        <h4>Inclusive Design</h4>
-                        <p>Integrating audio descriptions and visuals for broader accessibility.</p>
+                        <h4 style="margin-bottom: 16px;">Priya Desai</h4>
+                        <div class="empathy-quadrant">
+                            <div class="quadrant-item">
+                                <strong>Says</strong>
+                                <p>"I wish I understood the artist's intent."</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Thinks</strong>
+                                <p>Curious but sometimes overwhelmed.</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Does</strong>
+                                <p>Observes art, shares on social media.</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Feels</strong>
+                                <p>Wants to connect more deeply with the art.</p>
+                            </div>
+                        </div>
                     </div>
                     <div>
-                        <h4>Intuitive Interface</h4>
-                        <p>Inspired by familiar platforms like Pinterest and Spotify for ease of use.</p>
+                        <h4 style="margin-bottom: 16px;">Rohan Kapoor</h4>
+                        <div class="empathy-quadrant">
+                            <div class="quadrant-item">
+                                <strong>Says</strong>
+                                <p>"Is this a good investment?"</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Thinks</strong>
+                                <p>Evaluates value and exclusivity.</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Does</strong>
+                                <p>Networks, buys art, checks details.</p>
+                            </div>
+                            <div class="quadrant-item">
+                                <strong>Feels</strong>
+                                <p>Appreciates high quality and status.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+                <h3 style="margin-top: 64px; margin-bottom: 24px;">Problem Statement</h3>
+                <div class="highlight-text">
+                    "Art gallery visitors often lack sufficient contextual information and engaging experiences to fully
+                    appreciate artworks and understand the artists' intentions. This results in a diminished connection
+                    with the art, and therefore, reduced lasting engagement and visitor retention for the gallery."
+                </div>
+            </section>
+
+            <!-- Competitive Analysis -->
+            <section class="project-section">
+                <h3 style="margin-bottom: 24px;">Competitive Analysis</h3>
+                <div class="competitor-grid">
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Orpheo</div>
+                        <p>Global provider of hardware and software solutions for museum audio experiences.</p>
+                    </div>
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Acoustiguide</div>
+                        <p>Offers comprehensive audio guide systems tailored for cultural institutions.</p>
+                    </div>
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Smartify</div>
+                        <p>Mobile app uses image recognition to provide instant art information and audio tours.</p>
+                    </div>
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Guidekick</div>
+                        <p>Delivers location-sensitive audio content for immersive museum experiences.</p>
+                    </div>
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Google Arts & Culture</div>
+                        <p>Online platform for exploring art collections and virtual museum tours.</p>
+                    </div>
+                    <div class="competitor-item">
+                        <div class="competitor-logo">Artsteps</div>
+                        <p>Enables users to create and explore virtual 3D art exhibitions online.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Phase 3: Develop -->
+            <section class="project-section">
+                <h2 class="section-header">Phase 3: Develop</h2>
+
+                <h3 style="margin-bottom: 24px;">Solution Concept</h3>
+                <div class="highlight-text">
+                    An immersive and accessible web application, with a seamless QR code onboarding process, that
+                    delivers curated audio-visual experiences for art exhibitions, providing deeper contextual
+                    information about artworks and artists to enhance visitor engagement and increase art appreciation.
+                </div>
+
+                <h3 style="margin-top: 64px; margin-bottom: 24px;">Key Features</h3>
+                <div class="findings-grid-4">
+                    <div>
+                        <div class="image-placeholder">Audio-Visual</div>
+                        <p>Sequenced, curated audio-visual experience for cohesive art exploration.</p>
+                    </div>
+                    <div>
+                        <div class="image-placeholder">Accessibility</div>
+                        <p>Ensures access to the art collection, even after the physical visit.</p>
+                    </div>
+                    <div>
+                        <div class="image-placeholder">Inclusive</div>
+                        <p>Inclusive design, integrating audio descriptions and visuals.</p>
+                    </div>
+                    <div>
+                        <div class="image-placeholder">Context</div>
+                        <p>Clear communication of artist's intent behind each artwork.</p>
+                    </div>
+                </div>
+            </section>
 
         </div>
 
-        <footer style="scroll-snap-align: start; margin-top: 100px;">
-            <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 96px;">
-                <div style="flex: 1;">
+        <!-- Footer -->
+        <footer style="scroll-snap-align: start; margin-top: 0px;">
+            <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px;">
+                <div style="flex: 1; min-width: 300px;">
                     <div id="svg-container" class="blue-div">
                         <img style="width: 100%; height: auto;" src="../../assets/ngfoot.svg" alt="Neel Genix">
                         <div class="red-spot" id="red-spot"></div>
                     </div>
-                    <div style="display: flex; gap: 64px;">
+                    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
                         <div class="column">
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Branding &
-                                    Campaigns</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital
-                                    Products</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Poetry</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Branding & Campaigns</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Digital Products</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Poetry</a></p>
                         </div>
                         <div class="column">
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual
-                                    Design</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Research
-                                    Papers</a></p>
-                            <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Visual
-                                    Journal</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Visual Design</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Research Papers</a></p>
+                            <p class="footlink"><a href="#" style="color: #fff;">Visual Journal</a></p>
                         </div>
                     </div>
                 </div>
-                <div style="flex: 1;">
-                    <div style="display: flex; gap: 64px;">
+                <div style="flex: 1; min-width: 300px;">
+                    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
                         <div class="column">
                             <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">SERVICES</div>
                             <div>
-                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Logo &
-                                        Branding</a></p>
-                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Website
-                                        Design</a></p>
-                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Digital
-                                        Product</a></p>
-                                <p class="footlink"><a style="text-decoration: none; color: #ffffff;" href="">Brand
-                                        Campaign</a></p>
+                                <p class="footlink"><a href="#" style="color: #fff;">Logo & Branding</a></p>
+                                <p class="footlink"><a href="#" style="color: #fff;">Website Design</a></p>
+                                <p class="footlink"><a href="#" style="color: #fff;">Digital Product</a></p>
+                                <p class="footlink"><a href="#" style="color: #fff;">Brand Campaign</a></p>
                             </div>
                         </div>
                         <div class="column">
@@ -300,76 +606,38 @@
                 </div>
             </div>
             <div class="foot2">
-                <div style="display: flex; align-items: flex-start;">
-                    <img src="../../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
-                    <div style="margin-left: 32px;">
-                        <div style="font-size: 24px;">Subscribe to our <span
-                                style="font-weight: 500;">Newsletter</span>.</div>
-                        <div style="font-size: 12px;">Project Genix, Copyright 2024. All Rights Reserved.</div>
-                    </div>
-                </div>
-                <div class="newsform">
-                    <form id="email-form" style="cursor: url('../../assets/cursor.png') 16 16, auto;">
-                        <div class="input-wrapper">
-                            <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388"
-                                height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg"
-                                style="transition: fill 0.3s ease;">
-                                <path
-                                    d="M376.337 46.5H10.8633L1.76975 18.9119L26.0817 1.5H361.118L385.43 18.9119L376.337 46.5Z">
-                            </svg>
-                            <input type="email" id="email" name="email" placeholder="Email Address" required>
-                            <div id="response-message"></div>
+                <div
+                    style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+                    <div style="display: flex; align-items: center;">
+                        <img src="../../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
+                        <div style="margin-left: 20px;">
+                            <div style="font-size: 20px; line-height: 1.2;">Subscribe to <span
+                                    style="font-weight: 500;">Newsletter</span>.</div>
+                            <div style="font-size: 10px; opacity: 0.8;">Copyright 2024.</div>
                         </div>
-                        <button type="submit">
-                            <svg id="detecthover" fill="#ffffff" width="167" height="48" viewBox="0 0 167 49"
-                                xmlns="http://www.w3.org/2000/svg" style="transition: fill 0.3s ease;"
-                                onmouseover="this.querySelector('path').setAttribute('fill', '#FFF903');"
-                                onmouseout="this.querySelector('path').setAttribute('fill', '#ffffff');">
-                                <path d="M0 48.1656H140.8L166.035 29.8312L156.396 0.165625H0V24V48.1656Z" />
-                                <text x="55%" y="50%" dominant-baseline="middle" text-anchor="middle" class="substext"
-                                    fill="#000000">SUBSCRIBE</text>
-                            </svg>
-                        </button>
-                    </form>
+                    </div>
+                    <div class="newsform">
+                        <form id="email-form" style="cursor: url('../../assets/cursor.png') 16 16, auto;">
+                            <!-- Reusing existing SVG structure but may need adjustment for mobile responsiveness -->
+                            <div class="input-wrapper" style="width: auto;">
+                                <input type="email" id="email" name="email" placeholder="Email Address" required
+                                    style="width: 250px;">
+                            </div>
+                            <button type="submit"
+                                style="margin-left: 10px; color: white; font-weight: bold; cursor: pointer;">
+                                SUBSCRIBE
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </footer>
     </div>
 
-    <script>
-        const form = document.getElementById('email-form');
-        const responseMessageElement = document.getElementById('response-message');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            try {
-                const response = await fetch('/api/email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email }),
-                });
-                const responseData = await response.json();
-                if (response.ok) {
-                    responseMessageElement.innerHTML = `Saved.`;
-                    responseMessageElement.style.color = 'rgb(94, 255, 0)';
-                    console.log('Email saved successfully!');
-                } else {
-                    responseMessageElement.innerHTML = 'Already Exists !';
-                    responseMessageElement.style.color = 'rgb(251, 255, 0);';
-                    console.error('Error saving email:', response.status);
-                }
-            } catch (error) {
-                responseMessageElement.innerHTML = 'Error !';
-                responseMessageElement.style.color = 'rgb(251, 255, 0);';
-                console.error('Error saving email:', error);
-            }
-            setTimeout(() => {
-                responseMessageElement.style.display = 'none';
-            }, 3000);
-        });
-    </script>
     <script src="../../js/mainscript.js"></script>
+    <script>
+        // Simple script to handle form submission if needed, or rely on mainscript
+    </script>
 </body>
 
 </html>
