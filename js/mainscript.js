@@ -22,7 +22,7 @@ window.onload = function () {
 
 // JavaScript to load header
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('navbar.html')
+    fetch('components/navbar.html')
         .then(res => {
             if (!res.ok) throw new Error('Navbar not found');
             return res.text();
@@ -64,7 +64,7 @@ document.addEventListener("visibilitychange", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Get the current page URL
     const currentPage = window.location.pathname.split("/").pop(); // Get the current page name
 
@@ -113,26 +113,26 @@ const findMeDiv = document.querySelector('.findme');
 const originalBackground = divElement.style.background;
 
 findMeDiv.addEventListener('mouseover', (e) => {
-  divElement.style.background = `radial-gradient(circle at var(--x) var(--y), hsla(var(--h), 100%, 5%, 0) 0%, hsla(var(--h), 100%, 5%, 0.95) 5%, hsla(var(--h), 100%, 5%, 1) 15%)`;
+    divElement.style.background = `radial-gradient(circle at var(--x) var(--y), hsla(var(--h), 100%, 5%, 0) 0%, hsla(var(--h), 100%, 5%, 0.95) 5%, hsla(var(--h), 100%, 5%, 1) 15%)`;
 });
 
 findMeDiv.addEventListener('mouseout', (e) => {
-  divElement.style.background = originalBackground;
+    divElement.style.background = originalBackground;
 });
 
-pos.style.setProperty('--x', divRect.width/2 + 'px');
-pos.style.setProperty('--y', divRect.height/2 + 'px');
+pos.style.setProperty('--x', divRect.width / 2 + 'px');
+pos.style.setProperty('--y', divRect.height / 2 + 'px');
 
 divElement.style.setProperty('--h', 360);
 
-pos.addEventListener('mousemove', e =>{
+pos.addEventListener('mousemove', e => {
     pos.style.setProperty('--x', e.clientX + 'px')
     pos.style.setProperty('--y', e.clientY + 'px')
 
     // Get div dimensions
     const divRect = divElement.getBoundingClientRect();
-      
-      // Calculate color based on mouse position
+
+    // Calculate color based on mouse position
     const hue = ((e.clientX / divRect.width) + (e.clientY / divRect.height)) * 180;
 
     divElement.style.setProperty('--h', hue);
