@@ -37,8 +37,35 @@
         <div style="scroll-snap-align: start; height: 100%;">
             <div class="overlay"></div>
             <div class="content">
-                <h1>Your Content Will be Here</h1>
-                <p>This is an example of a video background that loops.</p>
+                <h1>Professional Works</h1>
+                <style>
+                    .project-list {
+                        display: grid;
+                        gap: 24px;
+                        margin-top: 48px;
+                    }
+
+                    .project-card {
+                        background: #f5f5f5;
+                        padding: 32px;
+                        border-radius: 12px;
+                        text-decoration: none;
+                        color: inherit;
+                        display: block;
+                        transition: transform 0.2s;
+                    }
+
+                    .project-card:hover {
+                        transform: translateY(-4px);
+                        background: #eee;
+                    }
+                </style>
+                <div class="project-list">
+                    <a href="professionalworks/right-to-look.html" class="project-card">
+                        <h2 style="margin: 0 0 12px 0;">Right to Look</h2>
+                        <p style="margin: 0; color: #666;">Audio-Visual Gallery Experience</p>
+                    </a>
+                </div>
             </div>
         </div>
         <div style=" overflow: hidden; scroll-snap-align: start; height: 100%;">
