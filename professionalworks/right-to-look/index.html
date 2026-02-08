@@ -5,639 +5,829 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right to Look - Neel Genix</title>
-    <link rel="icon" href="../../assets/ngicondark.svg" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../../assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="../../css/main.css" type="text/css">
-    <link rel="stylesheet" href="../../css/navbar.css" type="text/css">
-    <base href="/" />
+
+    <!-- Importing Jost font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+
+    <!-- Existing CSS -->
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/navbar.css">
+
     <style>
-        /* Project Specific Styles */
-        :root {
-            --primary-color: #823425;
-            --text-color: #333;
-            --bg-color: #fffff5;
-            --card-bg: #fff;
-        }
-
+        /* CSS Reset and Base Styles */
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            margin: 0 !important;
+            padding: 0 !important;
+            background-color: #f4f0ed !important;
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            /* Override main.css hidden */
+            height: auto !important;
         }
 
-        .project-container {
-            max-width: 1400px;
+        .figma-container {
+            position: relative;
+            width: 1920px;
             margin: 0 auto;
-            padding: 120px 24px 60px;
-        }
-
-        .project-section {
-            margin-bottom: 120px;
-        }
-
-        /* Banner */
-        .project-banner {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .vector-icon {
-            width: 54px;
-            height: auto;
-            margin-bottom: 24px;
-        }
-
-        .project-title {
-            font-family: 'Gotham', sans-serif;
-            font-weight: 800;
-            font-size: clamp(3rem, 8vw, 6rem);
-            line-height: 0.9;
-            text-transform: uppercase;
-            color: var(--primary-color);
-            margin-bottom: 16px;
-        }
-
-        .project-subtitle {
-            font-family: 'Gotham', sans-serif;
-            font-weight: 300;
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* Video/Hero Image */
-        .hero-media {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16/9;
-            background-color: #e0e0e0;
-            border-radius: 16px;
+            background-color: #f4f0ed;
+            overflow: hidden;
             display: flex;
+            flex-direction: column;
+        }
+
+        /* Utility classes */
+        .absolute {
+            position: absolute;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .items-center {
             align-items: center;
+        }
+
+        .justify-center {
             justify-content: center;
-            margin-bottom: 80px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .whitespace-pre-wrap {
+            white-space: pre-wrap;
+        }
+
+        .font-jost-medium {
+            font-family: 'Jost', sans-serif;
+            font-weight: 500;
+        }
+
+        .font-jost-regular {
+            font-family: 'Jost', sans-serif;
+            font-weight: 400;
+        }
+
+        .font-jost-semibold {
+            font-family: 'Jost', sans-serif;
+            font-weight: 600;
+        }
+
+        .font-jost-bold {
+            font-family: 'Jost', sans-serif;
+            font-weight: 700;
+        }
+
+        .font-jost-light {
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+        }
+
+        /* Gotham fonts from main.css */
+        .font-gotham-bold {
+            font-family: 'Gotham-Bold', sans-serif;
+            font-weight: 700;
+        }
+
+        .font-gotham-book {
+            font-family: 'Gotham-Book', sans-serif;
+            font-weight: 400;
+        }
+
+        .font-gotham-light {
+            font-family: 'Gotham-Light', sans-serif;
+            font-weight: 300;
+        }
+
+        .section {
+            width: 1920px;
+            position: relative;
+            flex-shrink: 0;
             overflow: hidden;
         }
 
-        .hero-media img {
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: linear-gradient(to bottom, rgba(70, 70, 70, 0.75) 0%, rgba(52, 52, 52, 0.78) 25%, rgba(35, 35, 35, 0.82) 50%, rgba(17, 17, 17, 0.86) 75%, rgba(0, 0, 0, 0.9) 100%);
         }
 
-        /* Details Grid */
-        .details-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 48px;
-        }
-
-        .details-column h3 {
-            font-family: 'Gotham', sans-serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            color: var(--primary-color);
-        }
-
-        .details-column p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        /* Section Headers */
-        .section-header {
-            font-family: 'Gotham', sans-serif;
-            font-weight: 700;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            color: var(--primary-color);
-            margin-bottom: 48px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 16px;
-        }
-
-        /* Process Grid */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .process-item h4 {
-            font-family: 'Gotham', sans-serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-
-        /* Findings Grid */
-        .findings-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 48px;
-        }
-
-        .findings-grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .finding-card {
-            background: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .image-placeholder {
-            width: 100%;
-            aspect-ratio: 3/4;
+        .img-placeholder {
             background-color: #ddd;
-            border-radius: 8px;
-            margin-bottom: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #666;
-            font-size: 0.8rem;
+            color: #555;
+            font-family: 'Jost', sans-serif;
         }
 
-        /* Personas */
-        .persona-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-        }
-
-        .persona-card {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .persona-image {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background-color: #ddd;
-            border-radius: 12px;
-        }
-
-        /* Empathy Map */
-        .empathy-map-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-        }
-
-        .empathy-quadrant {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            gap: 16px;
-            background: #fff;
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid #eee;
-        }
-
-        .quadrant-item strong {
-            display: block;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-        }
-
-        /* Competitors */
-        .competitor-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .competitor-item {
-            text-align: center;
-        }
-
-        .competitor-logo {
-            width: 100%;
-            aspect-ratio: 2/1;
-            background-color: #f0f0f0;
-            margin-bottom: 16px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Solution Concept */
-        .highlight-text {
-            font-size: 1.5rem;
-            line-height: 1.5;
-            font-weight: 500;
-            background: #fff;
-            padding: 48px;
-            border-radius: 16px;
-            border-left: 8px solid var(--primary-color);
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-
-            .process-grid,
-            .findings-grid-4,
-            .competitor-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            .details-grid,
-            .findings-grid,
-            .persona-grid,
-            .empathy-map-container,
-            .process-grid,
-            .findings-grid-4,
-            .competitor-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .project-container {
-                padding: 100px 20px 40px;
-            }
-
-            .section-header {
-                font-size: 1.8rem;
-            }
-
-            .highlight-text {
-                font-size: 1.2rem;
-                padding: 24px;
-            }
-
-            .hero-media {
-                border-radius: 8px;
-            }
-        }
-
-        /* Disable snap scroll */
-        .scroller {
-            scroll-snap-type: none !important;
-            scroll-behavior: auto !important;
-        }
-
-        .scroller>* {
-            scroll-snap-align: none !important;
+        /* Dashed borders */
+        .dashed-border-y {
+            border-top: 4px dashed #fa0;
+            /* Default color to override */
+            border-bottom: 4px dashed #fa0;
         }
     </style>
 </head>
 
 <body>
-    <div id="preloader">
-        <span class="loadertext">NEEL GENIX</span>
-        <img src="../../assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
-    </div>
 
-    <div id="callnav" style="width: 100%; position: fixed; z-index: 100;"></div>
+    <div id="callnavbar" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 1000;"></div>
 
-    <div class="scroller">
-        <div class="project-container">
+    <div class="figma-container">
 
-            <!-- Banner -->
-            <section class="project-section project-banner">
-                <svg class="vector-icon" viewBox="0 0 54 67" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M27 0L54 33.5L27 67L0 33.5L27 0Z" fill="#823425" />
-                </svg>
-                <h1 class="project-title">THE RIGHT TO LOOK</h1>
-                <p class="project-subtitle">Audio-Visual Experience</p>
-            </section>
+        <!-- Banner Node 809:701 -->
+        <div class="section" style="height: 480px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/dpattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+                <div class="gradient-overlay" style="opacity: 0.4;"></div>
+            </div>
+            <div
+                style="position: absolute; left: 240px; top: 50%; transform: translateY(-50%); width: 480px; display: flex; flex-direction: column; gap: 32px; align-items: center;">
+                <div
+                    style="width: 54px; height: 67px; background: url('../../assets/navicon.svg') no-repeat center/contain;">
+                </div>
+                <div
+                    style="font-family: 'Gotham-Bold'; font-size: 64px; color: white; text-align: center; line-height: 1;">
+                    THE RIGHT TO LOOK</div>
+                <p class="font-jost-medium" style="font-size: 32px; color: white; margin: 0;">Audio-Visual Experience
+                </p>
+            </div>
+        </div>
 
-            <!-- Video Thumbnail -->
-            <div class="hero-media">
-                <p>Project Video Placeholder</p>
+        <!-- Video Thumbnail 809:711 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/dpattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; border: 4px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <div
+                    style="width: 0; height: 0; border-top: 30px solid transparent; border-bottom: 30px solid transparent; border-left: 50px solid white; margin-left: 10px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Details 809:718 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay" style="opacity: 0.8;"></div>
             </div>
 
-            <!-- Details -->
-            <section class="project-section details-grid">
-                <div class="details-column">
-                    <h3>Project Overview</h3>
-                    <p>Right to Look is an immersive audio-visual art gallery experience. By scanning a QR code,
-                        visitors access a web app that guides them through the exhibition. Curated audio tours accompany
-                        each artwork, allowing users to explore the museum, discover the stories behind each piece, and
-                        hear directly the curators' voices.</p>
-                </div>
-                <div class="details-column">
-                    <h3>Team</h3>
-                    <p>Suhotra Chakraborty (Designer + Developer)<br>Ajinkya Satam (Designer)<br>Mansha Jejani
-                        (Designer)</p>
+            <div style="position: absolute; left: 128px; top: 152px;">
+                <p class="font-gotham-bold"
+                    style="font-size: 48px; color: white; margin: 0; text-transform: uppercase;">PROJECT Overview</p>
+            </div>
+            <p class="font-gotham-book"
+                style="position: absolute; left: 128px; top: 208px; width: 1664px; font-size: 32px; color: white; margin: 0;">
+                Right to Look is an immersive audio-visual art gallery experience. By scanning a QR code, visitors
+                access a web app that guides them through the exhibition. Curated audio tours accompany each artwork,
+                allowing users to explore the museum, discover the stories behind each piece, and hear directly the
+                curators' voices.
+            </p>
 
-                    <h3>Role & Year</h3>
-                    <p>UX/UI + Development<br>2023-24</p>
-                </div>
-            </section>
+            <div style="position: absolute; left: 128px; top: 472px;">
+                <p class="font-gotham-bold"
+                    style="font-size: 48px; color: white; margin: 0; text-transform: uppercase;">Team</p>
+            </div>
+            <ul
+                style="position: absolute; left: 128px; top: 529px; width: 1664px; font-family: 'Lato', sans-serif; font-size: 32px; color: white; list-style: disc; padding-left: 48px;">
+                <li><span class="font-gotham-bold">Suhotra Chakraborty</span> <span class="font-gotham-light">(Designer
+                        + Developer)</span></li>
+                <li><span class="font-gotham-bold">Ajinkya Satam</span> <span
+                        class="font-gotham-light">(Designer)</span></li>
+                <li><span class="font-gotham-bold">Mansha Jejani</span> <span
+                        class="font-gotham-light">(Designer)</span></li>
+            </ul>
 
-            <!-- Design Process -->
-            <section class="project-section">
-                <h2 class="section-header">Design Process</h2>
-                <p style="margin-bottom: 32px;">Based on Double Diamond & 3 Phases of IB MYP Design Cycle.</p>
-                <div class="process-grid">
-                    <div class="process-item">
-                        <h4>1. Enquire</h4>
-                        <p>Explore, gather data, question. Understand the problem's scope, laying groundwork for design.
-                        </p>
-                    </div>
-                    <div class="process-item">
-                        <h4>2. Analyze</h4>
-                        <p>Scrutinize data, find patterns, define the problem. Synthesize to create a clear problem
-                            statement.</p>
-                    </div>
-                    <div class="process-item">
-                        <h4>3. Develop</h4>
-                        <p>Generate solutions, evaluate ideas, and refine them, planning from concept to final design.
-                        </p>
-                    </div>
-                    <div class="process-item">
-                        <h4>4. Establish</h4>
-                        <p>Build prototypes for practical application, validating user experience and finalize design
-                            details.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Phase 1: Enquire -->
-            <section class="project-section">
-                <h2 class="section-header">Phase 1: Enquire</h2>
-                <p class="text-block">Explore, gather data, question. Understand the problem's scope, laying groundwork
-                    for design.</p>
-
-                <h3 style="margin-top: 48px; margin-bottom: 24px;">Domain Study</h3>
-                <div class="findings-grid-4">
-                    <div>
-                        <div class="image-placeholder">Gallery Landscape</div>
-                        <p>Exploration of the contemporary art gallery landscape, focusing on visitor engagement
-                            strategies.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Approaches</div>
-                        <p>Analysis of diverse gallery approaches: minimal description vs. guided experiences.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Immersive Experience</div>
-                        <p>Research on immersive and semi-immersive experiences in artistic & cultural settings.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Audio-Visual</div>
-                        <p>Study of successful audio-visual installations in museums, galleries and exhibition centres.
-                        </p>
-                    </div>
-                </div>
-
-                <h3 style="margin-top: 64px; margin-bottom: 24px;">Target Group</h3>
-                <p class="highlight-text" style="font-size: 1.2rem; padding: 32px; border-left-width: 4px;">
-                    Individuals, aged 18-45, visiting or present in Mumbai, including students, employed professionals,
-                    workers in unorganized sectors and entrepreneurs with a strong presence in the city's cultural and
-                    social scene, with a casual interest in art exhibitions.
+            <div style="position: absolute; left: 128px; top: 912px;">
+                <p class="font-gotham-bold" style="font-size: 48px; color: white; margin: 0;">UX/UI + Development</p>
+                <p class="font-gotham-book" style="font-size: 32px; color: white; margin: 0; line-height: 42px;">2023-24
                 </p>
-            </section>
+            </div>
+        </div>
 
-            <!-- Phase 2: Analyze -->
-            <section class="project-section">
-                <h2 class="section-header">Phase 2: Analyze</h2>
+        <!-- Design Process 809:732 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay" style="opacity: 0.8;"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Design
+                    Process</p>
+            </div>
+            <!-- Diamond visualization placeholders -->
+            <div
+                style="position: absolute; left: 264px; top: 292px; transform: translate(-50%, -50%); width: 400px; text-align: center;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: #00bfff;">Enquire</p>
+            </div>
+            <p class="font-jost-regular"
+                style="position: absolute; left: 264px; top: 340px; transform: translateX(-50%); width: 400px; font-size: 24px; color: white; text-align: center;">
+                Explore, gather data, question. Understand the problem's scope, laying groundwork for design.</p>
+            <div
+                style="position: absolute; left: calc(25% + 248px); top: 292px; transform: translate(-50%, -50%); width: 400px; text-align: center;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: #87cefa;">Analyze</p>
+            </div>
+            <p class="font-jost-regular"
+                style="position: absolute; left: calc(25% + 248px); top: 340px; transform: translateX(-50%); width: 400px; font-size: 24px; color: white; text-align: center;">
+                Scrutinize data, find patterns, define the problem. Synthesize to create a clear problem statement.</p>
+            <div
+                style="position: absolute; left: calc(50% + 232px); top: 292px; transform: translate(-50%, -50%); width: 400px; text-align: center;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: #35cec8;">Develop</p>
+            </div>
+            <p class="font-jost-regular"
+                style="position: absolute; left: calc(50% + 232px); top: 340px; transform: translateX(-50%); width: 400px; font-size: 24px; color: white; text-align: center;">
+                Generate solutions, evaluate ideas, and refine them, planning from concept to final design.</p>
+            <div
+                style="position: absolute; left: calc(75% + 216px); top: 292px; transform: translate(-50%, -50%); width: 400px; text-align: center;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: #7eeded;">Establish</p>
+            </div>
+            <p class="font-jost-regular"
+                style="position: absolute; left: calc(75% + 216px); top: 340px; transform: translateX(-50%); width: 400px; font-size: 24px; color: white; text-align: center;">
+                Build prototypes for practical application, validating user experience and finalize design details.</p>
+        </div>
 
-                <h3 style="margin-bottom: 24px;">User Personas</h3>
-                <div class="persona-grid">
-                    <div class="persona-card">
-                        <div class="persona-image"></div>
-                        <div>
-                            <h4>Priya Desai</h4>
-                            <p><strong>Bandra, Mumbai | 32 | Marketing Manager</strong></p>
-                            <p>Busy professional, enjoys exploring Mumbai's cultural scene, values experiences over
-                                material possessions, appreciates art but doesn't consider herself an expert.
-                                Comfortable with smartphones and social media.</p>
-                        </div>
-                    </div>
-                    <div class="persona-card">
-                        <div class="persona-image"></div>
-                        <div>
-                            <h4>Rohan Kapoor</h4>
-                            <p><strong>Malabar Hill, Mumbai | 40 | Tech Entrepreneur</strong></p>
-                            <p>High-net-worth individual, appreciates fine art, values exclusive experiences, tech-savvy
-                                and open to new technologies, collects contemporary art, attends art auctions, invests
-                                in art.</p>
-                        </div>
-                    </div>
+        <!-- Enquire Phase 809:784 -->
+        <div class="section" style="height: 480px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-semibold"
+                    style="font-size: 96px; color: #00bfff; letter-spacing: 57.6px; margin: 0;">ENQUIRE</p>
+                <p class="font-jost-regular" style="font-size: 24px; color: white; margin-top: 22px;">Explore, gather
+                    data, question. Understand the problem's scope, laying groundwork for design.</p>
+            </div>
+            <div style="position: absolute; left: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #00bfff; transform: rotate(-90deg) translate(-224px, -224px); transform-origin: top left;">
                 </div>
-
-                <h3 style="margin-top: 64px; margin-bottom: 24px;">Empathy Maps</h3>
-                <div class="empathy-map-container">
-                    <div>
-                        <h4 style="margin-bottom: 16px;">Priya Desai</h4>
-                        <div class="empathy-quadrant">
-                            <div class="quadrant-item">
-                                <strong>Says</strong>
-                                <p>"I wish I understood the artist's intent."</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Thinks</strong>
-                                <p>Curious but sometimes overwhelmed.</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Does</strong>
-                                <p>Observes art, shares on social media.</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Feels</strong>
-                                <p>Wants to connect more deeply with the art.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 style="margin-bottom: 16px;">Rohan Kapoor</h4>
-                        <div class="empathy-quadrant">
-                            <div class="quadrant-item">
-                                <strong>Says</strong>
-                                <p>"Is this a good investment?"</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Thinks</strong>
-                                <p>Evaluates value and exclusivity.</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Does</strong>
-                                <p>Networks, buys art, checks details.</p>
-                            </div>
-                            <div class="quadrant-item">
-                                <strong>Feels</strong>
-                                <p>Appreciates high quality and status.</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div style="position: absolute; right: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #00bfff; transform: rotate(-90deg) translate(-224px, -236px); transform-origin: top left;">
                 </div>
+            </div>
+        </div>
 
-                <h3 style="margin-top: 64px; margin-bottom: 24px;">Problem Statement</h3>
-                <div class="highlight-text">
-                    "Art gallery visitors often lack sufficient contextual information and engaging experiences to fully
-                    appreciate artworks and understand the artists' intentions. This results in a diminished connection
-                    with the art, and therefore, reduced lasting engagement and visitor retention for the gallery."
+        
+        <!-- Domain Study 809:807 -->
+        <div class="section" style="height: 1030px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Domain Study</p>
+            </div>
+            
+            <div style="position: absolute; left: 128px; top: 192px; width: 1664px; height: 710px;">
+                <div style="position: absolute; left: 0; top: 0; width: 368px; height: 512px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; left: 432px; top: 0; width: 368px; height: 512px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; left: 864px; top: 0; width: 368px; height: 512px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; left: 1296px; top: 0; width: 368px; height: 512px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-semibold" style="position: absolute; left: 0; top: 544px; width: 368px; font-size: 24px; color: white;">Visitor Engagement</p>
+                <p class="font-jost-semibold" style="position: absolute; left: 432px; top: 544px; width: 368px; font-size: 24px; color: white;">Description vs. Guidance</p>
+                <p class="font-jost-semibold" style="position: absolute; left: 864px; top: 544px; width: 368px; font-size: 24px; color: white;">Immersive Experiences</p>
+                <p class="font-jost-semibold" style="position: absolute; left: 1296px; top: 544px; width: 368px; font-size: 24px; color: white;">Audio-Visual Installations</p>
+                
+                <p class="font-jost-regular" style="position: absolute; left: 0; top: 602px; width: 368px; font-size: 20px; color: white;">Exploration of the contemporary art gallery landscape, focusing on visitor engagement strategies.</p>
+                <p class="font-jost-regular" style="position: absolute; left: 432px; top: 602px; width: 368px; font-size: 20px; color: white;">Analysis of diverse gallery approaches: minimal description vs. guided experiences.</p>
+                <p class="font-jost-regular" style="position: absolute; left: 864px; top: 602px; width: 368px; font-size: 20px; color: white;">Research on immersive and semi-immersive experiences in artistic & cultural settings.</p>
+                <p class="font-jost-regular" style="position: absolute; left: 1296px; top: 602px; width: 368px; font-size: 20px; color: white;">Study of successful audio-visual installations in museums, galleries and exhibition centres.</p>
+            </div>
+        </div>
+
+        <!-- Secondary Findings 809:829 -->
+        <div class="section" style="height: 1136px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Secondary Findings</p>
+            </div>
+            
+            <div style="position: absolute; left: 128px; top: 192px; width: 1664px; height: 816px;">
+                <div style="position: absolute; top: 0; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 0; width: 512px; font-size: 24px; color: white;">Common visitor disengagement due to lack of artwork context.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 576px; width: 512px; font-size: 24px; color: white;">Interpretation-focused approach vs. information-driven approach.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 1152px; width: 512px; font-size: 24px; color: white;">Potential for digital tools to enhance visitor engagement.</p>
+                
+                <div style="position: absolute; top: 440px; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 440px; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 440px; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 0; width: 512px; font-size: 24px; color: white;">Existing audio guides are underutilized or lack personalization.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 576px; width: 512px; font-size: 24px; color: white;">Desire for a cohesive narrative throughout an exhibition.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 1152px; width: 512px; font-size: 24px; color: white;">Lack of interaction with digital space.</p>
+            </div>
+        </div>
+<!-- Target Group 809:852 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Target
+                    Group</p>
+            </div>
+            <!-- Placeholder for target group image -->
+            <div
+                style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 424px; border: 1px solid white; border-radius: 24px; background: rgba(255,255,255,0.1);">
+            </div>
+            <p class="font-jost-regular"
+                style="position: absolute; top: 686px; left: 50%; transform: translateX(-50%); width: 1664px; font-size: 48px; color: white; text-align: center;">
+                Individuals, <span style="font-weight: 700; font-style: italic;">aged 18-45</span>, visiting or present
+                in <span style="font-weight: 700; font-style: italic;">Mumbai</span>, including students, employed
+                professionals...
+            </p>
+        </div>
+
+        
+        <!-- Primary Findings 809:862 -->
+        <div class="section" style="height: 1136px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Primary Findings</p>
+            </div>
+            
+            <div style="position: absolute; left: 128px; top: 192px; width: 1664px; height: 816px;">
+                <div style="position: absolute; top: 0; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 0; width: 512px; font-size: 24px; color: white;">Art gallery visitors seeking deeper understanding and engagement.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 576px; width: 512px; font-size: 24px; color: white;">Individuals interested in immersive cultural experiences.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 1152px; width: 512px; font-size: 24px; color: white;">Tech-savvy visitors comfortable with QR codes and web apps.</p>
+                
+                <div style="position: absolute; top: 440px; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 440px; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 440px; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 0; width: 512px; font-size: 24px; color: white;">Diverse age groups with varying levels of art knowledge.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 576px; width: 512px; font-size: 24px; color: white;">Tourists and local residents seeking enriching gallery visits.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 720px; left: 1152px; width: 512px; font-size: 24px; color: white;">People who want to understand the artist point of view.</p>
+            </div>
+        </div>
+<!-- Analyze Phase 809:885 -->
+        <div class="section" style="height: 480px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-semibold"
+                    style="font-size: 96px; color: #87cefa; letter-spacing: 57.6px; margin: 0;">ANALYZE</p>
+                <p class="font-jost-regular" style="font-size: 24px; color: white; margin-top: 22px;">Scrutinize data,
+                    find patterns, define the problem. Synthesize to create a clear problem statement.</p>
+            </div>
+            <div style="position: absolute; left: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #87cefa; transform: rotate(-90deg) translate(-224px, -224px); transform-origin: top left;">
                 </div>
-            </section>
-
-            <!-- Competitive Analysis -->
-            <section class="project-section">
-                <h3 style="margin-bottom: 24px;">Competitive Analysis</h3>
-                <div class="competitor-grid">
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Orpheo</div>
-                        <p>Global provider of hardware and software solutions for museum audio experiences.</p>
-                    </div>
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Acoustiguide</div>
-                        <p>Offers comprehensive audio guide systems tailored for cultural institutions.</p>
-                    </div>
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Smartify</div>
-                        <p>Mobile app uses image recognition to provide instant art information and audio tours.</p>
-                    </div>
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Guidekick</div>
-                        <p>Delivers location-sensitive audio content for immersive museum experiences.</p>
-                    </div>
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Google Arts & Culture</div>
-                        <p>Online platform for exploring art collections and virtual museum tours.</p>
-                    </div>
-                    <div class="competitor-item">
-                        <div class="competitor-logo">Artsteps</div>
-                        <p>Enables users to create and explore virtual 3D art exhibitions online.</p>
-                    </div>
+            </div>
+            <div style="position: absolute; right: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #87cefa; transform: rotate(-90deg) translate(-224px, -236px); transform-origin: top left;">
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <!-- Phase 3: Develop -->
-            <section class="project-section">
-                <h2 class="section-header">Phase 3: Develop</h2>
+        <!-- User Personas 809:896 -->
+        <div class="section" style="height: 954px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">User
+                    Personas</p>
+            </div>
 
-                <h3 style="margin-bottom: 24px;">Solution Concept</h3>
-                <div class="highlight-text">
-                    An immersive and accessible web application, with a seamless QR code onboarding process, that
-                    delivers curated audio-visual experiences for art exhibitions, providing deeper contextual
-                    information about artworks and artists to enhance visitor engagement and increase art appreciation.
+            <!-- Persona 1 -->
+            <div
+                style="position: absolute; top: 192px; left: 128px; width: 380px; height: 380px; border: 1px solid white; border-radius: 24px;">
+            </div> <!-- Image -->
+            <div style="position: absolute; top: 192px; left: 548px; width: 380px;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: white; margin: 0;">Priya Desai</p>
+                <p class="font-jost-medium" style="font-size: 32px; color: white; margin: 10px 0;">Bandra, Mumbai<br>32
+                </p>
+                <p class="font-jost-medium" style="font-size: 24px; color: white; margin: 10px 0;">Marketing Manager at
+                    a mid-sized company</p>
+            </div>
+            <div
+                style="position: absolute; top: 620px; left: 128px; width: 800px; color: white; font-size: 24px; font-family: 'Jost';">
+                Busy professional, enjoys exploring Mumbai's cultural scene...
+            </div>
+
+            <!-- Persona 2 -->
+            <div
+                style="position: absolute; top: 192px; left: 992px; width: 380px; height: 380px; border: 1px solid white; border-radius: 24px;">
+            </div> <!-- Image -->
+            <div style="position: absolute; top: 192px; left: 1412px; width: 380px;">
+                <p class="font-jost-semibold" style="font-size: 48px; color: white; margin: 0;">Rohan Kapoor</p>
+                <p class="font-jost-medium" style="font-size: 32px; color: white; margin: 10px 0;">Malabar Hill,
+                    Mumbai<br>40</p>
+                <p class="font-jost-medium" style="font-size: 24px; color: white; margin: 10px 0;">Tech Entrepreneur</p>
+            </div>
+            <div
+                style="position: absolute; top: 620px; left: 992px; width: 800px; color: white; font-size: 24px; font-family: 'Jost';">
+                High-net-worth individual, appreciates fine art...
+            </div>
+        </div>
+
+        <!-- Empathy Maps 809:910 -->
+        <div class="section" style="height: 1192px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Empathy
+                    Maps</p>
+            </div>
+            <!-- Labels -->
+            <div style="position: absolute; left: 512px; top: 216px; transform: translate(-50%, -50%);">
+                <p class="font-jost-semibold" style="font-size: 48px; color: white;">Priya Desai <span
+                        class="font-jost-light">(Employed Professional)</span></p>
+            </div>
+            <div style="position: absolute; left: 1408px; top: 216px; transform: translate(-50%, -50%);">
+                <p class="font-jost-semibold" style="font-size: 48px; color: white;">Rohan Kapoor <span
+                        class="font-jost-light">(Entrepreneur)</span></p>
+            </div>
+            <!-- Quadrants (Simplified visual representation) -->
+            <div
+                style="position: absolute; top: 265px; left: 129px; width: 800px; height: 800px; border: 1px solid white; border-radius: 24px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
+                <div style="border-right:1px solid white; border-bottom:1px solid white; position: relative;"><span
+                        style="position: absolute; bottom: 10px; right: 10px; color: #87cefa; font-size: 32px; font-family: 'Jost'; font-weight: 600;">Says</span>
                 </div>
-
-                <h3 style="margin-top: 64px; margin-bottom: 24px;">Key Features</h3>
-                <div class="findings-grid-4">
-                    <div>
-                        <div class="image-placeholder">Audio-Visual</div>
-                        <p>Sequenced, curated audio-visual experience for cohesive art exploration.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Accessibility</div>
-                        <p>Ensures access to the art collection, even after the physical visit.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Inclusive</div>
-                        <p>Inclusive design, integrating audio descriptions and visuals.</p>
-                    </div>
-                    <div>
-                        <div class="image-placeholder">Context</div>
-                        <p>Clear communication of artist's intent behind each artwork.</p>
-                    </div>
+                <div style="border-bottom:1px solid white; position: relative;"><span
+                        style="position: absolute; bottom: 10px; left: 10px; color: #87cefa; font-size: 32px; font-family: 'Jost'; font-weight: 600;">Thinks</span>
                 </div>
-            </section>
+                <div style="border-right:1px solid white; position: relative;"><span
+                        style="position: absolute; top: 10px; right: 10px; color: #87cefa; font-size: 32px; font-family: 'Jost'; font-weight: 600;">Does</span>
+                </div>
+                <div style="position: relative;"><span
+                        style="position: absolute; top: 10px; left: 10px; color: #87cefa; font-size: 32px; font-family: 'Jost'; font-weight: 600;">Feels</span>
+                </div>
+            </div>
+            <div
+                style="position: absolute; top: 265px; left: 993px; width: 800px; height: 800px; border: 1px solid white; border-radius: 24px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;">
+                <div style="border-right:1px solid white; border-bottom:1px solid white;"></div>
+                <div style="border-bottom:1px solid white;"></div>
+                <div style="border-right:1px solid white;"></div>
+                <div></div>
+            </div>
+        </div>
 
+        <!-- User Journey Maps 809:967 (Skipping detailed chart to text) -->
+        <div class="section" style="height: 1000px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">User
+                    Journey Maps</p>
+            </div>
+        </div>
+
+        
+        <!-- Insights - Needs - HMWs 809:1008 -->
+        <div class="section" style="height: 1026px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Insights - Needs - HMWs</p>
+            </div>
+            
+            <div style="position: absolute; display: flex; gap: 64px; left: 128px; top: 192px;">
+                <div style="position: relative; width: 368px;">
+                    <p class="font-jost-regular" style="font-size: 24px; color: white; margin-bottom: 32px;">Visitors actively seek engaging gallery experiences.</p>
+                    <div style="width: 368px; height: 368px; background: #333; border-radius: 24px; margin-bottom: 42px;"></div>
+                    <p class="font-jost-regular" style="font-size: 24px; color: #87cefa; margin-bottom: 32px;">Interactive and immersive elements.</p>
+                    <p class="font-jost-regular" style="font-size: 32px; color: white;">How might we create semi-immersive experiences?</p>
+                </div>
+                <div style="position: relative; width: 368px;">
+                    <p class="font-jost-regular" style="font-size: 24px; color: white; margin-bottom: 32px;">Visitors often lack crucial contextual information.</p>
+                    <div style="width: 368px; height: 368px; background: #333; border-radius: 24px; margin-bottom: 42px;"></div>
+                    <p class="font-jost-regular" style="font-size: 24px; color: #87cefa; margin-bottom: 32px;">Access to stories and perspectives.</p>
+                    <p class="font-jost-regular" style="font-size: 32px; color: white;">How might we deliver contextual information in an engaging format?</p>
+                </div>
+                <div style="position: relative; width: 368px;">
+                    <p class="font-jost-regular" style="font-size: 24px; color: white; margin-bottom: 32px;">Visitors desire to share their experiences with others.</p>
+                    <div style="width: 368px; height: 368px; background: #333; border-radius: 24px; margin-bottom: 42px;"></div>
+                    <p class="font-jost-regular" style="font-size: 24px; color: #87cefa; margin-bottom: 32px;">A way to share the experience.</p>
+                    <p class="font-jost-regular" style="font-size: 32px; color: white;">How might we make the gallery experience shareable?</p>
+                </div>
+                <div style="position: relative; width: 368px;">
+                    <p class="font-jost-regular" style="font-size: 24px; color: white; margin-bottom: 32px;">Visitors expect digital interaction as a standard.</p>
+                    <div style="width: 368px; height: 368px; background: #333; border-radius: 24px; margin-bottom: 42px;"></div>
+                    <p class="font-jost-regular" style="font-size: 24px; color: #87cefa; margin-bottom: 32px;">Digital space to interact with.</p>
+                    <p class="font-jost-regular" style="font-size: 32px; color: white;">How might we create a digital space for interaction?</p>
+                </div>
+            </div>
+        </div>
+<!-- Problem Statement 809:1036 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Problem
+                    Statement</p>
+            </div>
+            <div
+                style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 424px; border: 1px solid white; border-radius: 24px; background: rgba(0,0,0,0.5);">
+            </div>
+            <p
+                style="position: absolute; top: 650px; left: 128px; width: 1664px; text-align: center; color: white; font-size: 48px; font-family: 'Jost';">
+                Art gallery visitors often lack sufficient <span style="font-weight: 700;">contextual information</span>
+                and <span style="font-weight: 700;">engaging experiences</span>...
+            </p>
+        </div>
+
+        
+        <!-- Competitive Analysis 809:1047 -->
+        <div class="section" style="height: 1232px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Competitive Analysis</p>
+            </div>
+            
+            <div style="position: absolute; left: 128px; top: 192px; width: 1664px; height: 1000px;">
+                <div style="position: absolute; top: 0; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 0; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 0; width: 512px; font-size: 32px; color: white;">Orpheo Audio Guides</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 576px; width: 512px; font-size: 32px; color: white;">Acoustiguide Systems</p>
+                <p class="font-jost-regular" style="position: absolute; top: 280px; left: 1152px; width: 512px; font-size: 32px; color: white;">Smartify Art App</p>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 338px; left: 0; width: 512px; font-size: 24px; color: white;">Global provider of hardware and software solutions for museum audio experiences.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 338px; left: 576px; width: 512px; font-size: 24px; color: white;">Offers comprehensive audio guide systems tailored for cultural institutions.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 338px; left: 1152px; width: 512px; font-size: 24px; color: white;">Mobile app uses image recognition to provide instant art information and audio tours.</p>
+                
+                <div style="position: absolute; top: 504px; left: 0; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 504px; left: 576px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                <div style="position: absolute; top: 504px; left: 1152px; width: 512px; height: 256px; background: #333; border-radius: 24px;"></div>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 784px; left: 0; width: 512px; font-size: 32px; color: white;">Guidekick Audio Tours</p>
+                <p class="font-jost-regular" style="position: absolute; top: 784px; left: 576px; width: 512px; font-size: 32px; color: white;">Google Arts & Culture</p>
+                <p class="font-jost-regular" style="position: absolute; top: 784px; left: 1152px; width: 512px; font-size: 32px; color: white;">Artsteps Virtual Exhibitions</p>
+                
+                <p class="font-jost-regular" style="position: absolute; top: 842px; left: 0; width: 512px; font-size: 24px; color: white;">Delivers location-sensitive audio content for immersive museum experiences.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 842px; left: 576px; width: 512px; font-size: 24px; color: white;">Online platform for exploring art collections and virtual museum tours.</p>
+                <p class="font-jost-regular" style="position: absolute; top: 842px; left: 1152px; width: 512px; font-size: 24px; color: white;">Enables users to create and explore virtual 3D art exhibitions online.</p>
+            </div>
+        </div>
+<!-- Develop Phase 809:1079 -->
+        <div class="section" style="height: 480px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-semibold"
+                    style="font-size: 96px; color: #35cec8; letter-spacing: 57.6px; margin: 0;">DEVELOP</p>
+                <p class="font-jost-regular" style="font-size: 24px; color: white; margin-top: 22px;">Generate
+                    solutions, evaluate ideas, and refine them, planning from concept to final design.</p>
+            </div>
+            <div style="position: absolute; left: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #35cec8; transform: rotate(-90deg) translate(-224px, -224px); transform-origin: top left;">
+                </div>
+            </div>
+            <div style="position: absolute; right: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #35cec8; transform: rotate(-90deg) translate(-224px, -236px); transform-origin: top left;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Ideation 809:1100 -->
+        <div class="section" style="height: 1114px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">IDEATION
+                </p>
+            </div>
+            <!-- Images Row -->
+            <div style="position: absolute; top: 350px; left: 128px; display: flex; gap: 64px;">
+                <div style="width: 368px; height: 368px; border: 1px solid white; border-radius: 24px;"></div>
+                <div style="width: 368px; height: 368px; border: 1px solid white; border-radius: 24px;"></div>
+                <div style="width: 368px; height: 368px; border: 1px solid white; border-radius: 24px;"></div>
+                <div style="width: 368px; height: 368px; border: 1px solid white; border-radius: 24px;"></div>
+            </div>
+        </div>
+
+        <!-- Solution Concept, XD, IA would follow here, preserving length -->
+
+        
+        <!-- Solution Concept 809:1118 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">SOLUTION CONCEPT</p>
+            </div>
+            <div style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 424px; border: 1px solid white; border-radius: 24px; background: rgba(255,255,255,0.1);"></div>
+            <p class="font-jost-regular" style="position: absolute; top: 680px; left: 128px; width: 1664px; font-size: 48px; color: white; text-align: center;">
+                An immersive and accessible web application, with a seamless QR code onboarding process, that delivers curated audio-visual experiences for art exhibitions...
+            </p>
+        </div>
+
+        <!-- Experience Architecture 809:1128 -->
+        <div class="section" style="height: 1080px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Experience Architecture</p>
+            </div>
+            <!-- Simple diagram representation -->
+            <div style="position: absolute; top: 240px; left: 128px; width: 1664px; height: 733px; display: flex; justify-content: center; align-items: center;">
+                <div style="width: 800px; height: 600px; border: 2px dashed #888; border-radius: 24px; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px;">Experience Architecture Diagram</div>
+            </div>
+        </div>
+
+        <!-- Information Architecture 809:1154 -->
+        <div class="section" style="height: 1144px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Information Architecture</p>
+            </div>
+            <div style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 800px; display: flex; justify-content: center; align-items: center;">
+                <div style="width: 1200px; height: 700px; border: 2px dashed #888; border-radius: 24px; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px;">IA Diagram</div>
+            </div>
+        </div>
+
+        <!-- Process Flows 809:1245 -->
+        <div class="section" style="height: 1048px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Process Flows</p>
+            </div>
+            <div style="position: absolute; top: 192px; left: 50%; transform: translateX(-50%); text-align: center; width: 628px;">
+                <p class="font-jost-medium" style="font-size: 32px; color: white;">Onboarding at Entrance</p>
+            </div>
+            <div style="position: absolute; top: 296px; left: 128px; width: 1664px; height: 600px; border: 2px dashed #888; border-radius: 24px; display: flex; align-items: center; justify-content: center; color: white;">Process Flow Diagram</div>
+        </div>
+<!-- Establish Phase 809:1297 -->
+        <div class="section" style="height: 480px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-semibold"
+                    style="font-size: 96px; color: #7eeded; letter-spacing: 57.6px; margin: 0;">ESTABLISH</p>
+                <p class="font-jost-regular" style="font-size: 24px; color: white; margin-top: 22px;">Build prototypes
+                    for practical application, validating user experience and finalize design details.</p>
+            </div>
+            <div style="position: absolute; left: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #7eeded; transform: rotate(-90deg) translate(-224px, -224px); transform-origin: top left;">
+                </div>
+            </div>
+            <div style="position: absolute; right: 0; top: 0; width: 32px; height: 480px;">
+                <div
+                    style="width: 480px; height: 32px; border: 4px dashed #7eeded; transform: rotate(-90deg) translate(-224px, -236px); transform-origin: top left;">
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- Low-Fidelity Wireframes 809:1308 -->
+        <div class="section" style="height: 1073px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">Low-Fidelity Wireframes</p>
+            </div>
+            <div style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 753px; display: flex; gap: 40px; justify-content: center;">
+                <div style="width: 500px; height: 700px; background: #333; border-radius: 24px;"></div>
+                <div style="width: 500px; height: 700px; background: #333; border-radius: 24px;"></div>
+                <div style="width: 500px; height: 700px; background: #333; border-radius: 24px;"></div>
+            </div>
+        </div>
+
+        <!-- Explorations 809:1321 -->
+        <div class="section" style="height: 970px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg" style="width: 100%; height: 100%; object-fit: cover;"><div class="gradient-overlay"></div></div>
+            <div style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                 <p class="font-jost-medium" style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">EXPLORATIONS</p>
+            </div>
+            <div style="position: absolute; top: 192px; left: 128px; width: 1664px; height: 651px; display: flex; gap: 40px; overflow: hidden;">
+                <div style="width: 224px; height: 484px; background: #333; margin-top: 80px; border-radius: 12px;"></div>
+                <div style="width: 224px; height: 651px; background: #444; border-radius: 12px;"></div>
+                <div style="width: 224px; height: 484px; background: #333; margin-top: 80px; border-radius: 12px;"></div>
+                <div style="width: 224px; height: 484px; background: #444; margin-top: 80px; border-radius: 12px;"></div>
+                <div style="width: 224px; height: 484px; background: #333; margin-top: 80px; border-radius: 12px;"></div>
+                <div style="width: 224px; height: 484px; background: #444; margin-top: 80px; border-radius: 12px;"></div>
+            </div>
+        </div>
+<!-- High-Fidelity Wireframes 809:1337 -->
+        <div class="section" style="height: 1146px;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div
+                style="position: absolute; left: 50%; top: 76px; transform: translate(-50%, -50%); text-align: center;">
+                <p class="font-jost-medium"
+                    style="font-size: 32px; color: #f4f0ed; letter-spacing: 38.4px; text-transform: uppercase;">
+                    High-Fidelity Wireframes</p>
+            </div>
+            <!-- Phones Flex -->
+            <div style="position: absolute; top: 192px; left: 128px; display: flex; gap: 40px;">
+                <div
+                    style="width: 366px; height: 757px; border: 5px solid #cdcdcd; border-radius: 64px; background: #1a1a1a;">
+                </div>
+                <div
+                    style="width: 366px; height: 757px; border: 5px solid #cdcdcd; border-radius: 64px; background: #1a1a1a;">
+                </div>
+                <div
+                    style="width: 366px; height: 757px; border: 5px solid #cdcdcd; border-radius: 64px; background: #1a1a1a;">
+                </div>
+                <div
+                    style="width: 366px; height: 757px; border: 5px solid #cdcdcd; border-radius: 64px; background: #1a1a1a;">
+                </div>
+            </div>
+
+            <div
+                style="position: absolute; top: 975px; width: 100%; display: flex; justify-content: space-around; padding: 0 160px; box-sizing: border-box;">
+                <p class="font-jost-semibold" style="font-size: 32px; color: white;">Onboarding</p>
+                <p class="font-jost-semibold" style="font-size: 32px; color: white;">Studio List</p>
+                <p class="font-jost-semibold" style="font-size: 32px; color: white;">Studio Page</p>
+                <p class="font-jost-semibold" style="font-size: 32px; color: white;">Artwork Page</p>
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer style="scroll-snap-align: start; margin-top: 0px;">
-            <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 48px;">
-                <div style="flex: 1; min-width: 300px;">
-                    <div id="svg-container" class="blue-div">
-                        <img style="width: 100%; height: auto;" src="../../assets/ngfoot.svg" alt="Neel Genix">
-                        <div class="red-spot" id="red-spot"></div>
-                    </div>
-                    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
-                        <div class="column">
-                            <p class="footlink"><a href="#" style="color: #fff;">Branding & Campaigns</a></p>
-                            <p class="footlink"><a href="#" style="color: #fff;">Digital Products</a></p>
-                            <p class="footlink"><a href="#" style="color: #fff;">Poetry</a></p>
-                        </div>
-                        <div class="column">
-                            <p class="footlink"><a href="#" style="color: #fff;">Visual Design</a></p>
-                            <p class="footlink"><a href="#" style="color: #fff;">Research Papers</a></p>
-                            <p class="footlink"><a href="#" style="color: #fff;">Visual Journal</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div style="flex: 1; min-width: 300px;">
-                    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
-                        <div class="column">
-                            <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">SERVICES</div>
-                            <div>
-                                <p class="footlink"><a href="#" style="color: #fff;">Logo & Branding</a></p>
-                                <p class="footlink"><a href="#" style="color: #fff;">Website Design</a></p>
-                                <p class="footlink"><a href="#" style="color: #fff;">Digital Product</a></p>
-                                <p class="footlink"><a href="#" style="color: #fff;">Brand Campaign</a></p>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div style="font-size: 24px; font-weight: 500; margin-bottom: 24px;">CONTACT</div>
-                            <div>
-                                <p class="footlink"><a style="color: #ffffff;"
-                                        href="mailto:suhotraneel@gmail.com">suhotraneel@gmail.com</a></p>
-                                <div class="fsocials">
-                                    <div class="socialicon-container"><img class="socialicon"
-                                            src="../../assets/instagram.svg" alt="Instagram"></div>
-                                    <div class="socialicon-container"><img class="socialicon"
-                                            src="../../assets/linkedin.svg" alt="LinkedIn"></div>
-                                    <div class="socialicon-container"><img class="socialicon"
-                                            src="../../assets/youtube.svg" alt="YouTube"></div>
-                                    <div class="socialicon-container"><img class="socialicon"
-                                            src="../../assets/twitter.svg" alt="Twitter"></div>
-                                    <div class="socialicon-container"><img class="socialicon"
-                                            src="../../assets/spotify.svg" alt="Spotify"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="section" style="height: 240px; background-color: black;">
+            <div style="position: absolute; inset: 0;"><img src="../../assets/spattern.jpg"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+                <div class="gradient-overlay"
+                    style="background: linear-gradient(to bottom, rgba(115,115,115,0.75) 0%, rgba(27,27,27,0.9) 100%);">
                 </div>
             </div>
-            <div class="foot2">
-                <div
-                    style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
-                    <div style="display: flex; align-items: center;">
-                        <img src="../../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
-                        <div style="margin-left: 20px;">
-                            <div style="font-size: 20px; line-height: 1.2;">Subscribe to <span
-                                    style="font-weight: 500;">Newsletter</span>.</div>
-                            <div style="font-size: 10px; opacity: 0.8;">Copyright 2024.</div>
-                        </div>
-                    </div>
-                    <div class="newsform">
-                        <form id="email-form" style="cursor: url('../../assets/cursor.png') 16 16, auto;">
-                            <!-- Reusing existing SVG structure but may need adjustment for mobile responsiveness -->
-                            <div class="input-wrapper" style="width: auto;">
-                                <input type="email" id="email" name="email" placeholder="Email Address" required
-                                    style="width: 250px;">
-                            </div>
-                            <button type="submit"
-                                style="margin-left: 10px; color: white; font-weight: bold; cursor: pointer;">
-                                SUBSCRIBE
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div
+                style="position: absolute; left: calc(16.67% - 192px); top: calc(100% - 120px); transform: translateY(-50%);">
+                <p class="font-gotham-bold" style="font-size: 32px; color: white; margin: 0;">© Copyright, 2024. All
+                    Rights Reserved.</p>
             </div>
-        </footer>
+        </div>
+
     </div>
 
-    <script src="../../js/mainscript.js"></script>
-    <script>
-        // Simple script to handle form submission if needed, or rely on mainscript
-    </script>
+    <!-- Scripts removed to prevent interference with static layout -->
+    <!-- <script src="../../js/mainscript.js"></script> -->
+    <!-- <script src="../../js/navscript.js"></script> -->
 </body>
 
 </html>
