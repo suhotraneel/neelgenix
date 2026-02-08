@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Right to Look - Neel Genix</title>
-    <link rel="icon" href="../assets/ngicondark.svg" media="(prefers-color-scheme: light)">
-    <link rel="icon" href="../assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="../css/main.css" type="text/css">
-    <link rel="stylesheet" href="../css/navbar.css" type="text/css">
+    <link rel="icon" href="../../../assets/ngicondark.svg" media="(prefers-color-scheme: light)">
+    <link rel="icon" href="../../../assets/ngiconlight.svg" media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="../../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../css/navbar.css" type="text/css">
     <base href="/" />
     <style>
         .project-hero {
@@ -97,13 +97,24 @@
             margin-bottom: 24px;
             min-height: 300px;
         }
+
+        /* Override main.css scroll snap for this page */
+        .scroller {
+            scroll-snap-type: none !important;
+            scroll-behavior: auto !important;
+        }
+
+        /* Remove snap align from children if any global styles apply */
+        .scroller>* {
+            scroll-snap-align: none !important;
+        }
     </style>
 </head>
 
 <body>
     <div id="preloader">
         <span class="loadertext">NEEL GENIX</span>
-        <img src="../assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
+        <img src="../../assets/loader.svg" alt="Neel Genix" class="loader" width="50px" height="50px">
     </div>
 
     <div id="callnav" style="width: 100%; position: fixed; z-index: 100;"></div>
@@ -230,7 +241,7 @@
             <div class="foot1" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 96px;">
                 <div style="flex: 1;">
                     <div id="svg-container" class="blue-div">
-                        <img style="width: 100%; height: auto;" src="../assets/ngfoot.svg" alt="Neel Genix">
+                        <img style="width: 100%; height: auto;" src="../../assets/ngfoot.svg" alt="Neel Genix">
                         <div class="red-spot" id="red-spot"></div>
                     </div>
                     <div style="display: flex; gap: 64px;">
@@ -273,15 +284,15 @@
                                         href="mailto:suhotraneel@gmail.com">suhotraneel@gmail.com</a></p>
                                 <div class="fsocials">
                                     <div class="socialicon-container"><img class="socialicon"
-                                            src="../assets/instagram.svg" alt="Instagram"></div>
+                                            src="../../assets/instagram.svg" alt="Instagram"></div>
                                     <div class="socialicon-container"><img class="socialicon"
-                                            src="../assets/linkedin.svg" alt="LinkedIn"></div>
+                                            src="../../assets/linkedin.svg" alt="LinkedIn"></div>
                                     <div class="socialicon-container"><img class="socialicon"
-                                            src="../assets/youtube.svg" alt="YouTube"></div>
+                                            src="../../assets/youtube.svg" alt="YouTube"></div>
                                     <div class="socialicon-container"><img class="socialicon"
-                                            src="../assets/twitter.svg" alt="Twitter"></div>
+                                            src="../../assets/twitter.svg" alt="Twitter"></div>
                                     <div class="socialicon-container"><img class="socialicon"
-                                            src="../assets/spotify.svg" alt="Spotify"></div>
+                                            src="../../assets/spotify.svg" alt="Spotify"></div>
                                 </div>
                             </div>
                         </div>
@@ -290,7 +301,7 @@
             </div>
             <div class="foot2">
                 <div style="display: flex; align-items: flex-start;">
-                    <img src="../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
+                    <img src="../../assets/pgicony.svg" style="height: 48px; width: auto;" alt="Project Genix">
                     <div style="margin-left: 32px;">
                         <div style="font-size: 24px;">Subscribe to our <span
                                 style="font-weight: 500;">Newsletter</span>.</div>
@@ -298,7 +309,7 @@
                     </div>
                 </div>
                 <div class="newsform">
-                    <form id="email-form" style="cursor: url('../assets/cursor.png') 16 16, auto;">
+                    <form id="email-form" style="cursor: url('../../assets/cursor.png') 16 16, auto;">
                         <div class="input-wrapper">
                             <svg id="effecthover" fill="#DB261D" stroke="#FFFFFF" stroke-width="3" width="388"
                                 height="48" viewBox="0 0 388 48" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -358,7 +369,7 @@
             }, 3000);
         });
     </script>
-    <script src="../js/mainscript.js"></script>
+    <script src="../../js/mainscript.js"></script>
 </body>
 
 </html>

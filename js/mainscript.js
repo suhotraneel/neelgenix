@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "services": "nav4",
         "about": "nav5",
         "contact": "nav6",
-        "right-to-look.html": "nav1"
+        "right-to-look": "nav1"
     };
 
     // Check if the current page exists in the navMap
