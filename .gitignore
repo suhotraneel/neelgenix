@@ -1,0 +1,9 @@
+# Ignore large media files
+madtriptrials/herosection/hero_layers/output.mov
+madtriptrials/herosection/hero_layers/background_safari.mov
+madtriptrials/herosection/hero_layers/background.webp
+madtriptrials/herosection/background.mov
+
+# OS generated files
+.DS_Store
+**/.DS_Store

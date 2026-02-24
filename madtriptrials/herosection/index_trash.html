@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero & Walkcycle</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            height: 600vh;
+            /* space to scroll natively */
+        }
+
+        .scroll-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            white-space: nowrap;
+            z-index: 1;
+            /* Lower layer */
+        }
+
+        .scroll-container video {
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            width: auto;
+            display: block;
+        }
+
+        #video1 {
+            z-index: 1;
+            /* Sky layer */
+            opacity: 1;
+        }
+
+        #video2 {
+            z-index: 2;
+            /* Background layer */
+        }
+
+        .frame-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 600px;
+            max-height: 600px;
+            z-index: 10;
+            /* Upper layer */
+            pointer-events: none;
+            /* Ensures the frame doesn't block scroll clicks or interactions */
+        }
+
+        .frame-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-container" id="scrollContainer">
+        <video autoplay muted loop playsinline id="video1">
+            <source src="hero_layers/sky.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop playsinline id="video2">
+            <source src="hero_layers/background.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="frame-container">
+        <img id="animFrame" src="walk_frames/framea.png" alt="Animation Frame">
+    </div>
+
+    <script>
+        // --- Hero Section Variables ---
+        const video1 = document.getElementById('video1');
+        const video2 = document.getElementById('video2');
+
+        let scroll1, scroll2;
+
+        function getDynamicWidth(video) {
+            if (!video.videoWidth || !video.videoHeight) return window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const aspectRatio = video.videoWidth / video.videoHeight;
+            return viewportHeight * aspectRatio;
+        }
+
+        function setupRatios() {
+            const viewportWidth = window.innerWidth;
+            const width1 = getDynamicWidth(video1);
+            const width2 = getDynamicWidth(video2);
+
+            // Max scrollable distance for each video based on its width
+            scroll1 = Math.max(0, width1 - viewportWidth);
+            scroll2 = Math.max(0, width2 - viewportWidth);
+        }
+
+        function waitForVideos(callback) {
+            let loaded = 0;
+            const total = 2;
+
+            function check() {
+                loaded++;
+                if (loaded === total) callback();
+            }
+
+            if (video1.readyState >= 1) check(); else video1.addEventListener('loadedmetadata', check);
+            if (video2.readyState >= 1) check(); else video2.addEventListener('loadedmetadata', check);
+        }
+
+        // --- Walkcycle Variables ---
+        const starterFrame = "framea.png";
+        const loopFrames = [
+            "frame1.png", "frame2.png", "frame3.png", "frame4.png",
+            "frame5.png", "frame6.png", "frame7.png", "frame8.png"
+        ];
+        const imgEl = document.getElementById("animFrame");
+
+        // --- Combined Scroll Engine ---
+        function updateScrollEffects() {
+            // Calculate native scroll progress (0.0 to 1.0)
+            let maxScroll = document.body.scrollHeight - window.innerHeight;
+            if (maxScroll <= 0) maxScroll = 1; // Prevent division by zero
+
+            let scrollProgress = window.scrollY / maxScroll;
+            // Clamp values
+            if (scrollProgress < 0) scrollProgress = 0;
+            if (scrollProgress > 1) scrollProgress = 1;
+
+            // 1. Walkcycle frame selection Update
+            if (scrollProgress <= 0.01) {
+                imgEl.src = `walk_frames/${starterFrame}`;
+            } else {
+                const loopProgress = (scrollProgress - 0.01) * 80; // Speed factor
+                const frameIndex = Math.floor(loopProgress) % loopFrames.length;
+                imgEl.src = `walk_frames/${loopFrames[frameIndex]}`;
+            }
+
+            // 2. Horizontal background panning Update
+            if (scroll1 !== undefined && scroll2 !== undefined) {
+                // Map natural scroll progress to specific video horizontal scroll distances
+                video1.style.transform = `translateX(${-scrollProgress * scroll1}px)`;
+                video2.style.transform = `translateX(${-scrollProgress * scroll2}px)`;
+            }
+        }
+
+        // Initialize Logic
+        waitForVideos(() => {
+            setupRatios();
+            updateScrollEffects();
+            // Added opacity transition for smooth initial load of positions if needed
+        });
+
+        // Event Listeners
+        window.addEventListener("scroll", updateScrollEffects);
+
+        window.addEventListener("resize", () => {
+            setupRatios();
+            updateScrollEffects();
+        });
+    </script>
+
+</body>
+
+</html>

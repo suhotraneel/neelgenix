@@ -1,50 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scroll Frame Animation</title>
   <style>
     body {
       margin: 0;
-      height: 800vh; /* Allows scrolling */
-      background-color: black;
+      height: 500vh;
+      /* Makes enough space to scroll */
+      background: #000000;
     }
-    #frame {
+
+    .frame-container {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 600px;
+      max-height: 600px;
+    }
+
+    .frame-container img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
   </style>
 </head>
-<body style="background-color: #000000;">
 
-<img id="frame" src="frames/frame1.png" alt="Frame Animation">
+<body>
 
-<script>
-const totalFrames = 8;
-const frameElement = document.getElementById('frame');
-let currentFrame = -1;
+  <div class="frame-container">
+    <img id="animFrame" src="walk_frames/framea.png" alt="Animation Frame">
+  </div>
 
-function updateFrame() {
-  const scrollY = window.scrollY;
-  const scrollFraction = scrollY / 100; // 🔧 Adjust speed — lower = faster
-  let frameIndex = Math.floor(scrollFraction) % totalFrames;
+  <script>
+    // Starter frame (not part of the loop)
+    const starterFrame = "framea.png";
 
-  if (frameIndex < 0) frameIndex += totalFrames; // Ensure positive frame
+    // 8 looping frames
+    const loopFrames = [
+      "frame1.png", "frame2.png", "frame3.png", "frame4.png",
+      "frame5.png", "frame6.png", "frame7.png", "frame8.png"
+    ];
 
-  if (frameIndex !== currentFrame) {
-    frameElement.src = `frames/frame${frameIndex + 1}.png`; // +1 to match filenames
-    currentFrame = frameIndex;
-  }
-}
+    const imgEl = document.getElementById("animFrame");
 
-window.addEventListener('scroll', updateFrame);
-window.addEventListener('load', updateFrame);
+    window.addEventListener("scroll", () => {
+      // How far we scrolled (0 to 1)
+      const scrollProgress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
 
-</script>
+      // Decide which frame to show
+      if (scrollProgress <= 0.01) {
+        // First tiny bit of scroll: show starter
+        imgEl.src = `walk_frames/${starterFrame}`;
+      } else {
+        // After starter: loop frames
+        const loopProgress = (scrollProgress - 0.01) * 80; // speed factor
+        const frameIndex = Math.floor(loopProgress) % loopFrames.length;
+        imgEl.src = `walk_frames/${loopFrames[frameIndex]}`;
+      }
+    });
+  </script>
 
 </body>
+
 </html>

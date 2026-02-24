@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +9,7 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden; /* no default scrollbars */
+      /* overflow: hidden; no default scrollbars */
     }
 
     .scroll-container {
@@ -28,98 +29,323 @@
     }
 
     #video1 {
-      z-index: 1; /* Sky layer */
-      opacity: 1;
+      z-index: 1;
+      /* Sky layer */
+      opacity: 0.7;
+      /* Force hardware acceleration and hacky blend to drop Safari black backgrounds on webm */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
     }
+
     #video2 {
-      z-index: 2; /* Background layer */
+      z-index: 2;
+      /* Background layer */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+    }
+
+    .frame-container {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 80vh;
+      width: auto;
+      z-index: 3;
+    }
+
+    .frame-container img {
+      width: auto;
+      height: 100%;
+      display: block;
+    }
+
+    @media (max-width: 1024px) {
+      .frame-container {
+        top: 65%;
+        height: 70vh;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .frame-container {
+        top: 70%;
+        height: 60vh;
+      }
+    }
+
+    #mainContent {
+      opacity: 0;
+      /* Hidden initially until loaded */
+      transition: opacity 0.5s ease;
     }
   </style>
 </head>
+
 <body style="background-color: #000000;">
 
-<div class="scroll-container" id="scrollContainer">
-  <video autoplay muted loop playsinline id="video1">
-    <source src="sky.webm" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
-  <video autoplay muted loop playsinline id="video2">
-    <source src="background.webm" type="video/webm">
-    Your browser does not support the video tag.
-  </video>
-</div>
+  <div id="mainContent">
+    <div class="scroll-container" id="scrollContainer">
+      <video autoplay muted loop playsinline id="video1">
+        <source src="hero_layers/sky_safari.mov" type='video/mp4; codecs="hvc1"'>
+        <source src="https://raw.githubusercontent.com/suhotraneel/madtripstore/main/hero_layers/sky.webm"
+          type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+      <video autoplay muted loop playsinline id="video2">
+        <source src="hero_layers/background_safari.mov" type='video/mp4; codecs="hvc1"'>
+        <source src="https://raw.githubusercontent.com/suhotraneel/madtripstore/main/hero_layers/background.webm"
+          type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+      <div class="frame-container">
+        <img id="animFrame" src="https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/framea.png"
+          alt="Animation Frame">
+      </div>
+    </div>
 
-<script>
-  const scrollContainer = document.getElementById('scrollContainer');
-  const video1 = document.getElementById('video1');
-  const video2 = document.getElementById('video2');
+    <div>
+      <img src="https://raw.githubusercontent.com/suhotraneel/madtripstore/main/lower.png" width="100%" height="auto"
+        alt="">
+    </div>
+  </div>
 
-  let scrollSpeed1, scrollSpeed2;
-  let maxScrollableDistance = 0;
-  let scrollX = 0;
+  <script>
+    const scrollContainer = document.getElementById('scrollContainer');
+    const video1 = document.getElementById('video1');
+    const video2 = document.getElementById('video2');
+    const imgEl = document.getElementById("animFrame");
+    const frameContainer = document.querySelector('.frame-container');
 
-  function getDynamicWidth(video) {
-    const viewportHeight = window.innerHeight;
-    const aspectRatio = video.videoWidth / video.videoHeight;
-    return viewportHeight * aspectRatio;
-  }
+    const starterFrame = "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/framea.png";
+    const loopFrames = [
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame1.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame2.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame3.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame4.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame5.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame6.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame7.png",
+      "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/walk_frames/frame8.png"
+    ];
 
-  function setupRatios() {
-    const viewportWidth = window.innerWidth;
-    const width1 = getDynamicWidth(video1);
-    const width2 = getDynamicWidth(video2);
-
-    const scroll1 = width1 - viewportWidth;
-    const scroll2 = width2 - viewportWidth;
-
-    maxScrollableDistance = Math.max(scroll1, scroll2);
-    scrollSpeed1 = (scroll1 / maxScrollableDistance);
-    scrollSpeed2 = (scroll2 / maxScrollableDistance);
-
-    // Debug: Log image widths and scroll distances
-    console.log("Viewport Width:", viewportWidth);
-    console.log("Video 1 (width):", width1, "Scroll distance:", scroll1);
-    console.log("Video 2 (width):", width2, "Scroll distance:", scroll2);
-    console.log("Max Scrollable Distance:", maxScrollableDistance);
-    console.log("Scroll Speed 1:", scrollSpeed1);
-    console.log("Scroll Speed 2:", scrollSpeed2);
-  }
-
-  function applyScroll() {
-    scrollX = Math.max(0, Math.min(scrollX, maxScrollableDistance));
-    video1.style.left = `${-scrollX * scrollSpeed1}px`;
-    video2.style.left = `${-scrollX * scrollSpeed2}px`;
-  }
-
-  function waitForVideos(callback) {
-    let loaded = 0;
-    const total = 2;
-
-    function check() {
-      loaded++;
-      if (loaded === total) callback();
+    const transformFrames = [];
+    for (let i = 1; i <= 18; i++) {
+      transformFrames.push(`https://raw.githubusercontent.com/suhotraneel/madtripstore/main/transform/trans_${i}.png`);
     }
 
-    if (video1.readyState >= 1) check(); else video1.addEventListener('loadedmetadata', check);
-    if (video2.readyState >= 1) check(); else video2.addEventListener('loadedmetadata', check);
-  }
+    // === SCROLL ANIMATION TWEAKS ===
+    const TRANSFORM_SCROLL_RANGE = 1200; // Pixels to scroll for the initial transformation
+    const WALK_OUT_SCROLL_RANGE = 1500;  // Pixels of scroll for the final walk-out (lower = faster walk-out)
+    const WALK_OUT_BUFFER = -150;         // Fine-tune character distance off-screen (+ is further, - is shorter delay before scroll)
+    // ===============================
 
-  waitForVideos(() => {
-    setupRatios();
-    applyScroll();
-  });
+    let scrollSpeed1, scrollSpeed2;
+    let maxScrollableDistance = 0;
+    let scrollX = 0;
 
-  scrollContainer.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    scrollX += e.deltaY;
-    applyScroll();
-  });
+    function getDynamicWidth(video) {
+      const viewportHeight = window.innerHeight;
+      const aspectRatio = video.videoWidth / video.videoHeight;
+      return viewportHeight * aspectRatio;
+    }
 
-  // Re-run ratio & scroll setup on window resize
-  window.addEventListener('resize', () => {
-    setupRatios();
-    applyScroll();
-  });
-</script>
+    function setupRatios() {
+      const viewportWidth = window.innerWidth;
+      const width1 = getDynamicWidth(video1);
+      const width2 = getDynamicWidth(video2);
+
+      const scroll1 = width1 - viewportWidth;
+      const scroll2 = width2 - viewportWidth;
+
+      maxScrollableDistance = Math.max(scroll1, scroll2);
+      scrollSpeed1 = (scroll1 / maxScrollableDistance);
+      scrollSpeed2 = (scroll2 / maxScrollableDistance);
+
+      // Debug: Log image widths and scroll distances
+      console.log("Viewport Width:", viewportWidth);
+      console.log("Video 1 (width):", width1, "Scroll distance:", scroll1);
+      console.log("Video 2 (width):", width2, "Scroll distance:", scroll2);
+      console.log("Max Scrollable Distance:", maxScrollableDistance);
+      console.log("Scroll Speed 1:", scrollSpeed1);
+      console.log("Scroll Speed 2:", scrollSpeed2);
+    }
+
+    function updateFramesFromScroll() {
+      if (scrollX < TRANSFORM_SCROLL_RANGE) {
+        // Transformation phase
+        const transformProgress = Math.max(0, scrollX / TRANSFORM_SCROLL_RANGE);
+        const frameIndex = Math.min(
+          transformFrames.length - 1,
+          Math.floor(transformProgress * transformFrames.length)
+        );
+        imgEl.src = transformFrames[frameIndex];
+
+        // Ensure character stays centered
+        frameContainer.style.transform = "translate(-50%, -50%)";
+      } else {
+        // Walk loop phase
+        const walkScrollX = scrollX - TRANSFORM_SCROLL_RANGE;
+        const animationProgress = maxScrollableDistance === 0 ? 0 : (walkScrollX / maxScrollableDistance);
+
+        if (animationProgress <= 0.01) {
+          // Keep showing the last transform frame just before walk starts
+          imgEl.src = transformFrames[transformFrames.length - 1];
+        } else {
+          const loopProgress = Math.max(0, (animationProgress - 0.01) * 120);
+          const idxRaw = Math.floor(loopProgress);
+          const frameIndex = ((idxRaw % loopFrames.length) + loopFrames.length) % loopFrames.length;
+          imgEl.src = loopFrames[frameIndex];
+        }
+
+        if (walkScrollX <= maxScrollableDistance) {
+          // Keep character centered until scroll completes
+          frameContainer.style.transform = "translate(-50%, -50%)";
+        } else {
+          // After progress 1.0 → start moving container right
+          const fw = frameContainer.offsetWidth || 300;
+          const vw = window.innerWidth;
+          const distanceToRight = (vw / 2) + (fw / 2) + WALK_OUT_BUFFER;
+
+          const overscroll = walkScrollX - maxScrollableDistance;
+          const overscrollProgress = Math.min(1, Math.max(0, overscroll / WALK_OUT_SCROLL_RANGE));
+
+          const dx = overscrollProgress * distanceToRight;
+          frameContainer.style.transform = `translateX(calc(-50% + ${dx}px)) translateY(-50%)`;
+        }
+      }
+    }
+
+    function applyScroll() {
+      scrollX = Math.max(0, Math.min(scrollX, TRANSFORM_SCROLL_RANGE + maxScrollableDistance + WALK_OUT_SCROLL_RANGE));
+
+      // Video scrolling only starts after transform phase
+      const walkScrollX = Math.max(0, scrollX - TRANSFORM_SCROLL_RANGE);
+      const videoScrollX = Math.min(walkScrollX, maxScrollableDistance);
+      video1.style.left = `${-videoScrollX * scrollSpeed1}px`;
+      video2.style.left = `${-videoScrollX * scrollSpeed2}px`;
+
+      updateFramesFromScroll();
+    }
+
+    // Add this function to your existing script
+    function preloadImages(urls) {
+      const promises = urls.map(url => {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.src = url;
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error(`Failed to load image at ${url}`));
+        });
+      });
+      return Promise.all(promises);
+    }
+
+    function waitForVideos(callback) {
+      let loadedVideos = 0;
+      const totalVideos = 2;
+      const bottomImg = "https://raw.githubusercontent.com/suhotraneel/madtripstore/main/lower.png";
+
+      function checkVideos() {
+        loadedVideos++;
+        if (loadedVideos === totalVideos) {
+          // Now that videos have enough data to play, start preloading images
+          Promise.all([
+            preloadImages(transformFrames),
+            preloadImages(loopFrames),
+            preloadImages([bottomImg]) // Also ensure the bottom large image is loaded
+          ]).then(() => {
+            console.log("All animation frames and assets preloaded successfully.");
+            showContentAndStart(callback);
+          }).catch(error => {
+            console.error("Error preloading images:", error);
+            // Fallback: still start it even if some images failed
+            showContentAndStart(callback);
+          });
+        }
+      }
+
+      function showContentAndStart(cb) {
+        const mainContent = document.getElementById('mainContent');
+        mainContent.style.opacity = '1';
+        cb();
+      }
+
+      // readyState >= 3 means HAVE_FUTURE_DATA (can play at least a bit smoothly)
+      if (video1.readyState >= 3) checkVideos(); else video1.addEventListener('canplay', checkVideos, { once: true });
+      if (video2.readyState >= 3) checkVideos(); else video2.addEventListener('canplay', checkVideos, { once: true });
+
+      // Force trigger load and play for strict browsers (Safari)
+      video1.load();
+      video2.load();
+      video1.play().catch(e => console.log("Video 1 autoplay prevented:", e));
+      video2.play().catch(e => console.log("Video 2 autoplay prevented:", e));
+    }
+
+    waitForVideos(() => {
+      setupRatios();
+      applyScroll();
+    });
+
+    scrollContainer.addEventListener('wheel', (e) => {
+      handleScrollDelta(e.deltaY, e);
+    }, { passive: false });
+
+    // --- Touch Support for Mobile Browsers ---
+    let touchStartY = 0;
+    scrollContainer.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    scrollContainer.addEventListener('touchmove', (e) => {
+      if (!touchStartY) return;
+      const touchEndY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+      touchStartY = touchEndY; // Update for continuous swipe
+
+      // Touch events are trickier to preventDefault() on cleanly without messing up mobile UX.
+      // We only intercept if we are actively inside the animation range.
+      handleScrollDelta(deltaY, e);
+    }, { passive: false });
+
+    function handleScrollDelta(deltaY, event) {
+      if (window.scrollY > 0) {
+        return; // Let natural scroll handle it when we've scrolled down past the top
+      }
+
+      const totalScrollable = TRANSFORM_SCROLL_RANGE + maxScrollableDistance + WALK_OUT_SCROLL_RANGE;
+
+      // If we are at the bottom of the animation and trying to scroll down, let native scroll take over
+      if (scrollX >= totalScrollable && deltaY > 0) {
+        return;
+      }
+
+      // If we are at the top of the animation and trying to scroll up, let native scroll take over
+      if (scrollX <= 0 && deltaY < 0) {
+        return;
+      }
+
+      // Smooth handoff to native scroll:
+      if (deltaY > 0 && scrollX + deltaY >= totalScrollable) {
+        scrollX = totalScrollable;
+        applyScroll();
+        return; // Do NOT preventDefault! Allow the remaining push to scroll the page.
+      }
+
+      // We are fully within the animation bounds, block native scrolling and do our animation.
+      if (event && event.cancelable) {
+        event.preventDefault();
+      }
+
+      scrollX += deltaY;
+      applyScroll();
+    }
+
+    window.addEventListener('resize', () => {
+      setupRatios();
+      applyScroll();
+    });
+  </script>
 </body>
+
 </html>
