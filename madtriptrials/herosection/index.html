@@ -16,6 +16,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
+      /* Fallback before JS runs */
       overflow: hidden;
       white-space: nowrap;
     }
@@ -24,6 +25,7 @@
       position: absolute;
       top: 0;
       height: 100vh;
+      /* Fallback before JS runs */
       width: auto;
       display: block;
     }
@@ -138,20 +140,34 @@
     const TRANSFORM_SCROLL_RANGE = 1200; // Pixels to scroll for the initial transformation
     const WALK_OUT_SCROLL_RANGE = 1500;  // Pixels of scroll for the final walk-out (lower = faster walk-out)
     const WALK_OUT_BUFFER = -150;         // Fine-tune character distance off-screen (+ is further, - is shorter delay before scroll)
+    const SMOOTHNESS = 0.04;              // Lower = more momentum/inertia, Higher = faster/stiffer
     // ===============================
 
     let scrollSpeed1, scrollSpeed2;
     let maxScrollableDistance = 0;
+
+    // Physics variables for smooth scrolling
     let scrollX = 0;
+    let targetScrollX = 0;
+    let isAnimating = false;
+
+    // Fix Mobile Browser Viewport Issues (Stop elements from resizing when the address bar hides)
+    // We capture the initial innerHeight once, and enforce it so videos don't get cropped
+    let initialViewportHeight = window.innerHeight;
 
     function getDynamicWidth(video) {
-      const viewportHeight = window.innerHeight;
       const aspectRatio = video.videoWidth / video.videoHeight;
-      return viewportHeight * aspectRatio;
+      return initialViewportHeight * aspectRatio;
     }
 
     function setupRatios() {
       const viewportWidth = window.innerWidth;
+
+      // Lock heights manually
+      scrollContainer.style.height = `${initialViewportHeight}px`;
+      video1.style.height = `${initialViewportHeight}px`;
+      video2.style.height = `${initialViewportHeight}px`;
+
       const width1 = getDynamicWidth(video1);
       const width2 = getDynamicWidth(video2);
 
@@ -216,8 +232,10 @@
       }
     }
 
-    function applyScroll() {
-      scrollX = Math.max(0, Math.min(scrollX, TRANSFORM_SCROLL_RANGE + maxScrollableDistance + WALK_OUT_SCROLL_RANGE));
+    function applyScrollOutput() {
+      // Clamp target
+      const totalScrollable = TRANSFORM_SCROLL_RANGE + maxScrollableDistance + WALK_OUT_SCROLL_RANGE;
+      targetScrollX = Math.max(0, Math.min(targetScrollX, totalScrollable));
 
       // Video scrolling only starts after transform phase
       const walkScrollX = Math.max(0, scrollX - TRANSFORM_SCROLL_RANGE);
@@ -226,6 +244,35 @@
       video2.style.left = `${-videoScrollX * scrollSpeed2}px`;
 
       updateFramesFromScroll();
+    }
+
+    function renderLoop() {
+      // Linear interpolation (lerp) for buttery smooth momentum
+      const diff = targetScrollX - scrollX;
+
+      // Stop animating if the difference is tiny (optimization)
+      if (Math.abs(diff) < 0.5) {
+        scrollX = targetScrollX;
+        isAnimating = false;
+        applyScrollOutput();
+        return;
+      }
+
+      scrollX += diff * SMOOTHNESS;
+      applyScrollOutput();
+
+      if (isAnimating) {
+        requestAnimationFrame(renderLoop);
+      }
+    }
+
+    function triggerSmoothScroll(deltaY) {
+      targetScrollX += deltaY;
+
+      if (!isAnimating) {
+        isAnimating = true;
+        requestAnimationFrame(renderLoop);
+      }
     }
 
     // Add this function to your existing script
@@ -284,7 +331,7 @@
 
     waitForVideos(() => {
       setupRatios();
-      applyScroll();
+      applyScrollOutput();
     });
 
     scrollContainer.addEventListener('wheel', (e) => {
@@ -300,11 +347,9 @@
     scrollContainer.addEventListener('touchmove', (e) => {
       if (!touchStartY) return;
       const touchEndY = e.touches[0].clientY;
-      const deltaY = touchStartY - touchEndY;
+      const deltaY = (touchStartY - touchEndY) * 1.5; // Multiply for better swipe sensitivity
       touchStartY = touchEndY; // Update for continuous swipe
 
-      // Touch events are trickier to preventDefault() on cleanly without messing up mobile UX.
-      // We only intercept if we are actively inside the animation range.
       handleScrollDelta(deltaY, e);
     }, { passive: false });
 
@@ -315,20 +360,23 @@
 
       const totalScrollable = TRANSFORM_SCROLL_RANGE + maxScrollableDistance + WALK_OUT_SCROLL_RANGE;
 
+      // Ensure targetScrollX is tracking correctly before doing bound checks
+      targetScrollX = Math.max(0, targetScrollX);
+
       // If we are at the bottom of the animation and trying to scroll down, let native scroll take over
-      if (scrollX >= totalScrollable && deltaY > 0) {
+      if (targetScrollX >= totalScrollable && deltaY > 0) {
         return;
       }
 
       // If we are at the top of the animation and trying to scroll up, let native scroll take over
-      if (scrollX <= 0 && deltaY < 0) {
+      if (targetScrollX <= 0 && deltaY < 0) {
         return;
       }
 
       // Smooth handoff to native scroll:
-      if (deltaY > 0 && scrollX + deltaY >= totalScrollable) {
-        scrollX = totalScrollable;
-        applyScroll();
+      if (deltaY > 0 && targetScrollX + deltaY >= totalScrollable) {
+        targetScrollX = totalScrollable;
+        triggerSmoothScroll(0); // Wake up the renderer
         return; // Do NOT preventDefault! Allow the remaining push to scroll the page.
       }
 
@@ -337,13 +385,19 @@
         event.preventDefault();
       }
 
-      scrollX += deltaY;
-      applyScroll();
+      triggerSmoothScroll(deltaY);
     }
 
+    // Only update ratios if WIDTH changed. Don't re-run on height changes 
+    // to prevent mobile address bar jumpiness.
+    let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
-      setupRatios();
-      applyScroll();
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        initialViewportHeight = window.innerHeight; // Update height ONLY on orientation change
+        setupRatios();
+        applyScrollOutput();
+      }
     });
   </script>
 </body>
