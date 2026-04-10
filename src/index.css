@@ -114,7 +114,7 @@ body {
   background-color: rgba(255, 252, 245, 0.1);
   border: 1px solid rgba(255, 252, 245, 0.4);
   color: var(--text-light);
-  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   height: 60px;
 }
 
@@ -168,7 +168,8 @@ body {
   position: relative;
   flex-shrink: 0;
   display: none;
-  margin: 4px 0;
+  padding: 4px 0;
+  box-sizing: border-box;
 }
 
 .nav-item.active .nav-indicator-track {
