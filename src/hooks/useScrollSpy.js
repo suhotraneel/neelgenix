@@ -67,6 +67,7 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
 
     const handleScroll = () => {
       window.requestAnimationFrame(() => {
+        // Only update active section if we are NOT in the middle of a manual click/auto-scroll
         if (!isAutoScrolling) {
           updateActiveSection();
         }
@@ -75,10 +76,11 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
+        // When scrolling stops, we set isAutoScrolling to false
+        // BUT we only update the active section if we aren't already there
         setIsAutoScrolling(false);
-        if (!isAutoScrolling) updateActiveSection();
         updateIndicatorPosition();
-      }, 100);
+      }, 150); // Increased buffer to allow smooth scroll to finish
     };
 
     container.addEventListener('scroll', handleScroll);
