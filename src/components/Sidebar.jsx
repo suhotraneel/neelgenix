@@ -18,41 +18,28 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
   const menuRef = useRef(null);
   const itemsRef = useRef({});
 
-  // Sync scroll positioning and animation when active section changes
-  useEffect(() => {
-    Object.keys(itemsRef.current).forEach((id) => {
-      const el = itemsRef.current[id];
-      if (!el) return;
-      
-      if (id === activeSectionId) {
-        const targetSection = document.getElementById(id);
-        const sectionHeight = targetSection ? targetSection.offsetHeight : 0;
-        const targetHeight = calculateNavHeight(sectionHeight);
-        
-        el.style.height = `${targetHeight}px`;
+  // Parse section height from data to calculate nav height without DOM reads
+  const getNavHeight = (section) => {
+    if (section.id === sections[sections.length - 1].id) return MAX_NAV_HEIGHT;
+    
+    const hString = section.height || '400px';
+    const hValue = parseInt(hString.replace('px', '')) || 400;
+    return calculateNavHeight(hValue);
+  };
 
-        // Check if last item to force scroll to absolute bottom
-        if (id === sections[sections.length - 1].id) {
-          const container = menuRef.current;
-          if (container) {
-            const scrollToBottom = () => {
-              container.scrollTo({
-                top: container.scrollHeight,
-                behavior: 'smooth'
-              });
-            };
-            scrollToBottom();
-            setTimeout(scrollToBottom, 50);
-            setTimeout(scrollToBottom, 150);
-            setTimeout(scrollToBottom, 300);
-          }
-        } else {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      } else {
-        el.style.height = ''; 
+  // Sync scroll positioning of the menu panel when active section changes
+  useEffect(() => {
+    const activeEl = itemsRef.current[activeSectionId];
+    if (!activeEl) return;
+
+    if (activeSectionId === sections[sections.length - 1].id) {
+      const container = menuRef.current;
+      if (container) {
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
       }
-    });
+    } else {
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }, [activeSectionId, sections]);
 
   return (
@@ -64,11 +51,14 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
         <div className="menu">
           {sections.map((section) => {
             const isActive = section.id === activeSectionId;
+            const targetHeight = getNavHeight(section);
+
             return (
               <a 
                 key={section.id}
                 href={`#${section.id}`} 
                 className={`nav-item ${isActive ? 'active' : ''}`}
+                style={{ height: isActive ? `${targetHeight}px` : '60px' }}
                 ref={(el) => itemsRef.current[section.id] = el}
                 onClick={(e) => {
                   e.preventDefault();
@@ -80,7 +70,6 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
                   <span className="nav-label">{section.title}</span>
                 </div>
                 <div className="nav-indicator-track">
-                  {/* The top percentage is controlled globally via CSS vars or direct DOM from our hook to avoid rapid re-renders */}
                   <div className="nav-indicator" id={`indicator-${section.id}`}></div>
                 </div>
               </a>
