@@ -68,7 +68,7 @@ export function useScrollSpy(
       const isLastSection = activId === secs[secs.length - 1].id;
       let progress = 0;
       if (isLastSection) {
-        progress = 0.9;
+        progress = 0.95;
       } else {
         const totalActiveDistance = rect.height + 24;
         const distanceScrolled = threshold - rect.top;
@@ -137,7 +137,7 @@ export function useScrollSpy(
       container.removeEventListener('scroll', handleScroll);
       clearTimeout(scrollTimeout);
     };
-  // Empty deps: register once, read live values via refs
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // Empty deps: register once, read live values via refs
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 }
