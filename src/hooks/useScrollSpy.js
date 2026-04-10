@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function useScrollSpy(rightContainerRef, sections, activeSectionId, setActiveSectionId, isAutoScrolling, setIsAutoScrolling) {
+export function useScrollSpy(rightContainerRef, sections, activeSectionId, setActiveSectionId, isAutoScrolling, setIsAutoScrolling, manualScrollRef) {
   useEffect(() => {
     const container = rightContainerRef.current;
     if (!container) return;
@@ -67,8 +67,8 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
 
     const handleScroll = () => {
       window.requestAnimationFrame(() => {
-        // Only update active section if we are NOT in the middle of a manual click/auto-scroll
-        if (!isAutoScrolling) {
+        // Use the Ref for synchronous check to avoid re-render latency
+        if (!manualScrollRef.current && !isAutoScrolling) {
           updateActiveSection();
         }
         updateIndicatorPosition();
@@ -76,14 +76,13 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
 
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
-        // When scrolling stops, we set isAutoScrolling to false
-        // BUT we only update the active section if we aren't already there
+        manualScrollRef.current = false;
         setIsAutoScrolling(false);
         updateIndicatorPosition();
-      }, 150); // Increased buffer to allow smooth scroll to finish
+      }, 200); 
     };
 
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
 
     // Initial paint
     updateActiveSection();
@@ -93,5 +92,5 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
       container.removeEventListener('scroll', handleScroll);
       clearTimeout(scrollTimeout);
     };
-  }, [sections, activeSectionId, isAutoScrolling, setActiveSectionId, setIsAutoScrolling]);
+  }, [sections, activeSectionId, isAutoScrolling, setActiveSectionId, setIsAutoScrolling, manualScrollRef]);
 }

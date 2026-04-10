@@ -7,7 +7,8 @@ function MainContent({
   setActiveSectionId, 
   isAutoScrolling, 
   setIsAutoScrolling,
-  rightContainerRef 
+  rightContainerRef,
+  manualScrollRef
 }) {
   
   // Attach the ported vanilla scroll physics hook
@@ -17,7 +18,8 @@ function MainContent({
     activeSectionId, 
     setActiveSectionId, 
     isAutoScrolling, 
-    setIsAutoScrolling
+    setIsAutoScrolling,
+    manualScrollRef
   );
 
   return (

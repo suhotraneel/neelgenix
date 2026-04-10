@@ -8,8 +8,10 @@ function App() {
   const [activeSectionId, setActiveSectionId] = useState(sectionsData[0].id);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const rightContainerRef = useRef(null);
+  const manualScrollRef = useRef(false);
 
   const handleNavClick = (sectionId) => {
+    manualScrollRef.current = true;
     setActiveSectionId(sectionId);
     setIsAutoScrolling(true);
     
@@ -33,6 +35,7 @@ function App() {
         isAutoScrolling={isAutoScrolling}
         setIsAutoScrolling={setIsAutoScrolling}
         rightContainerRef={rightContainerRef}
+        manualScrollRef={manualScrollRef}
       />
     </div>
   );
