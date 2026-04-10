@@ -1,6 +1,54 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-export function useScrollSpy(rightContainerRef, sections, activeSectionId, setActiveSectionId, isAutoScrolling, setIsAutoScrolling, manualScrollRef) {
+export function useScrollSpy(
+  rightContainerRef,
+  sections,
+  activeSectionId,
+  setActiveSectionId,
+  isAutoScrolling,
+  setIsAutoScrolling,
+  manualScrollRef
+) {
+  // Keep refs up-to-date so scroll handler always reads the latest values
+  // without needing to re-register the listener (which was the root cause of the bug)
+  const activeSectionIdRef = useRef(activeSectionId);
+  const isAutoScrollingRef = useRef(isAutoScrolling);
+  const sectionsRef = useRef(sections);
+
+  activeSectionIdRef.current = activeSectionId;
+  isAutoScrollingRef.current = isAutoScrolling;
+  sectionsRef.current = sections;
+
+  // Update indicator whenever the active section changes
+  useEffect(() => {
+    const container = rightContainerRef.current;
+    if (!container) return;
+
+    const currentSection = document.getElementById(activeSectionId);
+    if (!currentSection) return;
+
+    const rect = currentSection.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
+    const threshold = containerRect.top + 24;
+
+    const isLastSection = activeSectionId === sections[sections.length - 1].id;
+    let progress = 0;
+    if (isLastSection) {
+      progress = 0.9;
+    } else {
+      const totalActiveDistance = rect.height + 24;
+      const distanceScrolled = threshold - rect.top;
+      progress = distanceScrolled / totalActiveDistance;
+    }
+    progress = Math.max(0, Math.min(1, progress));
+
+    const indicator = document.getElementById(`indicator-${activeSectionId}`);
+    if (indicator) {
+      indicator.style.top = `${progress * 100}%`;
+    }
+  }, [activeSectionId, sections, rightContainerRef]);
+
+  // Register the scroll listener ONCE — reads live values via refs, never re-registers
   useEffect(() => {
     const container = rightContainerRef.current;
     if (!container) return;
@@ -8,21 +56,17 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
     let scrollTimeout;
 
     const updateIndicatorPosition = () => {
-      const activeItem = document.querySelector('.nav-item.active');
-      if (!activeItem) return;
-
-      const currentSection = document.getElementById(activeSectionId);
+      const activId = activeSectionIdRef.current;
+      const secs = sectionsRef.current;
+      const currentSection = document.getElementById(activId);
       if (!currentSection) return;
 
       const rect = currentSection.getBoundingClientRect();
       const containerRect = container.getBoundingClientRect();
-      const threshold = containerRect.top + 24; // 24px scroll-margin offset
+      const threshold = containerRect.top + 24;
 
+      const isLastSection = activId === secs[secs.length - 1].id;
       let progress = 0;
-
-      // Check if this is the absolute last section
-      const isLastSection = activeSectionId === sections[sections.length - 1].id;
-
       if (isLastSection) {
         progress = 0.9;
       } else {
@@ -30,22 +74,22 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
         const distanceScrolled = threshold - rect.top;
         progress = distanceScrolled / totalActiveDistance;
       }
-
       progress = Math.max(0, Math.min(1, progress));
 
-      const indicator = document.getElementById(`indicator-${activeSectionId}`);
+      const indicator = document.getElementById(`indicator-${activId}`);
       if (indicator) {
         indicator.style.top = `${progress * 100}%`;
       }
     };
 
     const updateActiveSection = () => {
+      const secs = sectionsRef.current;
+      const activId = activeSectionIdRef.current;
       const containerRect = container.getBoundingClientRect();
       const threshold = containerRect.top + 24;
 
-      let activeCandidate = sections[0].id; // id fallback
-
-      sections.forEach(section => {
+      let activeCandidate = secs[0].id;
+      secs.forEach(section => {
         const el = document.getElementById(section.id);
         if (el) {
           const rect = el.getBoundingClientRect();
@@ -56,19 +100,19 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
       });
 
       const isAtBottom = Math.ceil(container.scrollTop + container.clientHeight) >= container.scrollHeight;
-      if (isAtBottom && sections.length > 0) {
-        activeCandidate = sections[sections.length - 1].id;
+      if (isAtBottom && secs.length > 0) {
+        activeCandidate = secs[secs.length - 1].id;
       }
 
-      if (activeCandidate !== activeSectionId) {
+      if (activeCandidate !== activId) {
         setActiveSectionId(activeCandidate);
       }
     };
 
     const handleScroll = () => {
       window.requestAnimationFrame(() => {
-        // Use the Ref for synchronous check to avoid re-render latency
-        if (!manualScrollRef.current && !isAutoScrolling) {
+        // Read current values from refs — no stale closures
+        if (!manualScrollRef.current && !isAutoScrollingRef.current) {
           updateActiveSection();
         }
         updateIndicatorPosition();
@@ -77,9 +121,10 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
         manualScrollRef.current = false;
+        isAutoScrollingRef.current = false;
         setIsAutoScrolling(false);
         updateIndicatorPosition();
-      }, 200); 
+      }, 300);
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
@@ -92,5 +137,7 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
       container.removeEventListener('scroll', handleScroll);
       clearTimeout(scrollTimeout);
     };
-  }, [sections, activeSectionId, isAutoScrolling, setActiveSectionId, setIsAutoScrolling, manualScrollRef]);
+  // Empty deps: register once, read live values via refs
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 }
