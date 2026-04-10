@@ -67,15 +67,16 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
             const targetHeight = getNavHeight(section);
 
             return (
-              <a 
+              <div
                 key={section.id}
-                href={`#${section.id}`} 
+                role="button"
+                tabIndex={0}
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 style={{ height: isActive ? `${targetHeight}px` : '60px' }}
                 ref={(el) => itemsRef.current[section.id] = el}
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavClick(section.id);
+                onClick={() => onNavClick(section.id)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') onNavClick(section.id);
                 }}
               >
                 <div className="nav-content">
@@ -85,7 +86,7 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
                 <div className="nav-indicator-track">
                   <div className="nav-indicator" id={`indicator-${section.id}`}></div>
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>
