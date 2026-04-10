@@ -17,14 +17,14 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
       const rect = currentSection.getBoundingClientRect();
       const containerRect = container.getBoundingClientRect();
       const threshold = containerRect.top + 24; // 24px scroll-margin offset
-      
+
       let progress = 0;
-      
+
       // Check if this is the absolute last section
       const isLastSection = activeSectionId === sections[sections.length - 1].id;
 
       if (isLastSection) {
-        progress = 0.5;
+        progress = 0.9;
       } else {
         const totalActiveDistance = rect.height + 24;
         const distanceScrolled = threshold - rect.top;
@@ -42,7 +42,7 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
     const updateActiveSection = () => {
       const containerRect = container.getBoundingClientRect();
       const threshold = containerRect.top + 24;
-      
+
       let activeCandidate = sections[0].id; // id fallback
 
       sections.forEach(section => {
@@ -82,7 +82,7 @@ export function useScrollSpy(rightContainerRef, sections, activeSectionId, setAc
     };
 
     container.addEventListener('scroll', handleScroll);
-    
+
     // Initial paint
     updateActiveSection();
     updateIndicatorPosition();
