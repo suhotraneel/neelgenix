@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import { sectionsData } from './data/sections';
@@ -12,9 +13,13 @@ function App() {
 
   const handleNavClick = (sectionId) => {
     manualScrollRef.current = true;
-    setActiveSectionId(sectionId);
-    setIsAutoScrolling(true);
     
+    // Force immediate UI update before the scroll starts
+    flushSync(() => {
+      setActiveSectionId(sectionId);
+      setIsAutoScrolling(true);
+    });
+
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' });
