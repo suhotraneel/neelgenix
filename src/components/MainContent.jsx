@@ -29,9 +29,16 @@ function MainContent({
           className="placeholder-section" 
           style={{ 
             backgroundColor: section.color, 
-            height: section.height 
+            height: section.height,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            color: 'white',
+            fontSize: '2rem',
+            fontWeight: 'bold'
           }}
         >
+          {section.title}
         </section>
       ))}
     </main>

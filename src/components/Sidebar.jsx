@@ -58,7 +58,7 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
   return (
     <nav className="left-panel">
       <div className="logo-container">
-        <img src="/assets/logo.svg" alt="Neel Genix Logo" className="logo" />
+        <img src="assets/logo.svg" alt="Neel Genix Logo" className="logo" />
       </div>
       <div className="menu-container" ref={menuRef}>
         <div className="menu">
