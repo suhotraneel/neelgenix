@@ -34,17 +34,22 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
 
     if (activeSectionId === sections[sections.length - 1].id) {
       const container = menuRef.current;
-      if (container) {
-        // Scroll immediately, then again after the height expansion animation (0.1s)
-        // so the full expanded item is guaranteed to be in frame.
-        const scrollToBottom = () =>
-          container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      if (!container) return;
 
-        scrollToBottom();
-        const t1 = setTimeout(scrollToBottom, 120); // after expansion animation
-        const t2 = setTimeout(scrollToBottom, 250); // safety net
-        return () => { clearTimeout(t1); clearTimeout(t2); };
-      }
+      // Wait for the height expansion animation to finish, THEN scroll to bottom.
+      // Using transitionend is exact — no guessing at timeouts.
+      const onTransitionEnd = (e) => {
+        if (e.propertyName !== 'height') return;
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        activeEl.removeEventListener('transitionend', onTransitionEnd);
+      };
+
+      activeEl.addEventListener('transitionend', onTransitionEnd);
+
+      // Fallback: if there's no transition (e.g. prefers-reduced-motion), scroll immediately
+      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+
+      return () => activeEl.removeEventListener('transitionend', onTransitionEnd);
     } else {
       activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
