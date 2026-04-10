@@ -35,7 +35,15 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
     if (activeSectionId === sections[sections.length - 1].id) {
       const container = menuRef.current;
       if (container) {
-        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        // Scroll immediately, then again after the height expansion animation (0.1s)
+        // so the full expanded item is guaranteed to be in frame.
+        const scrollToBottom = () =>
+          container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+
+        scrollToBottom();
+        const t1 = setTimeout(scrollToBottom, 120); // after expansion animation
+        const t2 = setTimeout(scrollToBottom, 250); // safety net
+        return () => { clearTimeout(t1); clearTimeout(t2); };
       }
     } else {
       activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
