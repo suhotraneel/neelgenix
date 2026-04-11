@@ -228,7 +228,7 @@ body {
     width: 100%;
     height: auto;
     flex-direction: row;
-    padding: 12px 0 12px 12px;
+    padding: 16px 0 24px 16px;
     align-items: flex-start;
   }
 
