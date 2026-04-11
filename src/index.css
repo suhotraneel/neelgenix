@@ -315,6 +315,8 @@ body {
   }
 
   .nav-indicator {
+    width: 4px;
+    height: 4px;
     top: 50%;
     left: calc(4px + var(--scroll-progress, 0) * (100% - 8px));
   }
