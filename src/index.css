@@ -232,6 +232,11 @@ body {
     align-items: flex-start;
   }
 
+  .right-container {
+    padding: 16px;
+    gap: 16px;
+  }
+
   .logo-container {
     width: 46px;
     height: 46px;
