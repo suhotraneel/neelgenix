@@ -30,28 +30,41 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
   // Sync scroll positioning of the menu panel when active section changes
   useEffect(() => {
     const activeEl = itemsRef.current[activeSectionId];
-    if (!activeEl) return;
+    const container = menuRef.current;
+    if (!activeEl || !container) return;
 
-    if (activeSectionId === sections[sections.length - 1].id) {
-      const container = menuRef.current;
-      if (!container) return;
+    const isMobile = window.innerWidth <= 767;
+    const isLast = activeSectionId === sections[sections.length - 1].id;
 
-      // Wait for the height expansion animation to finish, THEN scroll to bottom.
-      // Using transitionend is exact — no guessing at timeouts.
+    if (isLast) {
+      // For the last section, scroll to the extreme end (bottom on desktop, right on mobile)
       const onTransitionEnd = (e) => {
-        if (e.propertyName !== 'height') return;
-        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        if (e.propertyName !== (isMobile ? 'width' : 'height')) return;
+        if (isMobile) {
+          container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+        } else {
+          container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+        }
         activeEl.removeEventListener('transitionend', onTransitionEnd);
       };
 
       activeEl.addEventListener('transitionend', onTransitionEnd);
-
-      // Fallback: if there's no transition (e.g. prefers-reduced-motion), scroll immediately
-      container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      
+      // Immediate scroll attempt
+      if (isMobile) {
+        container.scrollTo({ left: container.scrollWidth, behavior: 'smooth' });
+      } else {
+        container.scrollTo({ top: container.scrollHeight, behavior: 'smooth' });
+      }
 
       return () => activeEl.removeEventListener('transitionend', onTransitionEnd);
     } else {
-      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      // For other sections, center the item in the viewport
+      activeEl.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: isMobile ? 'nearest' : 'center', 
+        inline: isMobile ? 'center' : 'nearest' 
+      });
     }
   }, [activeSectionId, sections]);
 
