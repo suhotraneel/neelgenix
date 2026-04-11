@@ -58,7 +58,8 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
   return (
     <nav className="left-panel">
       <div className="logo-container">
-        <img src="assets/logo.svg" alt="Neel Genix Logo" className="logo" />
+        <img src="assets/logo.svg" alt="Neel Genix Logo" className="logo desktop-logo" />
+        <img src="assets/ngiconlight.svg" alt="Neel Genix Logo" className="logo mobile-logo" />
       </div>
       <div className="menu-container" ref={menuRef}>
         <div className="menu">
@@ -72,7 +73,7 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
                 role="button"
                 tabIndex={0}
                 className={`nav-item ${isActive ? 'active' : ''}`}
-                style={{ height: isActive ? `${targetHeight}px` : '60px' }}
+                style={isActive ? { '--dynamic-size': `${targetHeight}px` } : {}}
                 ref={(el) => itemsRef.current[section.id] = el}
                 onClick={() => onNavClick(section.id)}
                 onKeyDown={(e) => {

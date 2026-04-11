@@ -44,7 +44,7 @@ export function useScrollSpy(
 
     const indicator = document.getElementById(`indicator-${activeSectionId}`);
     if (indicator) {
-      indicator.style.top = `calc(4px + ${progress} * (100% - 8px))`;
+      indicator.style.setProperty('--scroll-progress', progress);
     }
   }, [activeSectionId, sections, rightContainerRef]);
 
@@ -78,7 +78,7 @@ export function useScrollSpy(
 
       const indicator = document.getElementById(`indicator-${activId}`);
       if (indicator) {
-        indicator.style.top = `calc(4px + ${progress} * (100% - 8px))`;
+        indicator.style.setProperty('--scroll-progress', progress);
       }
     };
 
