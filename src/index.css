@@ -310,7 +310,7 @@ body {
   .nav-indicator-track {
     width: 100%;
     height: 8px;
-    margin: 0 0 4px 0;
+    margin: 0;
     order: -1;
   }
 
