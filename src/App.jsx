@@ -18,7 +18,7 @@ function App() {
     const path = window.location.pathname;
     const base = import.meta.env.BASE_URL;
     const slug = path.replace(base, '');
-    
+
     if (slug) {
       const targetSection = sectionsData.find(s => s.slug === slug);
       if (targetSection) {
@@ -36,7 +36,7 @@ function App() {
     if (loading) return;
     const currentSection = sectionsData.find(s => s.id === activeSectionId);
     if (currentSection && !document.hidden) {
-      document.title = `Neel Genix - ${currentSection.title}`;
+      document.title = `${currentSection.title} | Neel Genix`;
       const base = import.meta.env.BASE_URL;
       window.history.replaceState(null, null, `${base}${currentSection.slug}`);
     }
@@ -109,7 +109,7 @@ function App() {
     manualScrollRef.current = true;
     const base = import.meta.env.BASE_URL;
     window.history.replaceState(null, null, base);
-    
+
     flushSync(() => {
       setActiveSectionId(sectionsData[0].id);
       setIsAutoScrolling(true);
@@ -130,8 +130,8 @@ function App() {
         </div>
       )}
       <div className="app-container">
-        <Sidebar 
-          sections={sectionsData} 
+        <Sidebar
+          sections={sectionsData}
           activeSectionId={activeSectionId}
           onNavClick={handleNavClick}
           onLogoClick={handleLogoClick}
