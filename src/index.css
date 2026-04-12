@@ -406,6 +406,11 @@ body {
     top: 50%;
     left: calc(4px + var(--scroll-progress, 0) * (100% - 8px));
   }
+
+  /* Last section height adjustment for mobile footer offset */
+  .placeholder-section:last-child {
+    height: calc(100vh - 114px) !important;
+  }
 }
 
 /* Preloader Styles */
