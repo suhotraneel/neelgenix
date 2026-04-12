@@ -422,6 +422,10 @@ body {
     left: calc(4px + var(--scroll-progress, 0) * (100% - 8px));
   }
 
+  .placeholder-section {
+    scroll-margin-top: 16px;
+  }
+
   /* Last section height adjustment for mobile footer offset */
   .placeholder-section:last-child {
     height: calc(100dvh - 114px) !important;
