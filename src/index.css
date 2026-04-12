@@ -1,20 +1,20 @@
 @font-face {
   font-family: 'Gotham';
-  src: url('/assets/gotham/Gotham-Light.otf') format('opentype');
+  src: url('assets/gotham/Gotham-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/assets/gotham/Gotham-Book.otf') format('opentype');
+  src: url('assets/gotham/Gotham-Book.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Gotham';
-  src: url('/assets/gotham/Gotham-Medium.otf') format('opentype');
+  src: url('assets/gotham/Gotham-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
@@ -330,4 +330,51 @@ body {
     top: 50%;
     left: calc(4px + var(--scroll-progress, 0) * (100% - 8px));
   }
+}
+
+/* Preloader Styles */
+#preloader {
+  background: var(--bg-color);
+  top: 0px;
+  height: 100dvh;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#preloader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loadertext {
+  color: #111111;
+  text-align: center;
+  font-family: 'Gotham', sans-serif;
+  font-size: 48px;
+  margin-top: 0;
+  font-weight: 500;
+  animation: weight-and-color-change 1s linear infinite;
+}
+
+@keyframes weight-and-color-change {
+  0% { font-weight: 300; color: #fffcf5; }
+  50% { font-weight: 500; color: #111111; }
+  100% { font-weight: 300; color: #fffcf5; }
+}
+
+.loader {
+  animation: rotate 2s linear infinite;
+  margin-top: 10vh;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

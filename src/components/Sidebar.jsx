@@ -14,7 +14,7 @@ function calculateNavHeight(sectionHeight) {
   return Math.round(calculatedHeight);
 }
 
-function Sidebar({ sections, activeSectionId, onNavClick }) {
+function Sidebar({ sections, activeSectionId, onNavClick, onLogoClick }) {
   const menuRef = useRef(null);
   const itemsRef = useRef({});
 
@@ -70,7 +70,11 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
 
   return (
     <nav className="left-panel">
-      <div className="logo-container">
+      <div 
+        className="logo-container" 
+        onClick={onLogoClick}
+        style={{ cursor: 'pointer' }}
+      >
         <img src="assets/logo.svg" alt="Neel Genix Logo" className="logo desktop-logo" />
         <img src="assets/ngiconlight.svg" alt="Neel Genix Logo" className="logo mobile-logo" />
       </div>
