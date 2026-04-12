@@ -147,7 +147,7 @@ body {
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
-  text-align: right;
+  text-align: left;
   width: 100%;
   min-width: max-content;
 }
@@ -219,7 +219,7 @@ body {
   scroll-margin-top: 24px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
   .app-container {
     flex-direction: column-reverse;
   }
@@ -255,7 +255,7 @@ body {
     flex-direction: row;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 0 12px;
+    padding: 0 16px;
     /* Update mask for horizontal scroll */
     -webkit-mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
     mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
@@ -268,7 +268,7 @@ body {
   }
 
   .nav-item {
-    width: 128px;
+    width: 108px;
     height: auto;
     flex-direction: column;
     justify-content: center;
@@ -289,6 +289,7 @@ body {
     align-items: flex-start;
     padding: 0 10px;
     gap: 4px;
+    overflow: hidden;
   }
 
   .nav-number {
@@ -299,7 +300,11 @@ body {
   .nav-label {
     font-size: 10px;
     line-height: 14px;
-    text-align: right;
+    text-align: left;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .nav-item.active .nav-content {

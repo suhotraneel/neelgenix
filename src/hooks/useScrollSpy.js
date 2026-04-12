@@ -31,10 +31,11 @@ export function useScrollSpy(
     const containerRect = container.getBoundingClientRect();
     const threshold = containerRect.top + 24;
 
+    const isMobile = window.innerWidth <= 1024;
     const isLastSection = activeSectionId === sections[sections.length - 1].id;
     let progress = 0;
     if (isLastSection) {
-      progress = 0.9;
+      progress = 0.04;
     } else {
       const totalActiveDistance = rect.height + 24;
       const distanceScrolled = threshold - rect.top;
@@ -65,10 +66,11 @@ export function useScrollSpy(
       const containerRect = container.getBoundingClientRect();
       const threshold = containerRect.top + 24;
 
+      const isMobile = window.innerWidth <= 1024;
       const isLastSection = activId === secs[secs.length - 1].id;
       let progress = 0;
       if (isLastSection) {
-        progress = 0.95;
+        progress = 0.04;
       } else {
         const totalActiveDistance = rect.height + 24;
         const distanceScrolled = threshold - rect.top;

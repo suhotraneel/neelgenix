@@ -33,7 +33,7 @@ function Sidebar({ sections, activeSectionId, onNavClick }) {
     const container = menuRef.current;
     if (!activeEl || !container) return;
 
-    const isMobile = window.innerWidth <= 767;
+    const isMobile = window.innerWidth <= 1023;
     const isLast = activeSectionId === sections[sections.length - 1].id;
 
     if (isLast) {
