@@ -3,7 +3,6 @@ import { flushSync } from 'react-dom';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
 import { sectionsData } from './data/sections';
-import loaderSvg from './assets/loader.svg';
 import './index.css';
 
 function App() {
@@ -127,7 +126,7 @@ function App() {
       {loading && (
         <div id="preloader" className={hideLoader ? 'hide' : ''}>
           <span className="loadertext">NEEL GENIX</span>
-          <img src={loaderSvg} alt="Neel Genix" className="loader" width="64px" height="64px" />
+          <img src="assets/loader.svg" alt="Neel Genix" className="loader" width="64px" height="64px" />
         </div>
       )}
       <div className="app-container">
