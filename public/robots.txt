@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://neelgenix.com/sitemap.xml

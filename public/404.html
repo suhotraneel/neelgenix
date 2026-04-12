@@ -1,14 +1,32 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Neel Genix</title>
-    <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafgraph/spa-github-pages
-      var pathSegmentsToKeep = 1;
+<html lang="en">
 
-      var l = window.location;
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found | Neel Genix</title>
+
+  <script type="text/javascript">
+    // List of valid slugs from your sections.js
+    var validSlugs = [
+      'who-i-am',
+      'how-i-contribute',
+      'worked-with',
+      'things-ive-built',
+      'what-i-work-on',
+      'tools-i-use',
+      'my-ai-approach',
+      'beyond-work',
+      'what-people-say',
+      'lets-build'
+    ];
+
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    var path = l.pathname.split('/').pop(); // Get the last part of the URL
+
+    // ONLY redirect if it's a known valid section slug
+    if (validSlugs.indexOf(path) !== -1) {
       l.replace(
         l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
         l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
@@ -16,8 +34,98 @@
         (l.search ? '&' + l.search.replace(/&/g, '~and~') : '') +
         l.hash
       );
-    </script>
-  </head>
-  <body>
-  </body>
+    }
+    // Otherwise, the script does nothing and the 404 UI below is displayed.
+  </script>
+
+  <style>
+    :root {
+      --bg-color: #fffcf5;
+      --text-main: #111111;
+      --accent-from: #561c11;
+      --accent-to: #823425;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Gotham', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      padding: 2rem;
+      max-width: 600px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .error-code {
+      font-size: clamp(8rem, 20vw, 12rem);
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--accent-to), var(--accent-from));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -5px;
+    }
+
+    .message {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(to right, var(--accent-to), var(--accent-from));
+      color: #fffcf5;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(86, 28, 17, 0.2);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(86, 28, 17, 0.3);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="error-code">404</div>
+    <div class="message">The page you're looking for has drifted into deep space.</div>
+    <a href="/neelgenix/" class="btn">Back to Home</a>
+  </div>
+</body>
+
 </html>
