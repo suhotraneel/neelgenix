@@ -36,7 +36,7 @@ function App() {
     if (loading) return;
     const currentSection = sectionsData.find(s => s.id === activeSectionId);
     if (currentSection && !document.hidden) {
-      document.title = `${currentSection.title} | Neel Genix`;
+      document.title = `Neel Genix - ${currentSection.title}`;
       const base = import.meta.env.BASE_URL;
       window.history.replaceState(null, null, `${base}${currentSection.slug}`);
     }
@@ -62,7 +62,7 @@ function App() {
         // Restore the current section title
         const currentSection = sectionsData.find(s => s.id === activeSectionId);
         if (currentSection) {
-          document.title = `Suhotra Chakraborty | ${currentSection.title}`;
+          document.title = `Neel Genix - Suhotra Chakraborty`;
         }
       }
     };
