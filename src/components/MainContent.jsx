@@ -1,5 +1,6 @@
 import React from 'react';
 import { useScrollSpy } from '../hooks/useScrollSpy';
+import WorkedWith from './WorkedWith';
 
 function MainContent({ 
   sections, 
@@ -22,6 +23,28 @@ function MainContent({
     manualScrollRef
   );
 
+  const renderSectionContent = (section) => {
+    switch (section.slug) {
+      case 'i-worked-with':
+        return <WorkedWith />;
+      default:
+        return (
+          <div style={{ 
+            height: '100%', 
+            width: '100%', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            color: 'white',
+            fontSize: '2rem',
+            fontWeight: 'bold'
+          }}>
+            {section.title}
+          </div>
+        );
+    }
+  };
+
   return (
     <main className="right-container" id="content-container" ref={rightContainerRef}>
       {sections.map((section) => (
@@ -30,17 +53,12 @@ function MainContent({
           id={section.id} 
           className="placeholder-section" 
           style={{ 
-            backgroundColor: section.color, 
+            backgroundColor: section.slug === 'i-worked-with' ? 'transparent' : section.color, 
             height: section.height,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: 'white',
-            fontSize: '2rem',
-            fontWeight: 'bold'
+            padding: 0
           }}
         >
-          {section.title}
+          {renderSectionContent(section)}
         </section>
       ))}
     </main>
