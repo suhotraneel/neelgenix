@@ -41,24 +41,26 @@
 .ww-carousel-wrapper {
   width: 100%;
   padding-bottom: 5vw;
-  overflow: hidden; /* Changed to hidden to prevent scrollbars during manual drag */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   position: relative;
-  display: flex;
-  justify-content: center;
-  cursor: grab;
-  user-select: none;
 }
 
-.ww-carousel-wrapper:active {
-  cursor: grabbing;
+.ww-carousel-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .ww-logo-track {
   display: flex;
   gap: var(--grid-gap);
   align-items: center;
-  will-change: transform;
   width: max-content;
+  /* Add padding to center the first and last cloned items */
+  padding: 0 calc(50vw - (var(--logo-w) / 2));
 }
 
 .ww-logo-card {
@@ -69,13 +71,10 @@
   align-items: center;
   justify-content: center;
   opacity: 0.4;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   background: transparent;
-  pointer-events: none; /* Let the wrapper handle the drag events */
-}
-
-.ww-logo-card * {
-  pointer-events: none; /* Ensure no image/text dragging interferes */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
 }
 
 .ww-logo-card.active {

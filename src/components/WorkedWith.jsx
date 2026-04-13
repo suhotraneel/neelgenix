@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './WorkedWith.css';
 
 const WorkedWith = () => {
@@ -14,73 +14,95 @@ const WorkedWith = () => {
     { id: 9, name: 'Figma' },
   ];
 
+  // Triplicate the list for seamless infinite loop
   const logos = [...baseLogos, ...baseLogos, ...baseLogos];
   const totalItems = baseLogos.length;
 
-  const [index, setIndex] = useState(totalItems);
-  const [isTransitioning, setIsTransitioning] = useState(true);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const autoPlayRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(totalItems);
+  const wrapperRef = useRef(null);
+  const isInteracting = useRef(false);
 
-  const startAutoPlay = () => {
-    stopAutoPlay();
-    autoPlayRef.current = setInterval(() => {
-      setIndex((prev) => prev + 1);
-      setIsTransitioning(true);
-    }, 2500);
-  };
-
-  const stopAutoPlay = () => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
-  };
-
+  // Jump to middle on load
   useEffect(() => {
-    startAutoPlay();
-    return () => stopAutoPlay();
+    if (wrapperRef.current) {
+      const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+      if (cards[totalItems]) {
+        cards[totalItems].scrollIntoView({ inline: 'center', block: 'nearest' });
+      }
+    }
+  }, [totalItems]);
+
+  // Track the center item
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveIndex(parseInt(entry.target.dataset.index, 10));
+        }
+      });
+    }, {
+      root: wrapperRef.current,
+      rootMargin: '0px -40% 0px -40%', // Only trigger in the middle 20%
+      threshold: 0
+    });
+
+    const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+    cards.forEach(card => observer.observe(card));
+
+    return () => observer.disconnect();
   }, []);
 
-  const handleDragStart = (e) => {
-    setIsDragging(true);
-    setIsTransitioning(false);
-    stopAutoPlay();
-    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-    setStartX(clientX);
-  };
+  // Auto-scroll logic
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isInteracting.current || !wrapperRef.current) return;
+      
+      const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+      const nextIndex = activeIndex + 1;
+      
+      if (cards[nextIndex]) {
+        cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }, 1500);
 
-  const handleDragMove = (e) => {
-    if (!isDragging) return;
-    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-    const currentOffset = clientX - startX;
-    setDragOffset(currentOffset);
-  };
+    return () => clearInterval(interval);
+  }, [activeIndex]);
 
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
+  const handleScroll = () => {
+    if (!wrapperRef.current) return;
 
-    // Calculate how many items we dragged (with threshold)
-    const cardWidth = window.innerWidth * 0.25; // 25vw
-    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid-gap')) || 16;
-    const itemFullWidth = cardWidth + gap;
-    
-    const movedItems = Math.round(-dragOffset / itemFullWidth);
-    
-    setIndex(prev => prev + movedItems);
-    setDragOffset(0);
-    setIsTransitioning(true);
-    startAutoPlay();
-  };
-
-  const handleTransitionEnd = () => {
-    if (index >= totalItems * 2) {
-      setIsTransitioning(false);
-      setIndex(totalItems);
-    } else if (index < totalItems) {
-      setIsTransitioning(false);
-      setIndex(totalItems + (totalItems - 1));
+    // Handle the infinite jump smoothly
+    if (activeIndex >= totalItems * 2 - 1) {
+      // Reached near end, silently jump to middle
+      requestAnimationFrame(() => {
+        if (wrapperRef.current) {
+          wrapperRef.current.style.scrollBehavior = 'auto';
+          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const target = activeIndex - totalItems;
+          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
+          wrapperRef.current.style.scrollBehavior = 'smooth';
+          setActiveIndex(target);
+        }
+      });
+    } else if (activeIndex <= 0) {
+      // Reached near start, silently jump to middle
+      requestAnimationFrame(() => {
+        if (wrapperRef.current) {
+          wrapperRef.current.style.scrollBehavior = 'auto';
+          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const target = activeIndex + totalItems;
+          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
+          wrapperRef.current.style.scrollBehavior = 'smooth';
+          setActiveIndex(target);
+        }
+      });
     }
+  };
+
+  const setInteracting = (state) => {
+    isInteracting.current = state;
   };
 
   return (
@@ -95,29 +117,26 @@ const WorkedWith = () => {
 
       <div 
         className="ww-carousel-wrapper"
-        onMouseDown={handleDragStart}
-        onMouseMove={handleDragMove}
-        onMouseUp={handleDragEnd}
-        onMouseLeave={handleDragEnd}
-        onTouchStart={handleDragStart}
-        onTouchMove={handleDragMove}
-        onTouchEnd={handleDragEnd}
+        ref={wrapperRef}
+        onScroll={handleScroll}
+        onMouseEnter={() => setInteracting(true)}
+        onMouseLeave={() => setInteracting(false)}
+        onTouchStart={() => setInteracting(true)}
+        onTouchEnd={() => setInteracting(false)}
+        onWheel={() => {
+           setInteracting(true);
+           clearTimeout(window.wheelTimeout);
+           window.wheelTimeout = setTimeout(() => setInteracting(false), 2000);
+        }}
       >
-        <div
-          className="ww-logo-track"
-          onTransitionEnd={handleTransitionEnd}
-          style={{
-            transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-            transform: `translateX(calc(50% - (var(--logo-w) / 2) - (${index} * (var(--logo-w) + var(--grid-gap))) + ${dragOffset}px))`
-          }}
-        >
+        <div className="ww-logo-track">
           {logos.map((logo, i) => {
-            const isActive = i === index;
+            const isActive = i === activeIndex;
             return (
               <div
                 key={`${logo.id}-${i}`}
+                data-index={i}
                 className={`ww-logo-card ${isActive ? 'active' : ''}`}
-                style={{ userSelect: 'none' }}
               >
                 {/* Corners */}
                 <span className="ww-corner ww-tl" />
