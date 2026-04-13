@@ -14,23 +14,65 @@ const WorkedWith = () => {
     { id: 9, name: 'Figma' },
   ];
 
-  // Triplicate the list for seamless infinite loop
   const logos = [...baseLogos, ...baseLogos, ...baseLogos];
   const totalItems = baseLogos.length;
-  
-  // Start at the first item of the middle set
+
   const [index, setIndex] = useState(totalItems);
   const [isTransitioning, setIsTransitioning] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const autoPlayRef = useRef(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const startAutoPlay = () => {
+    stopAutoPlay();
+    autoPlayRef.current = setInterval(() => {
       setIndex((prev) => prev + 1);
       setIsTransitioning(true);
-    }, 1500);
-    return () => clearInterval(interval);
+    }, 2500);
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+  };
+
+  useEffect(() => {
+    startAutoPlay();
+    return () => stopAutoPlay();
   }, []);
 
-  // Handle the jump at the end of transition
+  const handleDragStart = (e) => {
+    setIsDragging(true);
+    setIsTransitioning(false);
+    stopAutoPlay();
+    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    setStartX(clientX);
+  };
+
+  const handleDragMove = (e) => {
+    if (!isDragging) return;
+    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const currentOffset = clientX - startX;
+    setDragOffset(currentOffset);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+
+    // Calculate how many items we dragged (with threshold)
+    const cardWidth = window.innerWidth * 0.25; // 25vw
+    const gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--grid-gap')) || 16;
+    const itemFullWidth = cardWidth + gap;
+    
+    const movedItems = Math.round(-dragOffset / itemFullWidth);
+    
+    setIndex(prev => prev + movedItems);
+    setDragOffset(0);
+    setIsTransitioning(true);
+    startAutoPlay();
+  };
+
   const handleTransitionEnd = () => {
     if (index >= totalItems * 2) {
       setIsTransitioning(false);
@@ -51,13 +93,22 @@ const WorkedWith = () => {
         />
       </div>
 
-      <div className="ww-carousel-wrapper">
+      <div 
+        className="ww-carousel-wrapper"
+        onMouseDown={handleDragStart}
+        onMouseMove={handleDragMove}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchStart={handleDragStart}
+        onTouchMove={handleDragMove}
+        onTouchEnd={handleDragEnd}
+      >
         <div
           className="ww-logo-track"
           onTransitionEnd={handleTransitionEnd}
           style={{
             transition: isTransitioning ? 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
-            transform: `translateX(calc(50% - (var(--logo-w) / 2) - (${index} * (var(--logo-w) + var(--grid-gap)))))`
+            transform: `translateX(calc(50% - (var(--logo-w) / 2) - (${index} * (var(--logo-w) + var(--grid-gap))) + ${dragOffset}px))`
           }}
         >
           {logos.map((logo, i) => {
@@ -66,6 +117,7 @@ const WorkedWith = () => {
               <div
                 key={`${logo.id}-${i}`}
                 className={`ww-logo-card ${isActive ? 'active' : ''}`}
+                style={{ userSelect: 'none' }}
               >
                 {/* Corners */}
                 <span className="ww-corner ww-tl" />

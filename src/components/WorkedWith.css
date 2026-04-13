@@ -41,17 +41,23 @@
 .ww-carousel-wrapper {
   width: 100%;
   padding-bottom: 5vw;
-  overflow: visible;
+  overflow: hidden; /* Changed to hidden to prevent scrollbars during manual drag */
   position: relative;
   display: flex;
   justify-content: center;
+  cursor: grab;
+  user-select: none;
+}
+
+.ww-carousel-wrapper:active {
+  cursor: grabbing;
 }
 
 .ww-logo-track {
   display: flex;
   gap: var(--grid-gap);
   align-items: center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
   width: max-content;
 }
 
@@ -65,6 +71,11 @@
   opacity: 0.4;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   background: transparent;
+  pointer-events: none; /* Let the wrapper handle the drag events */
+}
+
+.ww-logo-card * {
+  pointer-events: none; /* Ensure no image/text dragging interferes */
 }
 
 .ww-logo-card.active {
