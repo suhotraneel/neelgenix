@@ -1,6 +1,6 @@
 export const sectionsData = [
   { id: 'section-1', slug: 'who-i-am', number: '01', title: 'Who I Am', color: '#b2a27d', height: '560px' },
-  { id: 'section-2', slug: 'how-i-contribute', number: '02', title: 'How I Contribute', color: '#b27d81', height: '400px' },
+  { id: 'section-2', slug: 'how-i-contribute', number: '02', title: 'How I Contribute', color: '#B80000', height: '400px' },
   { id: 'section-3', slug: 'i-worked-with', number: '03', title: 'I Worked With', color: '#7d8ab2', height: 'auto' },
   { id: 'section-4', slug: 'things-ive-built', number: '04', title: "Things I've Built", color: '#7db297', height: '1000px' },
   { id: 'section-5', slug: 'what-i-work-on', number: '05', title: 'What I Work On', color: '#b27da8', height: '800px' },
