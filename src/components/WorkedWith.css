@@ -133,17 +133,15 @@
 }
 
 .ww-brand-logo {
-  max-width: 80%;
-  max-height: 80%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
-  /* Ensure the logomarks don't look completely distorted if missing viewbox */
-  width: auto;
-  height: auto;
 }
 
 @media (min-width: 1024px) {
   :root {
     --logo-w: 20vw;
-    --logo-h: 12.5vw; /* 20 * (5/8) */
+    --logo-h: 12.5vw;
+    /* 20 * (5/8) */
   }
 }
