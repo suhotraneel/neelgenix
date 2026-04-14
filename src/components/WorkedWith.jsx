@@ -71,43 +71,32 @@ const WorkedWith = () => {
 
   const handleScroll = () => {
     if (!wrapperRef.current) return;
-    const wrapper = wrapperRef.current;
 
-    // Handle the infinite jump smoothly using exact pixel shifting without scrollIntoView
+    // Handle the infinite jump smoothly
     if (activeIndex >= totalItems * 2 - 1) {
-      const cards = wrapper.querySelectorAll('.ww-logo-card');
-      if (!cards[0] || !cards[totalItems]) return;
-      
-      const shift = cards[totalItems].offsetLeft - cards[0].offsetLeft;
-      
-      wrapper.style.scrollBehavior = 'auto';
-      wrapper.style.scrollSnapType = 'none';
-      
-      wrapper.scrollLeft -= shift;
-      
-      // Force synchronous layout recalculation
-      wrapper.offsetHeight;
-      
-      wrapper.style.scrollBehavior = 'smooth';
-      wrapper.style.scrollSnapType = 'x mandatory';
-      setActiveIndex(activeIndex - totalItems);
-      
+      // Reached near end, silently jump to middle
+      requestAnimationFrame(() => {
+        if (wrapperRef.current) {
+          wrapperRef.current.style.scrollBehavior = 'auto';
+          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const target = activeIndex - totalItems;
+          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
+          wrapperRef.current.style.scrollBehavior = 'smooth';
+          setActiveIndex(target);
+        }
+      });
     } else if (activeIndex <= 0) {
-      const cards = wrapper.querySelectorAll('.ww-logo-card');
-      if (!cards[0] || !cards[totalItems]) return;
-      
-      const shift = cards[totalItems].offsetLeft - cards[0].offsetLeft;
-      
-      wrapper.style.scrollBehavior = 'auto';
-      wrapper.style.scrollSnapType = 'none';
-      
-      wrapper.scrollLeft += shift;
-      
-      wrapper.offsetHeight;
-      
-      wrapper.style.scrollBehavior = 'smooth';
-      wrapper.style.scrollSnapType = 'x mandatory';
-      setActiveIndex(activeIndex + totalItems);
+      // Reached near start, silently jump to middle
+      requestAnimationFrame(() => {
+        if (wrapperRef.current) {
+          wrapperRef.current.style.scrollBehavior = 'auto';
+          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const target = activeIndex + totalItems;
+          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
+          wrapperRef.current.style.scrollBehavior = 'smooth';
+          setActiveIndex(target);
+        }
+      });
     }
   };
 
