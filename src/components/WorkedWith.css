@@ -140,3 +140,10 @@
   width: auto;
   height: auto;
 }
+
+@media (min-width: 1024px) {
+  :root {
+    --logo-w: 20vw;
+    --logo-h: 12.5vw; /* 20 * (5/8) */
+  }
+}
