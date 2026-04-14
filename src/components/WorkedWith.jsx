@@ -7,10 +7,10 @@ const WorkedWith = () => {
     { id: 2, name: 'Madtrip', file: 'madtrip.svg' },
     { id: 3, name: 'Goa Sunsplash', file: 'goa_sunsplash.svg' },
     { id: 4, name: 'Coschool', file: 'coschool.svg' },
-    { id: 5, name: 'Space118', file: 'space118.svg' },
-    { id: 6, name: 'Ruskin Bond Collection', file: 'ruskin_bond_collection.svg' },
-    { id: 7, name: 'e4f Resurrect', file: 'e4f_ressurect.svg' },
-    { id: 8, name: 'Neo Marche', file: 'neo_marche.svg' },
+    { id: 5, name: 'Ruskin Bond Collection', file: 'ruskin_bond_collection.svg' },
+    { id: 6, name: 'e4f Resurrect', file: 'e4f_ressurect.svg' },
+    { id: 7, name: 'Neo Marche', file: 'neo_marche.svg' },
+    { id: 8, name: 'Space118', file: 'space118.svg' },
   ];
 
   // Triplicate the list for seamless infinite loop
@@ -71,32 +71,43 @@ const WorkedWith = () => {
 
   const handleScroll = () => {
     if (!wrapperRef.current) return;
+    const wrapper = wrapperRef.current;
 
-    // Handle the infinite jump smoothly
+    // Handle the infinite jump smoothly using exact pixel shifting without scrollIntoView
     if (activeIndex >= totalItems * 2 - 1) {
-      // Reached near end, silently jump to middle
-      requestAnimationFrame(() => {
-        if (wrapperRef.current) {
-          wrapperRef.current.style.scrollBehavior = 'auto';
-          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
-          const target = activeIndex - totalItems;
-          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
-          wrapperRef.current.style.scrollBehavior = 'smooth';
-          setActiveIndex(target);
-        }
-      });
+      const cards = wrapper.querySelectorAll('.ww-logo-card');
+      if (!cards[0] || !cards[totalItems]) return;
+      
+      const shift = cards[totalItems].offsetLeft - cards[0].offsetLeft;
+      
+      wrapper.style.scrollBehavior = 'auto';
+      wrapper.style.scrollSnapType = 'none';
+      
+      wrapper.scrollLeft -= shift;
+      
+      // Force synchronous layout recalculation
+      wrapper.offsetHeight;
+      
+      wrapper.style.scrollBehavior = 'smooth';
+      wrapper.style.scrollSnapType = 'x mandatory';
+      setActiveIndex(activeIndex - totalItems);
+      
     } else if (activeIndex <= 0) {
-      // Reached near start, silently jump to middle
-      requestAnimationFrame(() => {
-        if (wrapperRef.current) {
-          wrapperRef.current.style.scrollBehavior = 'auto';
-          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
-          const target = activeIndex + totalItems;
-          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
-          wrapperRef.current.style.scrollBehavior = 'smooth';
-          setActiveIndex(target);
-        }
-      });
+      const cards = wrapper.querySelectorAll('.ww-logo-card');
+      if (!cards[0] || !cards[totalItems]) return;
+      
+      const shift = cards[totalItems].offsetLeft - cards[0].offsetLeft;
+      
+      wrapper.style.scrollBehavior = 'auto';
+      wrapper.style.scrollSnapType = 'none';
+      
+      wrapper.scrollLeft += shift;
+      
+      wrapper.offsetHeight;
+      
+      wrapper.style.scrollBehavior = 'smooth';
+      wrapper.style.scrollSnapType = 'x mandatory';
+      setActiveIndex(activeIndex + totalItems);
     }
   };
 
