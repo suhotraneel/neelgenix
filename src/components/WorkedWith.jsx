@@ -3,15 +3,14 @@ import './WorkedWith.css';
 
 const WorkedWith = () => {
   const baseLogos = [
-    { id: 1, name: 'Google' },
-    { id: 2, name: 'AWS' },
-    { id: 3, name: 'Netflix' },
-    { id: 4, name: 'Stripe' },
-    { id: 5, name: 'OpenAI' },
-    { id: 6, name: 'Meta' },
-    { id: 7, name: 'Airbnb' },
-    { id: 8, name: 'Uber' },
-    { id: 9, name: 'Figma' },
+    { id: 1, name: 'CoSchool', file: 'coschool.svg' },
+    { id: 2, name: 'E4F Ressurect', file: 'e4f_ressurect.svg' },
+    { id: 3, name: 'Goa Sunsplash', file: 'goa_sunsplash.svg' },
+    { id: 4, name: 'MadTrip', file: 'madtrip.svg' },
+    { id: 5, name: 'Neo Marche', file: 'neo_marche.svg' },
+    { id: 6, name: 'Ruskin Bond Collection', file: 'ruskin_bond_collection.svg' },
+    { id: 7, name: 'Space118', file: 'space118.svg' },
+    { id: 8, name: 'Unilever', file: 'unilever.svg' },
   ];
 
   // Triplicate the list for seamless infinite loop
@@ -145,8 +144,11 @@ const WorkedWith = () => {
                 <span className="ww-corner ww-br" />
 
                 <div className="ww-logo-inner">
-                  {/* Future logo image will go here */}
-                  <span className="ww-placeholder-text">{logo.name}</span>
+                  <img 
+                    src={`/assets/brand_logos/${logo.file}`} 
+                    alt={logo.name} 
+                    className="ww-brand-logo" 
+                  />
                 </div>
               </div>
             );
