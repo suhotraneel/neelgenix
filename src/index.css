@@ -111,9 +111,9 @@
 }
 
 :root {
-  --bg-color: #fffcf5;
+  --bg-color: ##FFFCF5;
   --text-main: #111111;
-  --text-light: #fffcf5;
+  --text-light: ##FFFCF5;
   --panel-from: #561c11;
   --panel-to: #823425;
 }
@@ -466,7 +466,7 @@ body {
 @keyframes weight-and-color-change {
   0% {
     font-weight: 300;
-    color: #fffcf5;
+    color: ##FFFCF5;
   }
 
   50% {
@@ -476,7 +476,7 @@ body {
 
   100% {
     font-weight: 300;
-    color: #fffcf5;
+    color: ##FFFCF5;
   }
 }
 
