@@ -3,14 +3,14 @@ import './WorkedWith.css';
 
 const WorkedWith = () => {
   const baseLogos = [
-    { id: 1, name: 'CoSchool', file: 'coschool.svg' },
-    { id: 2, name: 'E4F Ressurect', file: 'e4f_ressurect.svg' },
+    { id: 1, name: 'Unilever', file: 'unilever.svg' },
+    { id: 2, name: 'Madtrip', file: 'madtrip.svg' },
     { id: 3, name: 'Goa Sunsplash', file: 'goa_sunsplash.svg' },
-    { id: 4, name: 'MadTrip', file: 'madtrip.svg' },
-    { id: 5, name: 'Neo Marche', file: 'neo_marche.svg' },
+    { id: 4, name: 'Coschool', file: 'coschool.svg' },
+    { id: 5, name: 'Space118', file: 'space118.svg' },
     { id: 6, name: 'Ruskin Bond Collection', file: 'ruskin_bond_collection.svg' },
-    { id: 7, name: 'Space118', file: 'space118.svg' },
-    { id: 8, name: 'Unilever', file: 'unilever.svg' },
+    { id: 7, name: 'e4f Resurrect', file: 'e4f_ressurect.svg' },
+    { id: 8, name: 'Neo Marche', file: 'neo_marche.svg' },
   ];
 
   // Triplicate the list for seamless infinite loop
@@ -57,10 +57,10 @@ const WorkedWith = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (isInteracting.current || !wrapperRef.current) return;
-      
+
       const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
       const nextIndex = activeIndex + 1;
-      
+
       if (cards[nextIndex]) {
         cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
@@ -114,7 +114,7 @@ const WorkedWith = () => {
         />
       </div>
 
-      <div 
+      <div
         className="ww-carousel-wrapper"
         ref={wrapperRef}
         onScroll={handleScroll}
@@ -123,9 +123,9 @@ const WorkedWith = () => {
         onTouchStart={() => setInteracting(true)}
         onTouchEnd={() => setInteracting(false)}
         onWheel={() => {
-           setInteracting(true);
-           clearTimeout(window.wheelTimeout);
-           window.wheelTimeout = setTimeout(() => setInteracting(false), 2000);
+          setInteracting(true);
+          clearTimeout(window.wheelTimeout);
+          window.wheelTimeout = setTimeout(() => setInteracting(false), 2000);
         }}
       >
         <div className="ww-logo-track">
@@ -144,10 +144,10 @@ const WorkedWith = () => {
                 <span className="ww-corner ww-br" />
 
                 <div className="ww-logo-inner">
-                  <img 
-                    src={`/assets/brand_logos/${logo.file}`} 
-                    alt={logo.name} 
-                    className="ww-brand-logo" 
+                  <img
+                    src={`/assets/brand_logos/${logo.file}`}
+                    alt={logo.name}
+                    className="ww-brand-logo"
                   />
                 </div>
               </div>
