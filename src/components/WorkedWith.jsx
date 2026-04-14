@@ -26,7 +26,10 @@ const WorkedWith = () => {
     if (wrapperRef.current) {
       const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
       if (cards[totalItems]) {
-        cards[totalItems].scrollIntoView({ inline: 'center', block: 'nearest' });
+        const targetCard = cards[totalItems];
+        const wrapper = wrapperRef.current;
+        const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+        wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
       }
     }
   }, [totalItems]);
@@ -57,12 +60,15 @@ const WorkedWith = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (isInteracting.current || !wrapperRef.current) return;
-
+      
       const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
       const nextIndex = activeIndex + 1;
-
+      
       if (cards[nextIndex]) {
-        cards[nextIndex].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        const targetCard = cards[nextIndex];
+        const wrapper = wrapperRef.current;
+        const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+        wrapper.scrollTo({ left: targetLeft, behavior: 'smooth' });
       }
     }, 1500);
 
@@ -72,29 +78,54 @@ const WorkedWith = () => {
   const handleScroll = () => {
     if (!wrapperRef.current) return;
 
-    // Handle the infinite jump smoothly
+    // Handle the infinite jump smoothly without jitter
     if (activeIndex >= totalItems * 2 - 1) {
       // Reached near end, silently jump to middle
       requestAnimationFrame(() => {
         if (wrapperRef.current) {
-          wrapperRef.current.style.scrollBehavior = 'auto';
-          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const wrapper = wrapperRef.current;
+          wrapper.style.scrollBehavior = 'auto';
+          wrapper.style.scrollSnapType = 'none'; // Avoid native snap fighting jump
+          
+          const cards = wrapper.querySelectorAll('.ww-logo-card');
           const target = activeIndex - totalItems;
-          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
-          wrapperRef.current.style.scrollBehavior = 'smooth';
-          setActiveIndex(target);
+          const targetCard = cards[target];
+          
+          if (targetCard) {
+            const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+            wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
+            setActiveIndex(target);
+          }
+          
+          // Re-enable smooth properties
+          requestAnimationFrame(() => {
+            wrapper.style.scrollBehavior = 'smooth';
+            wrapper.style.scrollSnapType = 'x mandatory';
+          });
         }
       });
     } else if (activeIndex <= 0) {
       // Reached near start, silently jump to middle
       requestAnimationFrame(() => {
         if (wrapperRef.current) {
-          wrapperRef.current.style.scrollBehavior = 'auto';
-          const cards = wrapperRef.current.querySelectorAll('.ww-logo-card');
+          const wrapper = wrapperRef.current;
+          wrapper.style.scrollBehavior = 'auto';
+          wrapper.style.scrollSnapType = 'none';
+          
+          const cards = wrapper.querySelectorAll('.ww-logo-card');
           const target = activeIndex + totalItems;
-          cards[target]?.scrollIntoView({ inline: 'center', block: 'nearest' });
-          wrapperRef.current.style.scrollBehavior = 'smooth';
-          setActiveIndex(target);
+          const targetCard = cards[target];
+          
+          if (targetCard) {
+            const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+            wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
+            setActiveIndex(target);
+          }
+          
+          requestAnimationFrame(() => {
+            wrapper.style.scrollBehavior = 'smooth';
+            wrapper.style.scrollSnapType = 'x mandatory';
+          });
         }
       });
     }
