@@ -75,60 +75,64 @@ const WorkedWith = () => {
     return () => clearInterval(interval);
   }, [activeIndex]);
 
-  const handleScroll = () => {
-    if (!wrapperRef.current) return;
+  const scrollTimeout = useRef(null);
 
-    // Handle the infinite jump smoothly without jitter
-    if (activeIndex >= totalItems * 2 - 1) {
-      // Reached near end, silently jump to middle
-      requestAnimationFrame(() => {
-        if (wrapperRef.current) {
-          const wrapper = wrapperRef.current;
-          wrapper.style.scrollBehavior = 'auto';
-          wrapper.style.scrollSnapType = 'none'; // Avoid native snap fighting jump
-          
-          const cards = wrapper.querySelectorAll('.ww-logo-card');
-          const target = activeIndex - totalItems;
-          const targetCard = cards[target];
-          
-          if (targetCard) {
-            const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
-            wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
-            setActiveIndex(target);
+  const handleScroll = () => {
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+
+    // Wait until scrolling has completely settled to avoid jitter
+    scrollTimeout.current = setTimeout(() => {
+      if (!wrapperRef.current) return;
+
+      // Handle the infinite jump smoothly without killing scroll momentum
+      if (activeIndex >= totalItems * 2 - 1) {
+        requestAnimationFrame(() => {
+          if (wrapperRef.current) {
+            const wrapper = wrapperRef.current;
+            wrapper.style.scrollBehavior = 'auto';
+            wrapper.style.scrollSnapType = 'none'; // Avoid native snap fighting jump
+            
+            const cards = wrapper.querySelectorAll('.ww-logo-card');
+            const target = activeIndex - totalItems;
+            const targetCard = cards[target];
+            
+            if (targetCard) {
+              const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+              wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
+              setActiveIndex(target);
+            }
+            
+            requestAnimationFrame(() => {
+              wrapper.style.scrollBehavior = 'smooth';
+              wrapper.style.scrollSnapType = 'x mandatory';
+            });
           }
-          
-          // Re-enable smooth properties
-          requestAnimationFrame(() => {
-            wrapper.style.scrollBehavior = 'smooth';
-            wrapper.style.scrollSnapType = 'x mandatory';
-          });
-        }
-      });
-    } else if (activeIndex <= 0) {
-      // Reached near start, silently jump to middle
-      requestAnimationFrame(() => {
-        if (wrapperRef.current) {
-          const wrapper = wrapperRef.current;
-          wrapper.style.scrollBehavior = 'auto';
-          wrapper.style.scrollSnapType = 'none';
-          
-          const cards = wrapper.querySelectorAll('.ww-logo-card');
-          const target = activeIndex + totalItems;
-          const targetCard = cards[target];
-          
-          if (targetCard) {
-            const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
-            wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
-            setActiveIndex(target);
+        });
+      } else if (activeIndex <= 0) {
+        requestAnimationFrame(() => {
+          if (wrapperRef.current) {
+            const wrapper = wrapperRef.current;
+            wrapper.style.scrollBehavior = 'auto';
+            wrapper.style.scrollSnapType = 'none';
+            
+            const cards = wrapper.querySelectorAll('.ww-logo-card');
+            const target = activeIndex + totalItems;
+            const targetCard = cards[target];
+            
+            if (targetCard) {
+              const targetLeft = targetCard.offsetLeft - (wrapper.clientWidth / 2) + (targetCard.clientWidth / 2);
+              wrapper.scrollTo({ left: targetLeft, behavior: 'instant' });
+              setActiveIndex(target);
+            }
+            
+            requestAnimationFrame(() => {
+              wrapper.style.scrollBehavior = 'smooth';
+              wrapper.style.scrollSnapType = 'x mandatory';
+            });
           }
-          
-          requestAnimationFrame(() => {
-            wrapper.style.scrollBehavior = 'smooth';
-            wrapper.style.scrollSnapType = 'x mandatory';
-          });
-        }
-      });
-    }
+        });
+      }
+    }, 150); // 150ms debounce
   };
 
   const setInteracting = (state) => {
