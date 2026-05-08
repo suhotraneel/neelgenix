@@ -22,8 +22,7 @@ function Sidebar({ sections, activeSectionId, onNavClick, onLogoClick }) {
   const getNavHeight = (section) => {
     if (section.id === sections[sections.length - 1].id) return MAX_NAV_HEIGHT;
     
-    const hString = section.height || '400px';
-    const hValue = parseInt(hString.replace('px', '')) || 400;
+    const hValue = section.designHeight || 400;
     return calculateNavHeight(hValue);
   };
 

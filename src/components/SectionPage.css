@@ -1,0 +1,357 @@
+.figma-page {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: space-between;
+  gap: 32px;
+  padding: 48px;
+  background:
+    linear-gradient(135deg, rgba(255, 252, 245, 0.92), rgba(255, 252, 245, 0.72)),
+    var(--section-color);
+  color: var(--text-main);
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  border-radius: 4px;
+}
+
+.figma-page::after {
+  content: '';
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(17, 17, 17, 0.12);
+  pointer-events: none;
+}
+
+.figma-page.is-dark {
+  background:
+    linear-gradient(135deg, rgba(30, 25, 17, 0.94), rgba(30, 25, 17, 0.82)),
+    var(--section-color);
+  color: var(--text-light);
+  border-color: rgba(255, 252, 245, 0.2);
+}
+
+.figma-page.is-dark::after {
+  border-color: rgba(255, 252, 245, 0.16);
+}
+
+.figma-section-number {
+  position: absolute;
+  top: 48px;
+  right: 48px;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 300;
+  letter-spacing: 0;
+  opacity: 0.72;
+}
+
+.figma-copy {
+  max-width: 560px;
+  position: relative;
+  z-index: 1;
+}
+
+.figma-kicker {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.figma-copy h1 {
+  font-size: 56px;
+  line-height: 0.96;
+  font-weight: 500;
+  letter-spacing: 0;
+  max-width: 620px;
+}
+
+.figma-intro {
+  max-width: 520px;
+  margin-top: 24px;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+}
+
+.figma-stats,
+.figma-card-grid,
+.figma-project-grid,
+.figma-split-panel,
+.figma-chip-cloud,
+.figma-quote,
+.figma-contact-actions,
+.figma-worked-with-panel {
+  position: relative;
+  z-index: 1;
+}
+
+.figma-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.figma-stat {
+  min-height: 112px;
+  padding: 20px;
+  border: 1px solid currentColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 252, 245, 0.18);
+}
+
+.figma-stat strong {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+.figma-stat span {
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 300;
+}
+
+.figma-split-panel {
+  width: min(100%, 520px);
+  justify-self: end;
+}
+
+.figma-list {
+  display: grid;
+  gap: 12px;
+}
+
+.figma-list-item {
+  min-height: 64px;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid currentColor;
+  background: rgba(255, 252, 245, 0.16);
+}
+
+.figma-list-item span,
+.figma-project-card span {
+  font-size: 11px;
+  line-height: 14px;
+  font-weight: 300;
+  opacity: 0.7;
+}
+
+.figma-list-item p {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.figma-worked-with-panel {
+  height: 360px;
+  border: 1px solid rgba(255, 252, 245, 0.18);
+}
+
+.figma-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.figma-project-card {
+  min-height: 178px;
+  padding: 24px;
+  border: 1px solid rgba(17, 17, 17, 0.24);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(255, 252, 245, 0.2);
+}
+
+.figma-project-card h2 {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.figma-project-card p {
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 300;
+}
+
+.figma-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.figma-focus-card {
+  min-height: 116px;
+  padding: 18px;
+  display: flex;
+  align-items: end;
+  border: 1px solid rgba(17, 17, 17, 0.24);
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  background: rgba(255, 252, 245, 0.18);
+}
+
+.figma-chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.figma-chip-cloud span {
+  padding: 13px 18px;
+  border: 1px solid rgba(17, 17, 17, 0.32);
+  background: rgba(255, 252, 245, 0.22);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.figma-quote {
+  max-width: 560px;
+  padding: 36px;
+  border-left: 2px solid currentColor;
+  justify-self: end;
+  background: rgba(255, 252, 245, 0.18);
+}
+
+.figma-quote p {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 300;
+}
+
+.figma-contact-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.figma-contact-actions a {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  color: inherit;
+  text-decoration: none;
+  border: 1px solid rgba(255, 252, 245, 0.38);
+  background: rgba(255, 252, 245, 0.08);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.figma-contact-actions a:hover,
+.figma-contact-actions a:focus-visible {
+  background: var(--bg-color);
+  color: var(--text-main);
+  outline: none;
+}
+
+@media (max-width: 1023px) {
+  .figma-page {
+    min-height: 100%;
+    padding: 28px;
+    gap: 28px;
+  }
+
+  .figma-page::after {
+    inset: 10px;
+  }
+
+  .figma-section-number {
+    top: 28px;
+    right: 28px;
+  }
+
+  .figma-copy {
+    max-width: none;
+    padding-right: 42px;
+  }
+
+  .figma-kicker {
+    font-size: 11px;
+    line-height: 16px;
+    margin-bottom: 16px;
+  }
+
+  .figma-copy h1 {
+    font-size: 38px;
+    line-height: 1;
+  }
+
+  .figma-intro {
+    margin-top: 18px;
+    font-size: 15px;
+    line-height: 23px;
+  }
+
+  .figma-stats,
+  .figma-project-grid,
+  .figma-card-grid,
+  .figma-contact-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .figma-stats {
+    gap: 10px;
+  }
+
+  .figma-stat,
+  .figma-focus-card,
+  .figma-project-card {
+    min-height: 92px;
+  }
+
+  .figma-list-item {
+    min-height: 58px;
+    grid-template-columns: 34px 1fr;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .figma-list-item p {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .figma-worked-with-panel {
+    height: 310px;
+    margin-inline: -10px;
+  }
+
+  .figma-project-card h2 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .figma-chip-cloud {
+    gap: 8px;
+  }
+
+  .figma-chip-cloud span {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .figma-quote {
+    padding: 24px;
+  }
+
+  .figma-quote p {
+    font-size: 23px;
+    line-height: 31px;
+  }
+}

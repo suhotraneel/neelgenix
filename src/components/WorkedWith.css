@@ -1,12 +1,9 @@
 :root {
-  --logo-w: 25vw;
-  --logo-h: 15.625vw;
-  /* 25 * (5/8) */
+  --logo-w: min(186px, 26vw);
+  --logo-h: calc(var(--logo-w) * 0.625);
   --grid-gap: clamp(16px, 1vw, 24px);
   --corner-size-inactive: calc(var(--logo-w) * 0.03125);
-  /* ~10px at 1280px */
   --corner-size-active: calc(var(--logo-w) * 0.0625);
-  /* ~20px at 1280px */
   --bg-dark: #1e1911;
   --bg-highlight: rgba(255, 252, 245, 0.05);
   --corner-color: rgba(255, 252, 245, 0.4);
@@ -59,8 +56,7 @@
   gap: var(--grid-gap);
   align-items: center;
   width: max-content;
-  /* Add padding to center the first and last cloned items */
-  padding: 0 calc(50vw - (var(--logo-w) / 2));
+  padding: 0 max(24px, calc((744px - var(--logo-w)) / 2));
 }
 
 .ww-logo-card {
@@ -140,8 +136,12 @@
 
 @media (min-width: 1024px) {
   :root {
-    --logo-w: 20vw;
-    --logo-h: 12.5vw;
-    /* 20 * (5/8) */
+    --logo-w: 172px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ww-logo-track {
+    padding: 0 calc((100vw - var(--logo-w)) / 2);
   }
 }
