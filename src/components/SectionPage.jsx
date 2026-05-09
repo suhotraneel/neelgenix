@@ -140,12 +140,18 @@ function WorkOnSection({ section }) {
 function ToolsSection({ section }) {
   return (
     <div className="tools-layout">
-      <h1>{section.heading}</h1>
+      <h1 className="tools-heading">
+        <span className="tools-heading-light">Some of the </span>
+        <span className="tools-heading-bold">tools</span>
+        <span className="tools-heading-light"> I use</span>
+      </h1>
       <div className="tool-track">
         {section.items.map((item, index) => (
-          <span className={index % 2 ? 'is-low' : ''} key={item}>
-            {item.slice(0, 1)}
-          </span>
+          <div className={`tool-pentagon-container ${index % 2 ? 'is-low' : ''}`} key={item.name}>
+            <div className="tool-pentagon">
+              <img src={item.image} alt={item.name} />
+            </div>
+          </div>
         ))}
       </div>
     </div>
