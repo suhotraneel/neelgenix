@@ -140,17 +140,17 @@ export const sectionsData = [
     layout: 'tools',
     heading: 'Some of the tools I use',
     items: [
-      { name: 'Figma', image: '/assets/032d7eb6a3a5c64707e7d5484ab7cbb41c0533d2.svg' },
+      { name: 'Figma', image: '/assets/cb9cb228d2e5fd2149e873315c9e1583e4807cee.svg' },
       { name: 'Anthropic', image: '/assets/600c814023c8c07cfc3c4fd273c760d68d932d03.png' },
-      { name: 'Google AI Studio', image: '/assets/35fad6719d847b997109dd9d11a135cf568b8ba3.svg' },
+      { name: 'Google AI Studio', image: '/assets/b59370b7cea2e2bb0c4d49fc7d922d7912e59444.svg' },
       { name: 'Cursor', image: '/assets/10375d591de250b6e8813017c0432fc9733745c7.png' },
       { name: 'Adobe CC', image: '/assets/9616a326a460768c879c8dcbd8cfd6cf586ed281.png' },
-      { name: 'Runway', image: '/assets/80d190523a47ce1c4dc3db1c4ce9b1188c870512.svg' },
+      { name: 'Runway', image: '/assets/f51787489950517c9daa8bda32781bd72cb5f388.svg' },
       { name: 'Framer', image: '/assets/858c44d71ebb05d43b793dcb886dd3adee63e15d.svg' },
-      { name: 'Anthropic_alt', image: '/assets/b59370b7cea2e2bb0c4d49fc7d922d7912e59444.svg' },
+      { name: 'Anthropic_alt', image: '/assets/35fad6719d847b997109dd9d11a135cf568b8ba3.svg' },
       { name: 'Unity', image: '/assets/4d571df10828cd30a3dbbc056d54a3e99e56833f.png' },
       { name: 'Shopify', image: '/assets/d0df57626a26a73c719977406727d1accd5e9e67.png' },
-      { name: 'Google Cloud', image: '/assets/cb9cb228d2e5fd2149e873315c9e1583e4807cee.svg' }
+      { name: 'Google Cloud', image: '/assets/032d7eb6a3a5c64707e7d5484ab7cbb41c0533d2.svg' }
     ],
   },
   {
