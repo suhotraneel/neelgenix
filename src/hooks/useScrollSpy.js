@@ -31,7 +31,6 @@ export function useScrollSpy(
     const containerRect = container.getBoundingClientRect();
     const threshold = containerRect.top + 24;
 
-    const isMobile = window.innerWidth <= 1024;
     const isLastSection = activeSectionId === sections[sections.length - 1].id;
     let progress = 0;
     if (isLastSection) {
@@ -66,7 +65,6 @@ export function useScrollSpy(
       const containerRect = container.getBoundingClientRect();
       const threshold = containerRect.top + 24;
 
-      const isMobile = window.innerWidth <= 1024;
       const isLastSection = activId === secs[secs.length - 1].id;
       let progress = 0;
       if (isLastSection) {
