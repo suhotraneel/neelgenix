@@ -32,7 +32,10 @@ function MainContent({
     if (!container) return undefined;
 
     const updateScale = () => {
-      const availableWidth = Math.max(1, container.clientWidth - 48);
+      // Match the CSS padding: 24px desktop, 16px mobile
+      const isMobile = window.innerWidth <= 1023;
+      const horizontalPadding = isMobile ? 32 : 48;
+      const availableWidth = Math.max(1, container.clientWidth - horizontalPadding);
       setContentScale(availableWidth / DESIGN_WIDTH);
     };
 
@@ -84,12 +87,7 @@ function MainContent({
           className={`content-section content-section-${section.slug}`}
           style={sectionStyles[section.id]}
         >
-          <div
-            className="content-scale-frame"
-            style={getFrameStyle(section)}
-          >
-            <SectionPage section={section} />
-          </div>
+          <SectionPage section={section} scaleStyle={getFrameStyle(section)} />
         </section>
       ))}
     </main>

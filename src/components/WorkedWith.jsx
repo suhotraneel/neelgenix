@@ -143,7 +143,7 @@ const WorkedWith = () => {
     <div className="ww-section-container">
       <div className="ww-header">
         <img
-          src="/assets/i_worked_with_banner.jpg"
+          src="/neelgenix/assets/i_worked_with_banner.jpg"
           alt="I Worked With"
           className="ww-banner-img"
         />
@@ -180,7 +180,7 @@ const WorkedWith = () => {
 
                 <div className="ww-logo-inner">
                   <img
-                    src={`/assets/brand_logos/${logo.file}`}
+                    src={`/neelgenix/assets/brand_logos/${logo.file}`}
                     alt={logo.name}
                     className="ww-brand-logo"
                   />

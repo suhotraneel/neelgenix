@@ -98,34 +98,34 @@ export const sectionsData = [
     heading: "Here's what I work on all day",
     items: [
       {
-        label: 'Product and Experience Design',
+        label: 'Product & Experience Design',
         detail:
-          'I work across product experiences, journeys, flows, and interfaces, shaping ideas into usable, clear, and scalable digital products.',
-        meta: ['Problem framing', 'UX flows', 'Interface design'],
+          'I start by bringing clarity to the problem and questioning assumptions. From there, I design flows, interactions, and interfaces that align user behaviour with business intent and create direction teams can act on.',
+        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
       },
       {
-        label: 'Design Systems and Scalability',
+        label: 'Design Systems & Scalability',
         detail:
-          'I build UI foundations, reusable patterns, and design documentation that help teams move faster without losing consistency.',
-        meta: ['Components', 'Tokens', 'Documentation'],
+          'I design and build systems that ensure visual consistency and clarity across interfaces. From components to patterns, I focus on creating scalable UI foundations that support both usability and growth.',
+        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
       },
       {
-        label: 'Brand and Storytelling',
+        label: 'User Research',
         detail:
-          'I translate identity, voice, and narrative into visual systems that can work across websites, decks, campaigns, and product moments.',
-        meta: ['Narrative', 'Visual systems', 'Content structure'],
+          'I work with research inputs and observed behaviour to uncover what truly matters. My focus is on translating insights into clear decisions that improve usability and make experiences more relevant.',
+        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
       },
       {
-        label: 'AI and Interaction Design',
+        label: 'AI & Interaction Design',
         detail:
-          'I explore AI-assisted experiences, conversational flows, and human-led workflows where automation needs judgment and restraint.',
-        meta: ['AI workflows', 'Conversation design', 'Prototyping'],
+          'I design interactions for intelligent systems while leveraging AI in my own workflows to explore, iterate, and refine solutions. My focus is on making AI intuitive, usable, and meaningful in real contexts.',
+        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
       },
       {
-        label: 'Product and Experience Strategy',
+        label: 'Product & Experience Design',
         detail:
-          'I help teams define what to build, why it matters, how it should behave, and how the experience can evolve after launch.',
-        meta: ['Research', 'Roadmaps', 'Launch clarity'],
+          'I take designs beyond screens by building and prototyping interfaces. This helps ensure feasibility, smoother collaboration with developers, and alignment between UI intent and final output.',
+        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
       },
     ],
   },
@@ -140,17 +140,17 @@ export const sectionsData = [
     layout: 'tools',
     heading: 'Some of the tools I use',
     items: [
-      { name: 'Figma', image: '/assets/cb9cb228d2e5fd2149e873315c9e1583e4807cee.svg' },
-      { name: 'Anthropic', image: '/assets/600c814023c8c07cfc3c4fd273c760d68d932d03.png' },
-      { name: 'Google AI Studio', image: '/assets/b59370b7cea2e2bb0c4d49fc7d922d7912e59444.svg' },
-      { name: 'Cursor', image: '/assets/10375d591de250b6e8813017c0432fc9733745c7.png' },
-      { name: 'Adobe CC', image: '/assets/9616a326a460768c879c8dcbd8cfd6cf586ed281.png' },
-      { name: 'Runway', image: '/assets/f51787489950517c9daa8bda32781bd72cb5f388.svg' },
-      { name: 'Framer', image: '/assets/858c44d71ebb05d43b793dcb886dd3adee63e15d.svg' },
-      { name: 'Anthropic_alt', image: '/assets/35fad6719d847b997109dd9d11a135cf568b8ba3.svg' },
-      { name: 'Unity', image: '/assets/4d571df10828cd30a3dbbc056d54a3e99e56833f.png' },
-      { name: 'Shopify', image: '/assets/d0df57626a26a73c719977406727d1accd5e9e67.png' },
-      { name: 'Google Cloud', image: '/assets/032d7eb6a3a5c64707e7d5484ab7cbb41c0533d2.svg' }
+      { name: 'Figma', image: '/neelgenix/assets/logo-figma.svg' },
+      { name: 'Anthropic', image: '/neelgenix/assets/logo-anthropic.png' },
+      { name: 'Google AI Studio', image: '/neelgenix/assets/logo-gemini.svg' },
+      { name: 'Cursor', image: '/neelgenix/assets/logo-cursor.png' },
+      { name: 'Adobe CC', image: '/neelgenix/assets/logo-adobe.png' },
+      { name: 'Runway', image: '/neelgenix/assets/logo-runway.svg' },
+      { name: 'Framer', image: '/neelgenix/assets/logo-framer.svg' },
+      { name: 'Anthropic_alt', image: '/neelgenix/assets/logo-anthropic-a.svg' },
+      { name: 'Unity', image: '/neelgenix/assets/logo-unity.png' },
+      { name: 'Shopify', image: '/neelgenix/assets/logo-shopify.png' },
+      { name: 'Google Cloud', image: '/neelgenix/assets/logo-gcloud.svg' }
     ],
   },
   {
@@ -163,10 +163,11 @@ export const sectionsData = [
     designHeight: 444,
     layout: 'story',
     pullQuote:
-      'I was documenting, composing, and writing - trying to understand how people feel, what they notice, and why certain moments stay.',
+      'I was documenting, composing, and writing—trying to understand how people feel, what they notice, and why certain moments stay.',
     paragraphs: [
-      'Through working with music artists, I saw how stories shape connection. Through photography, I learned to observe, capturing moments as they are, not as they are supposed to be. Through writing, I explored emotions, perceptions, and the unspoken layers of human experience.',
-      'Now, in design, I bring that same lens into everything I build. I approach problems as parts of a larger human journey, where behaviour, emotion, and environment intersect.',
+      'Through working with music artists, I saw how stories shape connection. Through photography, I learned to observe—capturing moments as they are, not as they’re supposed to be. Through writing, I explored emotions, perceptions, and the unspoken layers of human experience.',
+      'All of this shaped how I see people—not just as users, but as individuals moving through moments, contexts, and internal states.',
+      'Now, in design, I bring that same lens into everything I build. I approach problems as parts of a larger human journey—where behaviour, emotion, and environment intersect.',
     ],
     quote: 'Stories exist in what is built and in what is left unsaid.',
   },

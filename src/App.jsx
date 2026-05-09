@@ -126,7 +126,7 @@ function App() {
       {loading && (
         <div id="preloader" className={hideLoader ? 'hide' : ''}>
           <span className="loadertext">NEEL GENIX</span>
-          <img src="assets/loader.svg" alt="Neel Genix" className="loader" width="64px" height="64px" />
+          <img src="/neelgenix/assets/loader.svg" alt="Neel Genix" className="loader" width="64px" height="64px" />
         </div>
       )}
       <div className="app-container">
