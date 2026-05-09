@@ -15,9 +15,6 @@ function MainContent({
   manualScrollRef
 }) {
   const [contentScale, setContentScale] = useState(1);
-  const [isMobile, setIsMobile] = useState(() => (
-    typeof window !== 'undefined' ? window.innerWidth <= MOBILE_BREAKPOINT : false
-  ));
   
   // Attach the ported vanilla scroll physics hook
   useScrollSpy(
@@ -35,16 +32,8 @@ function MainContent({
     if (!container) return undefined;
 
     const updateScale = () => {
-      const nextIsMobile = window.innerWidth <= MOBILE_BREAKPOINT;
-      setIsMobile(nextIsMobile);
-
-      if (nextIsMobile) {
-        setContentScale(1);
-        return;
-      }
-
       const availableWidth = Math.max(1, container.clientWidth - 48);
-      setContentScale(Math.max(0.64, availableWidth / DESIGN_WIDTH));
+      setContentScale(availableWidth / DESIGN_WIDTH);
     };
 
     updateScale();
@@ -60,24 +49,20 @@ function MainContent({
 
   const sectionStyles = useMemo(() => {
     return sections.reduce((acc, section) => {
-      const height = isMobile
-        ? undefined
-        : `${Math.round(section.designHeight * contentScale)}px`;
+      const height = `${Math.round(section.designHeight * contentScale)}px`;
       acc[section.id] = {
         height,
         '--section-color': section.color,
       };
       return acc;
     }, {});
-  }, [sections, contentScale, isMobile]);
+  }, [sections, contentScale]);
 
   const canvasStyle = {
     '--content-scale': contentScale,
   };
 
   const getFrameStyle = (section) => {
-    if (isMobile) return undefined;
-
     return {
       width: `${DESIGN_WIDTH}px`,
       height: `${section.designHeight}px`,

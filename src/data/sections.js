@@ -28,16 +28,16 @@ export const sectionsData = [
       'Shaping products that are clear, usable, and built to scale. From defining what to build to how it evolves, I work with teams to create direction that can be effectively executed.',
     items: [
       {
-        label: 'Product direction',
-        detail: 'Clarifying goals, user needs, flows, and the decisions that move a product forward.',
+        label: 'Product Direction',
+        detail: 'I turn requirements into clear product direction, defining what to build, why it matters, and how it evolves.',
       },
       {
-        label: 'Interaction clarity',
-        detail: 'Designing interfaces that make tasks feel understandable, responsive, and easy to repeat.',
+        label: 'Human Insight',
+        detail: 'I ground decisions in real user, ensuring solutions are intuitive, usable, and relevant in real contexts.',
       },
       {
-        label: 'Scalable systems',
-        detail: 'Creating reusable patterns, components, and guidelines teams can keep building with.',
+        label: 'Systems & Storytelling',
+        detail: 'I design systems that go beyond screens, creating structure and cohesive narratives in experiences.',
       },
     ],
   },

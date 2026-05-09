@@ -39,17 +39,32 @@ function HeroSection({ section }) {
 }
 
 function BridgeSection({ section }) {
+  const imgImage22 = '/assets/bea60d226680f5e4af0bfe8148074b8075c60821.png';
+
   return (
     <div className="bridge-layout">
-      <header className="center-copy">
-        <h1>{section.heading}</h1>
-        <p>{section.intro}</p>
-      </header>
-      <div className="skill-row">
+      <div className="bridge-center-copy">
+        <h1 className="bridge-heading">
+          <span className="bridge-heading-light">I bridge </span>
+          <span className="bridge-heading-bold">business intent</span>
+          <span className="bridge-heading-light"> and </span>
+          <span className="bridge-heading-bold">user behaviour</span>
+        </h1>
+        <div className="bridge-intro">
+          <p className="bridge-intro-bold">Shaping products that are clear, usable, and built to scale.</p>
+          <p className="bridge-intro-light">From defining what to build to how it evolves, I work with teams to create direction that can be effectively executed.</p>
+        </div>
+      </div>
+      <div className="bridge-skill-row">
         {section.items.map((item) => (
-          <article className="skill-item" key={item.label}>
-            <h2>{item.label}</h2>
-            <p>{item.detail}</p>
+          <article className="bridge-skill-item" key={item.label}>
+            <div className="bridge-skill-text">
+              <h2>{item.label}</h2>
+              <p>{item.detail}</p>
+            </div>
+            <div className="bridge-skill-image">
+              <img src={imgImage22} alt="" />
+            </div>
           </article>
         ))}
       </div>
