@@ -199,8 +199,11 @@ function ProjectsSection({ section }) {
     if (!activeProject) {
       setFooterVisible(false);
       setIsScrolled(false);
+      document.body.style.overflow = 'auto';
       return;
     }
+    
+    document.body.style.overflow = 'hidden';
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -219,6 +222,7 @@ function ProjectsSection({ section }) {
     return () => {
       clearTimeout(timeoutId);
       observer.disconnect();
+      document.body.style.overflow = 'auto';
     };
   }, [activeProject]);
 
