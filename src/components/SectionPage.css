@@ -1308,7 +1308,6 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  height: 100dvh;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -1338,7 +1337,6 @@
   z-index: 2;
   width: 100vw;
   height: 100vh;
-  height: 100dvh;
   background: transparent;
   display: flex;
   flex-direction: column;
