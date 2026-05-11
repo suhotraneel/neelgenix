@@ -1309,6 +1309,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   display: flex;
   justify-content: center;
@@ -1350,10 +1351,12 @@
   z-index: 2;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: transparent;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   transform: scale(0.95);
   opacity: 0;
@@ -1687,6 +1690,7 @@
 
   .project-modal-footer {
     padding: 10px 12px;
+    padding-bottom: max(10px, env(safe-area-inset-bottom, 10px));
     flex-direction: row;
     justify-content: space-between;
     align-items: center;

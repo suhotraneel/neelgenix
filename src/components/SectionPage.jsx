@@ -359,7 +359,7 @@ function ProjectsSection({ section }) {
 
             <div className="project-modal-body">
                {activeProject.media && activeProject.media.length > 0 ? (
-                 <div className="project-media-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                 <div className="project-media-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                    {activeProject.media.map((block) => {
                      if (block.type === 'video') {
                        return (
