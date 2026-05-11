@@ -1,4 +1,16 @@
-import projectsData from './projects.json';
+import rawProjectsData from './projects.json';
+
+// Rewrite all /neelgenix/assets/ paths to use the dynamic base URL
+const base = import.meta.env.BASE_URL;
+const rewritePath = (path) => {
+  if (!path) return path;
+  return path.replace(/^\/neelgenix\/assets\//, `${base}assets/`);
+};
+const projectsData = rawProjectsData.map(project => ({
+  ...project,
+  image: rewritePath(project.image),
+  media: project.media?.map(m => ({ ...m, url: rewritePath(m.url) })) || [],
+}));
 
 export const sectionsData = [
   {
@@ -121,17 +133,17 @@ export const sectionsData = [
     layout: 'tools',
     heading: 'Some of the tools I use',
     items: [
-      { name: 'Figma', image: '/neelgenix/assets/logo-figma.svg' },
-      { name: 'Anthropic', image: '/neelgenix/assets/logo-anthropic.png' },
-      { name: 'Google AI Studio', image: '/neelgenix/assets/logo-gemini.svg' },
-      { name: 'Cursor', image: '/neelgenix/assets/logo-cursor.png' },
-      { name: 'Adobe CC', image: '/neelgenix/assets/logo-adobe.png' },
-      { name: 'Runway', image: '/neelgenix/assets/logo-runway.svg' },
-      { name: 'Framer', image: '/neelgenix/assets/logo-framer.svg' },
-      { name: 'Anthropic_alt', image: '/neelgenix/assets/logo-anthropic-a.svg' },
-      { name: 'Unity', image: '/neelgenix/assets/logo-unity.png' },
-      { name: 'Shopify', image: '/neelgenix/assets/logo-shopify.png' },
-      { name: 'Google Cloud', image: '/neelgenix/assets/logo-gcloud.svg' }
+      { name: 'Figma', image: `${import.meta.env.BASE_URL}assets/logo-figma.svg` },
+      { name: 'Anthropic', image: `${import.meta.env.BASE_URL}assets/logo-anthropic.png` },
+      { name: 'Google AI Studio', image: `${import.meta.env.BASE_URL}assets/logo-gemini.svg` },
+      { name: 'Cursor', image: `${import.meta.env.BASE_URL}assets/logo-cursor.png` },
+      { name: 'Adobe CC', image: `${import.meta.env.BASE_URL}assets/logo-adobe.png` },
+      { name: 'Runway', image: `${import.meta.env.BASE_URL}assets/logo-runway.svg` },
+      { name: 'Framer', image: `${import.meta.env.BASE_URL}assets/logo-framer.svg` },
+      { name: 'Anthropic_alt', image: `${import.meta.env.BASE_URL}assets/logo-anthropic-a.svg` },
+      { name: 'Unity', image: `${import.meta.env.BASE_URL}assets/logo-unity.png` },
+      { name: 'Shopify', image: `${import.meta.env.BASE_URL}assets/logo-shopify.png` },
+      { name: 'Google Cloud', image: `${import.meta.env.BASE_URL}assets/logo-gcloud.svg` }
     ],
   },
   {
@@ -232,7 +244,7 @@ export const sectionsData = [
     detail: "Let's work together to design and build something impactful, scalable, and ready to grow.",
     email: 'suhotraneel@gmail.com',
     items: [
-      { label: 'Resume', href: '/neelgenix/assets/suhotra_chakraborty_resume2026_neelgenix.pdf' },
+      { label: 'Resume', href: `${import.meta.env.BASE_URL}assets/suhotra_chakraborty_resume2026_neelgenix.pdf` },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/suhotra/' },
       { label: 'Instagram', href: 'https://www.instagram.com/neelgenix/' },
     ],

@@ -79,7 +79,7 @@ function HeroSection({ section }) {
 }
 
 function BridgeSection({ section }) {
-  const imgImage22 = '/neelgenix/assets/section2-bridge.png';
+  const imgImage22 = `${import.meta.env.BASE_URL}assets/section2-bridge.png`;
 
   return (
     <div className="bridge-layout">

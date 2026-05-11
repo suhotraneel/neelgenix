@@ -5,7 +5,12 @@ import MainContent from './components/MainContent';
 import CustomScrollbar from './components/CustomScrollbar';
 import AdminCMS from './components/AdminCMS';
 import { sectionsData } from './data/sections';
+import { injectGothamFonts } from './utils/fonts';
 import './index.css';
+
+// Inject fonts early using the correct BASE_URL (works on both GitHub Pages and Vercel)
+injectGothamFonts();
+
 
 function App() {
   const [isAdminPath, setIsAdminPath] = useState(false);
@@ -139,7 +144,7 @@ function App() {
       {loading && (
         <div id="preloader" className={hideLoader ? 'hide' : ''}>
           <span className="loadertext">NEEL GENIX</span>
-          <img src="/neelgenix/assets/loader.svg" alt="Neel Genix" className="loader" width="64px" height="64px" />
+          <img src={`${import.meta.env.BASE_URL}assets/loader.svg`} alt="Neel Genix" className="loader" width="64px" height="64px" />
         </div>
       )}
       <div className="app-container">
