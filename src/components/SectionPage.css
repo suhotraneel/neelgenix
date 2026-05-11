@@ -1384,6 +1384,13 @@
   flex-shrink: 0;
 }
 
+.project-modal-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+
 .project-modal-title {
   font-family: 'Handjet', sans-serif;
   font-weight: 500;
@@ -1401,12 +1408,9 @@
 }
 
 .project-modal-tag {
-  /* background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 4px 8px; */
   font-family: 'Gotham', sans-serif;
   font-size: 12px;
-  line-height: 14px;
+  line-height: 16px;
   font-weight: 300;
   color: #fff;
   white-space: nowrap;
@@ -1414,20 +1418,20 @@
 
 .project-modal-tag-separator {
   font-family: 'Gotham', sans-serif;
-  font-size: 10px;
-  line-height: 14px;
-  font-weight: 100;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 300;
   color: #fff;
 }
 
 /* Desktop Only Utility */
 .desktop-only {
-  display: flex;
+  display: flex !important;
 }
 
 /* Mobile Only Utility */
 .mobile-only {
-  display: none;
+  display: none !important;
 }
 
 .project-modal-close {
@@ -1439,10 +1443,7 @@
   justify-content: center;
   opacity: 1;
   transition: scale 0.2s ease;
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 30;
+  flex-shrink: 0;
 }
 
 .project-modal-close:hover {
@@ -1461,6 +1462,12 @@
   height: auto;
   display: block;
   border-radius: 0 !important;
+}
+
+.project-media-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .project-modal-footer {
@@ -1514,8 +1521,9 @@
 }
 
 .project-modal-nav {
-  position: absolute;
-  bottom: 12px;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%) scale(1);
   z-index: 30;
   width: 24px;
   height: 24px;
@@ -1523,7 +1531,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: scale 0.2s ease;
+  transition: transform 0.2s ease;
+  transform-origin: center;
 }
 
 .project-modal-nav.left {
@@ -1535,7 +1544,25 @@
 }
 
 .project-modal-nav:hover {
-  scale: 1.2;
+  transform: translateY(-50%) scale(1.2);
+}
+
+.project-modal-close-fixed {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.project-modal-close-fixed:hover {
+  transform: scale(1.2);
 }
 
 @keyframes modalBgFadeIn {
@@ -1626,7 +1653,10 @@
   .project-modal-header-info {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0;
+    margin-right: 0;
   }
 
   .project-modal-title {
@@ -1646,14 +1676,25 @@
   }
 
   .project-modal-close {
-    position: static;
+    background: transparent;
+    border: none;
+    padding: 0;
     margin-left: auto;
     width: 24px;
     height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
   }
 
   .project-modal-body {
     padding: 0 12px;
+  }
+
+  .project-media-list {
+    gap: 8px;
   }
 
   .project-modal-nav-mobile {

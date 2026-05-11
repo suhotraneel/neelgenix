@@ -43,6 +43,33 @@ import face19 from '../assets/section10/fcf40f681d48245222e6e5b4c29bc0b76c14332c
 
 const facesArray = [face0, face1, face2, face3, face4, face5, face6, face7, face8, face9, face10, face11, face12, face13, face14, face15, face16, face17, face18, face19];
 
+const fallbackCopyTextToClipboard = (text, onSuccess) => {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    if (onSuccess) onSuccess();
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+  document.body.removeChild(textArea);
+};
+
+const copyTextToClipboard = (text, onSuccess) => {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text)
+      .then(onSuccess)
+      .catch(() => fallbackCopyTextToClipboard(text, onSuccess));
+  } else {
+    fallbackCopyTextToClipboard(text, onSuccess);
+  }
+};
+
 const imageForIndex = (index) => (
   <div className="project-thumb" aria-hidden="true">
     <img src={heroImage} alt="" />
@@ -201,9 +228,10 @@ function ProjectsSection({ section }) {
     e.preventDefault();
     e.stopPropagation();
     if (contactSection?.email) {
-      navigator.clipboard.writeText(contactSection.email);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      copyTextToClipboard(contactSection.email, () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
     }
   };
 
@@ -310,6 +338,12 @@ function ProjectsSection({ section }) {
              </svg>
           </div>
 
+          <button className="project-modal-close-fixed desktop-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+             </svg>
+          </button>
+
           {/* Mobile Floating Nav - hidden when footer is visible */}
           <div className={`project-modal-nav-mobile left mobile-only ${footerVisible ? 'hidden' : ''}`} onClick={handlePrev}>
             <div className="nav-mobile-bg">
@@ -339,7 +373,10 @@ function ProjectsSection({ section }) {
             <div className={`project-modal-header ${isScrolled ? 'has-bg' : ''}`}>
                <div className="project-modal-header-info">
                   <h2 className="project-modal-title">
-                    {(section.projects.findIndex(p => p.id === activeProject.id) + 1).toString().padStart(2, '0')}. {activeProject.title}
+                    <span className="project-modal-number">
+                      {(section.projects.findIndex(p => p.id === activeProject.id) + 1).toString().padStart(2, '0')}.&nbsp;
+                    </span>
+                    {activeProject.title}
                   </h2>
                   <div className="project-modal-tags">
                     {activeProject.tags.map((tag, idx) => (
@@ -350,16 +387,16 @@ function ProjectsSection({ section }) {
                     ))}
                   </div>
                </div>
-               <button className="project-modal-close" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
+                <button className="project-modal-close mobile-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-               </button>
+                </button>
             </div>
 
             <div className="project-modal-body">
                {activeProject.media && activeProject.media.length > 0 ? (
-                 <div className="project-media-list" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                 <div className="project-media-list">
                    {activeProject.media.map((block) => {
                      if (block.type === 'video') {
                        return (
@@ -402,7 +439,7 @@ function ProjectsSection({ section }) {
                   </svg>
                </div>
 
-               <div className="project-modal-footer-content">
+               <div className="project-modal-footer-content mobile-only">
                  <div className="project-modal-footer-row">
                     <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
                        <span className="project-modal-link-text">Resume</span>
@@ -427,6 +464,32 @@ function ProjectsSection({ section }) {
                        <img src={iconInstagram} alt="" />
                     </a>
                  </div>
+               </div>
+
+               <div className="project-modal-footer-left desktop-only">
+                  <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
+                     <span className="project-modal-link-text">Resume</span>
+                     <img src={iconDownload} alt="" />
+                  </a>
+                  <button 
+                    onClick={handleCopyEmail}
+                    className="project-modal-link"
+                    style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
+                  >
+                     <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
+                     <img src={iconCopy} alt="" />
+                  </button>
+               </div>
+               
+               <div className="project-modal-footer-right desktop-only">
+                  <a href={contactSection?.items[1]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                     <span className="project-modal-link-text">Linkedin</span>
+                     <img src={iconLinkedin} alt="" />
+                  </a>
+                  <a href={contactSection?.items[2]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                     <span className="project-modal-link-text">Instagram</span>
+                     <img src={iconInstagram} alt="" />
+                  </a>
                </div>
 
                {/* Mobile Footer Chevrons - Right */}
@@ -660,10 +723,12 @@ function ContactSection({ section }) {
 
   const handleCopyEmail = (e) => {
     e.preventDefault();
-    navigator.clipboard.writeText(section.email).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
+    if (section.email) {
+      copyTextToClipboard(section.email, () => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      });
+    }
   };
 
   React.useEffect(() => {
