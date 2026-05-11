@@ -137,6 +137,7 @@ body {
   width: 100vw;
   height: 100dvh;
   overflow: hidden;
+  position: relative;
 }
 
 /* Left Panel */
@@ -291,7 +292,6 @@ body {
   line-height: 20px;
 }
 
-/* Right Container */
 .right-container {
   flex-grow: 1;
   height: 100%;
@@ -302,6 +302,13 @@ body {
   gap: 24px;
   align-items: center;
   background: var(--bg-color);
+  /* Hide native scrollbar for custom React scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.right-container::-webkit-scrollbar {
+  display: none; /* WebKit */
 }
 
 .content-section {

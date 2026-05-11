@@ -1,0 +1,124 @@
+[
+  {
+    "id": "p3",
+    "title": "Exhibition Experience",
+    "detail": "Spatial and digital experience design for guided discovery.",
+    "tags": [
+      "Experience",
+      "Research",
+      "Visual Design"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m3-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
+      }
+    ]
+  },
+  {
+    "id": "p4",
+    "title": "AI Voice Website",
+    "detail": "A clear product website for voice-led AI workflows.",
+    "tags": [
+      "Web Design",
+      "AI",
+      "Storytelling"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m4-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
+      }
+    ]
+  },
+  {
+    "id": "p5",
+    "title": "Teacher Platform Redesign",
+    "detail": "A more usable platform experience for teachers and learning teams.",
+    "tags": [
+      "Product Design",
+      "Systems",
+      "Handoff"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m5-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
+      }
+    ]
+  },
+  {
+    "id": "proj-1778511557545",
+    "title": "Guided Practice - SchoolAi",
+    "detail": "Guided Practice is SchoolAI's core learning loop",
+    "tags": [
+      "UI UX Design",
+      "Learning Design",
+      "Product Revamp"
+    ],
+    "image": "/neelgenix/assets/project-1778511557441-496173910.png",
+    "media": [
+      {
+        "id": "m-1778511406422",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557444-761700599.png"
+      },
+      {
+        "id": "m-1778511408282",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557461-497092338.png"
+      },
+      {
+        "id": "m-1778511409272",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557464-898475928.png"
+      },
+      {
+        "id": "m-1778511418445",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557468-494728554.png"
+      },
+      {
+        "id": "m-1778511428577",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557472-682426955.png"
+      },
+      {
+        "id": "m-1778511429388",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557487-338692609.png"
+      },
+      {
+        "id": "m-1778511430700",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557490-717313327.png"
+      },
+      {
+        "id": "m-1778511458819",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557506-934331543.png"
+      },
+      {
+        "id": "m-1778511459688",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557538-883881060.png"
+      },
+      {
+        "id": "m-1778511460536",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557541-572234466.png"
+      },
+      {
+        "id": "m-1778511469019",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778511557543-914252234.png"
+      }
+    ]
+  }
+]

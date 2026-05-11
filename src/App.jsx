@@ -2,10 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { flushSync } from 'react-dom';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
+import CustomScrollbar from './components/CustomScrollbar';
+import AdminCMS from './components/AdminCMS';
 import { sectionsData } from './data/sections';
 import './index.css';
 
 function App() {
+  const [isAdminPath, setIsAdminPath] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState(sectionsData[0].id);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -18,6 +21,11 @@ function App() {
     const path = window.location.pathname;
     const base = import.meta.env.BASE_URL;
     const slug = path.replace(base, '');
+
+    if (slug === 'cms' || slug === '/cms') {
+      setIsAdminPath(true);
+      return;
+    }
 
     if (slug) {
       const targetSection = sectionsData.find(s => s.slug === slug);
@@ -33,16 +41,17 @@ function App() {
 
   // Sync Title and URL with Active Section
   useEffect(() => {
-    if (loading) return;
+    if (loading || isAdminPath) return;
     const currentSection = sectionsData.find(s => s.id === activeSectionId);
     if (currentSection && !document.hidden) {
       document.title = `Neel Genix - ${currentSection.title}`;
       const base = import.meta.env.BASE_URL;
       window.history.replaceState(null, null, `${base}${currentSection.slug}`);
     }
-  }, [activeSectionId, loading]);
+  }, [activeSectionId, loading, isAdminPath]);
 
   useEffect(() => {
+    if (isAdminPath) return;
     const altTitles = [
       "🤔 Hello!",
       "✍🏻 I'm Suhotra Chakraborty",
@@ -72,7 +81,7 @@ function App() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       clearInterval(titleInterval);
     };
-  }, [activeSectionId]);
+  }, [activeSectionId, isAdminPath]);
 
   useEffect(() => {
     // Faster preloader sequence
@@ -121,6 +130,10 @@ function App() {
     }
   };
 
+  if (isAdminPath) {
+    return <AdminCMS />;
+  }
+
   return (
     <>
       {loading && (
@@ -145,6 +158,7 @@ function App() {
           rightContainerRef={rightContainerRef}
           manualScrollRef={manualScrollRef}
         />
+        <CustomScrollbar containerRef={rightContainerRef} />
       </div>
     </>
   );

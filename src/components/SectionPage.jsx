@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import Matter from 'matter-js';
 import heroImage from '../assets/hero.png';
 import WorkedWith from './WorkedWith';
@@ -6,6 +7,14 @@ import storyBg from '../assets/story-bg.png';
 import storyHighlight from '../assets/story-highlight.png';
 import './SectionPage.css';
 import workOnBg from '../assets/work-on-bg.png';
+import { sectionsData } from '../data/sections';
+
+// Section 4 Assets
+import project1 from '../assets/section4/project1.png';
+import project2 from '../assets/section4/project2.png';
+import project3 from '../assets/section4/project3.png';
+import project4 from '../assets/section4/project4.png';
+
 import iconDownload from '../assets/section10/5db5cda5ca7cd472992d33e00b452c331dbd2cda.svg';
 import iconCopy from '../assets/section10/200d8a7094d3571158958e270818b62e6b726654.svg';
 import iconLinkedin from '../assets/section10/4c811bea37dc8d79d6ccd1ddcdbbe2c35180cf5f.svg';
@@ -112,34 +121,325 @@ function WorkedWithSection({ section }) {
   );
 }
 
+function StylizedTitle({ className }) {
+  const chars = [
+    { c: 'T', s: 'block' },
+    { c: 'H', s: 'dotted' },
+    { c: 'I', s: 'serif' },
+    { c: 'N', s: 'block' },
+    { c: 'G', s: 'hollow' },
+    { c: 'S', s: 'dotted' },
+    { c: ' ', s: 'space' },
+    { c: 'I', s: 'dotted' },
+    { c: '’', s: 'block' },
+    { c: 'V', s: 'serif' },
+    { c: 'E', s: 'dotted' },
+    { c: ' ', s: 'space' },
+    { c: 'B', s: 'block-red' },
+    { c: 'U', s: 'dotted-red' },
+    { c: 'I', s: 'serif-red' },
+    { c: 'L', s: 'block-red' },
+    { c: 'T', s: 'dotted-red' },
+  ];
+
+  return (
+    <h1 className={className}>
+      {chars.map((item, i) => (
+        <span key={i} className={`char-${item.s}`}>
+          {item.c}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 function ProjectsSection({ section }) {
+  const [activeProject, setActiveProject] = React.useState(null);
+  const [isClosing, setIsClosing] = React.useState(false);
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
+  const [footerVisible, setFooterVisible] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+  const footerRef = React.useRef(null);
+  const rowColors = ['#1A161E', '#161E1E', '#1E1616', '#161E16'];
+  const projectImages = [project1, project2, project3, project4];
+
+  React.useEffect(() => {
+    setImageLoaded(false);
+  }, [activeProject]);
+
+  React.useEffect(() => {
+    if (!activeProject) {
+      setFooterVisible(false);
+      setIsScrolled(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setFooterVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+
+    // Give a small delay to ensure ref is attached after portal mount
+    const timeoutId = setTimeout(() => {
+      if (footerRef.current) {
+        observer.observe(footerRef.current);
+      }
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      observer.disconnect();
+    };
+  }, [activeProject]);
+
+  const contactSection = sectionsData.find(s => s.layout === 'contact');
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (contactSection?.email) {
+      navigator.clipboard.writeText(contactSection.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleProjectClick = (project) => {
+    setActiveProject(project);
+    setIsClosing(false);
+  };
+
+  const closeProjectModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setActiveProject(null);
+      setIsClosing(false);
+      setIsScrolled(false);
+      setFooterVisible(false);
+    }, 400); // match transition duration
+  };
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    const currentIndex = section.projects.findIndex(p => p.title === activeProject.title);
+    const prevIndex = (currentIndex - 1 + section.projects.length) % section.projects.length;
+    setActiveProject(section.projects[prevIndex]);
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    const currentIndex = section.projects.findIndex(p => p.title === activeProject.title);
+    const nextIndex = (currentIndex + 1) % section.projects.length;
+    setActiveProject(section.projects[nextIndex]);
+  };
+
+  const handleModalScroll = (e) => {
+    setIsScrolled(e.target.scrollTop > 10);
+  };
+
   return (
     <div className="projects-layout">
       <header className="big-title-block">
-        <h1>{section.heading}</h1>
-        <p>{section.intro}</p>
+        <StylizedTitle className="project-heading" />
+        <p className="project-intro-text">{section.intro}</p>
       </header>
       <div className="project-list">
         {section.projects.map((project, index) => (
-          <article className="project-row" key={project.title}>
-            <div className="edge-dots" aria-hidden="true" />
-            {imageForIndex(index)}
-            <div className="project-copy">
-              <h2>{project.title}</h2>
-              <p>{project.detail}</p>
-              <div className="tag-row">
-                {project.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
+          <article 
+            className="project-row" 
+            key={project.title}
+            style={{ backgroundColor: rowColors[index % rowColors.length], cursor: 'pointer' }}
+            onClick={() => handleProjectClick(project)}
+          >
+            <div className="filmstrip-edge" aria-hidden="true">
+              {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
+            </div>
+            
+            <div className="project-main-content">
+              <div className="project-thumb-container">
+                <img src={project.image || projectImages[index % projectImages.length]} alt="" className="project-thumb-img" />
+              </div>
+              
+              <div className="project-details">
+                <div className="project-details-inner">
+                  <div className="project-title-group">
+                    <h2 className="project-title-pixel">{project.title}</h2>
+                    <p className="project-detail-text">{project.detail}</p>
+                  </div>
+                  <div className="project-tag-row">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="project-tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="project-arrow-box">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.5 5L17.5 10L12.5 15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2.5 10H17.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="15.5" cy="10" r="1.5" fill="white"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <a className="project-action" href={`#${section.id}`} aria-label={`Open ${project.title}`}>
-              +
-            </a>
-            <div className="edge-dots" aria-hidden="true" />
+
+            <div className="filmstrip-edge" aria-hidden="true">
+              {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
+            </div>
           </article>
         ))}
       </div>
+      
+      {activeProject && createPortal(
+        <div className={`project-modal-overlay ${isClosing ? 'closing' : ''}`} onClick={closeProjectModal}>
+          <div className="project-modal-bg">
+             <div className="project-modal-gradient"></div>
+          </div>
+          
+          {/* Desktop Nav */}
+          <div className="project-modal-nav left desktop-only" onClick={handlePrev}>
+             <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
+             </svg>
+          </div>
+          <div className="project-modal-nav right desktop-only" onClick={handleNext}>
+             <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
+             </svg>
+          </div>
+
+          {/* Mobile Floating Nav - hidden when footer is visible */}
+          <div className={`project-modal-nav-mobile left mobile-only ${footerVisible ? 'hidden' : ''}`} onClick={handlePrev}>
+            <div className="nav-mobile-bg">
+              <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+          <div className={`project-modal-nav-mobile right mobile-only ${footerVisible ? 'hidden' : ''}`} onClick={handleNext}>
+            <div className="nav-mobile-bg">
+              <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
+              </svg>
+            </div>
+          </div>
+
+          {copied && (
+            <div className="contact-copied-message" style={{ bottom: '80px', zIndex: 100 }}>
+              <span>Email ID Copied</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+          )}
+
+          <div className={`project-modal-content ${isScrolled ? 'is-scrolled' : ''}`} onClick={(e) => e.stopPropagation()} onScroll={handleModalScroll}>
+            <div className={`project-modal-header ${isScrolled ? 'has-bg' : ''}`}>
+               <div className="project-modal-header-info">
+                  <h2 className="project-modal-title">
+                    {(section.projects.findIndex(p => p.id === activeProject.id) + 1).toString().padStart(2, '0')}. {activeProject.title}
+                  </h2>
+                  <div className="project-modal-tags">
+                    {activeProject.tags.map((tag, idx) => (
+                      <React.Fragment key={tag}>
+                        <span className="project-modal-tag">{tag}</span>
+                        {idx < activeProject.tags.length - 1 && <span className="project-modal-tag-separator">|</span>}
+                      </React.Fragment>
+                    ))}
+                  </div>
+               </div>
+               <button className="project-modal-close" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+               </button>
+            </div>
+
+            <div className="project-modal-body">
+               {activeProject.media && activeProject.media.length > 0 ? (
+                 <div className="project-media-list" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                   {activeProject.media.map((block) => {
+                     if (block.type === 'video') {
+                       return (
+                         <video 
+                           key={block.id}
+                           src={block.url} 
+                           className="project-modal-full-img" 
+                           autoPlay 
+                           loop 
+                           muted 
+                           playsInline 
+                           style={{ width: '100%', height: 'auto' }}
+                         />
+                       );
+                     }
+                     return (
+                       <img 
+                         key={block.id}
+                         src={block.url} 
+                         alt={activeProject.title} 
+                         className="project-modal-full-img" 
+                         loading="lazy"
+                         style={{ width: '100%', height: 'auto', display: 'block' }}
+                       />
+                     );
+                   })}
+                 </div>
+               ) : (
+                 <div className="project-image-loader" style={{ display: 'flex', justifyContent: 'center', padding: '48px 0', alignItems: 'center' }}>
+                   <p style={{ color: '#888' }}>No media available</p>
+                 </div>
+               )}
+            </div>
+
+            <div className="project-modal-footer" ref={footerRef}>
+               {/* Mobile Footer Chevrons - Left */}
+               <div className="footer-chevron left mobile-only" onClick={handlePrev}>
+                  <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
+                  </svg>
+               </div>
+
+               <div className="project-modal-footer-content">
+                 <div className="project-modal-footer-row">
+                    <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
+                       <span className="project-modal-link-text">Resume</span>
+                       <img src={iconDownload} alt="" />
+                    </a>
+                    <button 
+                      onClick={handleCopyEmail}
+                      className="project-modal-link"
+                      style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
+                    >
+                       <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
+                       <img src={iconCopy} alt="" />
+                    </button>
+                 </div>
+                 <div className="project-modal-footer-row">
+                    <a href={contactSection?.items[1]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                       <span className="project-modal-link-text">Linkedin</span>
+                       <img src={iconLinkedin} alt="" />
+                    </a>
+                    <a href={contactSection?.items[2]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                       <span className="project-modal-link-text">Instagram</span>
+                       <img src={iconInstagram} alt="" />
+                    </a>
+                 </div>
+               </div>
+
+               {/* Mobile Footer Chevrons - Right */}
+               <div className="footer-chevron right mobile-only" onClick={handleNext}>
+                  <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
+                  </svg>
+               </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }
@@ -257,17 +557,93 @@ function AiSection({ section }) {
 }
 
 function TestimonialsSection({ section }) {
-  return (
-    <div className="testimonials-layout">
-      <div className="testimonial-carousel">
-        {section.items.map((item) => (
-          <blockquote key={item.quote}>
-            <p>{item.quote}</p>
-            <cite>{item.by}</cite>
-          </blockquote>
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const itemsCount = section.items.length;
+
+  React.useEffect(() => {
+    if (isHovered) return;
+
+    const intervalId = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % itemsCount);
+    }, 8000);
+
+    return () => clearInterval(intervalId);
+  }, [isHovered, itemsCount]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + itemsCount) % itemsCount);
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % itemsCount);
+  };
+
+  const renderQuote = (quoteStr) => {
+    if (!quoteStr) return null;
+    const parts = quoteStr.split('\n\n');
+    return (
+      <div className="testimonial-quote">
+        {parts.map((part, i) => (
+          <React.Fragment key={i}>
+            <p style={{ marginBottom: 0 }}>{part}</p>
+            {i < parts.length - 1 && <p style={{ marginBottom: 0 }}>&#8203;</p>}
+          </React.Fragment>
         ))}
       </div>
-      <h1>{section.heading}</h1>
+    );
+  };
+
+  return (
+    <div className="testimonials-layout">
+      <div 
+        className="testimonial-carousel-container"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        
+        {section.items.map((item, index) => {
+          let position = 'hidden-right';
+          if (index === currentIndex) {
+            position = 'active';
+          } else if (index === (currentIndex - 1 + itemsCount) % itemsCount) {
+            position = 'prev';
+          } else if (index === (currentIndex + 1) % itemsCount) {
+            position = 'next';
+          } else if (index === (currentIndex - 2 + itemsCount) % itemsCount) {
+            position = 'hidden-left';
+          }
+
+          return (
+            <div key={index} className={`testimonial-card-animated ${position}`}>
+              {renderQuote(item.quote)}
+              <div className="testimonial-author-group">
+                <p className="testimonial-author">{item.by}</p>
+                <p className="testimonial-role">{item.role}</p>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Chevrons */}
+        <div className="testimonial-chevron left" onClick={handlePrev}>
+          <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#111111"/>
+          </svg>
+        </div>
+        <div className="testimonial-chevron right" onClick={handleNext}>
+          <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#111111"/>
+          </svg>
+        </div>
+
+      </div>
+      
+      <p className="testimonials-bg-text">
+        <span>What </span>
+        <span className="testimonials-bg-text-red">People</span>
+        <span> Say</span>
+      </p>
     </div>
   );
 }
@@ -276,17 +652,27 @@ function ContactSection({ section }) {
   const containerRef = React.useRef(null);
   const facesRef = React.useRef([]);
   const [isVisible, setIsVisible] = React.useState(false);
+  const [copied, setCopied] = React.useState(false);
   const engineRef = React.useRef(null);
   const runnerRef = React.useRef(null);
   const bodiesRef = React.useRef([]);
   const mousePos = React.useRef({ x: -1000, y: -1000, active: false });
 
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(section.email).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   React.useEffect(() => {
+    if (!containerRef.current) return;
     const engine = Matter.Engine.create();
     engineRef.current = engine;
     
     const width = 744;
-    const height = 508;
+    const height = containerRef.current.clientHeight;
     const floorY = height - 36;
     
     const floor = Matter.Bodies.rectangle(width / 2, floorY + 250, width + 1000, 500, { isStatic: true });
@@ -504,20 +890,44 @@ function ContactSection({ section }) {
         </p>
       </div>
 
+      {copied && (
+        <div className="contact-copied-message">
+          <span>Email ID Copied</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      )}
+
       <div className="contact-bottom-bar" style={{ pointerEvents: 'auto', zIndex: 10, position: 'relative' }}>
         <div className="contact-links-group">
-          <a href="/resume.pdf" className="contact-link" download>
-            <span className="contact-link-text">Resume</span>
+          <a href={section.items[0].href} className="contact-link" download>
+            <span className="contact-link-text">{section.items[0].label}</span>
             <div className="contact-link-icon">
               <img src={iconDownload} alt="" />
             </div>
           </a>
-          <a href={`mailto:${section.email}`} className="contact-link">
+          <button 
+            onClick={handleCopyEmail} 
+            className="contact-link" 
+            style={{ 
+              background: 'transparent', 
+              border: 'none', 
+              padding: 0, 
+              margin: 0,
+              cursor: 'pointer', 
+              font: 'inherit', 
+              color: 'inherit',
+              appearance: 'none',
+              outline: 'none',
+              position: 'relative'
+            }}
+          >
             <span className="contact-link-text">{section.email}</span>
             <div className="contact-link-icon">
               <img src={iconCopy} alt="" />
             </div>
-          </a>
+          </button>
         </div>
         <div className="contact-links-group">
           <a href={section.items[1].href} target="_blank" rel="noreferrer" className="contact-link">
@@ -565,11 +975,32 @@ const renderSection = (section) => {
   }
 };
 
-function SectionPage({ section, scaleStyle }) {
+function SectionPage({ section, scaleStyle, contentScale = 1 }) {
+  const articleRef = React.useRef(null);
+  const [marginBottom, setMarginBottom] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!articleRef.current) return;
+    
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const unscaledHeight = entry.target.offsetHeight;
+        const scaledHeight = unscaledHeight * contentScale;
+        const diff = unscaledHeight - scaledHeight;
+        setMarginBottom(-diff);
+      }
+    });
+    
+    resizeObserver.observe(articleRef.current);
+    
+    return () => resizeObserver.disconnect();
+  }, [contentScale]);
+
   return (
     <article
+      ref={articleRef}
       className={`figma-page figma-page-${section.layout} is-${section.tone || 'light'} content-scale-frame`}
-      style={{ '--section-color': section.color, ...scaleStyle }}
+      style={{ '--section-color': section.color, ...scaleStyle, marginBottom: `${marginBottom}px` }}
     >
       <SectionHeader section={section} />
       {renderSection(section)}

@@ -54,7 +54,7 @@ function MainContent({
     return sections.reduce((acc, section) => {
       const height = `${Math.round(section.designHeight * contentScale)}px`;
       acc[section.id] = {
-        height,
+        minHeight: height,
         '--section-color': section.color,
       };
       return acc;
@@ -68,7 +68,7 @@ function MainContent({
   const getFrameStyle = (section) => {
     return {
       width: `${DESIGN_WIDTH}px`,
-      height: `${section.designHeight}px`,
+      minHeight: `${section.designHeight}px`,
       transform: `scale(${contentScale})`,
     };
   };
@@ -87,7 +87,7 @@ function MainContent({
           className={`content-section content-section-${section.slug}`}
           style={sectionStyles[section.id]}
         >
-          <SectionPage section={section} scaleStyle={getFrameStyle(section)} />
+          <SectionPage section={section} scaleStyle={getFrameStyle(section)} contentScale={contentScale} />
         </section>
       ))}
     </main>
