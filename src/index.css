@@ -339,13 +339,6 @@ body {
 @media (max-width: 768px) {
   .content-section {
     scroll-margin-top: 16px;
-    min-height: auto !important;
-  }
-
-  .content-scale-frame {
-    width: 100%;
-    height: auto;
-    transform: none !important;
   }
 
   .content-section:last-child {

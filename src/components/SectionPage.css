@@ -1831,6 +1831,53 @@
     display: flex !important;
   }
 
+  /* Mobile Section 1 - Who I Am */
+  .figma-page-hero.content-scale-frame {
+    transform: none !important;
+    width: 100% !important;
+    min-height: auto !important;
+  }
+
+  .content-section-introduction {
+    min-height: auto !important;
+  }
+
+  .section-strip {
+    height: calc(24 / 4.2 * 1vw);
+    padding: calc(2 / 4.2 * 1vw) calc(8 / 4.2 * 1vw);
+    font-size: calc(14 / 4.2 * 1vw);
+    line-height: calc(20 / 4.2 * 1vw);
+  }
+
+  .hero-panel {
+    height: calc(480 / 4.2 * 1vw);
+    padding: calc(24 / 4.2 * 1vw);
+    margin-top: calc(8 / 4.2 * 1vw);
+  }
+
+  .hero-bg-img {
+    top: -78.74%;
+    left: -88.59%;
+    width: 277.1%;
+    height: 242.46%;
+  }
+
+  .hero-heading {
+    font-size: calc(56 / 4.2 * 1vw);
+  }
+
+  .hero-info-col {
+    gap: calc(4 / 4.2 * 1vw);
+  }
+
+  .hero-info-label {
+    font-size: calc(16 / 4.2 * 1vw);
+  }
+
+  .hero-info-value {
+    font-size: calc(12 / 4.2 * 1vw);
+  }
+
   .project-modal-header {
     position: sticky;
     top: 0;
@@ -1967,4 +2014,6 @@
   .project-modal-link-text {
     font-size: 14px;
   }
+
+
 }

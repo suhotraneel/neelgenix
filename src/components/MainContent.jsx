@@ -5,24 +5,24 @@ import SectionPage from './SectionPage';
 const DESIGN_WIDTH = 744;
 const MOBILE_BREAKPOINT = 1023;
 
-function MainContent({ 
-  sections, 
-  activeSectionId, 
-  setActiveSectionId, 
-  isAutoScrolling, 
+function MainContent({
+  sections,
+  activeSectionId,
+  setActiveSectionId,
+  isAutoScrolling,
   setIsAutoScrolling,
   rightContainerRef,
   manualScrollRef
 }) {
   const [contentScale, setContentScale] = useState(1);
-  
+
   // Attach the ported vanilla scroll physics hook
   useScrollSpy(
-    rightContainerRef, 
-    sections, 
-    activeSectionId, 
-    setActiveSectionId, 
-    isAutoScrolling, 
+    rightContainerRef,
+    sections,
+    activeSectionId,
+    setActiveSectionId,
+    isAutoScrolling,
     setIsAutoScrolling,
     manualScrollRef
   );
@@ -81,9 +81,9 @@ function MainContent({
       style={canvasStyle}
     >
       {sections.map((section) => (
-        <section 
+        <section
           key={section.id}
-          id={section.id} 
+          id={section.id}
           className={`content-section content-section-${section.slug}`}
           style={sectionStyles[section.id]}
         >

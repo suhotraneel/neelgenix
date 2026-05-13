@@ -137,9 +137,4 @@
     --logo-w: 172px;
   }
 }
-
-@media (max-width: 768px) {
-  .ww-logo-track {
-    padding: 0 calc((100vw - var(--logo-w)) / 2);
-  }
-}
+
