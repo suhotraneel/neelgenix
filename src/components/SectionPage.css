@@ -1831,8 +1831,8 @@
     display: flex !important;
   }
 
-  /* Mobile Section 1 - Who I Am */
-  .figma-page-hero.content-scale-frame {
+  /* Mobile All Sections - Reset scaling */
+  .content-scale-frame {
     transform: none !important;
     width: 100% !important;
     min-height: auto !important;
@@ -2021,5 +2021,160 @@
     font-size: 14px;
   }
 
+  /* Mobile Section 9 - Testimonials */
+  .testimonials-layout {
+    margin-top: calc(8 / 4.52 * 1vw);
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding: 8px 0;
+  }
 
+  .testimonial-carousel-container {
+    width: 100%;
+    height: calc(520 / 4.52 * 1vw);
+    margin: 0 0 calc(-4 / 4.52 * 1vw) 0;
+  }
+
+  .testimonial-card-animated {
+    width: calc(320 / 4.52 * 1vw);
+    height: calc(520 / 4.52 * 1vw);
+    padding: calc(16 / 4.52 * 1vw) calc(16 / 4.52 * 1vw) calc(32 / 4.52 * 1vw);
+    gap: calc(16 / 4.52 * 1vw);
+  }
+
+  .testimonial-quote {
+    font-size: calc(12 / 4.52 * 1vw);
+    line-height: calc(16 / 4.52 * 1vw);
+  }
+
+  .testimonial-author {
+    font-size: calc(14 / 4.52 * 1vw);
+    line-height: calc(21 / 4.52 * 1vw);
+  }
+
+  .testimonial-role {
+    font-size: calc(10 / 4.52 * 1vw);
+    line-height: calc(14 / 4.52 * 1vw);
+  }
+
+  .testimonial-card-animated.prev {
+    transform: translateX(calc(-280 / 4.52 * 1vw)) scale(0.8);
+  }
+
+  .testimonial-card-animated.next {
+    transform: translateX(calc(280 / 4.52 * 1vw)) scale(0.8);
+  }
+
+  .testimonial-card-animated.hidden-left {
+    transform: translateX(calc(-400 / 4.52 * 1vw)) scale(0.5);
+  }
+
+  .testimonial-card-animated.hidden-right {
+    transform: translateX(calc(400 / 4.52 * 1vw)) scale(0.5);
+  }
+
+  .testimonial-chevron {
+    width: calc(24 / 4.52 * 1vw);
+    height: calc(24 / 4.52 * 1vw);
+  }
+
+  .testimonial-chevron.left {
+    left: calc(10 / 4.52 * 1vw);
+  }
+
+  .testimonial-chevron.right {
+    left: auto;
+    right: calc(10 / 4.52 * 1vw);
+  }
+
+  .testimonials-bg-text {
+    width: 100%;
+    height: auto;
+    font-size: calc(72 / 4.52 * 1vw);
+    margin: calc(-20 / 4.52 * 1vw) auto 0 !important;
+  }
+
+  /* Mobile Section 10 - Contact */
+  .figma-page-contact.content-scale-frame {
+    transform: none !important;
+    width: 100% !important;
+    height: calc(100vh - 98px) !important;
+    height: calc(100dvh - 98px) !important;
+    min-height: auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  .content-section-contact {
+    height: calc(100vh - 98px) !important;
+    height: calc(100dvh - 98px) !important;
+    min-height: auto !important;
+  }
+
+  .contact-layout {
+    width: 100% !important;
+    height: auto !important;
+    flex: 1 !important;
+    min-height: auto !important;
+    margin-top: calc(8 / 4.52 * 1vw);
+  }
+
+  .contact-content {
+    padding: calc(40 / 4.52 * 1vw) calc(24 / 4.52 * 1vw) calc(48 / 4.52 * 1vw) calc(24 / 4.52 * 1vw);
+    gap: calc(16 / 4.52 * 1vw);
+  }
+
+  .contact-text-group {
+    gap: calc(16 / 4.52 * 1vw);
+  }
+
+  .contact-intro {
+    font-size: calc(18 / 4.52 * 1vw);
+    white-space: normal;
+    text-align: center;
+    line-height: normal;
+  }
+
+  .contact-detail {
+    font-size: calc(12 / 4.52 * 1vw);
+    line-height: calc(16 / 4.52 * 1vw);
+    width: calc(296 / 4.52 * 1vw);
+    white-space: normal;
+    text-align: center;
+  }
+
+  .contact-detail span {
+    line-height: calc(16 / 4.52 * 1vw);
+  }
+
+  .contact-big-text {
+    margin-bottom: 0 !important;
+  }
+
+  .contact-big-text .light,
+  .contact-big-text .medium {
+    font-size: calc(108 / 4.52 * 1vw);
+    line-height: normal;
+  }
+
+  .contact-bottom-bar {
+    flex-direction: column;
+    padding: calc(10 / 4.52 * 1vw) calc(24 / 4.52 * 1vw);
+    gap: calc(8 / 4.52 * 1vw);
+  }
+
+  .contact-links-group {
+    gap: calc(16 / 4.52 * 1vw);
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-link-text {
+    font-size: calc(14 / 4.52 * 1vw);
+    line-height: calc(20 / 4.52 * 1vw);
+  }
+
+  .contact-link-icon {
+    width: calc(16 / 4.52 * 1vw);
+    height: calc(16 / 4.52 * 1vw);
+  }
 }
