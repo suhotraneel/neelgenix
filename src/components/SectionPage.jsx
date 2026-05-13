@@ -80,27 +80,31 @@ const imageForIndex = (index) => (
 function SectionHeader({ section }) {
   return (
     <div className="section-strip">
-      <span>{section.number}</span>
+      <span>{section.number}.</span>
       <span>{section.title}</span>
     </div>
   );
 }
 
 function HeroSection({ section }) {
+  const imgSection1 = `${import.meta.env.BASE_URL}assets/053ba241caf62243a85e37935bfc18cf3f44534b.png`;
+
   return (
     <div className="hero-panel">
-      <div className="hero-copy">
-        <p>{section.eyebrow}</p>
-        <h1>{section.heading}</h1>
-        <div>
-          <span>{section.kicker}</span>
-          <span>{section.intro}</span>
+      <div className="hero-bg" aria-hidden="true">
+        <img src={imgSection1} alt="" className="hero-bg-img" />
+      </div>
+      <h1 className="hero-heading">{section.heading}</h1>
+      <div className="hero-info-row">
+        <div className="hero-info-col left">
+          <p className="hero-info-label">{section.kicker}</p>
+          <p className="hero-info-value">India</p>
+        </div>
+        <div className="hero-info-col right">
+          <p className="hero-info-label">{section.intro}</p>
+          <p className="hero-info-value">AI & Design Systems</p>
         </div>
       </div>
-      <div className="hero-portrait" aria-hidden="true">
-        <img src={heroImage} alt="" />
-      </div>
-      <p className="hero-footnote">{section.footnote}</p>
     </div>
   );
 }
@@ -142,7 +146,11 @@ function BridgeSection({ section }) {
 function WorkedWithSection({ section }) {
   return (
     <div className="worked-layout">
-      <h1>{section.heading}</h1>
+      <div className="worked-heading">
+        <span className="worked-heading-light">Brands I’ve </span>
+        <span className="worked-heading-medium">Worked</span>
+        <span className="worked-heading-light"> With</span>
+      </div>
       <WorkedWith />
     </div>
   );
@@ -150,23 +158,20 @@ function WorkedWithSection({ section }) {
 
 function StylizedTitle({ className }) {
   const chars = [
-    { c: 'T', s: 'block' },
-    { c: 'H', s: 'dotted' },
-    { c: 'I', s: 'serif' },
-    { c: 'N', s: 'block' },
-    { c: 'G', s: 'hollow' },
-    { c: 'S', s: 'dotted' },
-    { c: ' ', s: 'space' },
-    { c: 'I', s: 'dotted' },
-    { c: '’', s: 'block' },
-    { c: 'V', s: 'serif' },
-    { c: 'E', s: 'dotted' },
-    { c: ' ', s: 'space' },
-    { c: 'B', s: 'block-red' },
-    { c: 'U', s: 'dotted-red' },
-    { c: 'I', s: 'serif-red' },
-    { c: 'L', s: 'block-red' },
-    { c: 'T', s: 'dotted-red' },
+    { c: 'T', s: 'gotham-bold' },
+    { c: 'H', s: 'handjet-light' },
+    { c: 'I', s: 'handjet-black' },
+    { c: 'N', s: 'gotham-light' },
+    { c: 'G', s: 'handjet-medium' },
+    { c: 'S  I’', s: 'handjet-light' },
+    { c: 'V', s: 'handjet-medium' },
+    { c: 'E', s: 'handjet-light' },
+    { c: '  ', s: 'handjet-medium' },
+    { c: 'B', s: 'gotham-bold-red' },
+    { c: 'U', s: 'handjet-light-red' },
+    { c: 'I', s: 'handjet-black-red' },
+    { c: 'L', s: 'gotham-light-red' },
+    { c: 'T', s: 'handjet-light-red' },
   ];
 
   return (
@@ -200,10 +205,16 @@ function ProjectsSection({ section }) {
       setFooterVisible(false);
       setIsScrolled(false);
       document.body.style.overflow = 'auto';
+      document.body.style.overscrollBehavior = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.documentElement.style.overscrollBehavior = 'auto';
       return;
     }
-    
+
     document.body.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.overscrollBehavior = 'none';
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -223,6 +234,9 @@ function ProjectsSection({ section }) {
       clearTimeout(timeoutId);
       observer.disconnect();
       document.body.style.overflow = 'auto';
+      document.body.style.overscrollBehavior = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.documentElement.style.overscrollBehavior = 'auto';
     };
   }, [activeProject]);
 
@@ -280,8 +294,8 @@ function ProjectsSection({ section }) {
       </header>
       <div className="project-list">
         {section.projects.map((project, index) => (
-          <article 
-            className="project-row" 
+          <article
+            className="project-row"
             key={project.title}
             style={{ backgroundColor: rowColors[index % rowColors.length], cursor: 'pointer' }}
             onClick={() => handleProjectClick(project)}
@@ -289,12 +303,12 @@ function ProjectsSection({ section }) {
             <div className="filmstrip-edge" aria-hidden="true">
               {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
-            
+
             <div className="project-main-content">
               <div className="project-thumb-container">
                 <img src={project.image || projectImages[index % projectImages.length]} alt="" className="project-thumb-img" />
               </div>
-              
+
               <div className="project-details">
                 <div className="project-details-inner">
                   <div className="project-title-group">
@@ -309,9 +323,9 @@ function ProjectsSection({ section }) {
                 </div>
                 <div className="project-arrow-box">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.5 5L17.5 10L12.5 15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M2.5 10H17.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="15.5" cy="10" r="1.5" fill="white"/>
+                    <path d="M12.5 5L17.5 10L12.5 15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M2.5 10H17.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="15.5" cy="10" r="1.5" fill="white" />
                   </svg>
                 </div>
               </div>
@@ -323,43 +337,43 @@ function ProjectsSection({ section }) {
           </article>
         ))}
       </div>
-      
+
       {activeProject && createPortal(
         <div className={`project-modal-overlay ${isClosing ? 'closing' : ''}`} onClick={closeProjectModal}>
           <div className="project-modal-bg">
-             <div className="project-modal-gradient"></div>
+            <div className="project-modal-gradient"></div>
           </div>
-          
+
           {/* Desktop Nav */}
           <div className="project-modal-nav left desktop-only" onClick={handlePrev}>
-             <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
-             </svg>
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff" />
+            </svg>
           </div>
           <div className="project-modal-nav right desktop-only" onClick={handleNext}>
-             <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
-             </svg>
+            <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff" />
+            </svg>
           </div>
 
           <button className="project-modal-close-fixed desktop-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-             </svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </button>
 
           {/* Mobile Floating Nav - hidden when footer is visible */}
           <div className={`project-modal-nav-mobile left mobile-only ${footerVisible ? 'hidden' : ''}`} onClick={handlePrev}>
             <div className="nav-mobile-bg">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
+                <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff" />
               </svg>
             </div>
           </div>
           <div className={`project-modal-nav-mobile right mobile-only ${footerVisible ? 'hidden' : ''}`} onClick={handleNext}>
             <div className="nav-mobile-bg">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
+                <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff" />
               </svg>
             </div>
           </div>
@@ -368,140 +382,140 @@ function ProjectsSection({ section }) {
             <div className="contact-copied-message" style={{ bottom: '80px', zIndex: 100 }}>
               <span>Email ID Copied</span>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
           )}
 
           <div className={`project-modal-content ${isScrolled ? 'is-scrolled' : ''}`} onClick={(e) => e.stopPropagation()} onScroll={handleModalScroll}>
             <div className={`project-modal-header ${isScrolled ? 'has-bg' : ''}`}>
-               <div className="project-modal-header-info">
-                  <h2 className="project-modal-title">
-                    <span className="project-modal-number">
-                      {(section.projects.findIndex(p => p.id === activeProject.id) + 1).toString().padStart(2, '0')}.&nbsp;
-                    </span>
-                    {activeProject.title}
-                  </h2>
-                  <div className="project-modal-tags">
-                    {activeProject.tags.map((tag, idx) => (
-                      <React.Fragment key={tag}>
-                        <span className="project-modal-tag">{tag}</span>
-                        {idx < activeProject.tags.length - 1 && <span className="project-modal-tag-separator">|</span>}
-                      </React.Fragment>
-                    ))}
-                  </div>
-               </div>
-                <button className="project-modal-close mobile-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </button>
+              <div className="project-modal-header-info">
+                <h2 className="project-modal-title">
+                  <span className="project-modal-number">
+                    {(section.projects.findIndex(p => p.id === activeProject.id) + 1).toString().padStart(2, '0')}.&nbsp;
+                  </span>
+                  {activeProject.title}
+                </h2>
+                <div className="project-modal-tags">
+                  {activeProject.tags.map((tag, idx) => (
+                    <React.Fragment key={tag}>
+                      <span className="project-modal-tag">{tag}</span>
+                      {idx < activeProject.tags.length - 1 && <span className="project-modal-tag-separator">|</span>}
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+              <button className="project-modal-close mobile-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
 
             <div className="project-modal-body">
-               {activeProject.media && activeProject.media.length > 0 ? (
-                 <div className="project-media-list">
-                   {activeProject.media.map((block) => {
-                     if (block.type === 'video') {
-                       return (
-                         <video 
-                           key={block.id}
-                           src={block.url} 
-                           className="project-modal-full-img" 
-                           autoPlay 
-                           loop 
-                           muted 
-                           playsInline 
-                           style={{ width: '100%', height: 'auto' }}
-                         />
-                       );
-                     }
-                     return (
-                       <img 
-                         key={block.id}
-                         src={block.url} 
-                         alt={activeProject.title} 
-                         className="project-modal-full-img" 
-                         loading="lazy"
-                         style={{ width: '100%', height: 'auto', display: 'block' }}
-                       />
-                     );
-                   })}
-                 </div>
-               ) : (
-                 <div className="project-image-loader" style={{ display: 'flex', justifyContent: 'center', padding: '48px 0', alignItems: 'center' }}>
-                   <p style={{ color: '#888' }}>No media available</p>
-                 </div>
-               )}
+              {activeProject.media && activeProject.media.length > 0 ? (
+                <div className="project-media-list">
+                  {activeProject.media.map((block) => {
+                    if (block.type === 'video') {
+                      return (
+                        <video
+                          key={block.id}
+                          src={block.url}
+                          className="project-modal-full-img"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          style={{ width: '100%', height: 'auto' }}
+                        />
+                      );
+                    }
+                    return (
+                      <img
+                        key={block.id}
+                        src={block.url}
+                        alt={activeProject.title}
+                        className="project-modal-full-img"
+                        loading="lazy"
+                        style={{ width: '100%', height: 'auto', display: 'block' }}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="project-image-loader" style={{ display: 'flex', justifyContent: 'center', padding: '48px 0', alignItems: 'center' }}>
+                  <p style={{ color: '#888' }}>No media available</p>
+                </div>
+              )}
             </div>
 
             <div className="project-modal-footer" ref={footerRef}>
-               {/* Mobile Footer Chevrons - Left */}
-               <div className="footer-chevron left mobile-only" onClick={handlePrev}>
-                  <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff"/>
-                  </svg>
-               </div>
+              {/* Mobile Footer Chevrons - Left */}
+              <div className="footer-chevron left mobile-only" onClick={handlePrev}>
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#ffffff" />
+                </svg>
+              </div>
 
-               <div className="project-modal-footer-content mobile-only">
-                 <div className="project-modal-footer-row">
-                    <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
-                       <span className="project-modal-link-text">Resume</span>
-                       <img src={iconDownload} alt="" />
-                    </a>
-                    <button 
-                      onClick={handleCopyEmail}
-                      className="project-modal-link"
-                      style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
-                    >
-                       <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
-                       <img src={iconCopy} alt="" />
-                    </button>
-                 </div>
-                 <div className="project-modal-footer-row">
-                    <a href={contactSection?.items[1]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
-                       <span className="project-modal-link-text">Linkedin</span>
-                       <img src={iconLinkedin} alt="" />
-                    </a>
-                    <a href={contactSection?.items[2]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
-                       <span className="project-modal-link-text">Instagram</span>
-                       <img src={iconInstagram} alt="" />
-                    </a>
-                 </div>
-               </div>
-
-               <div className="project-modal-footer-left desktop-only">
+              <div className="project-modal-footer-content mobile-only">
+                <div className="project-modal-footer-row">
                   <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
-                     <span className="project-modal-link-text">Resume</span>
-                     <img src={iconDownload} alt="" />
+                    <span className="project-modal-link-text">Resume</span>
+                    <img src={iconDownload} alt="" />
                   </a>
-                  <button 
+                  <button
                     onClick={handleCopyEmail}
                     className="project-modal-link"
                     style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
                   >
-                     <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
-                     <img src={iconCopy} alt="" />
+                    <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
+                    <img src={iconCopy} alt="" />
                   </button>
-               </div>
-               
-               <div className="project-modal-footer-right desktop-only">
+                </div>
+                <div className="project-modal-footer-row">
                   <a href={contactSection?.items[1]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
-                     <span className="project-modal-link-text">Linkedin</span>
-                     <img src={iconLinkedin} alt="" />
+                    <span className="project-modal-link-text">Linkedin</span>
+                    <img src={iconLinkedin} alt="" />
                   </a>
                   <a href={contactSection?.items[2]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
-                     <span className="project-modal-link-text">Instagram</span>
-                     <img src={iconInstagram} alt="" />
+                    <span className="project-modal-link-text">Instagram</span>
+                    <img src={iconInstagram} alt="" />
                   </a>
-               </div>
+                </div>
+              </div>
 
-               {/* Mobile Footer Chevrons - Right */}
-               <div className="footer-chevron right mobile-only" onClick={handleNext}>
-                  <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff"/>
-                  </svg>
-               </div>
+              <div className="project-modal-footer-left desktop-only">
+                <a href={contactSection?.items[0]?.href} className="project-modal-link" download>
+                  <span className="project-modal-link-text">Resume</span>
+                  <img src={iconDownload} alt="" />
+                </a>
+                <button
+                  onClick={handleCopyEmail}
+                  className="project-modal-link"
+                  style={{ background: 'transparent', border: 'none', padding: 0, font: 'inherit', color: 'inherit', cursor: 'pointer' }}
+                >
+                  <span className="project-modal-link-text">{contactSection?.email || 'suhotraneel@gmail.com'}</span>
+                  <img src={iconCopy} alt="" />
+                </button>
+              </div>
+
+              <div className="project-modal-footer-right desktop-only">
+                <a href={contactSection?.items[1]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                  <span className="project-modal-link-text">Linkedin</span>
+                  <img src={iconLinkedin} alt="" />
+                </a>
+                <a href={contactSection?.items[2]?.href} target="_blank" rel="noreferrer" className="project-modal-link">
+                  <span className="project-modal-link-text">Instagram</span>
+                  <img src={iconInstagram} alt="" />
+                </a>
+              </div>
+
+              {/* Mobile Footer Chevrons - Right */}
+              <div className="footer-chevron right mobile-only" onClick={handleNext}>
+                <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#ffffff" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>,
@@ -599,23 +613,54 @@ function StorySection({ section }) {
   );
 }
 
+function StylizedAiTitle({ className }) {
+  // M A K E   W I T H   A I
+  const chars = [
+    { c: 'M', s: 'gotham-bold-red' },
+    { c: 'A', s: 'handjet-light-red' },
+    { c: 'K', s: 'handjet-black-red' },
+    { c: 'E', s: 'gotham-light-red' },
+    { c: ' ', s: 'handjet-light-black' },
+    { c: 'W', s: 'handjet-bold-black' },
+    { c: 'I', s: 'handjet-light-black' },
+    { c: 'T', s: 'handjet-bold-black' },
+    { c: 'H', s: 'handjet-light-black' },
+    { c: ' ', s: 'handjet-medium-black' },
+    { c: 'A', s: 'gotham-bold-black' },
+    { c: 'I', s: 'handjet-light-black' },
+  ];
+
+  return (
+    <h1 className={className}>
+      {chars.map((item, i) => (
+        <span key={i} className={`char-${item.s}`}>
+          {item.c}
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 function AiSection({ section }) {
   return (
     <div className="ai-layout">
-      <header className="big-title-block">
-        <h1>{section.heading}</h1>
-        <p>{section.intro}</p>
+      <header className="ai-title-block">
+        <StylizedAiTitle className="ai-heading" />
+        <p className="ai-intro-text">{section.intro}</p>
       </header>
-      <blockquote>{section.quote}</blockquote>
+      <div className="ai-quote-container">
+        <span className="ai-quote-text">
+          <span className="quote-mark">“</span> I <span className="text-bold">iterate rapidly</span> using multiple AI tools, understanding their <span className="text-bold">strengths</span> and <span className="text-bold">limitations</span> to assign the right tasks to the right systems. Some phases benefit from <span className="text-bold">full AI workflows</span>, while others require <span className="text-bold">selective intervention</span>. <span className="quote-mark">”</span>
+        </span>
+      </div>
       <div className="ai-card-stack">
         {section.items.map((item, index) => (
           <article className="ai-card" key={item.label}>
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <div>
+            <div className="ai-card-text">
               <h2>{item.label}</h2>
-              <p>{item.detail}</p>
+              <p dangerouslySetInnerHTML={{ __html: item.detail }}></p>
             </div>
-            <img src={heroImage} alt="" />
+            <img src={heroImage} alt="" className="ai-card-img" />
           </article>
         ))}
       </div>
@@ -663,12 +708,12 @@ function TestimonialsSection({ section }) {
 
   return (
     <div className="testimonials-layout">
-      <div 
+      <div
         className="testimonial-carousel-container"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        
+
         {section.items.map((item, index) => {
           let position = 'hidden-right';
           if (index === currentIndex) {
@@ -695,17 +740,17 @@ function TestimonialsSection({ section }) {
         {/* Chevrons */}
         <div className="testimonial-chevron left" onClick={handlePrev}>
           <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#111111"/>
+            <path d="M9.88 1.88L8 0L0 8L8 16L9.88 14.12L3.77333 8L9.88 1.88Z" fill="#111111" />
           </svg>
         </div>
         <div className="testimonial-chevron right" onClick={handleNext}>
           <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#111111"/>
+            <path d="M1.88 0L0 1.88L6.10667 8L0 14.12L1.88 16L9.88 8L1.88 0Z" fill="#111111" />
           </svg>
         </div>
 
       </div>
-      
+
       <p className="testimonials-bg-text">
         <span>What </span>
         <span className="testimonials-bg-text-red">People</span>
@@ -739,18 +784,18 @@ function ContactSection({ section }) {
     if (!containerRef.current) return;
     const engine = Matter.Engine.create();
     engineRef.current = engine;
-    
+
     const width = 744;
     const height = containerRef.current.clientHeight;
     const floorY = height - 36;
-    
+
     const floor = Matter.Bodies.rectangle(width / 2, floorY + 250, width + 1000, 500, { isStatic: true });
     const leftWall = Matter.Bodies.rectangle(-250, height / 2, 500, height * 4, { isStatic: true });
     const rightWall = Matter.Bodies.rectangle(width + 250, height / 2, 500, height * 4, { isStatic: true });
     const ceiling = Matter.Bodies.rectangle(width / 2, -1000, width + 1000, 500, { isStatic: true });
-    
+
     Matter.World.add(engine.world, [floor, leftWall, rightWall, ceiling]);
-    
+
     const faces = [];
     for (let i = 0; i < 60; i++) {
       const x = 100 + Math.random() * 544;
@@ -765,86 +810,93 @@ function ContactSection({ section }) {
     }
     bodiesRef.current = faces;
     Matter.World.add(engine.world, faces);
-    
+
     const runner = Matter.Runner.create();
     runnerRef.current = runner;
-    
+
     const prevMousePos = { x: -1000, y: -1000, active: false };
-    
+
     Matter.Events.on(engine, 'beforeUpdate', () => {
+      const currentHeight = containerRef.current ? containerRef.current.clientHeight : height;
+      const dynamicFloorY = currentHeight - 36;
+
+      Matter.Body.setPosition(floor, { x: width / 2, y: dynamicFloorY + 250 });
+      Matter.Body.setPosition(leftWall, { x: -250, y: currentHeight / 2 });
+      Matter.Body.setPosition(rightWall, { x: width + 250, y: currentHeight / 2 });
+
       let mvx = 0;
       let mvy = 0;
       let mouseSpeed = 0;
       let mx = 0;
       let my = 0;
-      
+
       if (mousePos.current.active) {
         mx = mousePos.current.x;
         my = mousePos.current.y;
-        
+
         if (prevMousePos.active) {
           mvx = mx - prevMousePos.x;
           mvy = my - prevMousePos.y;
         }
-        
+
         mouseSpeed = Math.sqrt(mvx * mvx + mvy * mvy);
       }
-      
+
       bodiesRef.current.forEach(body => {
         if (mousePos.current.active) {
           let dx = body.position.x - mx;
           let dy = body.position.y - my;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          
+
           if (dist < 180) {
             if (dist < 1) { dx = 1; dy = 0; dist = 1; }
-            
+
             // Base repulsion so emojis don't stay near the pointer.
             let forceMagnitude = 0.001 * (180 - dist) / 180;
-            
+
             // Add extra force based on mouse velocity moving towards the emoji
             if (mouseSpeed > 0) {
               const dirX = dx / dist;
               const dirY = dy / dist;
               const dotProduct = (mvx * dirX) + (mvy * dirY);
-              
+
               if (dotProduct > 0) {
                 forceMagnitude += (dotProduct * 0.0005) * ((180 - dist) / 180);
               }
             }
-            
+
             Matter.Body.applyForce(body, body.position, {
               x: (dx / dist) * forceMagnitude,
               y: (dy / dist) * forceMagnitude
             });
           }
         }
-        
+
         const maxVel = 35;
         if (body.velocity.x > maxVel) Matter.Body.setVelocity(body, { x: maxVel, y: body.velocity.y });
         if (body.velocity.x < -maxVel) Matter.Body.setVelocity(body, { x: -maxVel, y: body.velocity.y });
         if (body.velocity.y > maxVel) Matter.Body.setVelocity(body, { x: body.velocity.x, y: maxVel });
         if (body.velocity.y < -maxVel) Matter.Body.setVelocity(body, { x: body.velocity.x, y: -maxVel });
-        
+
         // Enforce container bounds strictly to prevent clipping and leaving
         if (body.position.y < 16 && body.velocity.y < 0) {
-            Matter.Body.setPosition(body, { x: body.position.x, y: 16 });
-            Matter.Body.setVelocity(body, { x: body.velocity.x, y: Math.abs(body.velocity.y) * 0.5 });
+          Matter.Body.setPosition(body, { x: body.position.x, y: 16 });
+          Matter.Body.setVelocity(body, { x: body.velocity.x, y: Math.abs(body.velocity.y) * 0.5 });
         }
         if (body.position.x < 16) {
-            Matter.Body.setPosition(body, { x: 16, y: body.position.y });
-            if (body.velocity.x < 0) Matter.Body.setVelocity(body, { x: Math.abs(body.velocity.x) * 0.5, y: body.velocity.y });
+          Matter.Body.setPosition(body, { x: 16, y: body.position.y });
+          if (body.velocity.x < 0) Matter.Body.setVelocity(body, { x: Math.abs(body.velocity.x) * 0.5, y: body.velocity.y });
         }
         if (body.position.x > width - 16) {
-            Matter.Body.setPosition(body, { x: width - 16, y: body.position.y });
-            if (body.velocity.x > 0) Matter.Body.setVelocity(body, { x: -Math.abs(body.velocity.x) * 0.5, y: body.velocity.y });
+          Matter.Body.setPosition(body, { x: width - 16, y: body.position.y });
+          if (body.velocity.x > 0) Matter.Body.setVelocity(body, { x: -Math.abs(body.velocity.x) * 0.5, y: body.velocity.y });
         }
-        if (body.position.y > floorY - 16) {
-            Matter.Body.setPosition(body, { x: body.position.x, y: floorY - 16 });
-            if (body.velocity.y > 0) Matter.Body.setVelocity(body, { x: body.velocity.x, y: -Math.abs(body.velocity.y) * 0.5 });
+        if (body.position.y > dynamicFloorY - 16) {
+          Matter.Body.setPosition(body, { x: body.position.x, y: dynamicFloorY - 16 });
+          if (body.velocity.y > 0) Matter.Body.setVelocity(body, { x: body.velocity.x, y: -Math.abs(body.velocity.y) * 0.5 });
         }
       });
-      
+
       if (mousePos.current.active) {
         prevMousePos.x = mx;
         prevMousePos.y = my;
@@ -924,8 +976,8 @@ function ContactSection({ section }) {
   };
 
   return (
-    <div 
-      className="contact-layout" 
+    <div
+      className="contact-layout"
       ref={containerRef}
       onMouseMove={handlePointerMove}
       onMouseLeave={handlePointerLeave}
@@ -963,7 +1015,7 @@ function ContactSection({ section }) {
         <div className="contact-copied-message">
           <span>Email ID Copied</span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       )}
@@ -976,16 +1028,16 @@ function ContactSection({ section }) {
               <img src={iconDownload} alt="" />
             </div>
           </a>
-          <button 
-            onClick={handleCopyEmail} 
-            className="contact-link" 
-            style={{ 
-              background: 'transparent', 
-              border: 'none', 
-              padding: 0, 
+          <button
+            onClick={handleCopyEmail}
+            className="contact-link"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
               margin: 0,
-              cursor: 'pointer', 
-              font: 'inherit', 
+              cursor: 'pointer',
+              font: 'inherit',
               color: 'inherit',
               appearance: 'none',
               outline: 'none',
@@ -1050,7 +1102,7 @@ function SectionPage({ section, scaleStyle, contentScale = 1 }) {
 
   React.useEffect(() => {
     if (!articleRef.current) return;
-    
+
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
         const unscaledHeight = entry.target.offsetHeight;
@@ -1059,9 +1111,9 @@ function SectionPage({ section, scaleStyle, contentScale = 1 }) {
         setMarginBottom(-diff);
       }
     });
-    
+
     resizeObserver.observe(articleRef.current);
-    
+
     return () => resizeObserver.disconnect();
   }, [contentScale]);
 
