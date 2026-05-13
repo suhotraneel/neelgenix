@@ -1260,6 +1260,13 @@
   min-height: auto !important;
 }
 
+@media (max-width: 1024px) {
+  .content-section-contact {
+    height: calc(100vh - 110px) !important;
+    height: calc(100dvh - 110px) !important;
+  }
+}
+
 .figma-page-contact {
   height: calc((100vh - 48px) / var(--content-scale, 1)) !important;
   height: calc((100dvh - 48px) / var(--content-scale, 1)) !important;
@@ -1268,10 +1275,10 @@
   flex-direction: column;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
   .figma-page-contact {
-    height: calc(100vh - 48px) !important;
-    height: calc(100dvh - 48px) !important;
+    height: calc((100vh - 114px) / var(--content-scale, 1)) !important;
+    height: calc((100dvh - 114px) / var(--content-scale, 1)) !important;
   }
 }
 

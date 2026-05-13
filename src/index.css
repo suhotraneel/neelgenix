@@ -238,7 +238,7 @@ body {
 
   .right-container {
     padding: 16px;
-    gap: 16px;
+    gap: 32px;
   }
 
   .logo-container {
@@ -334,7 +334,9 @@ body {
     top: 50%;
     left: calc(4px + var(--scroll-progress, 0) * (100% - 8px));
   }
+}
 
+@media (max-width: 768px) {
   .content-section {
     scroll-margin-top: 16px;
     min-height: auto !important;

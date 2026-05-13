@@ -132,13 +132,13 @@
   object-fit: contain;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 769px) {
   :root {
     --logo-w: 172px;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 768px) {
   .ww-logo-track {
     padding: 0 calc((100vw - var(--logo-w)) / 2);
   }
