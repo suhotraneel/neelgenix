@@ -205,17 +205,7 @@ body {
 }
 
 .content-section {
-  width: 100%;
-  max-width: none;
-  flex-shrink: 0;
-  border-radius: 4px;
   scroll-margin-top: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  overflow: visible;
-  min-height: 0 !important;
 }
 
 .content-scale-frame {

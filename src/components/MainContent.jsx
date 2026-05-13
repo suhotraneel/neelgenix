@@ -50,16 +50,7 @@ function MainContent({
     };
   }, [rightContainerRef]);
 
-  const sectionStyles = useMemo(() => {
-    return sections.reduce((acc, section) => {
-      const height = `${Math.round(section.designHeight * contentScale)}px`;
-      acc[section.id] = {
-        minHeight: height,
-        '--section-color': section.color,
-      };
-      return acc;
-    }, {});
-  }, [sections, contentScale]);
+
 
   const canvasStyle = {
     '--content-scale': contentScale,
@@ -81,14 +72,12 @@ function MainContent({
       style={canvasStyle}
     >
       {sections.map((section) => (
-        <section
+        <SectionPage 
           key={section.id}
-          id={section.id}
-          className={`content-section content-section-${section.slug}`}
-          style={sectionStyles[section.id]}
-        >
-          <SectionPage section={section} scaleStyle={getFrameStyle(section)} contentScale={contentScale} />
-        </section>
+          section={section} 
+          scaleStyle={getFrameStyle(section)} 
+          contentScale={contentScale} 
+        />
       ))}
     </main>
   );

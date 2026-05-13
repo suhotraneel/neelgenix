@@ -1119,8 +1119,9 @@ function SectionPage({ section, scaleStyle, contentScale = 1 }) {
 
   return (
     <article
+      id={section.id}
       ref={articleRef}
-      className={`figma-page figma-page-${section.layout} is-${section.tone || 'light'} content-scale-frame`}
+      className={`content-section content-section-${section.slug} figma-page figma-page-${section.layout} is-${section.tone || 'light'} content-scale-frame`}
       style={{ '--section-color': section.color, ...scaleStyle, marginBottom: `${marginBottom}px` }}
     >
       <SectionHeader section={section} />
