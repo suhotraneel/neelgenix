@@ -189,7 +189,7 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 48px;
   align-items: center;
   background: var(--bg-color);
   /* Hide native scrollbar for custom React scrollbar */
