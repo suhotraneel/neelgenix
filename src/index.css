@@ -193,12 +193,15 @@ body {
   align-items: center;
   background: var(--bg-color);
   /* Hide native scrollbar for custom React scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .right-container::-webkit-scrollbar {
-  display: none; /* WebKit */
+  display: none;
+  /* WebKit */
 }
 
 .content-section {
@@ -212,6 +215,7 @@ body {
   align-items: flex-start;
   position: relative;
   overflow: visible;
+  min-height: 0 !important;
 }
 
 .content-scale-frame {
