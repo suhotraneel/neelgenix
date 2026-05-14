@@ -74,8 +74,8 @@ function Sidebar({ sections, activeSectionId, onNavClick, onLogoClick }) {
         onClick={onLogoClick}
         style={{ cursor: 'pointer' }}
       >
-        <img src="assets/logo.svg" alt="Neel Genix Logo" className="logo desktop-logo" />
-        <img src="assets/ngiconlight.svg" alt="Neel Genix Logo" className="logo mobile-logo" />
+        <img src={`${import.meta.env.BASE_URL}assets/logo.svg`} alt="Neel Genix Logo" className="logo desktop-logo" />
+        <img src={`${import.meta.env.BASE_URL}assets/ngiconlight.svg`} alt="Neel Genix Logo" className="logo mobile-logo" />
       </div>
       <div className="menu-container" ref={menuRef}>
         <div className="menu">

@@ -134,7 +134,7 @@ function BridgeSection({ section }) {
               <p>{item.detail}</p>
             </div>
             <div className="bridge-skill-image">
-              <img src={imgImage22} alt="" />
+              <img src={item.image || imgImage22} alt="" />
             </div>
           </article>
         ))}

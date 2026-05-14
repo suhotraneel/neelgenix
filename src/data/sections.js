@@ -44,14 +44,17 @@ export const sectionsData = [
       {
         label: 'Product Direction',
         detail: "I turn ambiguous requirements into clear product direction, defining what to build, why it matters, and how products evolve through the process.",
+        image: `${import.meta.env.BASE_URL}assets/contribution-images/product-direction.jpg`,
       },
       {
         label: 'Technical Alignment',
         detail: "I design with technical feasibility in mind, working closely with engineers to refine experiences and shape products through execution.",
+        image: `${import.meta.env.BASE_URL}assets/contribution-images/technical-alignment.jpg`,
       },
       {
         label: 'Systems & Storytelling',
         detail: "I design systems that go beyond screens, creating consistency and structure while shaping experiences through cohesive narratives.",
+        image: `${import.meta.env.BASE_URL}assets/contribution-images/systems-storytelling.jpg`,
       },
     ],
   },
