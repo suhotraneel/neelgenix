@@ -218,7 +218,7 @@
 
 .bridge-skill-text h2 {
   font-family: 'Handjet', sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 24px;
   line-height: 26px;
   color: #111;
@@ -409,30 +409,44 @@
 }
 
 .project-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 364px 364px;
+  justify-content: center;
   gap: 16px;
   width: 100%;
 }
 
 .project-row {
-  width: 744px;
-  height: 120px;
+  position: relative;
+  width: 364px;
+  height: auto;
+  min-height: 328px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.16);
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+@media (hover: hover) {
+  .project-row:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+  }
 }
 
 .filmstrip-edge {
   width: 20px;
-  height: 112px;
+  height: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
   flex-shrink: 0;
+  margin-top: 8px;
 }
 
 .film-dot {
@@ -445,21 +459,25 @@
 
 .project-main-content {
   flex: 1;
-  height: 112px;
+  height: 320px;
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  margin-top: 4px;
+  border-radius: 12px;
 }
 
 .project-thumb-container {
-  width: 232px;
-  height: 112px;
+  width: 100%;
+  height: 200px;
   background-color: #0d0d0d;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 0;
 }
 
 .project-thumb-img {
@@ -470,11 +488,14 @@
 
 .project-details {
   flex: 1;
-  height: 112px;
-  padding: 12px 16px;
+  width: 100%;
+  height: 120px;
+  padding: 16px 12px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .project-details-inner {
@@ -482,6 +503,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+  width: 100%;
   height: 100%;
   overflow: hidden;
 }
@@ -489,14 +511,15 @@
 .project-title-group {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  width: 100%;
 }
 
 .project-title-pixel {
   font-family: 'Handjet', sans-serif;
   font-weight: 500;
-  font-size: 36px;
-  line-height: 1;
+  font-size: 32px;
+  line-height: 36px;
   color: white;
   white-space: nowrap;
   overflow: hidden;
@@ -507,10 +530,10 @@
 .project-detail-text {
   font-family: 'Gotham', sans-serif;
   font-weight: 300;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 14px;
   color: rgba(255, 252, 245, 0.72);
-  margin-top: 2px;
+  margin-top: 0;
 }
 
 .project-tag-row {
@@ -524,7 +547,7 @@
   height: 20px;
   display: inline-flex;
   align-items: center;
-  padding: 0 8px;
+  padding: 4px 6px;
   border: 1px solid rgba(255, 252, 245, 0.16);
   font-family: 'Gotham', sans-serif;
   font-weight: 400;
@@ -534,12 +557,14 @@
 }
 
 .project-arrow-box {
+  position: absolute;
+  bottom: 16px;
+  right: 12px;
   width: 20px;
   height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
   opacity: 0.8;
   flex-shrink: 0;
 }
@@ -2138,6 +2163,8 @@
   }
 
   .project-list {
+    display: flex;
+    flex-direction: column;
     gap: calc(12 / 4.52 * 1vw);
     width: 100%;
   }
@@ -2182,7 +2209,7 @@
   .project-details {
     width: 100%;
     height: calc(120 / 4.52 * 1vw);
-    padding: calc(16 / 4.52 * 1vw);
+    padding: calc(16 / 4.52 * 1vw) calc(12 / 4.52 * 1vw);
     flex-direction: column;
     align-items: flex-start;
     position: relative;
@@ -2218,15 +2245,15 @@
   .project-tag {
     height: calc(24 / 4.52 * 1vw);
     padding: calc(4 / 4.52 * 1vw) calc(8 / 4.52 * 1vw);
-    font-size: calc(10 / 4.52 * 1vw);
+    font-size: calc(9 / 4.52 * 1vw);
   }
 
   .project-arrow-box {
-    width: calc(20 / 4.52 * 1vw);
-    height: calc(20 / 4.52 * 1vw);
+    width: calc(24 / 4.52 * 1vw);
+    height: calc(24 / 4.52 * 1vw);
     position: absolute;
-    bottom: calc(18 / 4.52 * 1vw);
-    right: calc(16 / 4.52 * 1vw);
+    bottom: calc(16 / 4.52 * 1vw);
+    right: calc(12 / 4.52 * 1vw);
   }
 
   /* Mobile Section 9 - Testimonials */

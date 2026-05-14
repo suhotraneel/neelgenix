@@ -404,10 +404,7 @@ function ProjectsSection({ section }) {
             style={{ backgroundColor: projectColors[project.title] || rowColors[index % rowColors.length], cursor: 'pointer', transition: 'background-color 0.5s ease' }}
             onClick={() => handleProjectClick(project)}
           >
-            <div className="filmstrip-edge desktop-only" aria-hidden="true">
-              {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
-            </div>
-            <div className="filmstrip-edge mobile-only" aria-hidden="true">
+            <div className="filmstrip-edge" aria-hidden="true">
               {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
 
@@ -439,10 +436,7 @@ function ProjectsSection({ section }) {
               </div>
             </div>
 
-            <div className="filmstrip-edge desktop-only" aria-hidden="true">
-              {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
-            </div>
-            <div className="filmstrip-edge mobile-only" aria-hidden="true">
+            <div className="filmstrip-edge" aria-hidden="true">
               {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
           </article>
