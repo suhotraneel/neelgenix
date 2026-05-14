@@ -643,7 +643,7 @@ function WorkOnSection({ section }) {
         {section.items.map((item, idx) => (
           <article className="work-card" key={idx}>
             <div aria-hidden="true" className="work-card-bg">
-              <img src={workOnBg} alt="" className="work-card-bg-img" />
+              <img src={item.image || workOnBg} alt="" className="work-card-bg-img" />
               <div className="work-card-bg-gradient" />
             </div>
             <div className="work-card-content">
@@ -765,7 +765,7 @@ function AiSection({ section }) {
               <h2>{item.label}</h2>
               <p dangerouslySetInnerHTML={{ __html: item.detail }}></p>
             </div>
-            <img src={heroImage} alt="" className="ai-card-img" />
+            <img src={item.image || heroImage} alt="" className="ai-card-img" />
           </article>
         ))}
       </div>

@@ -98,30 +98,35 @@ export const sectionsData = [
         detail:
           'I start by bringing clarity to the problem and questioning assumptions. From there, I design flows, interactions, and interfaces that align user behaviour with business intent and create direction teams can act on.',
         meta: ['UX Design', 'UI Design', 'Product Thinking', 'Interaction Design', 'User Flows', 'Journey Mapping', 'Information Architecture', 'Design Handoff'],
+        image: `${import.meta.env.BASE_URL}assets/skills-images/product-experience-design.jpg`,
       },
       {
         label: 'Design Systems & Scalability',
         detail:
           'I design and build systems that ensure visual consistency and clarity across interfaces. From components to patterns, I focus on creating scalable UI foundations that support both usability and growth.',
         meta: ['Component Libraries', 'UI Consistency', 'Design Tokens', 'Responsive Design', 'Icon Libraries', 'Surface Systems', 'System Documentation', 'Design Language'],
+        image: `${import.meta.env.BASE_URL}assets/skills-images/design-systems-scalability.jpg`,
       },
       {
         label: 'User Research',
         detail:
           'I work with research inputs and observed behaviour to uncover what truly matters. My focus is on translating insights into clear decisions that improve usability and make experiences more relevant.',
         meta: ['Insight Synthesis', 'Behavioral Analysis', 'Persona Mapping', 'Usability Testing', 'Problem Framing', 'Data Interpretation', 'Qualitative Research', 'Heuristic Evaluation'],
+        image: `${import.meta.env.BASE_URL}assets/skills-images/user-research.jpg`,
       },
       {
         label: 'AI & Interaction Design',
         detail:
           'I design interactions for intelligent systems while leveraging AI in my own workflows to explore, iterate, and refine solutions. My focus is on making AI intuitive, usable, and meaningful in real contexts.',
         meta: ['AI Workflows', 'Prompt Design', 'Conversational UX', 'Multimodal Design', 'Interaction Patterns', 'Rapid Iteration', 'Use-case Design', 'AI Prototyping'],
+        image: `${import.meta.env.BASE_URL}assets/skills-images/ai-interaction-design.jpg`,
       },
       {
         label: 'Product & Experience Design',
         detail:
           'I take designs beyond screens by building and prototyping interfaces. This helps ensure feasibility, smoother collaboration with developers, and alignment between UI intent and final output.',
         meta: ['HTML', 'CSS', 'JavaScript', 'Python', 'AI-Assisted Coding', 'Content Management System', 'Shopify', 'Git (Version Control)'],
+        image: `${import.meta.env.BASE_URL}assets/skills-images/implementation.jpg`,
       },
     ],
   },
@@ -183,14 +188,17 @@ export const sectionsData = [
       {
         label: 'Automation & Systems',
         detail: 'I design automation workflows using tools like n8n to <span class="text-bold">handle repeatable tasks</span> with defined outcomes, often integrating <span class="text-bold">human-in-the-loop</span> structures to maintain control.',
+        image: `${import.meta.env.BASE_URL}assets/ai-approach-images/automation-systems.jpg`,
       },
       {
         label: 'Responsible Usage',
         detail: 'I follow principles around <span class="text-bold">ethical</span> and <span class="text-bold">effective</span> AI usage, ensuring outputs are reliable, lawful, and intentional. My approach is backed by a <span class="text-bold">Google </span>certification in <span class="text-bold">Responsible AI.</span>.',
+        image: `${import.meta.env.BASE_URL}assets/ai-approach-images/responsible-usage.jpg`,
       },
       {
         label: 'Technical Understanding',
         detail: 'Beyond using AI tools, I understand <span class="text-bold">how</span> and <span class="text-bold">why</span> they work. Through collaboration with engineering teams on AI products, I contribute to <span class="text-bold">decisions</span> on when AI is effective.',
+        image: `${import.meta.env.BASE_URL}assets/ai-approach-images/technical-understanding.jpg`,
       },
     ],
   },
