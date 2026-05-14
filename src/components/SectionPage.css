@@ -1929,12 +1929,12 @@
   }
 
   .worked-heading {
-    font-size: 48px;
+    font-size: calc(48 / 4.52 * 1vw);
   }
 
   .worked-layout {
-    gap: 32px;
-    padding: 32px 0;
+    gap: calc(32 / 4.52 * 1vw);
+    padding: calc(32 / 4.52 * 1vw) 0;
   }
 
   .hero-bg-img {
