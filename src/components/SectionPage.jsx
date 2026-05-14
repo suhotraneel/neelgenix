@@ -637,7 +637,7 @@ function WorkOnSection({ section }) {
         <span className="work-heading-light">Here’s</span>
         <span className="work-heading-medium"> </span>
         <span className="work-heading-bold">what I work on </span>
-        <span className="work-heading-light">all day </span>
+        <span className="work-heading-light mobile-break">all day </span>
       </h1>
       <div className="work-card-stack">
         {section.items.map((item, idx) => (
