@@ -172,8 +172,12 @@
 }
 
 .bridge-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   color: #111;
+  gap: 8px;
 }
 
 .bridge-intro-bold {
@@ -521,11 +525,12 @@
   display: inline-flex;
   align-items: center;
   padding: 0 8px;
-  border: 1px solid rgba(255, 252, 245, 0.2);
+  border: 1px solid rgba(255, 252, 245, 0.16);
   font-family: 'Gotham', sans-serif;
   font-weight: 400;
   font-size: 9px;
   color: rgba(255, 252, 245, 0.8);
+  background-color: rgba(255, 252, 245, 0.08);
 }
 
 .project-arrow-box {
@@ -2100,6 +2105,128 @@
 
   .project-modal-link-text {
     font-size: 14px;
+  }
+
+  /* Mobile Section 4 - Projects */
+  .projects-layout {
+    padding: calc(16 / 4.52 * 1vw) 0 0;
+    gap: calc(20 / 4.52 * 1vw);
+    width: 100%;
+    margin-top: calc(8 / 4.52 * 1vw);
+  }
+
+  .big-title-block h1 {
+    font-size: calc(56 / 4.52 * 1vw);
+  }
+
+  .project-heading {
+    font-size: calc(64 / 4.52 * 1vw);
+  }
+
+  .big-title-block p {
+    font-size: calc(14 / 4.52 * 1vw);
+    line-height: calc(16 / 4.52 * 1vw);
+    width: calc(392 / 4.52 * 1vw);
+    margin: calc(4 / 4.52 * 1vw) auto 0;
+    padding: 0 calc(14 / 4.52 * 1vw);
+  }
+
+  .big-title-block .project-intro-text {
+    font-size: calc(12 / 4.52 * 1vw);
+    line-height: calc(16 / 4.52 * 1vw);
+    margin-top: calc(8 / 4.52 * 1vw);
+  }
+
+  .project-list {
+    gap: calc(12 / 4.52 * 1vw);
+    width: 100%;
+  }
+
+  .project-row {
+    width: 100%;
+    height: auto;
+    min-height: calc(328 / 4.52 * 1vw);
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .filmstrip-edge {
+    width: calc(20 / 4.52 * 1vw);
+    height: calc(320 / 4.52 * 1vw);
+    gap: calc(8 / 4.52 * 1vw);
+    margin-top: calc(8 / 4.52 * 1vw);
+    justify-content: flex-start;
+  }
+
+  .film-dot {
+    width: calc(12 / 4.52 * 1vw);
+    height: calc(8 / 4.52 * 1vw);
+  }
+
+  .project-main-content {
+    flex: 1;
+    height: calc(320 / 4.52 * 1vw);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    margin-top: calc(4 / 4.52 * 1vw);
+    border-radius: calc(12 / 4.52 * 1vw);
+  }
+
+  .project-thumb-container {
+    width: 100%;
+    height: calc(200 / 4.52 * 1vw);
+    border-radius: 0;
+  }
+
+  .project-details {
+    width: 100%;
+    height: calc(120 / 4.52 * 1vw);
+    padding: calc(16 / 4.52 * 1vw);
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .project-details-inner {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .project-title-group {
+    width: 100%;
+    gap: calc(2 / 4.52 * 1vw);
+  }
+
+  .project-title-pixel {
+    font-size: calc(32 / 4.52 * 1vw);
+    line-height: calc(36 / 4.52 * 1vw);
+  }
+
+  .project-detail-text {
+    font-size: calc(10 / 4.52 * 1vw);
+    line-height: calc(14 / 4.52 * 1vw);
+  }
+
+  .project-tag-row {
+    gap: calc(8 / 4.52 * 1vw);
+  }
+
+  .project-tag {
+    height: calc(24 / 4.52 * 1vw);
+    padding: calc(4 / 4.52 * 1vw) calc(8 / 4.52 * 1vw);
+    font-size: calc(10 / 4.52 * 1vw);
+  }
+
+  .project-arrow-box {
+    width: calc(20 / 4.52 * 1vw);
+    height: calc(20 / 4.52 * 1vw);
+    position: absolute;
+    bottom: calc(18 / 4.52 * 1vw);
+    right: calc(16 / 4.52 * 1vw);
   }
 
   /* Mobile Section 9 - Testimonials */

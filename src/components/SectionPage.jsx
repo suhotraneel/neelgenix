@@ -185,6 +185,90 @@ function StylizedTitle({ className }) {
   );
 }
 
+const getPredominantHue = (src) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "Anonymous";
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      const MAX_SIZE = 100;
+      let width = img.width;
+      let height = img.height;
+      if (width > MAX_SIZE || height > MAX_SIZE) {
+        if (width > height) {
+          height *= MAX_SIZE / width;
+          width = MAX_SIZE;
+        } else {
+          width *= MAX_SIZE / height;
+          height = MAX_SIZE;
+        }
+      }
+      canvas.width = Math.max(1, width);
+      canvas.height = Math.max(1, height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+      const hueCounts = new Array(360).fill(0);
+      let validPixels = 0;
+
+      for (let i = 0; i < data.length; i += 4) {
+        let r = data[i] / 255;
+        let g = data[i + 1] / 255;
+        let b = data[i + 2] / 255;
+        let a = data[i + 3] / 255;
+
+        if (a < 0.1) continue;
+
+        const max = Math.max(r, g, b), min = Math.min(r, g, b);
+        let h, s, l = (max + min) / 2;
+
+        if (max === min) continue;
+
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+        if (s < 0.1 || l < 0.1 || l > 0.9) continue;
+
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h = Math.round(h * 60);
+        if (h < 0) h += 360;
+        if (h >= 360) h = 0;
+
+        hueCounts[h] += (s * (1 - Math.abs(2 * l - 1)));
+        validPixels++;
+      }
+
+      if (validPixels === 0) {
+        resolve(0);
+        return;
+      }
+
+      let maxCount = -1;
+      let predominantHue = 0;
+      for (let i = 0; i < 360; i++) {
+        let sum = 0;
+        for (let j = -5; j <= 5; j++) {
+          let idx = (i + j + 360) % 360;
+          sum += hueCounts[idx];
+        }
+        if (sum > maxCount) {
+          maxCount = sum;
+          predominantHue = i;
+        }
+      }
+
+      resolve(predominantHue);
+    };
+    img.onerror = () => resolve(0);
+    img.src = src;
+  });
+};
+
 function ProjectsSection({ section }) {
   const [activeProject, setActiveProject] = React.useState(null);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -192,6 +276,7 @@ function ProjectsSection({ section }) {
   const [copied, setCopied] = React.useState(false);
   const [footerVisible, setFooterVisible] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
+  const [projectColors, setProjectColors] = React.useState({});
   const footerRef = React.useRef(null);
   const rowColors = ['#1A161E', '#161E1E', '#1E1616', '#161E16'];
   const projectImages = [project1, project2, project3, project4];
@@ -199,6 +284,25 @@ function ProjectsSection({ section }) {
   React.useEffect(() => {
     setImageLoaded(false);
   }, [activeProject]);
+
+  React.useEffect(() => {
+    const loadColors = async () => {
+      if (!section.projects) return;
+      const colors = {};
+      for (let i = 0; i < section.projects.length; i++) {
+        const project = section.projects[i];
+        const src = project.image || projectImages[i % projectImages.length];
+        try {
+          const hue = await getPredominantHue(src);
+          colors[project.title] = `hsl(${hue}, 60%, 10%)`;
+        } catch (e) {
+          colors[project.title] = rowColors[i % rowColors.length];
+        }
+      }
+      setProjectColors(colors);
+    };
+    loadColors();
+  }, [section.projects]);
 
   React.useEffect(() => {
     if (!activeProject) {
@@ -297,11 +401,14 @@ function ProjectsSection({ section }) {
           <article
             className="project-row"
             key={project.title}
-            style={{ backgroundColor: rowColors[index % rowColors.length], cursor: 'pointer' }}
+            style={{ backgroundColor: projectColors[project.title] || rowColors[index % rowColors.length], cursor: 'pointer', transition: 'background-color 0.5s ease' }}
             onClick={() => handleProjectClick(project)}
           >
-            <div className="filmstrip-edge" aria-hidden="true">
+            <div className="filmstrip-edge desktop-only" aria-hidden="true">
               {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
+            </div>
+            <div className="filmstrip-edge mobile-only" aria-hidden="true">
+              {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
 
             <div className="project-main-content">
@@ -323,16 +430,20 @@ function ProjectsSection({ section }) {
                 </div>
                 <div className="project-arrow-box">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12.5 5L17.5 10L12.5 15" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M2.5 10H17.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="15.5" cy="10" r="1.5" fill="white" />
+                    <path d="M9 16.9999C9 16.9999 9 16.8999 9 16.6999V14.9999H11C11 14.9999 11 15.1013 11 15.3041V16.9999C11 16.9999 10.8986 16.9999 10.6958 16.9999H9ZM11 14.9999C11 14.9999 11 14.8999 11 14.6999V12.9999H13C13 12.9999 13 13.1013 13 13.3041V14.9999C13 14.9999 12.8986 14.9999 12.6958 14.9999H11ZM13 12.9999C13 12.9999 13 12.8999 13 12.6999V10.9999H15C15 10.9999 15 11.1013 15 11.3041V12.9999C15 12.9999 14.8986 12.9999 14.6958 12.9999H13ZM15 10.9999C15 10.9999 15 10.8999 15 10.6999V8.99989H17C17 8.99989 17 9.10127 17 9.30405V10.9999C17 10.9999 16.8986 10.9999 16.6958 10.9999H15ZM13 8.99989C13 8.99989 13 8.89989 13 8.69989V6.99989H15C15 6.99989 15 7.10128 15 7.30405V8.99989C15 8.99989 14.8986 8.99989 14.6958 8.99989H13ZM11 6.99989C11 6.99989 11 6.89989 11 6.69989V4.99989H13C13 4.99989 13 5.10127 13 5.30405V6.99989C13 6.99989 12.8986 6.99989 12.6958 6.99989H11ZM9 4.99989C9 4.99989 9 4.89989 9 4.69989V2.99989H11C11 2.99989 11 3.10128 11 3.30405V4.99989C11 4.99989 10.8986 4.99989 10.6958 4.99989H9Z" fill="white" />
+                    <path d="M11 8.99989H13V10.9999L11 10.9999V8.99989Z" fill="white" />
+                    <path d="M7 8.99989H9V10.9999H7V8.99989Z" fill="white" />
+                    <path d="M3 8.99989H5V10.9999H3V8.99989Z" fill="white" />
                   </svg>
                 </div>
               </div>
             </div>
 
-            <div className="filmstrip-edge" aria-hidden="true">
+            <div className="filmstrip-edge desktop-only" aria-hidden="true">
               {[...Array(7)].map((_, i) => <div key={i} className="film-dot" />)}
+            </div>
+            <div className="filmstrip-edge mobile-only" aria-hidden="true">
+              {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
           </article>
         ))}
