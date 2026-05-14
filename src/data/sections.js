@@ -106,19 +106,19 @@ export const sectionsData = [
         label: 'User Research',
         detail:
           'I work with research inputs and observed behaviour to uncover what truly matters. My focus is on translating insights into clear decisions that improve usability and make experiences more relevant.',
-        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
+        meta: ['Insight Synthesis', 'Behavioral Analysis', 'Persona Mapping', 'Usability Testing', 'Problem Framing', 'Data Interpretation', 'Qualitative Research', 'Heuristic Evaluation'],
       },
       {
         label: 'AI & Interaction Design',
         detail:
           'I design interactions for intelligent systems while leveraging AI in my own workflows to explore, iterate, and refine solutions. My focus is on making AI intuitive, usable, and meaningful in real contexts.',
-        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
+        meta: ['AI Workflows', 'Prompt Design', 'Conversational UX', 'Multimodal Design', 'Interaction Patterns', 'Rapid Iteration', 'Use-case Design', 'AI Prototyping'],
       },
       {
         label: 'Product & Experience Design',
         detail:
           'I take designs beyond screens by building and prototyping interfaces. This helps ensure feasibility, smoother collaboration with developers, and alignment between UI intent and final output.',
-        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
+        meta: ['HTML', 'CSS', 'JavaScript', 'Python', 'AI-Assisted Coding', 'Content Management System', 'Shopify', 'Git (Version Control)'],
       },
     ],
   },
