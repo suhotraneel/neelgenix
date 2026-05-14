@@ -2466,11 +2466,11 @@
   }
 
   .testimonial-card-animated.prev {
-    transform: translateX(calc(-280 / 4.52 * 1vw)) scale(0.8);
+    transform: translateX(calc(-312 / 4.52 * 1vw)) scale(0.8);
   }
 
   .testimonial-card-animated.next {
-    transform: translateX(calc(280 / 4.52 * 1vw)) scale(0.8);
+    transform: translateX(calc(312 / 4.52 * 1vw)) scale(0.8);
   }
 
   .testimonial-card-animated.hidden-left {
@@ -2487,12 +2487,12 @@
   }
 
   .testimonial-chevron.left {
-    left: calc(10 / 4.52 * 1vw);
+    left: calc(33 / 4.52 * 1vw);
   }
 
   .testimonial-chevron.right {
     left: auto;
-    right: calc(10 / 4.52 * 1vw);
+    right: calc(32 / 4.52 * 1vw);
   }
 
   .testimonials-bg-text {
@@ -2673,5 +2673,73 @@
 
   .text-red {
     font-size: calc(36 / 4.52 * 1vw);
+  }
+
+  /* Mobile Section 8 - AI */
+  .ai-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    gap: calc(24 / 4.52 * 1vw) !important;
+    margin-top: calc(8 / 4.52 * 1vw);
+  }
+
+  .ai-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: calc(4 / 4.52 * 1vw) !important;
+  }
+
+  .ai-heading {
+    font-size: calc(64 / 4.52 * 1vw);
+    margin-bottom: 0;
+  }
+
+  .ai-intro-text {
+    font-size: calc(12 / 4.52 * 1vw);
+    line-height: calc(16 / 4.52 * 1vw);
+    padding: 0 16px;
+  }
+
+  .ai-quote-container {
+    margin-top: 0;
+  }
+
+  .ai-quote-text {
+    font-size: calc(14 / 4.52 * 1vw);
+    line-height: calc(20 / 4.52 * 1vw);
+    text-align: center;
+  }
+
+  .ai-quote-text .quote-mark {
+    font-size: calc(20 / 4.52 * 1vw);
+    line-height: calc(20 / 4.52 * 1vw);
+  }
+
+  .ai-card-stack {
+    gap: calc(16 / 4.52 * 1vw);
+    margin-top: 0;
+  }
+
+  .ai-card {
+    height: auto;
+    min-height: auto;
+    border-radius: 0;
+  }
+
+  .ai-card-text {
+    padding: calc(16 / 4.52 * 1vw);
+    gap: calc(12 / 4.52 * 1vw);
+  }
+
+  .ai-card h2 {
+    font-size: calc(24 / 4.52 * 1vw);
+  }
+
+  .ai-card p {
+    font-size: calc(14 / 4.52 * 1vw);
+    line-height: calc(20 / 4.52 * 1vw);
   }
 }
