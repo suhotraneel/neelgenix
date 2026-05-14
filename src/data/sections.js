@@ -39,19 +39,19 @@ export const sectionsData = [
     layout: 'bridge',
     heading: 'I bridge business intent and user behaviour',
     intro:
-      'Shaping products that are clear, usable, and built to scale. From defining what to build to how it evolves, I work with teams to create direction that can be effectively executed.',
+      'Shaping products that are clear, usable, and built to scale. I ground decisions in real user behaviour while working with teams to create direction that can be effectively executed from concept to evolution.',
     items: [
       {
         label: 'Product Direction',
-        detail: 'I turn requirements into clear product direction, defining what to build, why it matters, and how it evolves.',
+        detail: "I turn ambiguous requirements into clear product direction, defining what to build, why it matters, and how products evolve through the process.",
       },
       {
-        label: 'Human Insight',
-        detail: 'I ground decisions in real user, ensuring solutions are intuitive, usable, and relevant in real contexts.',
+        label: 'Technical Alignment',
+        detail: "I design with technical feasibility in mind, working closely with engineers to refine experiences and shape products through execution.",
       },
       {
         label: 'Systems & Storytelling',
-        detail: 'I design systems that go beyond screens, creating structure and cohesive narratives in experiences.',
+        detail: "I design systems that go beyond screens, creating consistency and structure while shaping experiences through cohesive narratives.",
       },
     ],
   },
@@ -94,13 +94,13 @@ export const sectionsData = [
         label: 'Product & Experience Design',
         detail:
           'I start by bringing clarity to the problem and questioning assumptions. From there, I design flows, interactions, and interfaces that align user behaviour with business intent and create direction teams can act on.',
-        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
+        meta: ['UX Design', 'UI Design', 'Product Thinking', 'Interaction Design', 'User Flows', 'Journey Mapping', 'Information Architecture', 'Design Handoff'],
       },
       {
         label: 'Design Systems & Scalability',
         detail:
           'I design and build systems that ensure visual consistency and clarity across interfaces. From components to patterns, I focus on creating scalable UI foundations that support both usability and growth.',
-        meta: ['Components', 'Breakpoints', 'Variables', 'Surface System', 'Tokens', 'Documentation', 'Documentation', 'Documentation'],
+        meta: ['Component Libraries', 'UI Consistency', 'Design Tokens', 'Responsive Design', 'Icon Libraries', 'Surface Systems', 'System Documentation', 'Design Language'],
       },
       {
         label: 'User Research',
@@ -179,15 +179,15 @@ export const sectionsData = [
     items: [
       {
         label: 'Automation & Systems',
-        detail: 'I design automation workflows using tools like n8n to <span class="text-bold">handle repeatable tasks</span> with defined outcomes, often integrating <span class="text-bold">human-in-the-loop</span> structures to maintain control and quality.',
+        detail: 'I design automation workflows using tools like n8n to <span class="text-bold">handle repeatable tasks</span> with defined outcomes, often integrating <span class="text-bold">human-in-the-loop</span> structures to maintain control.',
       },
       {
         label: 'Responsible Usage',
-        detail: 'I follow principles around <span class="text-bold">ethical</span> and <span class="text-bold">effective</span> AI usage, ensuring outputs are reliable, lawful, and aligned with intent. My approach is backed by a certification in <span class="text-bold">Responsible AI from Google</span>.',
+        detail: 'I follow principles around <span class="text-bold">ethical</span> and <span class="text-bold">effective</span> AI usage, ensuring outputs are reliable, lawful, and intentional. My approach is backed by a <span class="text-bold">Google </span>certification in <span class="text-bold">Responsible AI.</span>.',
       },
       {
-        label: 'Understanding the Technology',
-        detail: 'Beyond using AI tools, I understand <span class="text-bold">how</span> and <span class="text-bold">why</span> they work. Through collaboration with engineering teams on AI products, I contribute to <span class="text-bold">decisions with clarity</span> on when AI is effective.',
+        label: 'Technical Understanding',
+        detail: 'Beyond using AI tools, I understand <span class="text-bold">how</span> and <span class="text-bold">why</span> they work. Through collaboration with engineering teams on AI products, I contribute to <span class="text-bold">decisions</span> on when AI is effective.',
       },
     ],
   },
@@ -206,16 +206,6 @@ export const sectionsData = [
         quote: "What makes Neel an excellent designer is that his curiosity spans wide. His keen interest in music, storyboarding, and collateral, and that breadth consistently elevates the originality of his work.\n\nHe approaches every brief with rigour, validating solutions across multiple directions before converging on what's visually compelling and functionally sound. At the UX level, he connects user needs to scalable, systems- level design decisions with quiet confidence.\n\nHe's equally at ease in the AI space, bringing a considered perspective on designing for AI-driven products and what that means for both user experience and creative direction.\n\nAbove all, he bridges the tactical and the strategic with ease, aligning his decisions with business objectives in ways that hold up in the room, and his influence on the design thinking around him is unmistakable.\n\nNeel brings a perfect mix of creative range, systems thinking, and strategic clarity.",
         by: 'Vijayender Cherupally',
         role: 'Design Director',
-      },
-      {
-        quote: "",
-        by: 'Kayideni Kholi',
-        role: 'Product Leader',
-      },
-      {
-        quote: "",
-        by: 'Manas Kunder',
-        role: 'Design Educator',
       },
       {
         quote: "I worked closely with Neel on two different engagements involving a mature, in-market product— Teacher Assistant, with over 35,000 users. He consistently demonstrated the ability to quickly grasp product context and user behavior, which is not easy in established systems.\n\nHe iterates effectively, keeps stakeholders in sync, and seeks input at the right time. What differentiates him is his drive to understand the 'why' behind decisions—even when it's not obvious in the product—so he can design with intent and push the product forward meaningfully.\n\nWe also collaborated on a few blue-sky explorations for the student persona. Neel navigated ambiguity well—keeping multiple options on the table while making the key decisions needed to bring clarity and move into the next iteration cycles.\n\nI will strongly recommend him for his attitude and skill, he can be a great design person where decisions are deliberate, yet fast.",

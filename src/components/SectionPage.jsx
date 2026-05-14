@@ -123,7 +123,7 @@ function BridgeSection({ section }) {
         </h1>
         <div className="bridge-intro">
           <p className="bridge-intro-bold">Shaping products that are clear, usable, and built to scale.</p>
-          <p className="bridge-intro-light">From defining what to build to how it evolves, I work with teams to create direction that can be effectively executed.</p>
+          <p className="bridge-intro-light">I ground decisions in real user behaviour while working with teams to create direction that can be effectively executed from concept to evolution.</p>
         </div>
       </div>
       <div className="bridge-skill-row">
@@ -695,7 +695,7 @@ function StorySection({ section }) {
         </div>
         <div className="story-overlay">
           <div className="story-highlight-box">
-            <img src={storyHighlight} alt="" className="story-highlight-img" />
+            {/* <img src={storyHighlight} alt="" className="story-highlight-img" /> */}
           </div>
           <p className="story-overlay-text">{section.pullQuote}</p>
         </div>

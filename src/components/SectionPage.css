@@ -178,6 +178,7 @@
   text-align: center;
   color: #111;
   gap: 8px;
+  padding: 0 24px;
 }
 
 .bridge-intro-bold {
@@ -191,7 +192,7 @@
   font-family: 'Gotham', sans-serif;
   font-weight: 400;
   font-size: 12px;
-  line-height: 20px;
+  line-height: 16px;
 }
 
 .bridge-skill-row {
@@ -672,7 +673,7 @@
 .work-card-title {
   font-family: 'Handjet', sans-serif;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 24px;
   line-height: normal;
   color: #111;
   font-variation-settings: 'ELGR' 1, 'ELSH' 2;
@@ -682,7 +683,7 @@
 .work-card-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -700,19 +701,20 @@
   flex-wrap: wrap;
   gap: 12px;
   align-content: flex-start;
+  padding-top: 4px;
 }
 
 .work-card-meta-item {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-  padding: 4px 10px;
+  padding: 4px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Gotham', sans-serif;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 10px;
+  line-height: 14px;
   color: #404040;
 }
 
@@ -2024,6 +2026,7 @@
     display: flex;
     flex-direction: column;
     gap: calc(8 / 4.52 * 1vw);
+    padding: 0;
   }
 
   .bridge-intro-bold {
@@ -2424,7 +2427,7 @@
   }
 
   .work-card-meta-item {
-    padding: calc(4 / 4.52 * 1vw) calc(10 / 4.52 * 1vw);
+    padding: calc(4 / 4.52 * 1vw) calc(8 / 4.52 * 1vw);
     font-size: calc(12 / 4.52 * 1vw);
     line-height: calc(16 / 4.52 * 1vw);
   }
@@ -2715,7 +2718,7 @@
 
   .ai-quote-text .quote-mark {
     font-size: calc(20 / 4.52 * 1vw);
-    line-height: calc(20 / 4.52 * 1vw);
+    line-height: calc(18 / 4.52 * 1vw);
   }
 
   .ai-card-stack {
