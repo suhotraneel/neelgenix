@@ -686,12 +686,16 @@ function ToolsSection({ section }) {
 }
 
 function StorySection({ section }) {
+  const images = section.images || [];
+  const scrollImages = [...images, ...images];
+
   return (
     <div className="story-layout">
       <div className="story-media">
         <div className="story-image-track">
-          <img src={storyBg} alt="" className="story-bg" />
-          <img src={storyBg} alt="" className="story-bg" />
+          {scrollImages.map((src, index) => (
+            <img key={index} src={src} alt="" className="story-bg" />
+          ))}
         </div>
         <div className="story-overlay">
           <div className="story-highlight-box">

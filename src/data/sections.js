@@ -165,6 +165,13 @@ export const sectionsData = [
     layout: 'story',
     pullQuote:
       'I was documenting, composing, and writing—trying to understand how people feel, what they notice, and why certain moments stay.',
+    images: [
+      `${import.meta.env.BASE_URL}assets/about-images/a.jpg`,
+      `${import.meta.env.BASE_URL}assets/about-images/b.jpg`,
+      `${import.meta.env.BASE_URL}assets/about-images/c.gif`,
+      `${import.meta.env.BASE_URL}assets/about-images/d.JPG`,
+      `${import.meta.env.BASE_URL}assets/about-images/e.JPG`,
+    ],
     paragraphs: [
       'Through working with music artists, I saw how stories shape connection. Through photography, I learned to observe—capturing moments as they are, not as they’re supposed to be. Through writing, I explored emotions, perceptions, and the unspoken layers of human experience.',
       'All of this shaped how I see people—not just as users, but as individuals moving through moments, contexts, and internal states.',

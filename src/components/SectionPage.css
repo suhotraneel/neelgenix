@@ -936,18 +936,26 @@
 
 .story-image-track {
   display: flex;
-  width: 100%;
+  width: max-content;
   height: 100%;
+  animation: scrollTrack 20s linear infinite;
+}
+
+@keyframes scrollTrack {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .story-bg {
-  width: 50%;
   height: 100%;
+  width: auto;
   object-fit: cover;
-}
-
-.story-bg:last-child {
-  filter: grayscale(1);
+  flex-shrink: 0;
 }
 
 .story-overlay {
@@ -2620,11 +2628,12 @@
   }
 
   .story-image-track {
-    width: calc(744 / 4.52 * 1vw);
+    width: max-content;
+    animation-duration: 20s;
   }
 
   .story-bg {
-    width: calc(372 / 4.52 * 1vw);
+    width: auto;
   }
 
   .story-overlay {
