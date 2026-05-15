@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3001;
+const MAX_UPLOAD_FILE_SIZE = 500 * 1024 * 1024; // 500 MB
 
 app.use(cors());
 app.use(express.json());
@@ -31,7 +32,13 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: MAX_UPLOAD_FILE_SIZE,
+    files: 40
+  }
+});
 const projectsFilePath = path.join(__dirname, 'src', 'data', 'projects.json');
 
 const readProjects = () => {
@@ -184,6 +191,29 @@ app.delete('/api/projects/:id', (req, res) => {
     console.error(error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
+});
+
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(413).json({
+        success: false,
+        message: `Uploaded file is too large. Max allowed size is ${Math.round(MAX_UPLOAD_FILE_SIZE / (1024 * 1024))}MB.`
+      });
+    }
+
+    return res.status(400).json({
+      success: false,
+      message: `Upload error: ${err.message}`
+    });
+  }
+
+  if (err) {
+    console.error(err);
+    return res.status(500).json({ success: false, message: 'Server error' });
+  }
+
+  return next();
 });
 
 app.listen(port, () => {

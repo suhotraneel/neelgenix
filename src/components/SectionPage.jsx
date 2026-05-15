@@ -42,6 +42,99 @@ import face18 from '../assets/section10/e2ffc11fada17aa16f898d59e1721afc5eb69b06
 import face19 from '../assets/section10/fcf40f681d48245222e6e5b4c29bc0b76c14332c.svg';
 
 const facesArray = [face0, face1, face2, face3, face4, face5, face6, face7, face8, face9, face10, face11, face12, face13, face14, face15, face16, face17, face18, face19];
+const CMS_PATH_REGEX = /\/cms\/?$/;
+const isCmsPath = (pathname) => CMS_PATH_REGEX.test(pathname);
+
+const getYouTubeVideoId = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  try {
+    const parsed = new URL(input);
+    const host = parsed.hostname.replace(/^www\./, '');
+
+    if (host === 'youtu.be') {
+      return parsed.pathname.split('/').filter(Boolean)[0] || '';
+    }
+
+    if (host.endsWith('youtube.com')) {
+      if (parsed.pathname === '/watch') {
+        return parsed.searchParams.get('v') || '';
+      }
+      if (parsed.pathname.startsWith('/embed/')) {
+        return parsed.pathname.split('/embed/')[1]?.split('/')[0] || '';
+      }
+      if (parsed.pathname.startsWith('/shorts/')) {
+        return parsed.pathname.split('/shorts/')[1]?.split('/')[0] || '';
+      }
+    }
+  } catch {
+    // fall through to regex fallback
+  }
+
+  const fallback = input.match(/(?:v=|\/embed\/|youtu\.be\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
+  return fallback?.[1] || '';
+};
+
+const getVimeoEmbedUrl = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  try {
+    const parsed = new URL(input);
+    const host = parsed.hostname.replace(/^www\./, '');
+    const params = new URLSearchParams(parsed.search);
+
+    if (host === 'player.vimeo.com') {
+      const playerMatch = parsed.pathname.match(/\/video\/(\d+)/);
+      if (!playerMatch) return '';
+      const query = params.toString();
+      return `https://player.vimeo.com/video/${playerMatch[1]}${query ? `?${query}` : ''}`;
+    }
+
+    if (host.endsWith('vimeo.com')) {
+      const segments = parsed.pathname.split('/').filter(Boolean);
+      let idIndex = -1;
+      for (let i = segments.length - 1; i >= 0; i--) {
+        if (/^\d+$/.test(segments[i])) {
+          idIndex = i;
+          break;
+        }
+      }
+
+      if (idIndex === -1) return '';
+
+      const videoId = segments[idIndex];
+      const unlistedHash = segments[idIndex + 1];
+      if (!params.get('h') && unlistedHash && /^[A-Za-z0-9]+$/.test(unlistedHash)) {
+        params.set('h', unlistedHash);
+      }
+
+      const query = params.toString();
+      return `https://player.vimeo.com/video/${videoId}${query ? `?${query}` : ''}`;
+    }
+  } catch {
+    // fall through to regex fallback
+  }
+
+  const fallback = input.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([A-Za-z0-9]+))?/i);
+  if (!fallback) return '';
+  const [, videoId, hash] = fallback;
+  return `https://player.vimeo.com/video/${videoId}${hash ? `?h=${hash}` : ''}`;
+};
+
+const getSupportedVideoEmbedUrl = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  const videoId = getYouTubeVideoId(value);
+  if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+
+  const vimeoEmbedUrl = getVimeoEmbedUrl(value);
+  if (vimeoEmbedUrl) return vimeoEmbedUrl;
+
+  return '';
+};
 
 const fallbackCopyTextToClipboard = (text, onSuccess) => {
   const textArea = document.createElement("textarea");
@@ -287,6 +380,8 @@ function ProjectsSection({ section }) {
   }, [activeProject]);
 
   React.useEffect(() => {
+    if (isCmsPath(window.location.pathname)) return;
+
     const path = window.location.pathname;
     const base = import.meta.env.BASE_URL;
     const slug = path.replace(base, '');
@@ -323,6 +418,8 @@ function ProjectsSection({ section }) {
   }, [section.projects]);
 
   React.useEffect(() => {
+    if (isCmsPath(window.location.pathname)) return;
+
     if (!activeProject) {
       setFooterVisible(false);
       setIsScrolled(false);
@@ -332,13 +429,19 @@ function ProjectsSection({ section }) {
       document.documentElement.style.overscrollBehavior = 'auto';
 
       const base = import.meta.env.BASE_URL;
-      window.history.replaceState(null, null, `${base}projects`);
+      const targetPath = `${base}projects`;
+      if (window.location.pathname !== targetPath) {
+        window.history.replaceState(null, null, targetPath);
+      }
       return;
     }
 
     const projectSlug = activeProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
     const base = import.meta.env.BASE_URL;
-    window.history.replaceState(null, null, `${base}projects/${projectSlug}`);
+    const targetPath = `${base}projects/${projectSlug}`;
+    if (window.location.pathname !== targetPath) {
+      window.history.replaceState(null, null, targetPath);
+    }
 
     document.body.style.overflow = 'hidden';
     document.body.style.overscrollBehavior = 'none';
@@ -571,6 +674,22 @@ function ProjectsSection({ section }) {
                 <div className="project-media-list">
                   {activeProject.media.map((block) => {
                     if (block.type === 'video') {
+                      const embedUrl = getSupportedVideoEmbedUrl(block.url);
+                      if (embedUrl) {
+                        return (
+                          <iframe
+                            key={block.id}
+                            src={embedUrl}
+                            title={`${activeProject.title} video`}
+                            className="project-modal-full-img"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                            style={{ width: '100%', aspectRatio: '16 / 9', border: 0, display: 'block' }}
+                          />
+                        );
+                      }
+
                       return (
                         <video
                           key={block.id}

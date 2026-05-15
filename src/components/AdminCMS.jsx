@@ -1,7 +1,105 @@
 import React, { useState, useEffect } from 'react';
 import './AdminCMS.css';
 
+const getYouTubeVideoId = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  try {
+    const parsed = new URL(input);
+    const host = parsed.hostname.replace(/^www\./, '');
+
+    if (host === 'youtu.be') {
+      return parsed.pathname.split('/').filter(Boolean)[0] || '';
+    }
+
+    if (host.endsWith('youtube.com')) {
+      if (parsed.pathname === '/watch') {
+        return parsed.searchParams.get('v') || '';
+      }
+      if (parsed.pathname.startsWith('/embed/')) {
+        return parsed.pathname.split('/embed/')[1]?.split('/')[0] || '';
+      }
+      if (parsed.pathname.startsWith('/shorts/')) {
+        return parsed.pathname.split('/shorts/')[1]?.split('/')[0] || '';
+      }
+    }
+  } catch {
+    // fall through to regex fallback
+  }
+
+  const fallback = input.match(/(?:v=|\/embed\/|youtu\.be\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
+  return fallback?.[1] || '';
+};
+
+const getVimeoEmbedUrl = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  try {
+    const parsed = new URL(input);
+    const host = parsed.hostname.replace(/^www\./, '');
+    const params = new URLSearchParams(parsed.search);
+
+    if (host === 'player.vimeo.com') {
+      const playerMatch = parsed.pathname.match(/\/video\/(\d+)/);
+      if (!playerMatch) return '';
+      const query = params.toString();
+      return `https://player.vimeo.com/video/${playerMatch[1]}${query ? `?${query}` : ''}`;
+    }
+
+    if (host.endsWith('vimeo.com')) {
+      const segments = parsed.pathname.split('/').filter(Boolean);
+      let idIndex = -1;
+      for (let i = segments.length - 1; i >= 0; i--) {
+        if (/^\d+$/.test(segments[i])) {
+          idIndex = i;
+          break;
+        }
+      }
+
+      if (idIndex === -1) return '';
+
+      const videoId = segments[idIndex];
+      const unlistedHash = segments[idIndex + 1];
+      if (!params.get('h') && unlistedHash && /^[A-Za-z0-9]+$/.test(unlistedHash)) {
+        params.set('h', unlistedHash);
+      }
+
+      const query = params.toString();
+      return `https://player.vimeo.com/video/${videoId}${query ? `?${query}` : ''}`;
+    }
+  } catch {
+    // fall through to regex fallback
+  }
+
+  const fallback = input.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([A-Za-z0-9]+))?/i);
+  if (!fallback) return '';
+  const [, videoId, hash] = fallback;
+  return `https://player.vimeo.com/video/${videoId}${hash ? `?h=${hash}` : ''}`;
+};
+
+const getDirectVideoUrl = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+  return /\.(mp4|webm|ogg)(\?.*)?$/i.test(input) ? input : '';
+};
+
+const getSupportedVideoEmbedUrl = (value = '') => {
+  const input = value.trim();
+  if (!input) return '';
+
+  const videoId = getYouTubeVideoId(value);
+  if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+
+  const vimeoEmbedUrl = getVimeoEmbedUrl(value);
+  if (vimeoEmbedUrl) return vimeoEmbedUrl;
+
+  return '';
+};
+
 function AdminCMS() {
+  const MAX_UPLOAD_FILE_SIZE = 500 * 1024 * 1024; // 500 MB
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [status, setStatus] = useState('');
@@ -123,14 +221,43 @@ function AdminCMS() {
   };
 
   const handleMediaFileChange = (index, file) => {
+    if (!file) return;
+    if (file.size > MAX_UPLOAD_FILE_SIZE) {
+      setStatus(`File "${file.name}" is too large. Maximum allowed size is ${Math.round(MAX_UPLOAD_FILE_SIZE / (1024 * 1024))}MB.`);
+      return;
+    }
+
     const newBlocks = [...mediaBlocks];
     newBlocks[index].file = file;
     setMediaBlocks(newBlocks);
+    setStatus('');
+  };
+
+  const handleMediaUrlChange = (index, url) => {
+    const newBlocks = [...mediaBlocks];
+    newBlocks[index].url = url;
+    newBlocks[index].file = null;
+    setMediaBlocks(newBlocks);
+    setStatus('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('Submitting...');
+
+    for (const block of mediaBlocks) {
+      if (block.type === 'video') {
+        const url = (block.url || '').trim();
+        if (!url) {
+          setStatus('Please add a YouTube or Vimeo link for every video block.');
+          return;
+        }
+        if (!getSupportedVideoEmbedUrl(url) && !getDirectVideoUrl(url)) {
+          setStatus('Please enter a valid YouTube or Vimeo link for video blocks.');
+          return;
+        }
+      }
+    }
 
     const data = new FormData();
     data.append('title', formData.title);
@@ -146,10 +273,12 @@ function AdminCMS() {
 
     const mediaDataPayload = [];
     mediaBlocks.forEach((block, idx) => {
-      if (block.file) {
+      if (block.type === 'image' && block.file) {
         const fileKey = `media_${idx}`;
         data.append(fileKey, block.file);
         mediaDataPayload.push({ id: block.id, type: block.type, fileKey });
+      } else if (block.type === 'video') {
+        mediaDataPayload.push({ id: block.id, type: block.type, url: (block.url || '').trim() });
       } else {
         mediaDataPayload.push({ id: block.id, type: block.type, url: block.url });
       }
@@ -165,18 +294,25 @@ function AdminCMS() {
         method,
         body: data,
       });
+      const raw = await response.text();
+      let result = {};
+      try {
+        result = raw ? JSON.parse(raw) : {};
+      } catch {
+        result = {};
+      }
 
-      const result = await response.json();
       if (response.ok) {
         setStatus('Project saved successfully!');
         fetchProjects();
         setTimeout(() => setView('dashboard'), 1000);
       } else {
-        setStatus(`Error: ${result.message}`);
+        const message = result.message || `Request failed (${response.status})`;
+        setStatus(`Error: ${message}`);
       }
     } catch (error) {
       console.error(error);
-      setStatus('Failed to connect to CMS Server.');
+      setStatus(`Failed to connect to CMS Server: ${error.message}`);
     }
   };
 
@@ -277,11 +413,37 @@ function AdminCMS() {
                     </div>
                     {block.url && !block.file && (
                       <div className="existing-media-preview">
-                        {block.type === 'image' ? <img src={block.url} alt="media" /> : <video src={block.url} muted />}
+                        {block.type === 'image' ? (
+                          <img src={block.url} alt="media" />
+                        ) : getSupportedVideoEmbedUrl(block.url) ? (
+                          <iframe
+                            src={getSupportedVideoEmbedUrl(block.url)}
+                            title="Video Preview"
+                            width="180"
+                            height="101"
+                            style={{ border: 'none', borderRadius: '4px' }}
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                          />
+                        ) : getDirectVideoUrl(block.url) ? (
+                          <video src={getDirectVideoUrl(block.url)} muted width="180" height="101" />
+                        ) : (
+                          <small>Invalid YouTube/Vimeo link</small>
+                        )}
                         <small>Existing Media</small>
                       </div>
                     )}
-                    <input type="file" accept={block.type === 'image' ? 'image/*' : 'video/*'} onChange={e => handleMediaFileChange(idx, e.target.files[0])} />
+                    {block.type === 'image' ? (
+                      <input type="file" accept="image/*" onChange={e => handleMediaFileChange(idx, e.target.files[0])} />
+                    ) : (
+                      <input
+                        type="url"
+                        value={block.url || ''}
+                        onChange={e => handleMediaUrlChange(idx, e.target.value)}
+                        placeholder="Paste YouTube or Vimeo URL"
+                      />
+                    )}
                   </div>
                 </div>
               ))}

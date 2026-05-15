@@ -68,39 +68,417 @@
     ]
   },
   {
-    "id": "p4",
-    "title": "AI Voice Website",
-    "detail": "A clear product website for voice-led AI workflows.",
+    "id": "proj-1778857197012",
+    "title": "Mosaic Lane - HSBC",
+    "detail": "Marketing campaign of HSBC, celebrating objects.",
     "tags": [
-      "Web Design",
-      "AI",
-      "Storytelling"
+      "Marketing",
+      "UX UI",
+      "Advertising"
     ],
     "image": "",
-    "media": []
+    "media": [
+      {
+        "id": "m-1778857251024",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430138-967332228.jpg"
+      },
+      {
+        "id": "m-1778857262634",
+        "type": "video",
+        "url": "https://youtu.be/e7jm92Q0DAQ?si=SkN48G-zIf81kQ6Y"
+      },
+      {
+        "id": "m-1778857263849",
+        "type": "video",
+        "url": "https://youtu.be/fa9lEn_yUbY?si=KQDNj5sJcqP6ut53"
+      },
+      {
+        "id": "m-1778857294556",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430143-401222838.jpg"
+      },
+      {
+        "id": "m-1778857368746",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430152-875192933.jpg"
+      },
+      {
+        "id": "m-1778857381362",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430161-116858078.jpg"
+      },
+      {
+        "id": "m-1778857382104",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430172-334125597.jpg"
+      },
+      {
+        "id": "m-1778857382667",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430178-329021586.jpg"
+      },
+      {
+        "id": "m-1778857383559",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430187-379536554.jpg"
+      },
+      {
+        "id": "m-1778857385734",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430196-383547227.jpg"
+      },
+      {
+        "id": "m-1778857386410",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430203-175578020.jpg"
+      },
+      {
+        "id": "m-1778857387017",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430212-659636247.jpg"
+      },
+      {
+        "id": "m-1778857387685",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430224-866624040.jpg"
+      },
+      {
+        "id": "m-1778857388367",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430234-401619086.jpg"
+      },
+      {
+        "id": "m-1778857388982",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430242-403683407.jpg"
+      },
+      {
+        "id": "m-1778857389500",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430254-103094472.jpg"
+      },
+      {
+        "id": "m-1778857390100",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430261-447360165.jpg"
+      },
+      {
+        "id": "m-1778857390692",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857430268-948974204.jpg"
+      }
+    ]
   },
   {
-    "id": "p5",
-    "title": "Teacher Platform & Redesign",
-    "detail": "A more usable platform experience for teachers and learning teams.",
+    "id": "proj-1778854763463",
+    "title": "Neo Marche Branding",
+    "detail": "reherher",
     "tags": [
-      "Product Design",
-      "Systems",
-      "Handoff"
+      "Branding",
+      "Marketing",
+      "Service Design"
     ],
-    "image": "",
-    "media": []
+    "image": "/neelgenix/assets/project-1778856991720-541434217.jpg",
+    "media": [
+      {
+        "id": "m-1778854751628",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778854763440-78060276.jpg"
+      },
+      {
+        "id": "m-1778854813158",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778854844833-83453288.jpg"
+      },
+      {
+        "id": "m-1778856228131",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436031-77232407.jpg"
+      },
+      {
+        "id": "m-1778856239148",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436046-80167188.jpg"
+      },
+      {
+        "id": "m-1778856248734",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436066-716591321.jpg"
+      },
+      {
+        "id": "m-1778856249401",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436104-912942086.jpg"
+      },
+      {
+        "id": "m-1778856250278",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436119-638111352.jpg"
+      },
+      {
+        "id": "m-1778856259235",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436141-971660339.jpg"
+      },
+      {
+        "id": "m-1778856259916",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436158-183164651.jpg"
+      },
+      {
+        "id": "m-1778856264057",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436170-540048404.jpg"
+      },
+      {
+        "id": "m-1778856265144",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436219-549929399.jpg"
+      },
+      {
+        "id": "m-1778856267154",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436229-772449227.jpg"
+      },
+      {
+        "id": "m-1778856268226",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436240-917465763.jpg"
+      },
+      {
+        "id": "m-1778856271242",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436281-394090926.jpg"
+      },
+      {
+        "id": "m-1778856367363",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436299-642009755.jpg"
+      },
+      {
+        "id": "m-1778856361656",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436309-947393083.jpg"
+      },
+      {
+        "id": "m-1778856352236",
+        "type": "video",
+        "url": "https://vimeo.com/1050371949/862d69c399?fl=tl&fe=ec"
+      },
+      {
+        "id": "m-1778856373971",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436319-751012276.jpg"
+      },
+      {
+        "id": "m-1778856418478",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436343-531950084.jpg"
+      },
+      {
+        "id": "m-1778856431872",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436378-300219419.jpg"
+      }
+    ]
   },
   {
-    "id": "p3",
-    "title": "Exhibition Experience",
-    "detail": "Spatial and digital experience design for guided discovery.",
+    "id": "proj-1778857769832",
+    "title": "The Right to Look",
+    "detail": "An immersive audio-visual art gallery experience from Space118",
     "tags": [
-      "Experience",
-      "Research",
-      "Visual Design"
+      "Experience Design",
+      "UX UI Design",
+      "Development"
     ],
     "image": "",
-    "media": []
+    "media": [
+      {
+        "id": "m-1778857636105",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769616-860805793.jpg"
+      },
+      {
+        "id": "m-1778857660075",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769627-183982611.jpg"
+      },
+      {
+        "id": "m-1778857661358",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769638-328150946.jpg"
+      },
+      {
+        "id": "m-1778857662505",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769647-935815165.jpg"
+      },
+      {
+        "id": "m-1778857663218",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769655-483459085.jpg"
+      },
+      {
+        "id": "m-1778857663938",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769658-488595714.jpg"
+      },
+      {
+        "id": "m-1778857664553",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769670-372921270.jpg"
+      },
+      {
+        "id": "m-1778857665243",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769682-816204065.jpg"
+      },
+      {
+        "id": "m-1778857685392",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769693-133668384.jpg"
+      },
+      {
+        "id": "m-1778857686528",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769704-210426185.jpg"
+      },
+      {
+        "id": "m-1778857687414",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769708-918340920.jpg"
+      },
+      {
+        "id": "m-1778857688133",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769718-955216904.jpg"
+      },
+      {
+        "id": "m-1778857692026",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769729-491652177.jpg"
+      },
+      {
+        "id": "m-1778857692731",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769754-443761226.jpg"
+      },
+      {
+        "id": "m-1778857742097",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769767-209816721.jpg"
+      },
+      {
+        "id": "m-1778857742854",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769779-205705337.jpg"
+      },
+      {
+        "id": "m-1778857743605",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769789-650572140.jpg"
+      },
+      {
+        "id": "m-1778857744362",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769793-270702224.jpg"
+      },
+      {
+        "id": "m-1778857745809",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769810-895687226.jpg"
+      },
+      {
+        "id": "m-1778857747122",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778857769821-497548207.jpg"
+      },
+      {
+        "id": "m-1778860966724",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012622-547115813.jpg"
+      },
+      {
+        "id": "m-1778860967923",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012637-82141387.jpg"
+      },
+      {
+        "id": "m-1778860969064",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012647-791073600.jpg"
+      },
+      {
+        "id": "m-1778860983164",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012650-233507382.jpg"
+      },
+      {
+        "id": "m-1778860985519",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012662-13912910.jpg"
+      },
+      {
+        "id": "m-1778860986404",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012674-36703371.jpg"
+      },
+      {
+        "id": "m-1778860987371",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012688-39794326.jpg"
+      },
+      {
+        "id": "m-1778861004247",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861012702-306260145.jpg"
+      }
+    ]
+  },
+  {
+    "id": "proj-1778861494018",
+    "title": "Garment Visualizer",
+    "detail": "A digital tools enabling customers to preview customisations in realtime",
+    "tags": [
+      "UX UI Design",
+      "Product Design"
+    ],
+    "image": "/neelgenix/assets/project-1778861494011-617628400.jpg",
+    "media": [
+      {
+        "id": "m-1778861420536",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778861494014-298686849.jpg"
+      },
+      {
+        "id": "m-1778861468154",
+        "type": "video",
+        "url": "https://youtu.be/y3tbaqQjjfE?si=0OzcLPkOrNoRFXoe"
+      }
+    ]
+  },
+  {
+    "id": "proj-1778862493477",
+    "title": "Ambush",
+    "detail": "A luxury lifestyle brand inspired by rare living species.",
+    "tags": [
+      "Branding",
+      "UX UI Design",
+      "Content Stretegy"
+    ],
+    "image": "/neelgenix/assets/project-1778862493460-513137617.jpg",
+    "media": [
+      {
+        "id": "m-1778862409724",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778862493464-459609238.jpg"
+      },
+      {
+        "id": "m-1778862424303",
+        "type": "video",
+        "url": "https://youtu.be/MDeuqvyvXyk?si=WNUQKP_vDL4Um4-C"
+      }
+    ]
   }
 ]

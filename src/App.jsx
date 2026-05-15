@@ -11,9 +11,14 @@ import './index.css';
 // Inject fonts early using the correct BASE_URL (works on both GitHub Pages and Vercel)
 injectGothamFonts();
 
+const CMS_PATH_REGEX = /\/cms\/?$/;
+const isCmsPath = (pathname) => CMS_PATH_REGEX.test(pathname);
 
 function App() {
-  const [isAdminPath, setIsAdminPath] = useState(false);
+  const [isAdminPath, setIsAdminPath] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return isCmsPath(window.location.pathname);
+  });
   const [activeSectionId, setActiveSectionId] = useState(sectionsData[0].id);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -24,13 +29,16 @@ function App() {
   // Initial scroll based on URL Slug
   useEffect(() => {
     const path = window.location.pathname;
-    const base = import.meta.env.BASE_URL;
-    const slug = path.replace(base, '');
 
-    if (slug === 'cms' || slug === '/cms') {
-      setIsAdminPath(true);
+    // Keep route classification in sync and short-circuit CMS.
+    const cmsPath = isCmsPath(path);
+    setIsAdminPath(cmsPath);
+    if (cmsPath) {
       return;
     }
+
+    const base = import.meta.env.BASE_URL;
+    const slug = path.replace(base, '');
 
     if (slug) {
       const slugParts = slug.split('/');
@@ -49,6 +57,7 @@ function App() {
   // Sync Title and URL with Active Section
   useEffect(() => {
     if (loading || isAdminPath) return;
+    if (isCmsPath(window.location.pathname)) return;
     const currentSection = sectionsData.find(s => s.id === activeSectionId);
     if (currentSection && !document.hidden) {
       document.title = `Neel Genix - ${currentSection.title}`;
@@ -63,8 +72,10 @@ function App() {
           newUrl += `/${slugParts[1]}`;
         }
       }
-      
-      window.history.replaceState(null, null, newUrl);
+
+      if (window.location.pathname !== newUrl) {
+        window.history.replaceState(null, null, newUrl);
+      }
     }
   }, [activeSectionId, loading, isAdminPath]);
 
