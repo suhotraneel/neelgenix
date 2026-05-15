@@ -31,3 +31,6 @@ index_vanilla_backup.css
 script_vanilla_backup.js
 .src_backup/
 temp-app/
+
+# Environment variables
+.env
