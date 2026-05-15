@@ -17,7 +17,7 @@ export const sectionsData = [
     id: 'section-1',
     slug: 'introduction',
     number: '01',
-    title: 'Who I Am',
+    title: 'Introduction',
     color: '#1e1911',
     tone: 'dark',
     designHeight: 466,

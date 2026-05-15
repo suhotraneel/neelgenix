@@ -180,7 +180,7 @@ function SectionHeader({ section }) {
 }
 
 function HeroSection({ section }) {
-  const imgSection1 = `${import.meta.env.BASE_URL}assets/053ba241caf62243a85e37935bfc18cf3f44534b.png`;
+  const imgSection1 = `${import.meta.env.BASE_URL}assets/hero-image.jpg`;
 
   return (
     <div className="hero-panel">
