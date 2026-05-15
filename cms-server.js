@@ -105,6 +105,20 @@ app.post('/api/projects', upload.any(), (req, res) => {
   }
 });
 
+app.put('/api/projects/reorder', express.json(), (req, res) => {
+  try {
+    const { projects } = req.body;
+    if (!projects || !Array.isArray(projects)) {
+      return res.status(400).json({ success: false, message: 'Invalid projects data' });
+    }
+    writeProjects(projects);
+    res.status(200).json({ success: true, message: 'Projects reordered successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
+
 app.put('/api/projects/:id', upload.any(), (req, res) => {
   try {
     const projectId = req.params.id;

@@ -56,6 +56,32 @@ function AdminCMS() {
     }
   };
 
+  const moveProject = async (index, direction) => {
+    const newProjects = [...projects];
+    if (direction === 'up' && index > 0) {
+      [newProjects[index - 1], newProjects[index]] = [newProjects[index], newProjects[index - 1]];
+    } else if (direction === 'down' && index < newProjects.length - 1) {
+      [newProjects[index + 1], newProjects[index]] = [newProjects[index], newProjects[index + 1]];
+    } else {
+      return;
+    }
+    
+    setProjects(newProjects);
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/projects/reorder', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ projects: newProjects })
+      });
+      if (!response.ok) {
+        setStatus('Failed to save new order');
+      }
+    } catch (err) {
+      setStatus('Failed to save new order');
+    }
+  };
+
   const startEdit = (project) => {
     setCurrentProject(project);
     setFormData({ title: project.title, detail: project.detail, tags: project.tags.join(', ') });
@@ -180,11 +206,17 @@ function AdminCMS() {
         </div>
         {status && <p className="status-message">{status}</p>}
         <div className="project-list-admin">
-          {projects.map(p => (
+          {projects.map((p, idx) => (
             <div key={p.id} className="project-list-item">
-              <div className="project-list-info">
-                <strong>{p.title}</strong>
-                <p>{p.detail}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div className="block-controls">
+                  <button type="button" onClick={() => moveProject(idx, 'up')} disabled={idx === 0}>▲</button>
+                  <button type="button" onClick={() => moveProject(idx, 'down')} disabled={idx === projects.length - 1}>▼</button>
+                </div>
+                <div className="project-list-info">
+                  <strong>{p.title}</strong>
+                  <p>{p.detail}</p>
+                </div>
               </div>
               <div className="project-list-actions">
                 <button className="action-btn edit" onClick={() => startEdit(p)}>Edit</button>

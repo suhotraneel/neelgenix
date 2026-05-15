@@ -1,59 +1,5 @@
 [
   {
-    "id": "p3",
-    "title": "Exhibition Experience",
-    "detail": "Spatial and digital experience design for guided discovery.",
-    "tags": [
-      "Experience",
-      "Research",
-      "Visual Design"
-    ],
-    "image": "",
-    "media": [
-      {
-        "id": "m3-1",
-        "type": "image",
-        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
-      }
-    ]
-  },
-  {
-    "id": "p4",
-    "title": "AI Voice Website",
-    "detail": "A clear product website for voice-led AI workflows.",
-    "tags": [
-      "Web Design",
-      "AI",
-      "Storytelling"
-    ],
-    "image": "",
-    "media": [
-      {
-        "id": "m4-1",
-        "type": "image",
-        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
-      }
-    ]
-  },
-  {
-    "id": "p5",
-    "title": "Teacher Platform Redesign",
-    "detail": "A more usable platform experience for teachers and learning teams.",
-    "tags": [
-      "Product Design",
-      "Systems",
-      "Handoff"
-    ],
-    "image": "",
-    "media": [
-      {
-        "id": "m5-1",
-        "type": "image",
-        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
-      }
-    ]
-  },
-  {
     "id": "proj-1778511557545",
     "title": "Guided Practice - SchoolAi",
     "detail": "Guided Practice is SchoolAI's core learning loop",
@@ -118,6 +64,60 @@
         "id": "m-1778511469019",
         "type": "image",
         "url": "/neelgenix/assets/project-1778511557543-914252234.png"
+      }
+    ]
+  },
+  {
+    "id": "p4",
+    "title": "AI Voice Website",
+    "detail": "A clear product website for voice-led AI workflows.",
+    "tags": [
+      "Web Design",
+      "AI",
+      "Storytelling"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m4-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
+      }
+    ]
+  },
+  {
+    "id": "p5",
+    "title": "Teacher Platform Redesign",
+    "detail": "A more usable platform experience for teachers and learning teams.",
+    "tags": [
+      "Product Design",
+      "Systems",
+      "Handoff"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m5-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
+      }
+    ]
+  },
+  {
+    "id": "p3",
+    "title": "Exhibition Experience",
+    "detail": "Spatial and digital experience design for guided discovery.",
+    "tags": [
+      "Experience",
+      "Research",
+      "Visual Design"
+    ],
+    "image": "",
+    "media": [
+      {
+        "id": "m3-1",
+        "type": "image",
+        "url": "/neelgenix/assets/8b67a768c8177c4ac7fce65ceb2ecb785c4f5cef.png"
       }
     ]
   }
