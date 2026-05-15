@@ -8,7 +8,7 @@
       "Learning Design",
       "Product Revamp"
     ],
-    "image": "/neelgenix/assets/project-1778511557441-496173910.png",
+    "image": "/neelgenix/assets/project-1778870410413-231577252.jpg",
     "media": [
       {
         "id": "m-1778511406422",
@@ -73,10 +73,10 @@
     "detail": "Marketing campaign of HSBC, celebrating objects.",
     "tags": [
       "Marketing",
-      "UX UI",
+      "UX UI Design",
       "Advertising"
     ],
-    "image": "",
+    "image": "/neelgenix/assets/project-1778870416890-243703735.jpg",
     "media": [
       {
         "id": "m-1778857251024",
@@ -171,128 +171,15 @@
     ]
   },
   {
-    "id": "proj-1778854763463",
-    "title": "Neo Marche Branding",
-    "detail": "reherher",
-    "tags": [
-      "Branding",
-      "Marketing",
-      "Service Design"
-    ],
-    "image": "/neelgenix/assets/project-1778856991720-541434217.jpg",
-    "media": [
-      {
-        "id": "m-1778854751628",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778854763440-78060276.jpg"
-      },
-      {
-        "id": "m-1778854813158",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778854844833-83453288.jpg"
-      },
-      {
-        "id": "m-1778856228131",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436031-77232407.jpg"
-      },
-      {
-        "id": "m-1778856239148",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436046-80167188.jpg"
-      },
-      {
-        "id": "m-1778856248734",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436066-716591321.jpg"
-      },
-      {
-        "id": "m-1778856249401",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436104-912942086.jpg"
-      },
-      {
-        "id": "m-1778856250278",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436119-638111352.jpg"
-      },
-      {
-        "id": "m-1778856259235",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436141-971660339.jpg"
-      },
-      {
-        "id": "m-1778856259916",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436158-183164651.jpg"
-      },
-      {
-        "id": "m-1778856264057",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436170-540048404.jpg"
-      },
-      {
-        "id": "m-1778856265144",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436219-549929399.jpg"
-      },
-      {
-        "id": "m-1778856267154",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436229-772449227.jpg"
-      },
-      {
-        "id": "m-1778856268226",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436240-917465763.jpg"
-      },
-      {
-        "id": "m-1778856271242",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436281-394090926.jpg"
-      },
-      {
-        "id": "m-1778856367363",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436299-642009755.jpg"
-      },
-      {
-        "id": "m-1778856361656",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436309-947393083.jpg"
-      },
-      {
-        "id": "m-1778856352236",
-        "type": "video",
-        "url": "https://vimeo.com/1050371949/862d69c399?fl=tl&fe=ec"
-      },
-      {
-        "id": "m-1778856373971",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436319-751012276.jpg"
-      },
-      {
-        "id": "m-1778856418478",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436343-531950084.jpg"
-      },
-      {
-        "id": "m-1778856431872",
-        "type": "image",
-        "url": "/neelgenix/assets/project-1778856436378-300219419.jpg"
-      }
-    ]
-  },
-  {
     "id": "proj-1778857769832",
-    "title": "The Right to Look",
-    "detail": "An immersive audio-visual art gallery experience from Space118",
+    "title": "Right to Look - Space 118",
+    "detail": "Digital immersive audio-visual art gallery experience",
     "tags": [
-      "Experience Design",
       "UX UI Design",
+      "Experience Design",
       "Development"
     ],
-    "image": "",
+    "image": "/neelgenix/assets/project-1778870430613-443475439.jpg",
     "media": [
       {
         "id": "m-1778857636105",
@@ -437,14 +324,128 @@
     ]
   },
   {
+    "id": "proj-1778854763463",
+    "title": "Neo Marche Branding",
+    "detail": "Brand communication strategies across marketing channels",
+    "tags": [
+      "Branding",
+      "Marketing",
+      "Service Design"
+    ],
+    "image": "/neelgenix/assets/project-1778870578942-289744409.jpg",
+    "media": [
+      {
+        "id": "m-1778854751628",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778854763440-78060276.jpg"
+      },
+      {
+        "id": "m-1778854813158",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778854844833-83453288.jpg"
+      },
+      {
+        "id": "m-1778856228131",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436031-77232407.jpg"
+      },
+      {
+        "id": "m-1778856239148",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436046-80167188.jpg"
+      },
+      {
+        "id": "m-1778856248734",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436066-716591321.jpg"
+      },
+      {
+        "id": "m-1778856249401",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436104-912942086.jpg"
+      },
+      {
+        "id": "m-1778856250278",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436119-638111352.jpg"
+      },
+      {
+        "id": "m-1778856259235",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436141-971660339.jpg"
+      },
+      {
+        "id": "m-1778856259916",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436158-183164651.jpg"
+      },
+      {
+        "id": "m-1778856264057",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436170-540048404.jpg"
+      },
+      {
+        "id": "m-1778856265144",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436219-549929399.jpg"
+      },
+      {
+        "id": "m-1778856267154",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436229-772449227.jpg"
+      },
+      {
+        "id": "m-1778856268226",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436240-917465763.jpg"
+      },
+      {
+        "id": "m-1778856271242",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436281-394090926.jpg"
+      },
+      {
+        "id": "m-1778856367363",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436299-642009755.jpg"
+      },
+      {
+        "id": "m-1778856361656",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436309-947393083.jpg"
+      },
+      {
+        "id": "m-1778856352236",
+        "type": "video",
+        "url": "https://vimeo.com/1050371949/862d69c399?fl=tl&fe=ec"
+      },
+      {
+        "id": "m-1778856373971",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436319-751012276.jpg"
+      },
+      {
+        "id": "m-1778856418478",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436343-531950084.jpg"
+      },
+      {
+        "id": "m-1778856431872",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778856436378-300219419.jpg"
+      }
+    ]
+  },
+  {
     "id": "proj-1778861494018",
     "title": "Garment Visualizer",
-    "detail": "A digital tools enabling customers to preview customisations in realtime",
+    "detail": "Digital visualiser for real-time preview of customisations",
     "tags": [
       "UX UI Design",
-      "Product Design"
+      "Product Design",
+      "Digital Fashion"
     ],
-    "image": "/neelgenix/assets/project-1778861494011-617628400.jpg",
+    "image": "/neelgenix/assets/project-1778870438157-184268421.jpg",
     "media": [
       {
         "id": "m-1778861420536",
@@ -459,15 +460,88 @@
     ]
   },
   {
+    "id": "proj-1778868499276",
+    "title": "Maze Blaze",
+    "detail": "Puzzle-adventure VR game based on Star Wars",
+    "tags": [
+      "Game Design",
+      "Development",
+      "Visual Design"
+    ],
+    "image": "/neelgenix/assets/project-1778870462961-877595121.jpg",
+    "media": [
+      {
+        "id": "m-1778868362459",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499052-254413692.jpg"
+      },
+      {
+        "id": "m-1778868388252",
+        "type": "video",
+        "url": "https://youtu.be/75uVig356WI?si=eUhWG4zm2NZdGBXA"
+      },
+      {
+        "id": "m-1778868388912",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499060-990594694.png"
+      },
+      {
+        "id": "m-1778868389399",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499108-990343363.png"
+      },
+      {
+        "id": "m-1778868389932",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499128-468138870.png"
+      },
+      {
+        "id": "m-1778868390563",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499157-898808887.png"
+      },
+      {
+        "id": "m-1778868391319",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499178-858590280.png"
+      },
+      {
+        "id": "m-1778868392519",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499192-638299420.png"
+      },
+      {
+        "id": "m-1778868393375",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499211-553738470.png"
+      },
+      {
+        "id": "m-1778868394253",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499225-88075902.png"
+      },
+      {
+        "id": "m-1778868394964",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499237-39397427.png"
+      },
+      {
+        "id": "m-1778868395797",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868499251-340776359.png"
+      }
+    ]
+  },
+  {
     "id": "proj-1778862493477",
-    "title": "Ambush",
-    "detail": "A luxury lifestyle brand inspired by rare living species.",
+    "title": "Ambush Luxury",
+    "detail": "Luxury lifestyle brand inspired by rare living species",
     "tags": [
       "Branding",
       "UX UI Design",
       "Content Stretegy"
     ],
-    "image": "/neelgenix/assets/project-1778862493460-513137617.jpg",
+    "image": "/neelgenix/assets/project-1778870448402-480393665.jpg",
     "media": [
       {
         "id": "m-1778862409724",
@@ -478,6 +552,49 @@
         "id": "m-1778862424303",
         "type": "video",
         "url": "https://youtu.be/MDeuqvyvXyk?si=WNUQKP_vDL4Um4-C"
+      }
+    ]
+  },
+  {
+    "id": "proj-1778868257897",
+    "title": "Prickle Typeface",
+    "detail": "Bold typeface inspired by the texture of wet animal fur",
+    "tags": [
+      "Type Design",
+      "Typography",
+      "Visual Design"
+    ],
+    "image": "/neelgenix/assets/project-1778870455272-910636751.jpg",
+    "media": [
+      {
+        "id": "m-1778868193743",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257742-901788879.jpg"
+      },
+      {
+        "id": "m-1778868194522",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257748-576467151.jpg"
+      },
+      {
+        "id": "m-1778868195167",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257777-412488355.jpg"
+      },
+      {
+        "id": "m-1778868195947",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257816-826327105.jpg"
+      },
+      {
+        "id": "m-1778868196495",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257870-720680119.jpg"
+      },
+      {
+        "id": "m-1778868197440",
+        "type": "image",
+        "url": "/neelgenix/assets/project-1778868257885-830807656.jpg"
       }
     ]
   }
