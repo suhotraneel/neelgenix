@@ -420,6 +420,8 @@ function ProjectsSection({ section }) {
   React.useEffect(() => {
     if (isCmsPath(window.location.pathname)) return;
 
+    const base = import.meta.env.BASE_URL;
+
     if (!activeProject) {
       setFooterVisible(false);
       setIsScrolled(false);
@@ -427,17 +429,24 @@ function ProjectsSection({ section }) {
       document.body.style.overscrollBehavior = 'auto';
       document.documentElement.style.overflow = 'auto';
       document.documentElement.style.overscrollBehavior = 'auto';
+      const currentSlugParts = window.location.pathname
+        .replace(base, '')
+        .replace(/^\/+|\/+$/g, '')
+        .split('/')
+        .filter(Boolean);
+      const isProjectDetailPath =
+        currentSlugParts.length > 1 && currentSlugParts[0] === 'projects';
 
-      const base = import.meta.env.BASE_URL;
-      const targetPath = `${base}projects`;
-      if (window.location.pathname !== targetPath) {
-        window.history.replaceState(null, null, targetPath);
+      if (isProjectDetailPath) {
+        const targetPath = `${base}projects`;
+        if (window.location.pathname !== targetPath) {
+          window.history.replaceState(null, null, targetPath);
+        }
       }
       return;
     }
 
     const projectSlug = activeProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const base = import.meta.env.BASE_URL;
     const targetPath = `${base}projects/${projectSlug}`;
     if (window.location.pathname !== targetPath) {
       window.history.replaceState(null, null, targetPath);

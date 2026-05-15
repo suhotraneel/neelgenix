@@ -38,19 +38,25 @@ function App() {
     }
 
     const base = import.meta.env.BASE_URL;
-    const slug = path.replace(base, '');
+    const defaultSection = sectionsData[0];
+    const relativePath = path.replace(base, '').replace(/^\/+|\/+$/g, '');
+    const slugParts = relativePath ? relativePath.split('/') : [];
+    const sectionSlug = slugParts[0] || '';
+    const targetSection = sectionsData.find((s) => s.slug === sectionSlug);
 
-    if (slug) {
-      const slugParts = slug.split('/');
-      const sectionSlug = slugParts[0];
-      const targetSection = sectionsData.find(s => s.slug === sectionSlug);
-      if (targetSection) {
-        setActiveSectionId(targetSection.id);
-        const el = document.getElementById(targetSection.id);
-        if (el) {
-          el.scrollIntoView();
-        }
+    if (targetSection) {
+      setActiveSectionId(targetSection.id);
+      const el = document.getElementById(targetSection.id);
+      if (el) {
+        el.scrollIntoView();
       }
+      return;
+    }
+
+    setActiveSectionId(defaultSection.id);
+    const canonicalPath = `${base}${defaultSection.slug}`;
+    if (window.location.pathname !== canonicalPath) {
+      window.history.replaceState(null, null, canonicalPath);
     }
   }, []);
 
