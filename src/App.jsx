@@ -33,7 +33,9 @@ function App() {
     }
 
     if (slug) {
-      const targetSection = sectionsData.find(s => s.slug === slug);
+      const slugParts = slug.split('/');
+      const sectionSlug = slugParts[0];
+      const targetSection = sectionsData.find(s => s.slug === sectionSlug);
       if (targetSection) {
         setActiveSectionId(targetSection.id);
         const el = document.getElementById(targetSection.id);
@@ -51,7 +53,18 @@ function App() {
     if (currentSection && !document.hidden) {
       document.title = `Neel Genix - ${currentSection.title}`;
       const base = import.meta.env.BASE_URL;
-      window.history.replaceState(null, null, `${base}${currentSection.slug}`);
+      let newUrl = `${base}${currentSection.slug}`;
+      
+      if (currentSection.slug === 'projects') {
+        const path = window.location.pathname;
+        const pathSlug = path.replace(base, '');
+        const slugParts = pathSlug.split('/');
+        if (slugParts.length > 1 && slugParts[0] === 'projects') {
+          newUrl += `/${slugParts[1]}`;
+        }
+      }
+      
+      window.history.replaceState(null, null, newUrl);
     }
   }, [activeSectionId, loading, isAdminPath]);
 

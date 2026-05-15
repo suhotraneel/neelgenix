@@ -274,6 +274,7 @@ function ProjectsSection({ section }) {
   const [isClosing, setIsClosing] = React.useState(false);
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
+  const [linkCopied, setLinkCopied] = React.useState(false);
   const [footerVisible, setFooterVisible] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [projectColors, setProjectColors] = React.useState({});
@@ -284,6 +285,23 @@ function ProjectsSection({ section }) {
   React.useEffect(() => {
     setImageLoaded(false);
   }, [activeProject]);
+
+  React.useEffect(() => {
+    const path = window.location.pathname;
+    const base = import.meta.env.BASE_URL;
+    const slug = path.replace(base, '');
+    const slugParts = slug.split('/');
+    
+    if (slugParts.length > 1 && slugParts[0] === 'projects' && section.projects) {
+      const projectParam = slugParts[1];
+      const project = section.projects.find(p =>
+        p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === projectParam
+      );
+      if (project) {
+        setActiveProject(project);
+      }
+    }
+  }, [section.projects]);
 
   React.useEffect(() => {
     const loadColors = async () => {
@@ -312,8 +330,15 @@ function ProjectsSection({ section }) {
       document.body.style.overscrollBehavior = 'auto';
       document.documentElement.style.overflow = 'auto';
       document.documentElement.style.overscrollBehavior = 'auto';
+
+      const base = import.meta.env.BASE_URL;
+      window.history.replaceState(null, null, `${base}projects`);
       return;
     }
+
+    const projectSlug = activeProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const base = import.meta.env.BASE_URL;
+    window.history.replaceState(null, null, `${base}projects/${projectSlug}`);
 
     document.body.style.overflow = 'hidden';
     document.body.style.overscrollBehavior = 'none';
@@ -492,6 +517,15 @@ function ProjectsSection({ section }) {
             </div>
           )}
 
+          {linkCopied && (
+            <div className="contact-copied-message" style={{ bottom: '80px', zIndex: 100 }}>
+              <span>Link Copied</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M13.3334 4L6.00008 11.3333L2.66675 8" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+          )}
+
           <div className={`project-modal-content ${isScrolled ? 'is-scrolled' : ''}`} onClick={(e) => e.stopPropagation()} onScroll={handleModalScroll}>
             <div className={`project-modal-header ${isScrolled ? 'has-bg' : ''}`}>
               <div className="project-modal-header-info">
@@ -510,11 +544,26 @@ function ProjectsSection({ section }) {
                   ))}
                 </div>
               </div>
-              <button className="project-modal-close mobile-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    copyTextToClipboard(window.location.href, () => {
+                      setLinkCopied(true);
+                      setTimeout(() => setLinkCopied(false), 2000);
+                    });
+                  }}
+                  title="Copy project link"
+                  style={{ background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 8px 0 12px' }}
+                >
+                  <img src={iconCopy} alt="Copy Link" style={{ width: '20px', height: '20px', filter: 'brightness(0) invert(1)' }} />
+                </button>
+                <button className="project-modal-close mobile-only" onClick={(e) => { e.stopPropagation(); closeProjectModal(); }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
             </div>
 
             <div className="project-modal-body">
