@@ -122,7 +122,7 @@ export const sectionsData = [
         image: `${import.meta.env.BASE_URL}assets/skills-images/ai-interaction-design.jpg`,
       },
       {
-        label: 'Product & Experience Design',
+        label: 'Implementation',
         detail:
           'I take designs beyond screens by building and prototyping interfaces. This helps ensure feasibility, smoother collaboration with developers, and alignment between UI intent and final output.',
         meta: ['HTML', 'CSS', 'JavaScript', 'Python', 'AI-Assisted Coding', 'Content Management System', 'Shopify', 'Git (Version Control)'],
