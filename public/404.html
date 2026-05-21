@@ -3,40 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,follow">
   <title>Neel Genix - Page Not Found</title>
-
-  <script type="text/javascript">
-    // List of valid slugs from your sections.js
-    var validSlugs = [
-      'who-i-am',
-      'how-i-contribute',
-      'worked-with',
-      'things-ive-built',
-      'what-i-work-on',
-      'tools-i-use',
-      'my-ai-approach',
-      'beyond-work',
-      'what-people-say',
-      'lets-build'
-    ];
-
-    var pathSegmentsToKeep = 1;
-    var l = window.location;
-    var path = l.pathname.split('/').pop(); // Get the last part of the URL
-
-    // ONLY redirect if it's a known valid section slug
-    if (validSlugs.indexOf(path) !== -1) {
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.replace(/&/g, '~and~') : '') +
-        l.hash
-      );
-    }
-    // Otherwise, the script does nothing and the 404 UI below is displayed.
-  </script>
 
   <style>
     :root {
@@ -124,7 +93,7 @@
   <div class="container">
     <div class="error-code">404</div>
     <div class="message">The page you're looking for has drifted into deep space.</div>
-    <a href="/neelgenix/" class="btn">Back to Home</a>
+    <a href="/" class="btn">Back to Home</a>
   </div>
 </body>
 

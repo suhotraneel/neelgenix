@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useScrollSpy } from '../hooks/useScrollSpy';
 import SectionPage from './SectionPage';
 
@@ -12,7 +12,8 @@ function MainContent({
   isAutoScrolling,
   setIsAutoScrolling,
   rightContainerRef,
-  manualScrollRef
+  manualScrollRef,
+  isNotFoundRoute = false,
 }) {
   const [contentScale, setContentScale] = useState(1);
 
@@ -71,6 +72,11 @@ function MainContent({
       ref={rightContainerRef}
       style={canvasStyle}
     >
+      {isNotFoundRoute && (
+        <section className="not-found-banner" aria-live="polite">
+          <p>Page not found. Showing portfolio overview instead.</p>
+        </section>
+      )}
       {sections.map((section) => (
         <SectionPage 
           key={section.id}

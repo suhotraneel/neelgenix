@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import Sidebar from './components/Sidebar';
 import MainContent from './components/MainContent';
@@ -6,139 +6,114 @@ import CustomScrollbar from './components/CustomScrollbar';
 import AdminCMS from './components/AdminCMS';
 import { sectionsData } from './data/sections';
 import { injectGothamFonts } from './utils/fonts';
-import { syncCanonicalTag } from './utils/seo';
+import { applySeoForPath, getSeoRouteForPath } from './utils/seo';
 import './index.css';
 
-// Inject fonts early using the correct BASE_URL (works on both GitHub Pages and Vercel)
 injectGothamFonts();
 
-const CMS_PATH_REGEX = /\/cms\/?$/;
-const isCmsPath = (pathname) => CMS_PATH_REGEX.test(pathname);
+const DEFAULT_SECTION_ID = sectionsData[0]?.id;
+
+const resolveSectionFromPath = (pathname) => {
+  const route = getSeoRouteForPath(pathname);
+  if (route.routeType === 'cms') {
+    return { route, sectionId: null };
+  }
+
+  if (route.routeType === 'home' || route.routeType === 'not-found') {
+    return { route, sectionId: DEFAULT_SECTION_ID };
+  }
+
+  if (route.routeType === 'project') {
+    const projectsSection = sectionsData.find((section) => section.slug === 'projects');
+    return { route, sectionId: projectsSection?.id || DEFAULT_SECTION_ID };
+  }
+
+  const section = sectionsData.find((item) => item.slug === route.sectionSlug);
+  return { route, sectionId: section?.id || DEFAULT_SECTION_ID };
+};
 
 function App() {
-  const [isAdminPath, setIsAdminPath] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return isCmsPath(window.location.pathname);
-  });
-  const [activeSectionId, setActiveSectionId] = useState(sectionsData[0].id);
+  const [activeSectionId, setActiveSectionId] = useState(DEFAULT_SECTION_ID);
   const [isAutoScrolling, setIsAutoScrolling] = useState(false);
   const [loading, setLoading] = useState(true);
   const [hideLoader, setHideLoader] = useState(false);
+  const [isAdminPath, setIsAdminPath] = useState(false);
+  const [isNotFoundRoute, setIsNotFoundRoute] = useState(false);
   const rightContainerRef = useRef(null);
   const manualScrollRef = useRef(false);
 
-  // Initial scroll based on URL Slug
+  const sectionById = useMemo(
+    () => new Map(sectionsData.map((section) => [section.id, section])),
+    [],
+  );
+
   useEffect(() => {
-    const path = window.location.pathname;
-    syncCanonicalTag(path);
+    const syncRouteState = (pathname) => {
+      const { route, sectionId } = resolveSectionFromPath(pathname);
+      setIsAdminPath(route.routeType === 'cms');
+      setIsNotFoundRoute(route.routeType === 'not-found');
+      applySeoForPath(pathname);
 
-    // Keep route classification in sync and short-circuit CMS.
-    const cmsPath = isCmsPath(path);
-    setIsAdminPath(cmsPath);
-    if (cmsPath) {
-      return;
-    }
-
-    const base = import.meta.env.BASE_URL;
-    const defaultSection = sectionsData[0];
-    const relativePath = path.replace(base, '').replace(/^\/+|\/+$/g, '');
-    const slugParts = relativePath ? relativePath.split('/') : [];
-    const sectionSlug = slugParts[0] || '';
-    const targetSection = sectionsData.find((s) => s.slug === sectionSlug);
-
-    if (targetSection) {
-      setActiveSectionId(targetSection.id);
-      const el = document.getElementById(targetSection.id);
-      if (el) {
-        el.scrollIntoView();
+      if (sectionId) {
+        setActiveSectionId(sectionId);
+        requestAnimationFrame(() => {
+          const sectionEl = document.getElementById(sectionId);
+          if (sectionEl) {
+            sectionEl.scrollIntoView();
+          }
+        });
       }
-      return;
-    }
+    };
 
-    setActiveSectionId(defaultSection.id);
-    const canonicalPath = `${base}${defaultSection.slug}`;
-    if (window.location.pathname !== canonicalPath) {
-      window.history.replaceState(null, null, canonicalPath);
-      syncCanonicalTag(canonicalPath);
-    }
+    syncRouteState(window.location.pathname);
+
+    const onPopState = () => {
+      syncRouteState(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('popstate', onPopState);
+    };
   }, []);
 
   useEffect(() => {
-    const handlePopState = () => {
-      syncCanonicalTag();
-    };
+    if (isAdminPath || loading) return;
 
-    window.addEventListener('popstate', handlePopState);
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-    };
-  }, []);
+    const currentSection = sectionById.get(activeSectionId);
+    if (!currentSection) return;
 
-  // Sync Title and URL with Active Section
-  useEffect(() => {
-    if (loading || isAdminPath) return;
-    if (isCmsPath(window.location.pathname)) return;
-    const currentSection = sectionsData.find(s => s.id === activeSectionId);
-    if (currentSection && !document.hidden) {
-      document.title = `Neel Genix - ${currentSection.title}`;
-      const base = import.meta.env.BASE_URL;
-      let newUrl = `${base}${currentSection.slug}`;
-      
-      if (currentSection.slug === 'projects') {
-        const path = window.location.pathname;
-        const pathSlug = path.replace(base, '');
-        const slugParts = pathSlug.split('/');
-        if (slugParts.length > 1 && slugParts[0] === 'projects') {
-          newUrl += `/${slugParts[1]}`;
-        }
-      }
-
-      if (window.location.pathname !== newUrl) {
-        window.history.replaceState(null, null, newUrl);
-      }
-      syncCanonicalTag(newUrl);
+    const currentPath = window.location.pathname;
+    const currentRoute = getSeoRouteForPath(currentPath);
+    if (currentRoute.routeType === 'not-found') {
+      applySeoForPath(currentPath);
+      setIsNotFoundRoute(true);
+      return;
     }
-  }, [activeSectionId, loading, isAdminPath]);
+
+    let nextPath = `/${currentSection.slug}`;
+
+    // Keep active project detail paths when the projects section is active.
+    if (currentSection.slug === 'projects' && currentRoute.routeType === 'project') {
+      nextPath = currentPath;
+    }
+
+    if (currentSection.slug === sectionsData[0].slug && currentRoute.routeType === 'home') {
+      nextPath = '/';
+    }
+
+    if (currentPath !== nextPath) {
+      window.history.replaceState(null, '', nextPath);
+    }
+    const route = applySeoForPath(nextPath);
+    setIsNotFoundRoute(route?.routeType === 'not-found');
+  }, [activeSectionId, isAdminPath, loading, sectionById]);
 
   useEffect(() => {
-    if (isAdminPath) return;
-    const altTitles = [
-      "🤔 Hello!",
-      "✍🏻 I'm Suhotra Chakraborty",
-      "🎸 aka Neel Genix",
-    ];
-    let titleInterval;
-    let i = 0;
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        titleInterval = setInterval(() => {
-          document.title = altTitles[i];
-          i = (i + 1) % altTitles.length;
-        }, 500);
-      } else {
-        clearInterval(titleInterval);
-        // Restore the current section title
-        const currentSection = sectionsData.find(s => s.id === activeSectionId);
-        if (currentSection) {
-          document.title = `Neel Genix - Suhotra Chakraborty`;
-        }
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      clearInterval(titleInterval);
-    };
-  }, [activeSectionId, isAdminPath]);
-
-  useEffect(() => {
-    // Faster preloader sequence
     const timer1 = setTimeout(() => {
       setHideLoader(true);
     }, 2000);
-    // Unmount after fade finishes (500ms fade)
+
     const timer2 = setTimeout(() => {
       setLoading(false);
     }, 1300);
@@ -149,14 +124,19 @@ function App() {
     };
   }, []);
 
-  const handleNavClick = (sectionId) => {
+  const handleNavClick = (sectionId, nextPath) => {
     manualScrollRef.current = true;
 
-    // Force immediate UI update before the scroll starts
     flushSync(() => {
       setActiveSectionId(sectionId);
       setIsAutoScrolling(true);
+      setIsNotFoundRoute(false);
     });
+
+    if (nextPath && window.location.pathname !== nextPath) {
+      window.history.pushState(null, '', nextPath);
+      applySeoForPath(nextPath);
+    }
 
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
@@ -166,16 +146,19 @@ function App() {
 
   const handleLogoClick = () => {
     manualScrollRef.current = true;
-    const base = import.meta.env.BASE_URL;
-    window.history.replaceState(null, null, base);
-    syncCanonicalTag(base);
 
     flushSync(() => {
-      setActiveSectionId(sectionsData[0].id);
+      setActiveSectionId(DEFAULT_SECTION_ID);
       setIsAutoScrolling(true);
+      setIsNotFoundRoute(false);
     });
 
-    const targetSection = document.getElementById(sectionsData[0].id);
+    if (window.location.pathname !== '/') {
+      window.history.pushState(null, '', '/');
+    }
+    applySeoForPath('/');
+
+    const targetSection = document.getElementById(DEFAULT_SECTION_ID);
     if (targetSection) {
       targetSection.scrollIntoView({ behavior: 'smooth' });
     }
@@ -190,7 +173,13 @@ function App() {
       {loading && (
         <div id="preloader" className={hideLoader ? 'hide' : ''}>
           <span className="loadertext">NEEL GENIX</span>
-          <img src={`${import.meta.env.BASE_URL}assets/loader.svg`} alt="Neel Genix" className="loader" width="64px" height="64px" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/loader.svg`}
+            alt="Neel Genix"
+            className="loader"
+            width="64"
+            height="64"
+          />
         </div>
       )}
       <div className="app-container">
@@ -208,6 +197,7 @@ function App() {
           setIsAutoScrolling={setIsAutoScrolling}
           rightContainerRef={rightContainerRef}
           manualScrollRef={manualScrollRef}
+          isNotFoundRoute={isNotFoundRoute}
         />
         <CustomScrollbar containerRef={rightContainerRef} />
       </div>

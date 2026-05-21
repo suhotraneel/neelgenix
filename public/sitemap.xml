@@ -1,117 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://neelgenix.com/</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <loc>https://www.neelgenix.com/</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/introduction</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://www.neelgenix.com/projects</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/contribution</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.neelgenix.com/introduction</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/clients</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/contribution</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.neelgenix.com/clients</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/guided-practice-schoolai</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/skills</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/mosaic-lane-hsbc</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/tools</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/right-to-look-space-118</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/about-me</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/neo-marche-branding</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/ai-approach</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/garment-visualizer</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/testimonials</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/maze-blaze</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/contact</loc>
+    <lastmod>2026-05-21T13:44:55.578Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/ambush-luxury</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/guided-practice-schoolai</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/projects/prickle-typeface</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/mosaic-lane-hsbc</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/skills</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/right-to-look-space-118</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/tools</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/neo-marche-branding</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/about-me</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.neelgenix.com/projects/garment-visualizer</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/ai-approach</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/maze-blaze</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/testimonials</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>https://www.neelgenix.com/projects/ambush-luxury</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
   <url>
-    <loc>https://neelgenix.com/contact</loc>
-    <lastmod>2026-05-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://www.neelgenix.com/projects/prickle-typeface</loc>
+    <lastmod>2026-05-15T20:19:07.546Z</lastmod>
   </url>
 </urlset>

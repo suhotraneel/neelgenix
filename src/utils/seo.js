@@ -1,62 +1,118 @@
-const DEFAULT_CANONICAL_ORIGIN = 'https://www.neelgenix.com';
+import rawProjects from '../data/projects.json';
+import {
+  SEO_CONSTANTS,
+  buildSeoManifest,
+  normalizeAssetPath,
+  normalizePathname,
+  resolveSeoRoute,
+  toAbsoluteUrl,
+} from './seoManifest';
 
-const normalizeOrigin = (origin) => {
-  if (!origin) return DEFAULT_CANONICAL_ORIGIN;
-  return origin.replace(/\/+$/g, '');
+const manifest = buildSeoManifest({ projects: rawProjects });
+
+const ensureMetaTag = (attribute, key, value = '') => {
+  let tag = document.head.querySelector(`meta[${attribute}="${key}"]`);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attribute, key);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', value);
+  return tag;
 };
 
-const normalizeBasePath = (basePath = '/') => {
-  if (!basePath) return '/';
-  const withLeadingSlash = basePath.startsWith('/') ? basePath : `/${basePath}`;
-  return withLeadingSlash.endsWith('/') ? withLeadingSlash : `${withLeadingSlash}/`;
-};
-
-const stripBasePath = (pathname, basePath) => {
-  const normalizedBase = normalizeBasePath(basePath);
-  if (normalizedBase === '/') return pathname;
-
-  const baseWithoutTrailingSlash = normalizedBase.slice(0, -1);
-  if (pathname === normalizedBase || pathname === baseWithoutTrailingSlash) return '/';
-
-  if (pathname.startsWith(normalizedBase)) {
-    return `/${pathname.slice(normalizedBase.length)}`;
+const ensureCanonicalTag = () => {
+  const canonicalTags = document.head.querySelectorAll('link[rel="canonical"]');
+  if (canonicalTags.length > 1) {
+    canonicalTags.forEach((tag, index) => {
+      if (index > 0) {
+        tag.remove();
+      }
+    });
   }
 
-  return pathname;
+  let canonicalTag = canonicalTags[0] || document.head.querySelector('link[rel="canonical"]');
+  if (!canonicalTag) {
+    canonicalTag = document.createElement('link');
+    canonicalTag.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonicalTag);
+  }
+  return canonicalTag;
 };
 
-const normalizePathname = (pathname = '/') => {
-  const withLeadingSlash = pathname.startsWith('/') ? pathname : `/${pathname}`;
-  const withSingleSlashes = withLeadingSlash.replace(/\/{2,}/g, '/');
-  if (withSingleSlashes === '/') return withSingleSlashes;
-  return withSingleSlashes.replace(/\/+$/g, '');
-};
-
-const getCanonicalOrigin = () => normalizeOrigin(
-  import.meta.env.VITE_CANONICAL_ORIGIN || import.meta.env.VITE_SITE_URL
-);
-
-export const getCanonicalUrl = (pathname = window.location.pathname) => {
-  const strippedPath = stripBasePath(pathname, import.meta.env.BASE_URL);
-  const normalizedPath = normalizePathname(strippedPath);
-  return `${getCanonicalOrigin()}${normalizedPath}`;
-};
-
-export const syncCanonicalTag = (pathname = window.location.pathname) => {
-  if (typeof document === 'undefined') return '';
-
-  const canonicalUrl = getCanonicalUrl(pathname);
-  let canonicalLink = document.querySelector('link[rel="canonical"]');
-
-  if (!canonicalLink) {
-    canonicalLink = document.createElement('link');
-    canonicalLink.setAttribute('rel', 'canonical');
-    document.head.appendChild(canonicalLink);
+const ensureJsonLdTag = () => {
+  const jsonLdTags = document.head.querySelectorAll('script[data-seo-jsonld="true"]');
+  if (jsonLdTags.length > 1) {
+    jsonLdTags.forEach((tag, index) => {
+      if (index > 0) {
+        tag.remove();
+      }
+    });
   }
 
-  if (canonicalLink.getAttribute('href') !== canonicalUrl) {
-    canonicalLink.setAttribute('href', canonicalUrl);
+  let jsonLdTag =
+    jsonLdTags[0] || document.head.querySelector('script[data-seo-jsonld="true"]');
+  if (!jsonLdTag) {
+    jsonLdTag = document.createElement('script');
+    jsonLdTag.setAttribute('type', 'application/ld+json');
+    jsonLdTag.setAttribute('data-seo-jsonld', 'true');
+    document.head.appendChild(jsonLdTag);
   }
-
-  return canonicalUrl;
+  return jsonLdTag;
 };
+
+const setJsonLd = (value) => {
+  const jsonLdTag = ensureJsonLdTag();
+  if (!value) {
+    jsonLdTag.textContent = '';
+    return;
+  }
+  const payload = Array.isArray(value) ? value : [value];
+  jsonLdTag.textContent = JSON.stringify(payload);
+};
+
+export const getSeoRouteForPath = (pathname = window.location.pathname) =>
+  resolveSeoRoute(normalizePathname(pathname), manifest);
+
+export const applySeoForPath = (pathname = window.location.pathname) => {
+  if (typeof document === 'undefined') return null;
+
+  const route = getSeoRouteForPath(pathname);
+  const canonicalPath = normalizePathname(route.canonicalPath);
+  const canonicalUrl = toAbsoluteUrl(canonicalPath, SEO_CONSTANTS.canonicalOrigin);
+  const ogImage = toAbsoluteUrl(normalizeAssetPath(route.ogImage), SEO_CONSTANTS.canonicalOrigin);
+
+  document.title = route.title;
+
+  ensureCanonicalTag().setAttribute('href', canonicalUrl);
+  ensureMetaTag('name', 'description', route.description);
+  ensureMetaTag('name', 'robots', route.robots);
+  ensureMetaTag('property', 'og:type', 'website');
+  ensureMetaTag('property', 'og:site_name', SEO_CONSTANTS.siteName);
+  ensureMetaTag('property', 'og:locale', SEO_CONSTANTS.defaultLocale);
+  ensureMetaTag('property', 'og:url', canonicalUrl);
+  ensureMetaTag('property', 'og:title', route.title);
+  ensureMetaTag('property', 'og:description', route.description);
+  ensureMetaTag('property', 'og:image', ogImage);
+  ensureMetaTag('name', 'twitter:card', 'summary_large_image');
+  ensureMetaTag('name', 'twitter:url', canonicalUrl);
+  ensureMetaTag('name', 'twitter:title', route.title);
+  ensureMetaTag('name', 'twitter:description', route.description);
+  ensureMetaTag('name', 'twitter:image', ogImage);
+
+  const jsonLdValue =
+    typeof route.jsonLdFactory === 'function'
+      ? route.jsonLdFactory({ canonicalUrl, origin: SEO_CONSTANTS.canonicalOrigin, route })
+      : null;
+  setJsonLd(jsonLdValue);
+
+  return {
+    ...route,
+    canonicalUrl,
+  };
+};
+
+export const getCanonicalUrl = (pathname = window.location.pathname) =>
+  toAbsoluteUrl(normalizePathname(pathname), SEO_CONSTANTS.canonicalOrigin);
+
+export const getSeoManifest = () => manifest;

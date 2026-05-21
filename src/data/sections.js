@@ -1,10 +1,12 @@
 import rawProjectsData from './projects.json';
 
-// Rewrite all /neelgenix/assets/ paths to use the dynamic base URL
+// Normalize project asset paths and respect the active Vite base path.
 const base = import.meta.env.BASE_URL;
 const rewritePath = (path) => {
   if (!path) return path;
-  return path.replace(/^\/neelgenix\/assets\//, `${base}assets/`);
+  return path
+    .replace(/^\/neelgenix\/assets\//, `${base}assets/`)
+    .replace(/^\/assets\//, `${base}assets/`);
 };
 const projectsData = rawProjectsData.map(project => ({
   ...project,

@@ -146,6 +146,8 @@ const WorkedWith = () => {
           src={`${import.meta.env.BASE_URL}assets/i_worked_with_banner.jpg`}
           alt="I Worked With"
           className="ww-banner-img"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
@@ -183,6 +185,8 @@ const WorkedWith = () => {
                     src={`${import.meta.env.BASE_URL}assets/brand_logos/${logo.file}`}
                     alt={logo.name}
                     className="ww-brand-logo"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>

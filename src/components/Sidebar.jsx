@@ -69,31 +69,42 @@ function Sidebar({ sections, activeSectionId, onNavClick, onLogoClick }) {
 
   return (
     <nav className="left-panel">
-      <div 
-        className="logo-container" 
-        onClick={onLogoClick}
+      <a
+        href="/"
+        className="logo-container"
+        onClick={(e) => {
+          e.preventDefault();
+          onLogoClick();
+        }}
         style={{ cursor: 'pointer' }}
+        aria-label="Go to portfolio home"
       >
         <img src={`${import.meta.env.BASE_URL}assets/logo.svg`} alt="Neel Genix Logo" className="logo desktop-logo" />
         <img src={`${import.meta.env.BASE_URL}assets/ngiconlight.svg`} alt="Neel Genix Logo" className="logo mobile-logo" />
-      </div>
+      </a>
       <div className="menu-container" ref={menuRef}>
         <div className="menu">
           {sections.map((section) => {
             const isActive = section.id === activeSectionId;
             const targetHeight = getNavHeight(section);
+            const sectionHref = section.slug === sections[0].slug ? '/' : `/${section.slug}`;
 
             return (
-              <div
+              <a
                 key={section.id}
-                role="button"
-                tabIndex={0}
+                href={sectionHref}
                 className={`nav-item ${isActive ? 'active' : ''}`}
                 style={isActive ? { '--dynamic-size': `${targetHeight}px` } : {}}
                 ref={(el) => itemsRef.current[section.id] = el}
-                onClick={() => onNavClick(section.id)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavClick(section.id, sectionHref);
+                }}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') onNavClick(section.id);
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onNavClick(section.id, sectionHref);
+                  }
                 }}
               >
                 <div className="nav-content">
@@ -103,7 +114,7 @@ function Sidebar({ sections, activeSectionId, onNavClick, onLogoClick }) {
                 <div className="nav-indicator-track">
                   <div className="nav-indicator" id={`indicator-${section.id}`}></div>
                 </div>
-              </div>
+              </a>
             );
           })}
         </div>

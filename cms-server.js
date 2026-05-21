@@ -57,7 +57,7 @@ app.get('/api/projects', (req, res) => {
   try {
     const projects = readProjects();
     res.json(projects);
-  } catch (err) {
+  } catch {
     res.status(500).json({ message: 'Error reading projects' });
   }
 });
@@ -70,7 +70,7 @@ app.post('/api/projects', upload.any(), (req, res) => {
     let thumbnailPath = '';
     const thumbnailFile = req.files.find(f => f.fieldname === 'thumbnail');
     if (thumbnailFile) {
-      thumbnailPath = `/neelgenix/assets/${thumbnailFile.filename}`;
+      thumbnailPath = `/assets/${thumbnailFile.filename}`;
     }
 
     let parsedMediaData = [];
@@ -86,7 +86,7 @@ app.post('/api/projects', upload.any(), (req, res) => {
       if (block.fileKey) {
         const matchedFile = req.files.find(f => f.fieldname === block.fileKey);
         if (matchedFile) {
-          return { id: block.id, type: block.type, url: `/neelgenix/assets/${matchedFile.filename}` };
+          return { id: block.id, type: block.type, url: `/assets/${matchedFile.filename}` };
         }
       }
       return { id: block.id, type: block.type, url: block.url || '' };
@@ -135,7 +135,7 @@ app.put('/api/projects/:id', upload.any(), (req, res) => {
     let thumbnailPath = existingImage || '';
     const thumbnailFile = req.files.find(f => f.fieldname === 'thumbnail');
     if (thumbnailFile) {
-      thumbnailPath = `/neelgenix/assets/${thumbnailFile.filename}`;
+      thumbnailPath = `/assets/${thumbnailFile.filename}`;
     }
 
     let parsedMediaData = [];
@@ -151,7 +151,7 @@ app.put('/api/projects/:id', upload.any(), (req, res) => {
       if (block.fileKey) {
         const matchedFile = req.files.find(f => f.fieldname === block.fileKey);
         if (matchedFile) {
-          return { id: block.id, type: block.type, url: `/neelgenix/assets/${matchedFile.filename}` };
+          return { id: block.id, type: block.type, url: `/assets/${matchedFile.filename}` };
         }
       }
       return { id: block.id, type: block.type, url: block.url || '' };

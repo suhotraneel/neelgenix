@@ -1,6 +1,6 @@
 /**
  * Dynamically injects Gotham @font-face declarations using Vite's BASE_URL.
- * This ensures fonts load correctly on both GitHub Pages (/neelgenix/) and Vercel (/).
+ * This ensures fonts resolve correctly from the deployed Vite base path.
  */
 export function injectGothamFonts() {
   const base = import.meta.env.BASE_URL;
@@ -28,7 +28,7 @@ export function injectGothamFonts() {
   const css = fontFaces
     .map(
       ({ file, weight, style }) =>
-        `@font-face { font-family: 'Gotham'; src: url('${g}${file}.otf') format('opentype'); font-weight: ${weight}; font-style: ${style}; }`
+        `@font-face { font-family: 'Gotham'; src: url('${g}${file}.otf') format('opentype'); font-weight: ${weight}; font-style: ${style}; font-display: swap; }`
     )
     .join('\n');
 

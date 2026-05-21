@@ -19,7 +19,8 @@ import iconDownload from '../assets/section10/5db5cda5ca7cd472992d33e00b452c331d
 import iconCopy from '../assets/section10/200d8a7094d3571158958e270818b62e6b726654.svg';
 import iconLinkedin from '../assets/section10/4c811bea37dc8d79d6ccd1ddcdbbe2c35180cf5f.svg';
 import iconInstagram from '../assets/section10/f9346257c2e1ab3f5a6e7245521267b9e3f886ed.svg';
-import { syncCanonicalTag } from '../utils/seo';
+import { applySeoForPath, getSeoManifest } from '../utils/seo';
+import { normalizePathname, resolveSeoRoute, slugifyProjectTitle } from '../utils/seoManifest';
 
 import face0 from '../assets/section10/088a79ff77b70a66e090488e03909c3e13ec0fe7.svg';
 import face1 from '../assets/section10/3e7000f7d487a4a460e30948baac836204a5d428.svg';
@@ -166,7 +167,7 @@ const copyTextToClipboard = (text, onSuccess) => {
 
 const imageForIndex = (index) => (
   <div className="project-thumb" aria-hidden="true">
-    <img src={heroImage} alt="" />
+    <img src={heroImage} alt="" loading="lazy" decoding="async" />
     <span>{String(index + 1).padStart(2, '0')}</span>
   </div>
 );
@@ -186,7 +187,16 @@ function HeroSection({ section }) {
   return (
     <div className="hero-panel">
       <div className="hero-bg" aria-hidden="true">
-        <img src={imgSection1} alt="" className="hero-bg-img" />
+        <img
+          src={imgSection1}
+          alt="Portrait of Suhotra Chakraborty"
+          className="hero-bg-img"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+          width="744"
+          height="466"
+        />
       </div>
       <h1 className="hero-heading">{section.heading}</h1>
       <div className="hero-info-row">
@@ -228,7 +238,12 @@ function BridgeSection({ section }) {
               <p>{item.detail}</p>
             </div>
             <div className="bridge-skill-image">
-              <img src={item.image || imgImage22} alt="" />
+              <img
+                src={item.image || imgImage22}
+                alt={`${item.label} illustration`}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </article>
         ))}
@@ -375,6 +390,7 @@ function ProjectsSection({ section }) {
   const footerRef = React.useRef(null);
   const rowColors = ['#1A161E', '#161E1E', '#1E1616', '#161E16'];
   const projectImages = [project1, project2, project3, project4];
+  const seoManifest = React.useMemo(() => getSeoManifest(), []);
 
   React.useEffect(() => {
     setImageLoaded(false);
@@ -383,15 +399,15 @@ function ProjectsSection({ section }) {
   React.useEffect(() => {
     if (isCmsPath(window.location.pathname)) return;
 
-    const path = window.location.pathname;
-    const base = import.meta.env.BASE_URL;
-    const slug = path.replace(base, '');
-    const slugParts = slug.split('/');
+    const slugParts = normalizePathname(window.location.pathname)
+      .replace(/^\/+|\/+$/g, '')
+      .split('/')
+      .filter(Boolean);
     
     if (slugParts.length > 1 && slugParts[0] === 'projects' && section.projects) {
       const projectParam = slugParts[1];
-      const project = section.projects.find(p =>
-        p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-') === projectParam
+      const project = section.projects.find(
+        (p) => slugifyProjectTitle(p.title) === projectParam,
       );
       if (project) {
         setActiveProject(project);
@@ -421,8 +437,7 @@ function ProjectsSection({ section }) {
   React.useEffect(() => {
     if (isCmsPath(window.location.pathname)) return;
 
-    const base = import.meta.env.BASE_URL;
-    syncCanonicalTag();
+    applySeoForPath(window.location.pathname);
 
     if (!activeProject) {
       setFooterVisible(false);
@@ -431,8 +446,7 @@ function ProjectsSection({ section }) {
       document.body.style.overscrollBehavior = 'auto';
       document.documentElement.style.overflow = 'auto';
       document.documentElement.style.overscrollBehavior = 'auto';
-      const currentSlugParts = window.location.pathname
-        .replace(base, '')
+      const currentSlugParts = normalizePathname(window.location.pathname)
         .replace(/^\/+|\/+$/g, '')
         .split('/')
         .filter(Boolean);
@@ -440,20 +454,26 @@ function ProjectsSection({ section }) {
         currentSlugParts.length > 1 && currentSlugParts[0] === 'projects';
 
       if (isProjectDetailPath) {
-        const targetPath = `${base}projects`;
-        if (window.location.pathname !== targetPath) {
-          window.history.replaceState(null, null, targetPath);
-          syncCanonicalTag(targetPath);
+        const currentRoute = resolveSeoRoute(window.location.pathname, seoManifest);
+        // Preserve unknown project detail URLs so they remain soft-404 (noindex,follow).
+        if (currentRoute.routeType === 'project') {
+          const targetPath = '/projects';
+          if (window.location.pathname !== targetPath) {
+            window.history.replaceState(null, null, targetPath);
+            applySeoForPath(targetPath);
+          }
         }
       }
       return;
     }
 
-    const projectSlug = activeProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const targetPath = `${base}projects/${projectSlug}`;
+    const projectSlug = slugifyProjectTitle(activeProject.title);
+    const targetPath = `/projects/${projectSlug}`;
     if (window.location.pathname !== targetPath) {
       window.history.replaceState(null, null, targetPath);
-      syncCanonicalTag(targetPath);
+      applySeoForPath(targetPath);
+    } else {
+      applySeoForPath(targetPath);
     }
 
     document.body.style.overflow = 'hidden';
@@ -483,7 +503,7 @@ function ProjectsSection({ section }) {
       document.documentElement.style.overflow = 'auto';
       document.documentElement.style.overscrollBehavior = 'auto';
     };
-  }, [activeProject]);
+  }, [activeProject, seoManifest]);
 
   const contactSection = sectionsData.find(s => s.layout === 'contact');
 
@@ -539,11 +559,16 @@ function ProjectsSection({ section }) {
       </header>
       <div className="project-list">
         {section.projects.map((project, index) => (
-          <article
+          <a
             className="project-row"
             key={project.title}
+            href={`/projects/${slugifyProjectTitle(project.title)}`}
             style={{ backgroundColor: projectColors[project.title] || rowColors[index % rowColors.length], cursor: 'pointer', transition: 'background-color 0.5s ease' }}
-            onClick={() => handleProjectClick(project)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleProjectClick(project);
+            }}
+            aria-label={`Open project: ${project.title}`}
           >
             <div className="filmstrip-edge" aria-hidden="true">
               {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
@@ -551,7 +576,15 @@ function ProjectsSection({ section }) {
 
             <div className="project-main-content">
               <div className="project-thumb-container">
-                <img src={project.image || projectImages[index % projectImages.length]} alt="" className="project-thumb-img" />
+                <img
+                  src={project.image || projectImages[index % projectImages.length]}
+                  alt={`${project.title} preview`}
+                  className="project-thumb-img"
+                  loading="lazy"
+                  decoding="async"
+                  width="324"
+                  height="172"
+                />
               </div>
 
               <div className="project-details">
@@ -580,7 +613,7 @@ function ProjectsSection({ section }) {
             <div className="filmstrip-edge" aria-hidden="true">
               {[...Array(20)].map((_, i) => <div key={i} className="film-dot" />)}
             </div>
-          </article>
+          </a>
         ))}
       </div>
 
@@ -824,7 +857,13 @@ function WorkOnSection({ section }) {
         {section.items.map((item, idx) => (
           <article className="work-card" key={idx}>
             <div aria-hidden="true" className="work-card-bg">
-              <img src={item.image || workOnBg} alt="" className="work-card-bg-img" />
+              <img
+                src={item.image || workOnBg}
+                alt=""
+                className="work-card-bg-img"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="work-card-bg-gradient" />
             </div>
             <div className="work-card-content">
@@ -857,7 +896,7 @@ function ToolsSection({ section }) {
         {section.items.map((item, index) => (
           <div className={`tool-pentagon-container ${index % 2 ? 'is-low' : ''}`} key={item.name}>
             <div className="tool-pentagon">
-              <img src={item.image} alt={item.name} />
+              <img src={item.image} alt={item.name} loading="lazy" decoding="async" />
             </div>
           </div>
         ))}
@@ -875,7 +914,7 @@ function StorySection({ section }) {
       <div className="story-media">
         <div className="story-image-track">
           {scrollImages.map((src, index) => (
-            <img key={index} src={src} alt="" className="story-bg" />
+            <img key={index} src={src} alt="" className="story-bg" loading="lazy" decoding="async" />
           ))}
         </div>
         <div className="story-overlay">
@@ -950,7 +989,13 @@ function AiSection({ section }) {
               <h2>{item.label}</h2>
               <p dangerouslySetInnerHTML={{ __html: item.detail }}></p>
             </div>
-            <img src={item.image || heroImage} alt="" className="ai-card-img" />
+            <img
+              src={item.image || heroImage}
+              alt={`${item.label} visual`}
+              className="ai-card-img"
+              loading="lazy"
+              decoding="async"
+            />
           </article>
         ))}
       </div>
@@ -1279,7 +1324,7 @@ function ContactSection({ section }) {
       <div className="contact-faces-container">
         {Array.from({ length: 60 }).map((_, i) => (
           <div className="contact-face-physics" key={i} ref={el => facesRef.current[i] = el}>
-            <img src={facesArray[i % 20]} alt="" />
+            <img src={facesArray[i % 20]} alt="" loading="lazy" decoding="async" />
           </div>
         ))}
       </div>
