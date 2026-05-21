@@ -231,6 +231,11 @@ export const sectionsData = [
         role: 'Product Leader',
       },
       {
+        quote: "I've worked with Suhotra (Neel) across multiple projects and one thing that really stood out was how quickly he understands the product direction and convert that into practical design decisions.\n\nHe is really good at rapid ideation and brings clarity during discussions. Communication and collaboration with him was always smooth across product and design teams.\n\nI also liked how actively he adopts Al into his workflow, not just for experimentation but to better align designs with business goals and improve execution speed.\n\nHe is a solid designer and a great person to work with.",
+        by: 'Kayideni Kholi',
+        role: 'Product Leader',
+      },
+      {
         quote: "I have known Suhotra since we worked together on the interactive installation for the Portfolio event at Pearl Academy in 2022. From his very first steps, I saw that Suhotra was exceptional at making design functional and meaningful. His creativity with a constant urge to learn and explore new ideas always keeps him on the edge in terms of pushing the boundaries of design.\n\nOne of his standout projects was the cultural studies outcome, where his innovative design thinking and unique narrative techniques were fully displayed. Suhotra is an excellent researcher and delivers user-centric solutions that are thoughtful and impactful. His ability to blend exploration, ideation, and practical application is remarkable.\n\nI am not a bit of doubt about the brilliance of Suhotra's future in design; I wish him all the best and good fortune as he continues to grow and makes his way in the world of design.",
         by: 'Sunil Mahajan',
         role: 'Design Researcher',
