@@ -6,6 +6,7 @@ import CustomScrollbar from './components/CustomScrollbar';
 import AdminCMS from './components/AdminCMS';
 import { sectionsData } from './data/sections';
 import { injectGothamFonts } from './utils/fonts';
+import { syncCanonicalTag } from './utils/seo';
 import './index.css';
 
 // Inject fonts early using the correct BASE_URL (works on both GitHub Pages and Vercel)
@@ -29,6 +30,7 @@ function App() {
   // Initial scroll based on URL Slug
   useEffect(() => {
     const path = window.location.pathname;
+    syncCanonicalTag(path);
 
     // Keep route classification in sync and short-circuit CMS.
     const cmsPath = isCmsPath(path);
@@ -57,7 +59,19 @@ function App() {
     const canonicalPath = `${base}${defaultSection.slug}`;
     if (window.location.pathname !== canonicalPath) {
       window.history.replaceState(null, null, canonicalPath);
+      syncCanonicalTag(canonicalPath);
     }
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      syncCanonicalTag();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
   // Sync Title and URL with Active Section
@@ -82,6 +96,7 @@ function App() {
       if (window.location.pathname !== newUrl) {
         window.history.replaceState(null, null, newUrl);
       }
+      syncCanonicalTag(newUrl);
     }
   }, [activeSectionId, loading, isAdminPath]);
 
@@ -153,6 +168,7 @@ function App() {
     manualScrollRef.current = true;
     const base = import.meta.env.BASE_URL;
     window.history.replaceState(null, null, base);
+    syncCanonicalTag(base);
 
     flushSync(() => {
       setActiveSectionId(sectionsData[0].id);

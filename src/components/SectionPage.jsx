@@ -19,6 +19,7 @@ import iconDownload from '../assets/section10/5db5cda5ca7cd472992d33e00b452c331d
 import iconCopy from '../assets/section10/200d8a7094d3571158958e270818b62e6b726654.svg';
 import iconLinkedin from '../assets/section10/4c811bea37dc8d79d6ccd1ddcdbbe2c35180cf5f.svg';
 import iconInstagram from '../assets/section10/f9346257c2e1ab3f5a6e7245521267b9e3f886ed.svg';
+import { syncCanonicalTag } from '../utils/seo';
 
 import face0 from '../assets/section10/088a79ff77b70a66e090488e03909c3e13ec0fe7.svg';
 import face1 from '../assets/section10/3e7000f7d487a4a460e30948baac836204a5d428.svg';
@@ -421,6 +422,7 @@ function ProjectsSection({ section }) {
     if (isCmsPath(window.location.pathname)) return;
 
     const base = import.meta.env.BASE_URL;
+    syncCanonicalTag();
 
     if (!activeProject) {
       setFooterVisible(false);
@@ -441,6 +443,7 @@ function ProjectsSection({ section }) {
         const targetPath = `${base}projects`;
         if (window.location.pathname !== targetPath) {
           window.history.replaceState(null, null, targetPath);
+          syncCanonicalTag(targetPath);
         }
       }
       return;
@@ -450,6 +453,7 @@ function ProjectsSection({ section }) {
     const targetPath = `${base}projects/${projectSlug}`;
     if (window.location.pathname !== targetPath) {
       window.history.replaceState(null, null, targetPath);
+      syncCanonicalTag(targetPath);
     }
 
     document.body.style.overflow = 'hidden';
