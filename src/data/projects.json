@@ -2,7 +2,7 @@
   {
     "id": "proj-1778511557545",
     "title": "Guided Practice - SchoolAi",
-    "detail": "Guided Practice is SchoolAI's core learning loop",
+    "detail": "SchoolAi's core learning loop with AI Tutor Vin",
     "tags": [
       "UI UX Design",
       "Learning Design",
@@ -64,6 +64,74 @@
         "id": "m-1778511469019",
         "type": "image",
         "url": "/neelgenix/assets/project-1778511557543-914252234.png"
+      }
+    ]
+  },
+  {
+    "id": "proj-1780325015010",
+    "title": "The EDGE",
+    "detail": "SchoolAi's invite-only aspirational study environment",
+    "tags": [
+      "UX UI Design",
+      "Behavioural Design",
+      "Product Strategy"
+    ],
+    "image": "/assets/project-1780331758937-544683855.jpg",
+    "media": [
+      {
+        "id": "m-1780324958143",
+        "type": "image",
+        "url": "/assets/project-1780331758954-654399740.jpg"
+      },
+      {
+        "id": "m-1780324958945",
+        "type": "image",
+        "url": "/assets/project-1780325014942-35318871.jpg"
+      },
+      {
+        "id": "m-1780324959756",
+        "type": "image",
+        "url": "/assets/project-1780325014946-470207327.jpg"
+      },
+      {
+        "id": "m-1780324960588",
+        "type": "image",
+        "url": "/assets/project-1780325014950-671622497.jpg"
+      },
+      {
+        "id": "m-1780324961795",
+        "type": "image",
+        "url": "/assets/project-1780325014955-475252827.jpg"
+      },
+      {
+        "id": "m-1780324963993",
+        "type": "image",
+        "url": "/assets/project-1780325014960-122620678.jpg"
+      },
+      {
+        "id": "m-1780324964848",
+        "type": "image",
+        "url": "/assets/project-1780325014965-147025140.jpg"
+      },
+      {
+        "id": "m-1780324965620",
+        "type": "image",
+        "url": "/assets/project-1780331758959-636535591.jpg"
+      },
+      {
+        "id": "m-1780324966325",
+        "type": "image",
+        "url": "/assets/project-1780325014996-170241055.jpg"
+      },
+      {
+        "id": "m-1780324967188",
+        "type": "image",
+        "url": "/assets/project-1780325015003-85828458.jpg"
+      },
+      {
+        "id": "m-1780324967946",
+        "type": "image",
+        "url": "/assets/project-1780325015007-787190314.jpg"
       }
     ]
   },
