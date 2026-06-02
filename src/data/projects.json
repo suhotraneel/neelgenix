@@ -69,7 +69,7 @@
   },
   {
     "id": "proj-1780325015010",
-    "title": "The EDGE",
+    "title": "The EDGE - SchoolAi",
     "detail": "SchoolAi's invite-only aspirational study environment",
     "tags": [
       "UX UI Design",
@@ -132,6 +132,59 @@
         "id": "m-1780324967946",
         "type": "image",
         "url": "/assets/project-1780341809565-838038744.jpg"
+      }
+    ]
+  },
+  {
+    "id": "proj-1780440619417",
+    "title": "Shadowgun Legends",
+    "detail": "AA Sci-Fi MMO FPS Gameplay UI Redesign",
+    "tags": [
+      "UX UI Design",
+      "Game Redesign",
+      "Interaction Design"
+    ],
+    "image": "/assets/project-1780440973125-958920552.jpg",
+    "media": [
+      {
+        "id": "m-1780440609167",
+        "type": "image",
+        "url": "/assets/project-1780440619357-566471440.jpg"
+      },
+      {
+        "id": "m-1780440680560",
+        "type": "image",
+        "url": "/assets/project-1780440973137-33143094.jpg"
+      },
+      {
+        "id": "m-1780440681123",
+        "type": "image",
+        "url": "/assets/project-1780440973221-350325065.jpg"
+      },
+      {
+        "id": "m-1780440681611",
+        "type": "image",
+        "url": "/assets/project-1780440973260-393844033.jpg"
+      },
+      {
+        "id": "m-1780440682549",
+        "type": "image",
+        "url": "/assets/project-1780440973338-509655088.jpg"
+      },
+      {
+        "id": "m-1780440683268",
+        "type": "image",
+        "url": "/assets/project-1780440973419-32060853.jpg"
+      },
+      {
+        "id": "m-1780440683943",
+        "type": "image",
+        "url": "/assets/project-1780440973487-164551452.jpg"
+      },
+      {
+        "id": "m-1780440684543",
+        "type": "image",
+        "url": "/assets/project-1780441650377-549310445.jpg"
       }
     ]
   },
